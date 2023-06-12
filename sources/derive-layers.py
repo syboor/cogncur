@@ -51,9 +51,3 @@ for glyph in font.selection.byGlyphs:
 
 
 
-
-
-### Create fonts
-import fontforge;
-font = fontforge.activeFont();
-
