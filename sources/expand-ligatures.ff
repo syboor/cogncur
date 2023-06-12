@@ -1,0 +1,175 @@
+##### Run this script from within FontForge with 'Execute script'.
+##### Purpose: expand SchoolCursive with new ligatures without renumbering the existing ones...
+
+### NB with 'multiple substitution', we don't need this.
+
+import fontforge;
+import math;
+font = fontforge.activeFont();
+
+codepoint = 0xE801; # where to start putting all the special glyphs
+
+# read glyphs into dictionary
+def get_glyphs():
+  global font;
+  glyphs = {};
+  for g in font.glyphs():
+    if (g.glyphname != '' and g.glyphname[0:3] != 'uni'):
+      glyphs[g.glyphname] = g;  
+  return glyphs;
+
+# read glyphs into dictionary
+def get_glyphs_by_codepoint():
+  global font;
+  glyphs = {};
+  for g in font.glyphs('encoding'):
+    if (g.unicode > 0):
+      glyphs[g.unicode] = g;
+    #if (g.glyphname != '' and g.glyphname[0:3] != 'uni'):
+    #  glyphs[g.glyphname] = g;  
+  return glyphs;
+
+# returns first available empty codepoint
+def next_codepoint():
+  global codepoint;
+  glyphs = get_glyphs_by_codepoint();
+  while (codepoint in glyphs):
+    codepoint = codepoint + 1;
+  return codepoint;
+
+  
+
+def create_ligature(part1, part2, part3 = '', subtable = ''):
+  global font;
+  global codepoint;
+  glyphs = get_glyphs();
+  
+  name = part1 + '_' + part2;
+  if (part3):
+    name = name + '_' + part3;
+  if (name in glyphs):
+    fontforge.logWarning('ligature ' + name + ' already exists');
+  else:
+    fontforge.logWarning('creating ligature: ' + name + ' at codepoint ' + hex(codepoint));
+    
+    # create ligature
+    glyph = font.createChar(codepoint);
+    glyph.clear();
+    glyph.glyphname = name;
+    if (part3):
+      glyph.addPosSub('ligatures-connected', (part1, part2, part3));
+    else:
+      glyph.addPosSub('ligatures-connected', (part1, part2));
+    glyph.unlinkRmOvrlpSave = 1;
+    glyph.build();
+    
+    if (subtable == ''):
+      glyphorig = glyphs[part2];
+      if (part3):
+        if (part1[:2] == 'cc'):
+          subtable = 'ligatures-after-' + part1[2:3] + '-end';
+        if (part1[:2] == 'cg'):
+          subtable = 'ligatures-start-alone';
+      else:
+        if (part1[:2] == 'cc'):
+          subtable = 'ligatures-after-' + part1[2:3] + '-continued';
+        if (part1[:2] == 'cg'):
+          subtable = 'ligatures-start-continued';
+
+    fontforge.logWarning('substitution table: ' + subtable + ', orig: ' + glyphorig.glyphname);
+  
+    glyphorig.addPosSub(subtable, glyph.glyphname);
+    codepoint += 1;
+    #back_classes[back_mapping[letter]].append(glyph.glyphname);
+
+
+#for x in ['cln', 'clp', 'clf', 'clg', 'clv', 'clo', 'clF', 'ca']:
+#  create_ligature(x+'o', 'obreve');
+#  create_ligature(x+'o', 'obreve', 'con');
+
+create_ligature('cga', 'a', 'cen');
+create_ligature('cgh', 'b', 'cev');
+create_ligature('cgo', 'c', 'cee');
+create_ligature('cga', 'd', 'ced');
+create_ligature('cgi', 'dotlessi', 'cen');
+create_ligature('cgi', 'dotlessj', 'ceg');
+create_ligature('cge', 'e', 'cee');
+create_ligature('cgh', 'f', 'cef');
+create_ligature('cga', 'g', 'ceg');
+create_ligature('cgh', 'h', 'ceh');
+create_ligature('cgi', 'i', 'ced');
+create_ligature('cgn', 'ij', 'cej');
+create_ligature('cgi', 'j', 'cej');
+create_ligature('cgh', 'k', 'ceh');
+create_ligature('cgh', 'l', 'ceH');
+create_ligature('cgn', 'm', 'cen');
+create_ligature('cgn', 'n', 'cen');
+create_ligature('cgo', 'o', 'ceo');
+create_ligature('cgi', 'p', 'cep');
+create_ligature('cga', 'q', 'ceq');
+create_ligature('cgn', 'r', 'cen');
+create_ligature('cgs', 's', 'ces');
+create_ligature('cgt', 't', 'cet');
+create_ligature('cgi', 'u', 'cen');
+create_ligature('cgn', 'v', 'cev');
+create_ligature('cgi', 'w', 'cev');
+create_ligature('cgn', 'x', 'cen');
+create_ligature('cgn', 'y', 'ceg');
+create_ligature('cgn', 'z', 'ceq');
+create_ligature('cgi', 'ij1', 'cej');
+create_ligature('cgi', 'r1', 'cen');
+create_ligature('cgt1', 't1', 'ced');
+create_ligature('cgn', 'w1', 'cev');
+create_ligature('cgi', 'y1', 'ceg');
+create_ligature('cgi', 'z1', 'cen');
+create_ligature('cgi', 'z1caron', 'ceq');
+
+codepoint = 0xE900; # where to start putting all the special glyphs
+
+create_ligature('cga', 'a');
+create_ligature('cgh', 'b');
+create_ligature('cgo', 'c');
+create_ligature('cga', 'd');
+create_ligature('cgi', 'dotlessi');
+create_ligature('cgi', 'dotlessj');
+create_ligature('cge', 'e');
+create_ligature('cgh', 'f');
+create_ligature('cga', 'g');
+create_ligature('cgh', 'h');
+create_ligature('cgi', 'i');
+create_ligature('cgn', 'ij');
+create_ligature('cgi', 'j');
+create_ligature('cgh', 'k');
+create_ligature('cgh', 'l');
+create_ligature('cgn', 'm');
+create_ligature('cgn', 'n');
+create_ligature('cgo', 'o');
+create_ligature('cgi', 'p');
+create_ligature('cga', 'q');
+create_ligature('cgn', 'r');
+create_ligature('cgs', 's');
+create_ligature('cgt', 't');
+create_ligature('cgi', 'u');
+create_ligature('cgn', 'v');
+create_ligature('cgi', 'w');
+create_ligature('cgn', 'x');
+create_ligature('cgn', 'y');
+create_ligature('cgz', 'z');
+create_ligature('cgi', 'ij1');
+create_ligature('cgi', 'r1');
+create_ligature('cgt1', 't1');
+create_ligature('cgn', 'w1');
+create_ligature('cgi', 'y1');
+create_ligature('cgz1', 'z1');
+create_ligature('cgz1', 'z1caron');
+
+
+
+
+
+
+
+# TODO: these ligatures still need to be added to the classes for contextual alternates
+# Is there a way to construct (print) these classes from the substitution tables???
+
+#############################################################################################

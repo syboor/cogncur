@@ -1,0 +1,1060 @@
+@font-face {
+  font-family: "CogncurWeb";
+  src: url("/fonts/cogncur/fonts/cogncurupright.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CogncurSlantWeb";
+  src: url("/fonts/cogncur/fonts/cogncurslant.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CogncurCallWeb";
+  src: url("/fonts/cogncur/fonts/cogncurcall.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.desktop {
+  font-family: "Cogncur";
+}
+    
+    
+.cursive, .rawcursive {
+  font-family: "CogncurWeb";
+  line-height: normal; /* Overrule setting from masterstyle */
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.autocursive {
+  font-family: "CogncurWeb";
+  line-height: normal; /* Overrule setting from masterstyle */
+  font-feature-settings: "calt" 1;  
+}
+.cursive i, .cursive em, .rawcursive i, .rawcursive em, .autocursive i, .autocursive em {
+  font-family: "CogncurSlantWeb";
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.cursive strong, .rawcursive strong, .autocursive strong {
+  font-family: "CogncurCallWeb";
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.word {
+  font-family: "CogncurWeb";
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+
+.cursive.startpunten-font, .cursive .startpunten-font, .startpunten-font .cursive,
+.rawcursive.startpunten-font, .rawcursive .startpunten-font, .startpunten-font .rawcursive,
+.line.startpunten-font, .line .startpunten-font, .startpunten-font .line,
+.rawline.startpunten-font, .rawline .startpunten-font, .startpunten-font .rawline,
+.letter.startpunten-font, .letter .startpunten-font, .startpunten-font .letter,
+.rawletter.startpunten-font, .rawletter .startpunten-font, .startpunten-font .rawletter,
+.hokjes.startpunten-font, .hokjes .startpunten-font, .startpunten-font .hokjes,
+.word-startpunten-font, .word .startpunten-font, .startpunten-font .word {
+  font-family: "CogncurWeb-Start";
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+
+
+.cursive.arrows-font, .cursive .arrows-font, .arrows-font .cursive,
+.rawcursive.arrows-font, .rawcursive .arrows-font, .arrows-font .rawcursive,
+.line.arrows-font, .line .arrows-font, .arrows-font .line,
+.rawline.arrows-font, .rawline .arrows-font, .arrows-font .rawline,
+.letter.arrows-font, .letter .arrows-font, .arrows-font .letter,
+.rawletter.arrows-font, .rawletter .arrows-font, .arrows-font .rawletter,
+.hokjes.arrows-font, .hokjes .arrows-font, .arrows-font .hokjes,
+.word-arrows-font, .word .arrows-font, .arrows-font .word {
+  font-family: "CogncurWeb-Arrows";
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.cursive.morearrows-font, .cursive .morearrows-font, .morearrows-font .cursive,
+.rawcursive.morearrows-font, .rawcursive .morearrows-font, .morearrows-font .rawcursive,
+.line.morearrows-font, .line .morearrows-font, .morearrows-font .line,
+.rawline.morearrows-font, .rawline .morearrows-font, .morearrows-font .rawline,
+.letter.morearrows-font, .letter .morearrows-font, .morearrows-font .letter,
+.rawletter.morearrows-font, .rawletter .morearrows-font, .morearrows-font .rawletter,
+.hokjes.morearrows-font, .hokjes .morearrows-font, .morearrows-font .hokjes,
+.word-morearrows-font, .word .morearrows-font, .morearrows-font .word {
+  font-family: "CogncurWeb-MArrows";
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+
+.cursive.dotted-font, .cursive .dotted-font, .dotted-font .cursive,
+.rawcursive.dotted-font, .rawcursive .dotted-font, .dotted-font .rawcursive,
+.line.dotted-font, .line .dotted-font, .dotted-font .line,
+.rawline.dotted-font, .rawline .dotted-font, .dotted-font .rawline,
+.letter.dotted-font, .letter .dotted-font, .dotted-font .letter,
+.rawletter.dotted-font, .rawletter .dotted-font, .dotted-font .rawletter,
+.hokjes.dotted-font, .hokjes .dotted-font, .dotted-font .hokjes,
+.word-dotted-font, .word .dotted-font, .dotted-font .word {
+  font-family: "CogncurWeb-Dotted";
+}
+.cursive.dotted-arrows2-font, .cursive .dotted-arrows2-font, .dotted-arrows2-font .cursive,
+.rawcursive.dotted-arrows2-font, .rawcursive .dotted-arrows2-font, .dotted-arrows2-font .rawcursive,
+.line.dotted-arrows2-font, .line .dotted-arrows2-font, .dotted-arrows2-font .line,
+.rawline.dotted-arrows2-font, .rawline .dotted-arrows2-font, .dotted-arrows2-font .rawline,
+.letter.dotted-arrows2-font, .letter .dotted-arrows2-font, .dotted-arrows2-font .letter,
+.rawletter.dotted-arrows2-font, .rawletter .dotted-arrows2-font, .dotted-arrows2-font .rawletter,
+.hokjes.dotted-arrows2-font, .hokjes .dotted-arrows2-font, .dotted-arrows2-font .hokjes,
+.word-dotted-arrows2-font, .word .dotted-arrows2-font, .dotted-arrows2-font .word {
+  font-family: "CogncurWeb-Dotted-MArrows";
+}
+
+.line, .rawline {
+  font-family: "CogncurWeb";
+  line-height: normal;
+  display: block;
+  position: relative;
+  margin-bottom: 0em;
+  text-overflow: clip;
+  line-height: 1em;
+  white-space: pre; /* Double whitespaces count as double and do not collapse */
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.line-container {
+  height: 1em; /* Needed because it only contains absolutely positioned elements */
+}
+
+
+/* Adjustable space between lines. Note that there's always a bit of extra space as soon as 'nospacebetween' is disabled,
+   and this extra space is dependent on font size */
+.ld1 .line, .ld1.line, .ld1 .rawline, .ld1.rawline { margin-bottom: 0.111em; }
+.ld2 .line, .ld2.line, .ld2 .rawline, .ld2.rawline { margin-bottom: 0.222em; }
+.ld3 .line, .ld3.line, .ld3 .rawline, .ld3.rawline { margin-bottom: 0.333em; }
+.ld4 .line, .ld4.line, .ld4 .rawline, .ld4.rawline { margin-bottom: 0.444em; }
+.ld5 .line, .ld5.line, .ld5 .rawline, .ld5.rawline { margin-bottom: 0.556em; }
+.ld6 .line, .ld6.line, .ld6 .rawline, .ld6.rawline { margin-bottom: 0.667em; }
+.ld7 .line, .ld7.line, .ld7 .rawline, .ld7.rawline { margin-bottom: 0.778em; }
+.ld8 .line, .ld8.line, .ld8 .rawline, .ld8.rawline { margin-bottom: 0.889em; }
+.ld9 .line, .ld9.line, .ld9 .rawline, .ld9.rawline { margin-bottom: 1em; }
+.ld10 .line, .ld10.line, .ld10 .rawline, .ld10.rawline { margin-bottom: 0.111em; }
+.ld11 .line, .ld11.line, .ld11 .rawline, .ld11.rawline { margin-bottom: 0.222em; }
+.ld12 .line, .ld12.line, .ld12 .rawline, .ld12.rawline { margin-bottom: 0.333em; }
+.ld13 .line, .ld13.line, .ld13 .rawline, .ld13.rawline { margin-bottom: 0.444em; }
+.ld14 .line, .ld14.line, .ld14 .rawline, .ld14.rawline { margin-bottom: 0.556em; }
+.ld15 .line, .ld15.line, .ld15 .rawline, .ld15.rawline { margin-bottom: 0.667em; }
+.ld16 .line, .ld16.line, .ld16 .rawline, .ld16.rawline { margin-bottom: 0.778em; }
+.ld17 .line, .ld17.line, .ld17 .rawline, .ld17.rawline { margin-bottom: 0.889em; }
+.ld18 .line, .ld18.line, .ld18 .rawline, .ld18.rawline { margin-bottom: 1em; }
+.ld19 .line, .ld19.line, .ld19 .rawline, .ld19.rawline { margin-bottom: 1.111em; }
+.ld20 .line, .ld20.line, .ld20 .rawline, .ld20.rawline { margin-bottom: 1.222em; }
+
+.ld1 .line:last-child, .ld1.line:last-child, .ld1 .rawline:last-child, .ld1.rawline:last-child,
+.ld2 .line:last-child, .ld2.line:last-child, .ld2 .rawline:last-child, .ld2.rawline:last-child,
+.ld3 .line:last-child, .ld3.line:last-child, .ld3 .rawline:last-child, .ld3.rawline:last-child,
+.ld4 .line:last-child, .ld4.line:last-child, .ld4 .rawline:last-child, .ld4.rawline:last-child,
+.ld5 .line:last-child, .ld5.line:last-child, .ld5 .rawline:last-child, .ld5.rawline:last-child,
+.ld6 .line:last-child, .ld6.line:last-child, .ld6 .rawline:last-child, .ld6.rawline:last-child,
+.ld7 .line:last-child, .ld7.line:last-child, .ld7 .rawline:last-child, .ld7.rawline:last-child,
+.ld8 .line:last-child, .ld8.line:last-child, .ld8 .rawline:last-child, .ld8.rawline:last-child,
+.ld9 .line:last-child, .ld9.line:last-child, .ld9 .rawline:last-child, .ld9.rawline:last-child,
+.ld10 .line:last-child, .ld10.line:last-child, .ld10 .rawline:last-child, .ld10.rawline:last-child,
+.ld11 .line:last-child, .ld11.line:last-child, .ld11 .rawline:last-child, .ld11.rawline:last-child,
+.ld12 .line:last-child, .ld12.line:last-child, .ld12 .rawline:last-child, .ld12.rawline:last-child,
+.ld13 .line:last-child, .ld13.line:last-child, .ld13 .rawline:last-child, .ld13.rawline:last-child,
+.ld14 .line:last-child, .ld14.line:last-child, .ld14 .rawline:last-child, .ld14.rawline:last-child,
+.ld15 .line:last-child, .ld15.line:last-child, .ld15 .rawline:last-child, .ld15.rawline:last-child,
+.ld16 .line:last-child, .ld16.line:last-child, .ld16 .rawline:last-child, .ld16.rawline:last-child,
+.ld17 .line:last-child, .ld17.line:last-child, .ld17 .rawline:last-child, .ld17.rawline:last-child,
+.ld18 .line:last-child, .ld18.line:last-child, .ld18 .rawline:last-child, .ld18.rawline:last-child,
+.ld19 .line:last-child, .ld19.line:last-child, .ld19 .rawline:last-child, .ld19.rawline:last-child,
+.ld20 .line:last-child, .ld20.line:last-child, .ld20 .rawline:last-child, .ld20.rawline:last-child
+ {
+  margin-bottom: 0;
+}
+
+/* Adjuste space between sets of lines. Since this uses a different margin, this stacks on top of ld space.
+ * Note: while SchoolSchrift uses absolute units, we will use relative units here...
+ */
+.ldi1 .line.firstrepeat, .ldi1.line.firstrepeat, .ldi1 .rawline.firstrepeat, .ldi1.rawline.firstrepeat { margin-top: 0.111em; }
+.ldi2 .line.firstrepeat, .ldi2.line.firstrepeat, .ldi2 .rawline.firstrepeat, .ldi2.rawline.firstrepeat { margin-top: 0.222em; }
+.ldi3 .line.firstrepeat, .ldi3.line.firstrepeat, .ldi3 .rawline.firstrepeat, .ldi3.rawline.firstrepeat { margin-top: 0.333em; }
+.ldi4 .line.firstrepeat, .ldi4.line.firstrepeat, .ldi4 .rawline.firstrepeat, .ldi4.rawline.firstrepeat { margin-top: 0.444em; }
+.ldi5 .line.firstrepeat, .ldi5.line.firstrepeat, .ldi5 .rawline.firstrepeat, .ldi5.rawline.firstrepeat { margin-top: 0.556em; }
+.ldi6 .line.firstrepeat, .ldi6.line.firstrepeat, .ldi6 .rawline.firstrepeat, .ldi6.rawline.firstrepeat { margin-top: 0.667em; }
+.ldi7 .line.firstrepeat, .ldi7.line.firstrepeat, .ldi7 .rawline.firstrepeat, .ldi7.rawline.firstrepeat { margin-top: 0.778em; }
+.ldi8 .line.firstrepeat, .ldi8.line.firstrepeat, .ldi8 .rawline.firstrepeat, .ldi8.rawline.firstrepeat { margin-top: 0.889em; }
+.ldi9 .line.firstrepeat, .ldi9.line.firstrepeat, .ldi9 .rawline.firstrepeat, .ldi9.rawline.firstrepeat { margin-top: 1em; }
+.ldi10 .line.firstrepeat, .ldi10.line.firstrepeat, .ldi10 .rawline.firstrepeat, .ldi10.rawline.firstrepeat { margin-top: 1.111em; }
+.ldi11 .line.firstrepeat, .ldi11.line.firstrepeat, .ldi11 .rawline.firstrepeat, .ldi11.rawline.firstrepeat { margin-top: 1.222em; }
+.ldi12 .line.firstrepeat, .ldi12.line.firstrepeat, .ldi12 .rawline.firstrepeat, .ldi12.rawline.firstrepeat { margin-top: 1.333em; }
+.ldi13 .line.firstrepeat, .ldi13.line.firstrepeat, .ldi13 .rawline.firstrepeat, .ldi13.rawline.firstrepeat { margin-top: 1.444em; }
+.ldi14 .line.firstrepeat, .ldi14.line.firstrepeat, .ldi14 .rawline.firstrepeat, .ldi14.rawline.firstrepeat { margin-top: 1.556em; }
+.ldi15 .line.firstrepeat, .ldi15.line.firstrepeat, .ldi15 .rawline.firstrepeat, .ldi15.rawline.firstrepeat { margin-top: 1.667em; }
+.ldi16 .line.firstrepeat, .ldi16.line.firstrepeat, .ldi16 .rawline.firstrepeat, .ldi16.rawline.firstrepeat { margin-top: 1.778em; }
+.ldi17 .line.firstrepeat, .ldi17.line.firstrepeat, .ldi17 .rawline.firstrepeat, .ldi17.rawline.firstrepeat { margin-top: 1.889em; }
+.ldi18 .line.firstrepeat, .ldi18.line.firstrepeat, .ldi18 .rawline.firstrepeat, .ldi18.rawline.firstrepeat { margin-top: 2em; }
+.ldi19 .line.firstrepeat, .ldi19.line.firstrepeat, .ldi19 .rawline.firstrepeat, .ldi19.rawline.firstrepeat { margin-top: 2.111em; }
+.ldi20 .line.firstrepeat, .ldi20.line.firstrepeat, .ldi20 .rawline.firstrepeat, .ldi20.rawline.firstrepeat { margin-top: 2.222em; }
+
+.ldi1 .line.firstrepeat:first-child, .ldi1.line.firstrepeat:first-child, .ldi1 .rawline.firstrepeat:first-child, .ldi1.rawline.firstrepeat:first-child,
+.ldi2 .line.firstrepeat:first-child, .ldi2.line.firstrepeat:first-child, .ldi2 .rawline.firstrepeat:first-child, .ldi2.rawline.firstrepeat:first-child,
+.ldi3 .line.firstrepeat:first-child, .ldi3.line.firstrepeat:first-child, .ldi3 .rawline.firstrepeat:first-child, .ldi3.rawline.firstrepeat:first-child,
+.ldi4 .line.firstrepeat:first-child, .ldi4.line.firstrepeat:first-child, .ldi4 .rawline.firstrepeat:first-child, .ldi4.rawline.firstrepeat:first-child,
+.ldi5 .line.firstrepeat:first-child, .ldi5.line.firstrepeat:first-child, .ldi5 .rawline.firstrepeat:first-child, .ldi5.rawline.firstrepeat:first-child,
+.ldi6 .line.firstrepeat:first-child, .ldi6.line.firstrepeat:first-child, .ldi6 .rawline.firstrepeat:first-child, .ldi6.rawline.firstrepeat:first-child,
+.ldi7 .line.firstrepeat:first-child, .ldi7.line.firstrepeat:first-child, .ldi7 .rawline.firstrepeat:first-child, .ldi7.rawline.firstrepeat:first-child,
+.ldi8 .line.firstrepeat:first-child, .ldi8.line.firstrepeat:first-child, .ldi8 .rawline.firstrepeat:first-child, .ldi8.rawline.firstrepeat:first-child,
+.ldi9 .line.firstrepeat:first-child, .ldi9.line.firstrepeat:first-child, .ldi9 .rawline.firstrepeat:first-child, .ldi9.rawline.firstrepeat:first-child,
+.ldi10 .line.firstrepeat:first-child, .ldi10.line.firstrepeat:first-child, .ldi10 .rawline.firstrepeat:first-child, .ldi10.rawline.firstrepeat:first-child,
+.ldi11 .line.firstrepeat:first-child, .ldi11.line.firstrepeat:first-child, .ldi11 .rawline.firstrepeat:first-child, .ldi11.rawline.firstrepeat:first-child,
+.ldi12 .line.firstrepeat:first-child, .ldi12.line.firstrepeat:first-child, .ldi12 .rawline.firstrepeat:first-child, .ldi12.rawline.firstrepeat:first-child,
+.ldi13 .line.firstrepeat:first-child, .ldi13.line.firstrepeat:first-child, .ldi13 .rawline.firstrepeat:first-child, .ldi13.rawline.firstrepeat:first-child,
+.ldi14 .line.firstrepeat:first-child, .ldi14.line.firstrepeat:first-child, .ldi14 .rawline.firstrepeat:first-child, .ldi14.rawline.firstrepeat:first-child,
+.ldi15 .line.firstrepeat:first-child, .ldi15.line.firstrepeat:first-child, .ldi15 .rawline.firstrepeat:first-child, .ldi15.rawline.firstrepeat:first-child,
+.ldi16 .line.firstrepeat:first-child, .ldi16.line.firstrepeat:first-child, .ldi16 .rawline.firstrepeat:first-child, .ldi16.rawline.firstrepeat:first-child,
+.ldi17 .line.firstrepeat:first-child, .ldi17.line.firstrepeat:first-child, .ldi17 .rawline.firstrepeat:first-child, .ldi17.rawline.firstrepeat:first-child,
+.ldi18 .line.firstrepeat:first-child, .ldi18.line.firstrepeat:first-child, .ldi18 .rawline.firstrepeat:first-child, .ldi18.rawline.firstrepeat:first-child,
+.ldi19 .line.firstrepeat:first-child, .ldi19.line.firstrepeat:first-child, .ldi19 .rawline.firstrepeat:first-child, .ldi19.rawline.firstrepeat:first-child,
+.ldi20 .line.firstrepeat:first-child, .ldi20.line.firstrepeat:first-child, .ldi20 .rawline.firstrepeat:first-child, .ldi20.rawline.firstrepeat:first-child
+ {
+  margin-top: 0;
+}
+
+
+
+.letter, .rawletter { /* Voor een cursive letter binnen een regel instructietekst */
+  font-family: "CogncurWeb";
+  font-size: 150%;
+  line-height: 66%;
+  display: inline-block;
+  position: relative;
+  top: 0em;
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+} 
+.letter, .rawletter { /* bold does not work for all connector glyphs. Single letters are often used within title text, so we want to disable bold */
+  font-weight: normal;
+}
+
+.nospacebetween .line,
+.nospacebetween .rawline {
+  margin-bottom: 0em;
+}
+
+/* If we want to overlap descenders and ascenders, what do we need to do?
+ - OK negative margin on lines
+ - OK bottomline should be dashed instead of solid (it should look like a midline instead of a topline)
+ - OK bottomline should be generated on last line
+ - bottomline should be generated on lastrepeat dependent on distance between herhaalsets -> this distance should be in relative units to work...
+ - OK topline should only be generated on first line
+ - topline should have same thickness as baseline
+
+ - it should be possible to overrule bottomline with a linestyle
+*/
+.overlapdescenders .line,
+.overlapdescenders .rawline {
+  margin-bottom: -0.33em;
+}
+
+.centered {
+  text-align: center;
+}
+
+.line-container, .word-container {
+  position: relative;
+  top: 0;
+}
+.line-overlay {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%; /* needed for text-alignment to word */
+}
+.word-overlay {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+.hokjes-overlay {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+.line-original {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  width: 100%; /* needed for text-alignment to word */
+}
+
+
+.baselines {
+  width: 100%;
+  position: absolute;
+  top: .33em;
+  height: .325em; /* why??? */
+  border-bottom: 2px solid #48a6dd;
+  border-top: 2px dashed #48a6dd;
+  /* border-left: 1px dotted #99999a; */ /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
+  z-index: -99;
+}
+
+.rh2 .baselines, .rh2_67 .baselines, .lhwide .baselines, .rh3 .baselines, .lh2 .baselines, .rh4 .baselines, .lh3 .baselines {
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+  height: .3em;
+}
+.lh3 .baselines {
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+  height: .31em;
+}
+
+.rh2.overlapdescenders .line:first-child .outerlines, .rh2_67.overlapdescenders .line:first-child .outerlines, .lhwide.overlapdescenders .line:first-child .outerlines, .rh3.overlapdescenders .line:first-child .outerlines, .lh2.overlapdescenders .line:first-child .outerlines, .rh4.overlapdescenders .line:first-child .outerlines, .lh3.overlapdescenders .line:first-child .outerlines,
+.rh2.overlapdescenders .line.forcetopline .outerlines, .rh2_67.overlapdescenders .line.forcetopline .outerlines, .lhwide.overlapdescenders .line.forcetopline .outerlines, .rh3.overlapdescenders .line.forcetopline .outerlines, .lh2.overlapdescenders .line.forcetopline .outerlines, .rh4.overlapdescenders .line.forcetopline .outerlines, .lh3.overlapdescenders .line.forcetopline .outerlines {
+  border-top-width: 1px;
+}
+
+
+.rh5 .baselines, .rh6 .baselines, .ld4 .baselines, .rh6 .baselines, .lh4 .baselines, .rh7 .baselines {
+  height: .31em;
+}
+.lh5 .baselines, .rh8 .baselines, .rh9 .baselines, .lh6 .baselines, .lh7 .baselines {
+  height: .32em;
+  top: .32em;
+}
+
+
+.thin .baselines {
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+}
+.blacklines .baselines {
+  border-bottom-color: #000 !important;
+  border-top-color: #000 !important;  
+}
+.blacklines .outerlines {
+  border-bottom-color: #000 !important;
+  border-top-color: #000 !important;  
+}
+.blueredlines .baselines {
+  border-bottom-color: #cd309d !important;
+}
+/* .defaultlines should overrule blacklines */
+.blacklines .defaultlines .baselines, 
+.blueredlines .defaultlines .baselines {
+  border-bottom-color: #48a6dd !important;
+  border-top-color: #48a6dd !important;
+}
+
+.nolines .baselines {
+  border-width: 0px !important; 
+  background-color: transparent !important;
+}
+.outerlines,
+.nospacebetween .line:last-child .outerlines,
+.nospacebetween .rawline:last-child .outerlines {
+  width: 100%;
+  position: absolute;
+  top: 0em;
+  border-top: 2px solid #48a6dd;
+  border-bottom: 2px solid #48a6dd; 
+  /* border-left: 1px dotted #99999a; *//* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
+  height: 1em;
+  box-sizing: border-box;
+  z-index: -99;
+}
+.rh2 .outerlines, .rh2_67 .outerlines, .lhwide .outerlines, .rh3 .outerlines, .lh2 .outerlines, .rh4 .outerlines, .lh3 .outerlines,
+.rh2.nospacebetween .line:last-child .outerlines,
+.rh2_67.nospacebetween .line:last-child .outerlines,
+.lhwide.nospacebetween .line:last-child .outerlines,
+.rh3.nospacebetween .line:last-child .outerlines,
+.lh2.nospacebetween .line:last-child .outerlines,
+.rh4.nospacebetween .line:last-child .outerlines,
+.lh3.nospacebetween .line:last-child .outerlines,
+.rh2.nospacebetween .rawline:last-child .outerlines,
+.rh2_67.nospacebetween .rawline:last-child .outerlines,
+.lhwide.nospacebetween .rawline:last-child .outerlines,
+.rh3.nospacebetween .rawline:last-child .outerlines,
+.lh2.nospacebetween .rawline:last-child .outerlines,
+.rh4.nospacebetween .rawline:last-child .outerlines,
+.lh3.nospacebetween .rawline:last-child .outerlines,
+.rh2 .nospacebetween .line:last-child .outerlines,
+.rh2_67 .nospacebetween .line:last-child .outerlines,
+.lhwide .nospacebetween .line:last-child .outerlines,
+.rh3 .nospacebetween .line:last-child .outerlines,
+.lh2 .nospacebetween .line:last-child .outerlines,
+.rh4 .nospacebetween .line:last-child .outerlines,
+.lh3 .nospacebetween .line:last-child .outerlines,
+.rh2 .nospacebetween .rawline:last-child .outerlines,
+.rh2_67 .nospacebetween .rawline:last-child .outerlines,
+.lhwide .nospacebetween .rawline:last-child .outerlines,
+.rh3 .nospacebetween .rawline:last-child .outerlines,
+.lh2 .nospacebetween .rawline:last-child .outerlines,
+.rh4 .nospacebetween .rawline:last-child .outerlines,
+.lh3 .nospacebetween .rawline:last-child .outerlines
+
+ {
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+}
+
+
+/* When overlappeping descenders/ascenders, we are overlapping the baseline with the topline,
+ * so by default, we don't want a topline.
+ */
+.overlapdescenders .outerlines {
+  border-top: none;
+}
+/* Sometimes we want a topline */
+.overlapdescenders .line:first-child .outerlines, .overlapdescenders .line.forcetopline .outerlines {
+  border-top: 2px solid #48a6dd;
+}
+/* Bottomline overlaps with midline, so should also be suppresed */
+.nospacebetween .outerlines, .overlapdescenders .outerlines {
+  border-bottom: 0px;
+}
+/* On the very last line, the bottom line should look like a midline.
+ * The same is true on the last line of a repeat, but only if there is sufficient distance (> ldi4) between repeats  */
+.overlapdescenders .lastline .outerlines,
+.overlapdescenders.ldi7 .forcebottomline .outerlines, 
+.overlapdescenders.ldi8 .forcebottomline .outerlines, 
+.overlapdescenders.ldi9 .forcebottomline .outerlines, 
+.overlapdescenders.ldi10 .forcebottomline .outerlines, 
+.overlapdescenders.ldi11 .forcebottomline .outerlines, 
+.overlapdescenders.ldi12 .forcebottomline .outerlines, 
+.overlapdescenders.ldi13 .forcebottomline .outerlines, 
+.overlapdescenders.ldi14 .forcebottomline .outerlines, 
+.overlapdescenders.ldi15 .forcebottomline .outerlines, 
+.overlapdescenders.ldi16 .forcebottomline .outerlines, 
+.overlapdescenders.ldi17 .forcebottomline .outerlines, 
+.overlapdescenders.ldi18 .forcebottomline .outerlines, 
+.overlapdescenders.ldi19 .forcebottomline .outerlines, 
+.overlapdescenders.ldi20 .forcebottomline .outerlines 
+{ /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
+  border-bottom: 1px dashed #48a6dd;
+}
+
+.nospacebetween.forcebottomline .outerlines, .nospacebetween .forcebottomline .outerlines { /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
+  border-bottom: 2px solid #48a6dd;
+}
+.rh2.nospacebetween.forcebottomline .outerlines, .rh2.nospacebetween .forcebottomline .outerlines, 
+.rh2 .nospacebetween.forcebottomline .outerlines, .rh2 .nospacebetween .forcebottomline .outerlines,
+.rh2_67.nospacebetween.forcebottomline .outerlines, .rh2_67.nospacebetween .forcebottomline .outerlines, 
+.rh2_67 .nospacebetween.forcebottomline .outerlines, .rh2_67 .nospacebetween .forcebottomline .outerlines,
+.rh3.nospacebetween.forcebottomline .outerlines, .rh3.nospacebetween .forcebottomline .outerlines, 
+.rh3 .nospacebetween.forcebottomline .outerlines, .rh3 .nospacebetween .forcebottomline .outerlines,
+.rh4.nospacebetween.forcebottomline .outerlines, .rh4.nospacebetween .forcebottomline .outerlines, 
+.rh4 .nospacebetween.forcebottomline .outerlines, .rh4 .nospacebetween .forcebottomline .outerlines,
+.lhwide.nospacebetween.forcebottomline .outerlines, .lhwide.nospacebetween .forcebottomline .outerlines, 
+.lhwide .nospacebetween.forcebottomline .outerlines, .lhwide .nospacebetween .forcebottomline .outerlines,
+.lh2.nospacebetween.forcebottomline .outerlines, .lh2.nospacebetween .forcebottomline .outerlines, 
+.lh2 .nospacebetween.forcebottomline .outerlines, .lh2 .nospacebetween .forcebottomline .outerlines,
+.lh3.nospacebetween.forcebottomline .outerlines, .lh3.nospacebetween .forcebottomline .outerlines, 
+.lh3 .nospacebetween.forcebottomline .outerlines, .lh3 .nospacebetween .forcebottomline .outerlines
+{ /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
+  border-bottom-width: 1px;
+}
+
+
+
+.thin .outerlines {
+  border-top-width: .5px;
+  border-bottom-width: .5px;
+}
+.nolines .outerlines {
+  border-width: 0px !important;
+}
+.noouterlines .outerlines, .noouterlines_fade .outerlines {
+  border-width: 0px !important;
+}
+.noouterlines_fade .line:first-child .outerlines{
+  border-top-color: rgba(72,166,221,1) !important; /* #48a6dd but with transparency added for easier manipulation */;
+  border-top-width: 1px !important;
+}
+.noouterlines_fade .line:nth-child(2) .outerlines{
+  border-image: linear-gradient(to right, rgba(72,166,221,1), rgba(72,166,221,.2)) 1;
+  border-top-width: 1px !important;
+}
+.noouterlines_fade .line:nth-child(3) .outerlines{
+  border-image: linear-gradient(to right, rgba(72,166,221,.7), #fff 75%) 1;
+  border-top-width: 1px !important;
+}
+.noouterlines_fade .line:nth-child(4) .outerlines{
+  border-image: linear-gradient(to right, rgba(72,166,221,.4), #fff 45%) 1;
+  border-top-width: 1px !important;
+}
+.noouterlines_fade .line:nth-child(5) .outerlines{
+  border-image: linear-gradient(to right, rgba(72,166,221,.3), #fff 20%) 1;
+  border-top-width: 1px !important;
+}
+.blacklines .noouterlines_fade .line:first-child .outerlines{
+  border-top-color: #000 !important;
+  border-top-width: 1px !important;
+}
+.blacklines .noouterlines_fade .line:nth-child(2) .outerlines{
+  border-image: linear-gradient(to right, #000, #ddd) 1;
+  border-top-width: 1px !important;
+}
+.blacklines .noouterlines_fade .line:nth-child(3) .outerlines{
+  border-image: linear-gradient(to right, #666, #fff 75%) 1;
+  border-top-width: 1px !important;
+}
+.blacklines .noouterlines_fade .line:nth-child(4) .outerlines{
+  border-image: linear-gradient(to right, #999, #fff 45%) 1;
+  border-top-width: 1px !important;
+}
+.blacklines .noouterlines_fade .line:nth-child(5) .outerlines{
+  border-image: linear-gradient(to right, #ccc, #fff 20%) 1;
+  border-top-width: 1px !important;
+}
+
+
+
+.norompline .baselines, .norompline_fade .baselines {
+  border-top-color: transparent !important;
+}
+.norompline_fade .line:first-child .baselines{
+  border-top-color: rgba(72,166,221,1) !important; /* #48a6dd but with transparency added for easier manipulation */;
+}
+.norompline_fade .line:nth-child(2) .baselines{
+  border-top-color: rgba(72,166,221,.5) !important;
+}
+.norompline_fade .line:nth-child(3) .baselines{
+  border-top-color: rgba(72,166,221,.25) !important;
+}
+.blacklines .norompline_fade .line:first-child .baselines{
+  border-top-color: #000 !important;
+}
+.blacklines .norompline_fade .line:nth-child(2) .baselines{
+  border-top-color: #b0b0b0 !important;
+}
+.blacklines .norompline_fade .line:nth-child(3) .baselines{
+  border-top-color: #ddd !important;
+}
+.noromphoogtelijn .baselines {
+  border-left: none;
+}
+.romphoogtelijn .baselines {
+  border-left: 1px dotted #48a6de; /* slightly different form horizontal lines */
+}
+.blacklines .romphoogtelijn .baselines {
+  border-left: 1px dotted #010101; /* slighty different from horizontal lines */
+}
+.nobottomline .outerlines {
+  border-bottom: 0px !important;
+}
+
+.outline {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;  
+}
+/* Outline text is slightly thicker than normal text. This makes black text with the same thickness as outline text */
+.black_with_outline_thickness {
+  color: black;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;  
+}
+.traceable_with_outline_thickness {
+  color: #AAA;
+  text-shadow: -1px -1px 0 #AAA, 1px -1px 0 #AAA, -1px 1px 0 #AAA, 1px 1px 0 #AAA;  
+}
+
+/* Use this to cancel out .outline */
+.black {
+  color: black;
+  text-shadow: none;
+}
+
+/* rh = romphoogte in mm. Dit is de afstand van grondlijn tot romplijn.
+   lh = lineheight in 1/8". Dit is de afstand van grondlijn tot bovenluslijn. NB onderluszone is niet inbegrepen!!!
+ */
+.rh2 {
+  font-size: 23px;
+}
+.rh2_67 {
+  font-size: 30px;
+}
+.lhwide {  /* 1/3 of wide ruled paper. NB wide ruled paper = 11/32" */
+  font-size: 33px; 
+}
+.rh3 {
+  font-size: 34px;
+}
+.lh2 { 
+  font-size: 37px; 
+}
+.rh4 {
+  font-size: 46px;
+}
+.lh3 { 
+  font-size: 55px; 
+}
+.rh5 {
+  font-size: 57px;
+}
+.rh6 {
+  font-size: 69px;
+}
+.lh4 { 
+  font-size: 73px; 
+}
+.rh7 {
+  font-size: 80px;
+}
+.lh5 { 
+  font-size: 91px; 
+}
+.rh8 {
+  font-size: 92px;
+}
+.rh9 {
+  font-size: 103px;
+}
+.lh6 { 
+  font-size: 110px; 
+}
+.rh10 {
+  font-size: 115px;
+}
+.rh11 {
+  font-size: 126px;
+}
+.lh7 { 
+  font-size: 128px; 
+}
+.rh12 {
+  font-size: 138px;
+}
+.lh8 {
+  font-size: 146px; 
+}
+.rh13 {
+  font-size: 149px;
+}
+.rh14 {
+  font-size: 161px;
+}
+.lh9 {
+  font-size: 164px; 
+}
+.rh15 {
+  font-size: 172px;
+}
+.lh10 {
+  font-size: 182px; 
+}
+.rh16 {
+  font-size: 184px;
+}
+.rh17{
+  font-size: 195px;
+}
+.lh11 {
+  font-size: 201px; 
+}
+.rh18 {
+  font-size: 207px;
+}
+.rh19 {
+  font-size: 218px;
+}
+.lh12 {
+  font-size: 219px; 
+}
+.rh20 {
+  font-size: 230px;
+}
+.lh13 {
+  font-size: 237px; 
+}
+.rh22 {
+  font-size: 253px;
+}
+.lh14 {
+  font-size: 256px; 
+}
+.lh15 {
+  font-size: 273px; 
+}
+.rh24 {
+  font-size: 276px;
+}
+.lh16 {
+  font-size: 292px; 
+}
+.rh26 {
+  font-size: 299px;
+}
+.lh17 {
+  font-size: 310px; 
+}
+.rh28 {
+  font-size: 322px;
+}
+.lh18 {
+  font-size: 329px; 
+}
+.rh30 {
+  font-size: 345px;
+}
+.lh20 {
+  font-size: 364px; 
+}
+.rh32 {
+  font-size: 368px;
+}
+.rh34 {
+  font-size: 391px;
+}
+.lh22 {
+  font-size: 402px;
+}
+.rh36 {
+  font-size: 414px;
+}
+.lh24 {
+  font-size: 438px;
+}
+.rh38 {
+  font-size: 437px;
+}
+.rh40 {
+  font-size: 460px;
+}
+.rh42 {
+  font-size: 483px;
+}
+.rh44 {
+  font-size: 506px;
+}
+.rh46 {
+  font-size: 529px;
+}
+.rh48 {
+  font-size: 552px;
+}
+.rh50 {
+  font-size: 575px;
+}
+
+.clear {
+  clear: both;
+}
+
+#cell_template {
+  display: none;
+}
+.rectangled {
+  display: inline-block;
+  position: relative;
+}
+.o_rectangle {
+  background-color: #faf;
+  position: absolute;
+  top: .356em;
+  left: .07em;
+  height: .327em;
+  width: .125em;
+  z-index: -1;
+}
+.o_rectangle::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  right: -50%;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: inherit;
+  -webkit-transform: skewX(-15deg);
+  -moz-transform: skewX(-15deg);
+  -ms-transform: skewX(-15deg);
+  transform: skewX(-15deg);      
+}
+.o_rectangle::before {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  left: -50%;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: inherit;
+  -webkit-transform: skewX(-15deg);
+  -moz-transform: skewX(-15deg);
+  -ms-transform: skewX(-15deg);
+  transform: skewX(-15deg);    
+}
+.invisible {
+  /* Only the letter should be invisible, not the background elements */
+  color: transparent;
+  text-shadow: none; /* overrule .outline */
+}
+.outline {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;  
+}
+.traceable {
+  color: #AAA;
+}
+.example {
+  color: #333;
+}
+.term {
+  font-style: italic;
+}
+.pullout {
+  border: 1px solid #333;
+  padding: 10px;
+  float: right;
+  background: #fff;
+  font-size: 10pt;
+  max-width: 40%;
+}
+.pullout h2 {
+  font-weight: bold;
+  font-size: inherit;
+  margin: 0px;
+  text-align: center;
+}
+h2 { 
+  margin: 20px 0 0 0;
+}
+
+.correctiesymbool {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+th {
+  text-align: left;
+}
+ul {
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+
+.masque-upper {
+  width: 100%;
+  position: absolute;
+  height: .36em;
+  left: 1px;
+  top: 0em;
+  z-index: 10;
+  background-color: #eee;
+}
+.masque-lower {
+  width: 100%;
+  position: absolute;
+  height: .325em;
+  left: 1px;
+  bottom: 0em;
+  z-index: 10;
+  background-color: #eee;
+}
+.masque-body {
+  width: 100%;
+  position: absolute;
+  top: .363em;
+  height: .325em;
+  left: 1px;
+  z-index: 10;
+  background-color: #eee;
+}
+/* If we are masquing a zone, put all lines in front of the masque so that we can see the lines properly.
+ * Consequence: the lines are also in front of the text, since the masque is in front of the text. 
+ */
+.masqued-upper .baselines, .masqued-lower .baselines, .masqued-body .baselines {
+  z-index: 11;
+}
+.masqued-upper .outerlines, .masqued-lower .outerlines, .masqued-body .outerlines {
+  z-index: 11 !important;
+}
+/* Put this class around a letter I that you want to have without a dot */
+.inodot {
+  position: relative;
+}
+.masqued-dot {
+  display: inline-block;
+  position: absolute;
+  top: .1em;
+  width: .1em;
+  right: 0em;
+  height: .2em;
+  background-color: #fff;
+  z-index: 99;
+}
+
+.tag {
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 1px 5px 1px 5px;
+  margin: 0 5px 0 5px;
+}
+
+/* 'hokjes' have a height/width-ratio of 2:1. 
+ * These 'hokjes' are 1ex wide and 2ex tall, and the baseline of the font is aligned 
+ * with the bottom of the 'hokje'. Basically, the bottom 1ex of the font (descender zone)
+ * is chopped off. However, if you try to print a webpage, you need to have room for 
+ * this bottom 1ex, otherwise the entire line of text is omitted when printing.
+ */
+.hokjes {
+  white-space: pre;
+  font-variant-numeric: tabular-nums;
+  font-family: 'CogncurWeb';
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.hokjes-table {
+  font-variant-numeric: tabular-nums;
+  table-layout: fixed;
+  margin: 0px;
+  border-collapse: collapse;
+  border-spacing: 0;	  
+}
+table.hokjes-table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+table.hokjes-table td {
+  border: 1px solid #66f;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 0.03ex;
+  text-align: center;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  line-height: normal; 
+}
+.rh20 table.hokjes-table td,
+.rh22 table.hokjes-table td,
+.rh24 table.hokjes-table td,
+.rh26 table.hokjes-table td,
+.rh28 table.hokjes-table td,
+.rh30 table.hokjes-table td,
+.rh32 table.hokjes-table td,
+.rh34 table.hokjes-table td,
+.rh36 table.hokjes-table td,
+.rh38 table.hokjes-table td,
+.rh40 table.hokjes-table td,
+.rh42 table.hokjes-table td,
+.rh44 table.hokjes-table td,
+.rh46 table.hokjes-table td,
+.rh48 table.hokjes-table td,
+.rh50 table.hokjes-table td,
+.rh20 table.hokjes-table td {
+  border-width: 2px;
+}
+table.hokjes-table td div.hokjes-content {
+  width: 2ex;
+  height: 2ex;
+  padding-top: 2ex;
+  position: relative;
+  bottom: 0ex;
+}
+table.hokjes-table td div.hokjes-content.hokjes-overlay {
+  position: absolute;
+}
+div.hokjes-content .tussen_de_hokjes {
+  position: absolute;
+  left: .85ex;
+}
+
+table.hokjes-table .hokjes-los, .hokjes-los table.hokjes-table {
+  border-spacing: 0px 1ex;
+  border-collapse: separate;
+  margin-top: 2ex; /* no border-spacing at the top please */
+  /* Set font so that 1ex is relative to the correct font */
+  font-family: "CogncurWeb";
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  
+}
+
+.startpunten-font table.hokjes-table .hokjes-los, .startpunten-font .hokjes-los table.hokjes-table, .startpunten-font.hokjes-los table.hokjes-table {
+  font-family: "CogncurWeb-Start";
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.arrows-font table.hokjes-table .hokjes-los, .arrows-font .hokjes-los table.hokjes-table, .arrows-font.hokjes-los table.hokjes-table {
+  font-family: "CogncurWeb-Arrows";
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.morearrows-font table.hokjes-table .hokjes-los, .morearrows-font .hokjes-los table.hokjes-table, .morearrows-font.hokjes-los table.hokjes-table {
+  font-family: "CogncurWeb-MArrows";
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+
+table.hokjes-table .hokjes-los td.skip, .hokjes-los table.hokjes-table td.skip,
+table.hokjes-table .hokjes-nolines td, .hokjes-nolines table.hokjes-table td {
+  border: none;
+}
+table.hokjes-table .hokjes-los td.next, .hokjes-los table.hokjes-table td.next {
+  border-left: none;
+}
+table.hokjes-table .hokjes-baseline td, .hokjes-baseline table.hokjes-table td, table.hokjes-table td.hokjes-baseline {
+  border-top: 1px solid rgba(255,255,255,0);
+  border-left: 1px solid rgba(255,255,255,0);
+  border-right: 1px solid rgba(255,255,255,0);
+}
+table.hokjes-table .hokjes-met-romphoogtelijn .hokjes-rompzone, .hokjes-met-romphoogtelijn table.hokjes-table .hokjes-rompzone {
+  border-left: 1px dotted #66f; /* TODO: nog niet duidelijk genoeg */
+}
+table.hokjes-table td.next .hokjes-rompzone, table.hokjes-table td.next .hokjes-rompzone,
+table.hokjes-table td.skip .hokjes-rompzone, table.hokjes-table td.skip .hokjes-rompzone {
+  border-left: none;
+}
+
+.hokjes-cell {
+  position: relative;
+}
+
+
+.hokjes-rompzone {
+  position: absolute;
+  height: 2ex;
+  width: 100%;
+  bottom: 0em; /* why??? */
+  z-index: -99;
+}
+.hokjes-met-romplijn .hokjes-rompzone, .hokjes-met-rompzone .hokjes-rompzone {
+  border-top: 1px dashed #66f;
+}
+
+.hokjes-met-rompzone .hokjes-rompzone  {
+  background-color: #eef;
+}
+.hokjes-los .skip .hokjes-rompzone {
+  background-color: transparent;
+  border-top: none;
+}
+
+
+/* 'hokjes-minder_hoog' have a height/width-ratio of 1.8:1. 
+ * These 'hokjes' are 1ex wide, 1.8ex tall, and the baseline of the font is aligned 
+ * with the bottom of the 'hokje'. Don't use them with any glyphs that have descenders.
+ * NB the font is 3ex high: 1ex for descenders, 1ex for the 'letterrompen', and 1ex for ascenders.
+ */
+
+table.hokjes-minder-hoog.hokjes-table td .hokjes-content,
+.hokjes-minder-hoog table.hokjes-table td .hokjes-content {
+  line-height: 2.6ex;
+  height: 1.8ex;
+}
+
+/* and for the sake of our settings preview, we need to be able to overrule this :( */
+.hokjes-minder-hoog .hokjes-hoog table.hokjes-table td .hokjes-content {
+  line-height: normal;
+  height: 2ex;
+}
+
+/* force printing of background color */
+.line, .rawline, .hokjes-cell {
+  -webkit-print-color-adjust: exact !important;   
+  color-adjust: exact !important;                 
+}
+
+.red {
+  color: #c00;
+}
+.green {
+  color: #090;
+}

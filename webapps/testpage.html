@@ -1,0 +1,1463 @@
+﻿<!DOCTYPE html>
+<!--
+  The script cogncur_converter.js and the font SchoolCursiveWeb.otf were developed by Liesbeth Flobbe.  
+-->
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="./cogncur.css" />
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="./cogncur_converter.js"></script><!-- functions for converting text to Schoolschrift glyphs -->
+  <script src="./cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script>
+    cogncur_converter.init({
+    });
+  </script>
+</head>
+<body class="max">
+  <h1>Testpage Cogncur</h1>  
+  
+  <ul>
+    <li><a href="#scriptoptions">Scripting options</a></li>
+    <li><a href="#letters">Lowercase letters</a></li>
+    <li><a href="#lowervariants">Lowercase letter variants</a></li>
+    <li><a href="#upper">Uppercase letters</a></li>
+    <li><a href="#uppervariants">Uppercase letter variants</a></li>
+    <li><a href="#letterswhitespace">Whitespace</a></li>
+    <li><a href="#connections">Connections</a></li>
+    <li><a href="#inter">Interpunction</a></li>
+    <li><a href="#digits">Digits</a></li>
+    <li><a href="#special">Special characters</a></li>
+    <li><a href="#lines">Lines</a></li>
+    <li><a href="#entry">Entry strokes</a></li>
+    <li><a href="#exit">Exit strokes</a></li>
+    <li><a href="#starts">Starting points</a></li>
+    <li><a href="#arrows">Arrows</a></li>
+    <li><a href="#wordfade">Wordfade</a></li>
+    <li><a href="#overlap">Overlapping entry / connecting strokes</a></li>
+    <li>Witruimte
+  </ul>
+
+  
+  <!-- 
+  DONE: exit-strokes (afhalen), interpunctie en spatie.
+    
+  TODO: verbindingen naar o en a doortrekken... (nuttig voor webtoepassingen, maar geen probleem in het desktop font -> gewoon altijd doen)
+  
+  LATER: komma na t, b, v, w moet dichterbij de letter. Dus right-bearing van de t moet minder, alle verbindingen cctX moeten breder :(
+    Maar: eerst uitroepteken doen en kijken welke problemen dat oplevert...
+    1. DONE adjust r-bearing for optimal word space. 
+    2. DONE if comma still needs to be closer, use kerning (it's more than wide enough to kern closer)
+    3. DONE: why doesn't it kern in Chrome? -> use the DEV build to create the font. TODO: maybe try a newer version?
+    
+  TODO: special exit stroke ceX (instead of cen) for symmetry purposes...
+    
+  TODO: shorter stick variants (+ add the substitution rules into the web font itself)
+    - TODO: create shorter versions of ? and !  Or maybe only do this when using capitals???
+    
+  DONE: quotes and apostrophe. apostrophe will be low, single quote will be higher.
+    - program the high/low apostrophe rule into the font. This should probably be a contextual alt?
+    - NB no smart quotes in the font!
+  
+  TODO: kerning for remaining interpunction
+  - after word: colon, semicolon, guillemot, upside down quotes, slash, bracket
+  - before word: guillemot, low opening quotes, apostrophe (because of contractions!!!), slash, bracket
+    - redo this when we have letters without entry stroke from the baseline
+  NB when kerning combinations of interpunction (especially quotes combined with other interpunction), make
+  certain these combination only appear in ONE kerning table!!!
+    
+  LATER: more kerning before question mark ? 
+  - split off exit stroke for i/j/A1/N1/M1. Kern cen -> ? closer together (but not for i, j, A1, N1, M1)
+  - kerning for specific uppercase letters (probably done on the ligatures themselves, not on an extra exit stroke
+  - 4 kerning tables:
+    - letter-interpunction
+    - interpunction-interpunction
+    - interpunction-letter
+    - letter-uppercase
+  
+  LATER: language specific ligatures and substitutions: Danish 'ae'
+  
+  TODO: create starting points fonts
+  
+  TODO: test multiple substitution (from contextual alternates) in Word and Photoshop
+  -> it works in: Windows font viewer, MS Word (after activating calt), Chromium, LibreOffice :)
+  -> doesn't work in Photoshop CS6
+  -> TODO: other Adobe products -> it works in Photoshop version 24.
+  
+  TODO: 
+  - testing/documentation matrix: per feature: what it should look like, what a 'failure' looks like, questions to ask (does it work automatically?). Features: contextual alternates; kerning; stylistic sets; multilinguage support; 'ij' ligature
+  - how to 'flatten' stylistic sets for MS Word
+  
+  DOCU: test how to activate the 'ij' ligature in Word and Photoshop
+  - NO: it won't work automatically (based on Unicode codepoint) without OpenType? Libre
+  - Word / LibreOffice: select document language at the bottom of the window
+  - Yes, can we suppress it for selected words by changing language? YES
+
+  TODO: revisit merging points of N2, M2 and U.
+  
+  TODO: Use symbols for lines??? (at least in the regular fonts...). Pick 3 symbols: fully lined, fully lined without bottom descender, baseline + midline, baseline only (standard | symbol). Broken pipe (|)???
+  
+  -->
+  
+  <h2>Scripting options</h2>
+  cursive: connections creating by javascript, contextual alternates disabled. <i>reason: this gives us access to the individual connecting glyphs for styling</i>
+  <div class="cursive rh8">
+  minimum hello world
+  </div>
+  rawcursive: both javascript and contextual alternates disabled
+  <div class="rawcursive rh8">
+  minimum hello world
+  </div>
+  autocursive: contextual alternates used, javascript disabled
+  <div class="autocursive rh8">
+  minimum hello world
+  </div>
+  
+  <h2><a name="letters">Lowercase letters / connections</a></h2>
+  <div class="cursive rh12">
+  inn mum nun minimum <br/>
+  him hun uhh hmm<br/>
+  au an aa aha man<br/>
+  ou oa on ohm oi<br/>
+  no oo moon<br/>
+  ch ic oc cc con cam <br/>
+  ee ei he hoe mean<br/>
+  nice each name much<br/>
+  meme hee nee neon<br/>
+  mm mean necco echo<br/>
+  ll hole ellen<br/>
+  vv vi va ve vo vh<br/>
+  even viva vole<br/>
+  bubble blab boob bee<br/>
+  uu ww we will new<br/>
+  add did dodo deed<br/>
+  candle hold ladder<br/>
+  je ja jojo jl jn ju<br>
+  jj oj nj lj wj ej<br/>
+  gaggle gig log glad<br/>
+  eye yay lily boy<br/>
+  kick bake kooky<br/>
+  is as os gs ws es<br/>
+  ip ap op gp wp ep<br/>
+  sass sl sm si so se sj<br/>
+  pp pi po pe pa ph pn<br/>
+  pass puppy phone apple<br/>
+  qa qu qo qy qe qs ql<br/>
+  fa fi fo fn fe fs fl<br/>
+  quaffle fan elfs fluffy<br/>
+  qji qp qgi fji fp fgi<br/>
+  exe ixu qxy oxo axa xxl<br/>
+  px sxs jxg<br/>
+  jazzy zigzag zj ze zs<br/>
+  zorro rare furs awry<br/>
+  tithe bottle tate<br/>
+  et st pt qt ft t<br/>
+  herfstbui hobbit<br/>
+  abcdefghijklm<br/>
+  nopqrstuvwxyz<br/>
+  a b c d e f g h i j k l m<br/>
+  n o p q r s t u v w x y z<br/>
+  </div>
+
+
+  <h2><a name="slant">Lowercase letters, slanted</a></h2>
+  <div class="cursive rh12"><i>
+  inn mum nun minimum <br/>
+  him hun uhh hmm<br/>
+  au an aa aha man<br/>
+  ou oa on ohm oi<br/>
+  no oo moon<br/>
+  ch ic oc cc con cam <br/>
+  ee ei he hoe mean<br/>
+  nice each name much<br/>
+  meme hee nee neon<br/>
+  mm mean necco echo<br/>
+  ll hole ellen<br/>
+  vv vi va ve vo vh<br/>
+  even viva vole<br/>
+  bubble blab boob bee<br/>
+  uu ww we will new<br/>
+  add did dodo deed<br/>
+  candle hold ladder<br/>
+  je ja jojo jl jn ju<br>
+  jj oj nj lj wj ej<br/>
+  gaggle gig log glad<br/>
+  eye yay lily boy<br/>
+  kick bake kooky<br/>
+  is as os gs ws es<br/>
+  ip ap op gp wp ep<br/>
+  sass sl sm si so se sj<br/>
+  pp pi po pe pa ph pn<br/>
+  pass puppy phone apple<br/>
+  qa qu qo qy qe qs ql<br/>
+  fa fi fo fn fe fs fl<br/>
+  quaffle fan elfs fluffy<br/>
+  qji qp qgi fji fp fgi<br/>
+  exe ixu qxy oxo axa xxl<br/>
+  px sxs jxg<br/>
+  jazzy zigzag zj ze zs<br/>
+  zorro rare furs awry<br/>
+  jazzy zigzag zj ze zs<br/>
+  zorro rare furs awry<br/>
+  tithe bottle tate<br/>
+  abcdefghijklm<br/>
+  nopqrstuvwxyz<br/>
+  a b c d e f g h i j k l m<br/>
+  n o p q r s t u v w x y z<br/>
+  </i>
+  </div>
+
+  <h2><a name="calligraphy">Lowercase letters, calligraphy</a></h2>
+  <div class="cursive rh12"><strong>
+  inn mum nun minimum <br/>
+  him hun uhh hmm<br/>
+  au an aa aha man<br/>
+  ou oa on ohm oi<br/>
+  no oo moon<br/>
+  ch ic oc cc con cam <br/>
+  ee ei he hoe mean<br/>
+  nice each name much<br/>
+  meme hee nee neon<br/>
+  mm mean necco echo<br/>
+  ll hole ellen<br/>
+  vv vi va ve vo vh<br/>
+  even viva vole<br/>
+  bubble blab boob bee<br/>
+  uu ww we will new<br/>
+  add did dodo deed<br/>
+  candle hold ladder<br/>
+  je ja jojo jl jn ju<br>
+  jj oj nj lj wj ej<br/>
+  gaggle gig log glad<br/>
+  eye yay lily boy<br/>
+  kick bake kooky<br/>
+  is as os gs ws es<br/>
+  ip ap op gp wp ep<br/>
+  jazzy zigzag zj ze zs<br/>
+  zorro rare furs awry<br/>
+  tithe bottle tate<br/>
+  abcdefghijklm<br/>
+  nopqrstuvwxyz<br/>
+  a b c d e f g h i j k l m<br/>
+  n o p q r s t u v w x y z<br/>
+  </strong>
+  </div>
+
+  <h2><a name="lowervariants">Lowercase letter variants</a></h2>
+  <h3>t variant</h3>
+  <table>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <td class="lines rh8 nospacebetween" data-cogncur-t-variant=0>
+        <div class="line">t it et st pt gt qt ot vt &nbsp;</div>
+        <div class="line">tt ti ty tl to ta te ts &nbsp;</div>
+        <div class="line">tithe bottle tate &nbsp;</div>
+        <div class="line">stotter tocht&nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-t-variant=1>
+        <div class="line">t it et st pt gt qt ot vt &nbsp;</div>
+        <div class="line">tt ti ty tl to ta te ts &nbsp;</div>
+        <div class="line">tithe bottle tate &nbsp;</div>
+        <div class="line">stotter tocht&nbsp;</div>
+      </td>
+    </tr>
+  </table>
+
+  <h3>rz top variant</h3>
+  <table>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <td class="lines rh8 nospacebetween" data-cogncur-rz-top-variant=0>
+        <div class="line">r rr ar br er fr gr mr sz tz &nbsp;</div>
+        <div class="line">z zz az bz ez fz gz mz sz tz &nbsp;</div>
+        <div class="line">here are carrots</div>
+        <div class="line">zigzag jazzy ozone&nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-rz-top-variant=1>
+        <div class="line">r rr ar br er fr gr mr sz tz &nbsp;</div>
+        <div class="line">z zz az bz ez fz gz mz sz tz &nbsp;</div>
+        <div class="line">here are carrots</div>
+        <div class="line">zigzag jazzy ozone</div>
+      </td>
+    </tr>
+  </table>
+
+  <h3>dp stick length variant</h3>
+  <table>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <td class="lines rh8 nospacebetween" data-cogncur-dp-variant=0>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-dp-variant=1>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+      </td>
+    </tr>
+  </table>
+
+  <h3>ij ligature</h3>
+  NB 'ij' ligature always should be enabled for Dutch
+  <table>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <td class="lines rh8 nospacebetween" data-cogncur-ij-ligature=0>
+        <div class="line">yes, ijs en wijn!&nbsp;</div>
+        <div class="line">Yes, IJs En Wijn!&nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-ij-ligature=1>
+        <div class="line">yes, ijs en wijn!</div>
+        <div class="line">Yes, IJs En Wijn!</div>
+
+      </td>
+    </tr>
+  </table>
+
+  <h3>y variant</h3>
+  <table>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <td class="lines rh8 nospacebetween" data-cogncur-ij-ligature=1 data-cogncur-y-variant=0>
+        <div class="line">yes, ijs en wijn! y ij &nbsp;</div>
+        <div class="line">Yes, IJs En Wijn! y ij &nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-ij-ligature=1 data-cogncur-y-variant=1>
+        <div class="line">yes, ijs en wijn! y ij </div>
+        <div class="line">Yes, IJs En Wijn! y ij </div>
+
+      </td>
+    </tr>
+  </table>
+
+  <h3>w variant</h3>
+  <table>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <td class="lines rh8 nospacebetween" data-cogncur-w-variant=0>
+        <div class="line">Why, why, ewe, law, w!&nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-w-variant=1>
+        <div class="line">Why, why, ewe, law, w!</div>
+      </td>
+    </tr>
+  </table>
+
+
+
+  
+
+  <h2><a name="upper">Uppercase letters and connections</a></h2>
+  <div class="cursive rh8">
+  Agg Ann Aim Aeroplane Afrika Ape Ass Ao Are Atkinson<br/>
+  City Clapton Cricket Cat Ct<br/>
+  East Rumford Science Fair<br/>
+  Big Bend Blend <br/>
+  Dear Dancing Duck<br/>
+  Field Flip Far From Fee<br/>
+  Gabe Soto Glad Grumpy<br/>
+  Hey Happy Hippo!<br/>
+  Ink Ill Iglo<br/>
+  Jack Jules Jingle Jelly<br/>
+  Kentucky Kansas Kiwi Klingon<br/>
+  Luke Llewelyn Leo Lady<br/> 
+  My Name is Nancy Meier.<br/>
+  Museum<br/>
+  No Na Ne Ny Nt Ns Nh<br/>
+  Old Oscar On Oxygen<br/>
+  Piss Poor Potluck Project Plop<br/>
+  Quiz Qatar Qom<br/>
+  Ride Return Roar Rumford<Br/>
+  Silly Slimy Science<br/>
+  Trip Tent Truck Travel Toys Tubmann Tlip<br/>
+  Usher Uniform Ultra<br/>
+  Van Violet Veela Vho<br/>
+  Who Wants Will Wet<br/>
+  Xylitol Xerxes Xara<br/>
+  Yes Yggdrasil Yank Yule<br/>
+  Zebra Zig Zag Zloti <br/>
+  </div>  
+  <div class="lines rh8">
+    <div class="line">A B C D E F G H I J K L M</div>
+    <div class="line">N O P Q R S T U V W X Y Z</div>
+
+  </div>
+  <div class="lines rh8">
+    <div class="line">Aa Bb Cc Dd Ee Ff Gg Hh Jj</div>
+    <div class="line">Kk Ll Mm Nn Oo Pp Qq Rr</div>
+    <div class="line">Ss Tt Uu Vv Ww Xx Yy Zz</div>
+
+  </div>
+  
+  <h2><a name="uppervariants">Uppercase letter variants</a></h2>
+  <h3>AMN-variant</h3>
+  <table>
+    <tr>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+    <tr>
+      <td class="lines rh8 nospacebetween" data-cogncur-uppercase-amn-variant=0>
+        <div class="line">Aa Ash Arm</div>
+        <div class="line">Aye All</div>
+        <div class="line">Nn No Nit</div>
+        <div class="line">Name Nee</div>
+        <div class="line">Mm My Mic</div>
+        <div class="line">Ms Mrs</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-uppercase-amn-variant=1>
+        <div class="line">Aa Ash Arm</div>
+        <div class="line">Aye All</div>
+        <div class="line">Nn No Nit</div>
+        <div class="line">Name Nee</div>
+        <div class="line">Mm My Mic</div>
+        <div class="line">Ms Mrs</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-uppercase-amn-variant=2>
+        <div class="line">Aa Ash Arm</div>
+        <div class="line">Aye All</div>
+        <div class="line">Nn No Nit</div>
+        <div class="line">Name Nee</div>
+        <div class="line">Mm My Mic</div>
+        <div class="line">Ms Mrs</div>
+      </td>
+    </tr>
+  </table>
+
+  <h2><a name="letterswhitespace">Whitespace at end of word</a></h2>
+  <div class="cursive rh12">
+    i i o i n i s i j i q i<br/>
+    e i p i l i h i v i z i<br/>
+    f i t i b i c i A i B i<br/>
+    C i D i E i F i G i H i<br/>
+    I i J i K i L i M i N i<br/>
+    O i P i f i<br/>
+    i,i,o,o,n,n,s,s,j,j,q,q,t,t,<br/>
+    e,e,p,p,l,l,v,v,z,z,a,a,b,b,<br/>
+    f,f,<br/>
+    A,B,C,D,E,F,G,H,I,J,K,L,M,
+    N,O,P,T<br/>
+    i, i, o, o, n, n, s, s,<br/>
+    j, j, q, q, e, e, p, p,<br/>
+    l, l, v, v, z, z, a, a,<br/>
+    t, t, f, f, b, b, c, c,<br/>
+    A, B, C, D, E, F, G, H,<br/>
+    I, J, P, L<br/>
+    i! o! n! s! j! q! e! p!<br/>
+    t! b! v! w! c! A! B! C!<br/>
+    D! E! F! G! H! I! J! K!<br/>
+    L! M! N! O! P! f! <br/>
+    Ho, ho, ho! St... St...<br/> 
+    no. no. no. is it so?<br/>
+    i? o? n? s? j? q? e? p?<br/>
+    t? b? v? w? c? A? B? C?<br/>
+    D? E? F? G? H? I? J? K?<br/>
+    L? M? N? O? P? f?<br/>
+    i' o' n' s' j' q' e' p'<br/>
+    t' b' v' w' c' A' B' C'<br/>
+    D' E' F' G' H' I' J' K'<br/>
+    L' M' N' O' P' f' <br/>
+    i" o" n" s" j" q" e" p"<br/>
+    t" b" v" w" c" A" B" C"<br/>
+    D" E" F" G" H" I" J" K"<br/>
+    L" M" N" O" P" f" <br/>
+    what? why? how?<br/>
+    m'n z'n it's I'll he's<br/>
+    parents' s'! s'? s'.<br/>
+    O'Neill. D'Nealian? McDo<br/>
+    <i>no. no. no. is it so?</i><Br/>
+    <strong>no. no. no. is it so?</strong><Br/>
+  </div>
+  Note that H and l need special kerning because the letter glyphs overlap their exit stroke.
+  <div class="cursive rh12">
+    H? l? h? f? H! l! h! f!<br/>
+    H' l' h' f' H. l. h. f.<br/>
+    n? d? i?<br/>
+    g? y? j?<br/>
+  </div>   
+
+  <h2><a name="letterswhitespace">Whitespace at start of word</a></h2>
+  <div class="cursive rh12">
+    i ii oi ni si ji qi ei<br/>
+    i pi li hi vi zi ti bi<br/>
+    i ci xi fi Ai Bi Ci Di<br/>
+    i Ei Fi Gi Hi Ji Ki Mi<br/>
+    i Ni Oi Pi<br/>
+    i. ii. oi. ni. si. ji. qi. ei.<br/>
+    i. pi. li. hi. vi. zi. ti. bi.<br/>
+    i. ci. xi. fi. Ai. Bi. Ci. Di.<br/>
+    i. Ei. Fi. Gi. Hi. Ji. Ki. Mi.<br/>
+    i. Ni. Oi. Pi.<br/>
+    ‘i’ ‘ii’ ‘oi’ ‘ni’ ‘si’ ‘ji’ ‘qi’ ‘ei’<br/>
+    ‘i’ ‘pi’ ‘li’ ‘hi’ ‘vi’ ‘zi’ ‘ti’ ‘bi’<br/>
+    ‘i’ ‘ci’ ‘xi’ ‘fi’ ‘Ai’ ‘Bi’ ‘Ci’ ‘Di’<br/>
+    ‘i’ ‘Ei’ ‘Fi’ ‘Gi’ ‘Hi’ ‘Ji’ ‘Ki’ ‘Mi’<br/>
+    ‘i’ ‘Ni’ ‘Oi’ ‘Pi’ ‘!’ ‘?’<br/>
+  </div>   
+  <div class="cursive rh12"  data-cogncur-uppercase-amn-variant=1>
+    ‘i’ ‘Ai’ ‘Mi’ ‘Ni’<br/>
+  </div>
+  
+  <h2><a name="letterswhitespace">Whitespace - both sides</a></h2>
+  <div class="cursive rh12">
+    ‘i’ ‘o’ ‘n’ ‘s’ ‘j’ ‘q’ ‘e’<br/>
+    ‘p’ ‘l’ ‘h’ ‘v’ ‘z’ ‘t’ ‘b’<br/>
+    ‘c’ ‘x’ ‘f’ ‘A’ ‘B’ ‘C’ ‘D’<br/>
+    ‘E’ ‘F’ ‘G’ ‘H’ ‘J’ ‘K’ ‘M’<br/>
+    ‘N’ ‘O’ ‘P’ ‘!’ ‘?’<br/>
+    !i! !o! !n! !s! !j! !q! !e!<br/>
+    !p! !l! !h! !v! !z! !t! !b!<br/>
+    !c! !x! !f! !A! !B! !C! !D!<br/>
+    !E! !F! !G! !H! !J! !K! !M!<br/>
+    !N! !O! !P! !!! !?!<br/>
+    |i| |o| |n| |s| |j| |q| |e|<br/>
+    |p| |l| |h| |v| |z| |t| |b|<br/>
+    |c| |x| |f| |A| |B| |C| |D|<br/>
+    |E| |F| |G| |H| |J| |K| |M|<br/>
+    |N| |O| |P| |!| |?|<br/>
+    /i/ /o/ /n/ /s/ /j/ /q/ /e/<br/>
+    /p/ /l/ /h/ /v/ /z/ /t/ /b/<br/>
+    /c/ /x/ /f/ /A/ /B/ /C/ /D/<br/>
+    /E/ /F/ /G/ /H/ /J/ /K/ /M/<br/>
+    /N/ /O/ /P/ /!/ /?/<br/>
+
+  </div>   
+  <div class="cursive rh12"  data-cogncur-uppercase-amn-variant=1>
+    /A/ /M/ /N/ !A! !M! !N!<br/>
+  </div>
+
+  <h2><a name="smartquotes">Smart quotes</a></h2>
+  No smart quotes, but two apostrophes of different height.
+  <div class="cursive rh6" data-cogncur-smartquotes=0>
+  It's me. I'll do anything.<Br/>
+  M'n zoon is zo'n kind!<br/>
+  Parents' wishes.<br/>
+  He said: "How do you 'know' that?"<br/>
+  "Why not," I thought, "Let's tell him!"<br/>
+  </div>
+
+  smartquotes = 1
+  <div class="cursive rh6" data-cogncur-smartquotes=1>
+  It's me. I'll do anything.<Br/>
+  M'n zoon is zo'n kind!<br/>
+  Parents' wishes.<br/>
+  He said: "How do you 'know' that?"<br/>
+  "Why not," I thought, "Let's tell him!"<br/>
+  "Yes, we take parents' wishes seriously."<br/>
+  'Yes, we take parents' wishes seriously.'<br/>
+  'kiss' 'us' 'now'<br/>
+  </div>
+
+  smartquotes = 2
+  <div class="cursive rh6" data-cogncur-smartquotes=2>
+  It's me. I'll do anything.<Br/>
+  M'n zoon is zo'n kind!<br/>
+  Parents' wishes.<br/>
+  He said: "How do you 'know' that?"<br/>
+  "Why not," I thought, "Let's tell him!"<br/>
+  "Yes, we take parents' wishes seriously."<br/>
+  'Yes, we take parents' wishes seriously.'<br/>
+  'kiss' 'us' 'now'<br/>
+  </div>
+
+  smartquotes = 3
+  <div class="cursive rh6" data-cogncur-smartquotes=3>
+  It's me. I'll do anything.<Br/>
+  M'n zoon is zo'n kind!<br/>
+  Parents' wishes.<br/>
+  He said: "How do you 'know' that?"<br/>
+  "Why not," I thought, "Let's tell him!"<br/>
+  "Yes, we take parents' wishes seriously."<br/>
+  'Yes, we take parents' wishes seriously.'<br/>
+  'kiss' 'us' 'now'<br/>
+  </div>
+
+  smartquotes = 4
+  <div class="cursive rh6" data-cogncur-smartquotes=4>
+  It's me. I'll do anything.<Br/>
+  M'n zoon is zo'n kind!<br/>
+  Parents' wishes.<br/>
+  He said: "How do you 'know' that?"<br/>
+  "Why not," I thought, "Let's tell him!"<br/>
+  "Yes, we take parents' wishes seriously."<br/>
+  'Yes, we take parents' wishes seriously.'<br/>
+  'kiss' 'us' 'now'<br/>
+  </div>
+
+
+
+
+  <h3>Good versus bad kerning (source material)</h3>
+  <img src="../schoolcursive/savvas/savvas_kerning_handwriting.jpg">
+  <div class="cursive rh12">Handwriting</div>
+  <img src="../schoolcursive/savvas/savvas_kerning_kite.png">
+  <div class="cursive rh12">kite</div>
+  <img src="../schoolcursive/savvas/savvas_kerning_pinknotebook.png">
+  <div class="cursive rh12">a pink notebook</div>
+
+
+
+  <h2><a name="connections">Connections</a></h2>
+  <div class="cursive rh8 nospacebetween red-connections">
+  Ai An Al Ao Aa Ae As At<br/>
+  Bi Bn Bl Bo Ba Be Bs Bt<br/>
+  Di Dn Dl Do Da De Ds Dt<br/>
+  ti tn tl to ta te ts tt<br/>
+  nt ot et vt gt st pt qt<br/>
+  </div>
+  
+  <div class="cursive rh8 nospacebetween">
+  <i>
+  Foxtrox Golf Hotel India Juliett
+  </i>
+  </div>
+
+
+  
+  <h2><a name="inter">Interpunction</a></h2>
+  <div class="cursive rh8 nospacebetween">
+  Can't you fix it?<br/>
+  I'll be there!<br/>
+  Happy, Doc and Grumpy...<br/>
+  Don't. Tell. Me. What. To. Do.<br/>
+  "Who's there?" she asked.<br/>
+  “Who's there?” she asked.<br/>
+  ‘Who's there?’ she asked.<br/>
+  ¿Do you support «comillas españolas»?<br/> 
+  ¡¡¡Idiota!!!<br/>
+  Step one: open packaging; step two: remove seal.<br/>
+  ¡Ávida cigüeña floja!, pibonazo quemó whisky extra. 
+  </div>
+  
+  <h2><a name="digits">Digits</a></h2>
+  <div class="lines rh12">
+    <div class="line">0 1 2 3 4 5 6 7 8 9 10</div>
+    <div class="line">1789 2001 1492</div>
+    <div class="line">8:30 a.m. Ride to the park.</div>
+    <div class="line">10:10 a.m. Meet Al at the park.</div>
+    <div class="line">12:15 p.m. Have a picnic lunch.</div>
+  </div>
+
+  <h2><a name="special">Special characters</a></h2>
+  <h3>Footnotes</h3>
+  <div class="lines rh6">
+    <div class="line ">D'Nealian© Trademark® designed¹ by² Donaldª N. Thurber³.</div>
+    <div class="line traceable morearrows-overlay-rood">D'Nealian© Trademark® designed¹ by² Donaldª N. Thurber³.</div>
+  </div>
+  <h3>Currency</h3>
+  <div class="lines rh6">
+    <div class="line rh6">$ € ¥ £ ¢ &nbsp; €17.50 £19.95</div>
+    <div class="line traceable morearrows-overlay-rood">$ € ¥ £ ¢ &nbsp; €17.50 £19.95</div>
+  </div>
+  <h3>More interpuntion</h3>
+  <div class="lines rh6">
+    <div class="line rh6">% & * @ # |</div>
+    <div class="line traceable morearrows-overlay-rood">% & * @ # |</div>
+  </div>
+  <h3>Acute</h3>
+  <div class="lines rh6">
+    <div class="line rh6">á é í ó ú ý Á É Í Ó &nbsp;Ý café née más mí</div>
+    <div class="line traceable morearrows-overlay-rood">á é í ó ú ý Á É Í Ó &nbsp;Ý café née más mí</div>
+  </div>
+  <h3>Grave</h3>
+  </div>
+  <div class="lines rh6">
+    <div class="line rh6">à è ì ò ù À È Ì Ò &nbsp;Ù</div>
+    <div class="line traceable morearrows-overlay-rood">à è ì ò ù À È Ì Ò &nbsp;Ù</div>
+  </div>
+  <h3>Circumflex</h3>
+  <div class="lines rh6">
+    <div class="line rh6">â ê î ô û Â Ê Î Ô &nbsp;Û</div>
+    <div class="line traceable morearrows-overlay-rood">â ê î ô û Â Ê Î Ô &nbsp;Û</div>
+  </div>
+  <h3>Tilde</h3>
+  <div class="lines rh6">
+    <div class="line rh6">ã ñ õ Ã Ñ Õ</div>
+    <div class="line traceable morearrows-overlay-rood">ã ñ õ Ã Ñ Õ</div>
+  </div>
+  <h3>Diaeresis</h3>
+  <div class="lines rh6">
+    <div class="line rh6">ä ë ï ö ü ÿ Ä Ë Ï Ö &nbsp;Ü Ÿ</div>
+    <div class="line traceable morearrows-overlay-rood">ä ë ï ö ü ÿ Ä Ë Ï Ö &nbsp;Ü Ÿ</div>
+  </div>
+  <h3>Ring</h3>
+  <div class="lines rh6">
+    <div class="line rh6">å Å</div>
+    <div class="line traceable morearrows-overlay-rood">å Å</div>
+  </div>
+  <h3>Composite letters</h3>
+  <div class="lines rh6">
+    <div class="line rh6">æ œ ß Æ Œ sœur diæresis Ægypt eße aßa tßi</div>
+    <div class="line traceable morearrows-overlay-rood">æ œ ß Æ Œ sœur diæresis Ægypt eße aßa tßi</div>
+  </div>
+  <h3>Other</h3>
+  <div class="lines rh6">
+    <div class="line rh6">ç ı ø š ž Ç Ø Š garçon Ça eššo Štl ažure øžøñë</div>
+    <div class="line traceable morearrows-overlay-rood">ç ı ø š ž Ç Ø Š garçon Ça eššo Štl ažure øžøñë</div>
+  </div>
+  <h3>Unsupported characters with combining accents</h3>
+  <div class="lines rh6">
+    <div class="line rh6">Ǹ ǹ Ń ń ů ũ Ũ</div> 
+    <div class="line traceable morearrows-overlay-rood">Ǹ ǹ Ń ń ů ũ Ũ</div> 
+  </div>
+  
+  <h2><a name="lines rh6">Lines</a></h2>
+  <div class="lines rh24 nospacebetween">
+    <div class="line">pig fat dog </div>
+    <div class="line">pig fat dog </div>
+    <div class="line outline">pig fat dog </div>
+  </div>
+  <br/>
+  <div class="lines rh24 ld5">
+    <div class="line">pig fat dog </div>
+    <div class="line">pig fat dog </div>
+    <div class="line outline">pig fat dog </div>
+  </div>
+  <div class="lines rh12 nospacebetween">
+    <div class="line">pig fat dog </div>
+    <div class="line">pig fat dog </div>
+    <div class="line outline">pig fat dog </div>
+  </div>
+  <br/>
+  <div class="lines rh12 ld5">
+    <div class="line">pig fat dog </div>
+    <div class="line">pig fat dog </div>
+    <div class="line outline">pig fat dog </div>
+  </div>
+  <div class="lines rh6 nospacebetween">
+    <div class="line">pig fat dog </div>
+    <div class="line">pig fat dog </div>
+    <div class="line outline">pig fat dog </div>
+  </div>
+  <br/>
+  <div class="lines rh6 ld5">
+    <div class="line">pig fat dog </div>
+    <div class="line">pig fat dog </div>
+    <div class="line outline">pig fat dog </div>
+  </div>
+  <div class="lines rh3 nospacebetween">
+    <div class="line">pig fat dog </div>
+    <div class="line">pig fat dog </div>
+    <div class="line outline">pig fat dog </div>
+  </div>
+  <br/>
+  <div class="lines rh3 ld5">
+    <div class="line">pig fat dog </div>
+    <div class="line">pig fat dog </div>
+    <div class="line outline">pig fat dog </div>
+  </div>
+  
+  <h2><a name="entry">Entry strokes</a></h2>
+  <table>
+    <tr>
+      <th>0: all entry strokes from baseline</th>
+      <th>1: no entry strokes for c/a/d/g/o/q</th>
+      <th>2: short entry strokes, none for c/a/d/g/o/q/t</th>
+    </tr>
+    <tr>
+      <td data-cogncur-aanhalen-variant=0>
+        <div class="lines rh6 nospacebetween">
+          <div class="line">ant dodo</div>
+          <div class="line">goat quail</div>
+          <div class="line">egg end else</div>
+          <div class="line">fog bill hat fun</div>
+          <div class="line">lick hick</div>
+          <div class="line">ink up why</div>
+          <div class="line">my name van</div>
+          <div class="line">zip you xenon</div>
+          <div class="line">stop sign</div>
+          <div class="line">cat orca</div>
+          <div class="line">robot rat</div>
+          <div class="line">jellyfish jar</div>
+          <div class="line">pumpkin party</div>
+          <div class="line">time turner</div>
+        </div>
+      </td>
+      <td data-cogncur-aanhalen-variant=1>
+        <div class="lines rh6 nospacebetween">
+          <div class="line">ant dodo</div>
+          <div class="line">goat quail</div>
+          <div class="line">egg end else</div>
+          <div class="line">fog bill hat fun</div>
+          <div class="line">lick hick</div>
+          <div class="line">ink up why</div>
+          <div class="line">my name van</div>
+          <div class="line">zip you xenon</div>
+          <div class="line">stop sign</div>
+          <div class="line">cat orca</div>
+          <div class="line">robot rat</div>
+          <div class="line">jellyfish jar</div>
+          <div class="line">pumpkin party</div>
+          <div class="line">time turner</div>
+        </div>
+      </td>
+      <td data-cogncur-aanhalen-variant=2>
+        <div class="lines rh6 nospacebetween">
+          <div class="line">ant dodo</div>
+          <div class="line">goat quail</div>
+          <div class="line">egg end else</div>
+          <div class="line">fog bill hat fun</div>
+          <div class="line">lick hick</div>
+          <div class="line">ink up why</div>
+          <div class="line">my name van</div>
+          <div class="line">zip you xenon</div>
+          <div class="line">stop sign</div>
+          <div class="line">cat orca</div>
+          <div class="line">robot rat</div>
+          <div class="line">jellyfish jar</div>
+          <div class="line">pumpkin party</div>
+          <div class="line">time turner</div>
+        </div>
+      </td>
+     </tr>
+   </table>
+  <h3>Non-connected upper case with/without entry strokes for lowercase</h3>
+  <table>
+    <tr>
+      <th>With entry strokes</th>
+      <th>Without entry strokes</th>
+      <th>Mixed entry strokes</th>
+    </tr>
+    <tr>
+      <td data-cogncur-aanhalen-variant=0 data-cogncur-hoofdletter-i-variant=1>
+        <Div class='lines rh6 nospacebetween'>
+          <div class="line">Big Band Bend Blend</div>
+          <div class="line">Dear Dancing Donald Duck</div>
+          <div class="line">Far Field Flip Ftt</div>
+          <div class="line">Gladly God Gave Gift</div>
+          <div class="line">Hey Happy Hippo</div>
+          <div class="line">Ink Iglo Iffy</div>
+          <div class="line">Old Oscar On Oxygen</div>
+          <div class="line">Off Ozz Oil Otter</div>
+          <div class="line">Piss Poor Plucky Prop</div>
+          <div class="line">Slip Sat Stick Set</div>
+          <div class="line">Trip Tent Toys Tyler Tt</div>
+          <div class="line">Van Veela Vie Vho Vt</div>
+          <div class="line">Who Wants Will Wet</div>
+        </div>
+      </td>
+      <td data-cogncur-aanhalen-variant=2 data-cogncur-hoofdletter-i-variant=1>
+        <Div class='lines rh6 nospacebetween'>
+          <div class="line">Big Band Bend Blend</div>
+          <div class="line">Dear Dancing Donald Duck</div>
+          <div class="line">Far Field Flip Ftt</div>
+          <div class="line">Gladly God Gave Gift</div>
+          <div class="line">Hey Happy Hippo</div>
+          <div class="line">Ink Iglo Iffy</div>
+          <div class="line">Old Oscar On Oxygen</div>
+          <div class="line">Off Ozz Oil Otter</div>
+          <div class="line">Piss Poor Plucky Prop</div>
+          <div class="line">Slip Sat Stick Set</div>
+          <div class="line">Trip Tent Toys Tyler Tt</div>
+          <div class="line">Van Veela Vie Vho Vt</div>
+          <div class="line">Who Wants Will Wet</div>
+        </div>
+      </td>
+      <td data-cogncur-aanhalen-variant=1 data-cogncur-hoofdletter-i-variant=1>
+        <Div class='lines rh6 nospacebetween'>
+          <div class="line">Big Band Bend Blend</div>
+          <div class="line">Dear Dancing Donald Duck</div>
+          <div class="line">Far Field Flip Ftt</div>
+          <div class="line">Gladly God Gave Gift</div>
+          <div class="line">Hey Happy Hippo</div>
+          <div class="line">Ink Iglo Iffy</div>
+          <div class="line">Old Oscar On Oxygen</div>
+          <div class="line">Off Ozz Oil Otter</div>
+          <div class="line">Piss Poor Plucky Prop</div>
+          <div class="line">Slip Sat Stick Set</div>
+          <div class="line">Trip Tent Toys Tyler Tt</div>
+          <div class="line">Van Veela Vie Vho Vt</div>
+          <div class="line">Who Wants Will Wet</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  </div>
+  
+  <h2><a name="exit">Exit strokes</a></h2>
+  <table>
+    <tr>
+      <th>0: all letters have exit strokes</th>
+      <th>1: no exit strokes for p and s</th>
+    </tr>
+    <tr>
+      <td data-cogncur-exit-strokes=0>
+        <div class="lines rh6 nospacebetween" style="text-align: right">
+          <div class="line">ski gym red</div>
+          <div class="line">win far hill</div>
+          <div class="line">flu lick hat</div>
+          <div class="line">aqua rex</div>
+          <div class="line">bus fuss</div>
+          <div class="line">groß Fuß</div>
+          <div class="line">pop stop</div>
+          <div class="line">riff cliff</div>
+          <div class="line">taq faq</div>
+          <div class="line">jazz</div>
+          <div class="line">stay stag</div>
+          <div class="line">hadj</div>
+          <div class="line">lev now</div>
+          <div class="line">stab</div>
+          <div class="line">dodo go</div>
+          <div class="line">shoe flee zinc</div>
+        </div>
+      </td>
+      <td data-cogncur-exit-strokes=1>
+        <div class="lines rh6 nospacebetween" style="text-align: right">
+          <div class="line">ski gym red</div>
+          <div class="line">win far hill</div>
+          <div class="line">flu lick hat</div>
+          <div class="line">aqua rex</div>
+          <div class="line">bus fuss</div>
+          <div class="line">groß Fuß</div>
+          <div class="line">pop stop</div>
+          <div class="line">riff cliff</div>
+          <div class="line">taq faq</div>
+          <div class="line">jazz</div>
+          <div class="line">stay stag</div>
+          <div class="line">hadj</div>
+          <div class="line">lev now</div>
+          <div class="line">stab</div>
+          <div class="line">dodo go</div>
+          <div class="line">shoe flee zinc</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  
+  <h2><a name="starts">Starting points</a></h2>
+  <br/><br/>
+  <table style="width: 100%">
+    <tr>
+      <th>entry strokes 0</th>
+      <th>entry strokes 2</th>
+    </tr>
+    <tr>
+      <td data-cogncur-aanhalen-variant=0>
+        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="startpunt-overlay-rood" data-nlines="1">
+          <div class="line">a b c d e f g h i</div>
+          <div class="line">j k l m n o p q r </div>
+          <div class="line">s t u v w x y z</div>
+          <div class="line">A B C D E F G H I </div>
+          <div class="line">J K L M N O P Q R </div>
+          <div class="line">S T U V W X Y Z</div>
+          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
+          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
+          <div class="line">ant baboon cat dodo</div>
+          <div class="line">Egg Fang Good Hat</div>
+          <div class="line">Tick Flee Tree Fog</div>
+          <div class="line" data-cogncur-hoofdletter-i-variant=0>Ink Poor Sit Zap</div>
+          <div class="line" data-cogncur-hoofdletter-i-variant=1>Ink Jack Ant Bill</div>
+        </div>
+      </td>
+          
+        </div>
+      </td>
+      <td data-cogncur-aanhalen-variant=2>
+        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="startpunt-overlay-rood" data-nlines="1">
+          <div class="line">a b c d e f g h i</div>
+          <div class="line">j k l m n o p q r </div>
+          <div class="line">s t u v w x y z</div>
+          <div class="line">A B C D E F G H I </div>
+          <div class="line">J K L M N O P Q R </div>
+          <div class="line">S T U V W X Y Z</div>
+          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
+          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
+          <div class="line">ant baboon cat dodo</div>
+          <div class="line">Egg Fang Good Hat</div>
+          <div class="line">Tick Flee Tree Fog</div>
+          <div class="line" data-cogncur-hoofdletter-i-variant=0>Ink Poor Sit Zap</div>
+          <div class="line" data-cogncur-hoofdletter-i-variant=1>Ink Jack Ant Bill</div>
+        </div>
+      </td>
+     </tr>
+   </table>
+  
+  <h2><a name="arrows">Arrows</a></h2>
+  <br/>
+  <div class="lines rh14 traceable">
+    <div class="line nolines arrows-overlay traceable">Big Word</div>
+  </div>
+  <div class="lines rh14">
+    <div class="line nolines arrows-overlay traceable">Big Word</div>
+  </div>
+<!--
+  <div class="lines rh14 traceable">
+    <div class="line nolines arrows-overlay traceable">A B Cow x y zoo</div>
+  </div>
+  <div class="lines rh14">
+    <div class="line nolines arrows-overlay traceable">A B Cow x y zoo</div>
+  </div>
+  -->
+  
+  <h3>Sizing</h3>
+  <div class="lines add-overlay rh6" data-overlay-classes="arrows-font red">
+    <div class="line">aap eend inkt</div>
+  </div>
+  <div class="lines add-overlay rh8" data-overlay-classes="arrows-font red">
+    <div class="line">aap eend inkt</div>
+  </div>
+  <div class="lines add-overlay rh10" data-overlay-classes="arrows-font red">
+    <div class="line">aap eend inkt</div>
+  </div>
+  <div class="lines add-overlay rh12" data-overlay-classes="arrows-font red">
+    <div class="line">aap eend inkt</div>
+  </div>
+  <h3>Shortcut classes</h3>
+  Without the need for data attributes...
+  <div class="lines rh8">
+    <div class="line arrows-overlay">a b c d e f g h i j k l</div>
+    <div class="line arrows-overlay-rood">a b c d e f g h i j k l</div>
+    <div class="line arrows-overlay-groen">a b c d e f g h i j k l</div>
+    <div class="line arrows-overlay traceable">a b c d e f g h i j k l</div>
+    <div class="line arrows-overlay-rood traceable">a b c d e f g h i j k l</div>
+    <div class="line arrows-overlay-groen traceable">a b c d e f g h i j k l</div>
+    <div class="line arrows-overlay outline">a b c d e f g h i j k l</div>
+    <div class="line arrows-overlay-rood outline">a b c d e f g h i j k l</div>
+    <div class="line arrows-overlay-groen outline">a b c d e f g h i j k l</div>
+  </div>
+  
+  
+  <h3>All letters (arrows)</h3>
+  <table style="width: 100%">
+    <tr>
+      <th>entry strokes 0</th>
+      <th>entry strokes 2</th>
+    </tr>
+    <tr>
+      <td data-cogncur-aanhalen-variant=0>
+        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="arrows-font red" data-nlines="1">
+          <div class="line">a b c d e f g h i</div>
+          <div class="line">j k l m n o p q r </div>
+          <div class="line">s t u v w x y z</div>
+          <div class="line">A B C D E F G H I </div>
+          <div class="line">J K L M N O P Q R </div>
+          <div class="line">S T U V W X Y Z</div>
+          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
+          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
+          <div class="line">ant baboon cat dodo</div>
+          <div class="line">Egg Fang Good Hat</div>
+          <div class="line">Tick Flee Tree Fog</div>
+        </div>
+      </td>
+      <td data-cogncur-aanhalen-variant=2>
+        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="arrows-font red" data-nlines="1">
+          <div class="line">a b c d e f g h i</div>
+          <div class="line">j k l m n o p q r </div>
+          <div class="line">s t u v w x y z</div>
+          <div class="line">A B C D E F G H I </div>
+          <div class="line">J K L M N O P Q R </div>
+          <div class="line">S T U V W X Y Z</div>
+          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
+          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
+          <div class="line">ant baboon cat dodo</div>
+          <div class="line">Egg Fang Good Hat</div>
+          <div class="line">Tick Flee Tree Fog</div>
+        </div>
+      </td>
+     </tr>
+   </table>
+
+  <h3>All letters (more arrows)</h3>
+  <table style="width: 100%">
+    <tr>
+      <th>entry strokes 0</th>
+      <th>entry strokes 2</th>
+    </tr>
+    <tr>
+      <td data-cogncur-aanhalen-variant=0>
+        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="morearrows-font red" data-nlines="1">
+          <div class="line">a b c d e f g h i</div>
+          <div class="line">j k l m n o p q r </div>
+          <div class="line">s t u v w x y z</div>
+          <div class="line">A B C D E F G H I </div>
+          <div class="line">J K L M N O P Q R </div>
+          <div class="line">S T U V W X Y Z</div>
+          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
+          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
+          <div class="line">ant baboon cat dodo</div>
+          <div class="line">Egg Fang Good Hat</div>
+          <div class="line">Tick Flee Tree Fog</div>
+        </div>
+      </td>
+      <td data-cogncur-aanhalen-variant=2>
+        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="morearrows-font red" data-nlines="1">
+          <div class="line">a b c d e f g h i</div>
+          <div class="line">j k l m n o p q r </div>
+          <div class="line">s t u v w x y z</div>
+          <div class="line">A B C D E F G H I </div>
+          <div class="line">J K L M N O P Q R </div>
+          <div class="line">S T U V W X Y Z</div>
+          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
+          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
+          <div class="line">ant baboon cat dodo</div>
+          <div class="line">Egg Fang Good Hat</div>
+          <div class="line">Tick Flee Tree Fog</div>
+        </div>
+      </td>
+     </tr>
+   </table>
+
+  <b>Connections (standard arrows)</b>
+  <div class="lines arrows-overlay rh8">
+    <div class="line">a b c d e f g h i j k l m</div>
+    <div class="line">n o p q r s t u v w x y z</div>
+    <div class="line">inn mum nun minimum</div>
+    <div class="line">it unit tint mutt tutu</div>
+    <div class="line">tip up pint put</div>
+    <div class="line">pn uppi</div>
+    <div class="line">sin spit snuit</div>
+    <div class="line">is its piss ups</div>
+    <div class="line">ant ass aim apt</div>
+    <div class="line">tan pat sat naan</div>
+    <div class="line">autism stump sauna stamina</div>
+    
+    <div class="line">add did stand audit</div>
+    <div class="line">dig mug ping msg tg</div> <!-- to g -->
+    <div class="line">gg ga gd gi gu</div> <!-- from g -->
+    <div class="line">gnu gs gp gt</div> <!-- from g -->
+    <div class="line">jug jam djinn juju </div><!-- j -->
+    <div class="line">uw aw nw tw sw gw </div><!-- to w -->
+    <div class="line">wu wa ws wt wn wp </div><!-- from w -->
+    <div class="line">io ao no po so go wo </div> <!-- to o -->
+    <div class="line">oa oi on os oo op ot</div><!-- from o -->
+    <div class="line">va vn vi ov sv nv</div>
+    <div class="line">voodoo owing avium</div>
+    <div class="line">bo bi ba bs bt bp bn</div><!-- from b -->
+    <div class="line">nb pb gb vb ob</div><!-- to b -->
+    <div class="line">wow baobab</div>
+    <div class="line">sh oh vh hh ah nh gh</div><!-- to h -->
+    <div class="line">high ought ohm ship</div>
+    <div class="line">sjjj ojo hjp gjh pju </div><!-- to j again... a bit tight but doable -->
+    <div class="line">yoyo gym hay by pity </div><!-- 'by' is ugly but spot on for reproduction -->
+    <div class="line">hee nee iee ee tee ae</div><!-- ee and to e -->
+    <div class="line">pee see</div><!-- to e -->
+    <div class="line">we ve oe ge je</div><!-- to e -->
+    <div class="line">oc ic sc gc pc tc</div><!-- to c -->
+    <div class="line">science museum </div><!-- from e/c -->
+    <div class="line">ci eei cn een cu eeu</div>
+    <div class="line">ich icb ceh web</div><!-- from e/c -->
+    <div class="line">ca eea cg eeg co eeo</div> <!-- from e/c -->
+    <div class="line">cs ces cp cep ct cet</div> <!-- from e/c -->
+    <div class="line">kick book kk ks ke kn</div> <!-- k -->
+    <div class="line">Kentucky </div>
+    <div class="line">ar ir pr sr gr jr</div><!-- to r -->
+    <div class="line">through here</div><!-- to r -->
+    <div class="line">library for wrist</div> <!-- to/from r -->
+    <div class="line">cru euro bar</div><!-- to/from r -->
+    <div class="line">elf of if pff</div><!-- to f --> 
+    <div class="line">ifa ifn iff ifi ifn ifs ifo ifr ifp ift</div>
+    <div class="line">buffy feel ifjords fifteen</div><!-- from f -->
+    <div class="line">aqua qa qo qr iqs qqt</div><!-- q -->
+    <div class="line">lily ile else lp ill ilk</div><!-- from l -->
+    <div class="line">exe axa oxo gx hx</div> <!-- from/to x -->
+    <div class="line">jazz zed zigzag</div> <!-- from/to z -->
+    <div class="line">pjotr sjib gja gga jji yji zji</div>
+    <div class="line">ppotr spib gpa jpa yjp zpi</div>
+    <div class="line">fjord qja</div><!-- to j -->
+    <div class="line">no do po so go jo vo oo eeo co</div><!-- to n, to v -->
+    <div class="line">na da pa sa ga ja va oa eea ca</div>
+    <div class="line">law dew ow ww </div>
+    <div class="line">we ve be wu vu bu </div>
+  </div>
+  
+
+  <b>Connections (more arrows)</b>
+  <div class="lines morearrows-overlay-rood rh8">
+    <div class="line">a b c d e f g h i j k l m</div>
+    <div class="line">n o p q r s t u v w x y z</div>
+    <div class="line">inn mum nun minimum</div>
+    <div class="line">it unit tint mutt tutu</div>
+    <div class="line">tip up pint put</div>
+    <div class="line">pn uppi</div>
+    <div class="line">sin spit snuit</div>
+    <div class="line">is its piss ups</div>
+    <div class="line">ant ass aim apt</div>
+    <div class="line">tan pat sat naan</div>
+    <div class="line">autism stump sauna stamina</div>
+    
+    <div class="line">add did stand audit</div>
+    <div class="line">dig mug ping msg tg</div> <!-- to g -->
+    <div class="line">gg ga gd gi gu</div> <!-- from g -->
+    <div class="line">gnu gs gp gt</div> <!-- from g -->
+    <div class="line">jug jam djinn juju </div><!-- j -->
+    <div class="line">uw aw nw tw sw gw </div><!-- to w -->
+    <div class="line">wu wa ws wt wn wp </div><!-- from w -->
+    <div class="line">io ao no po so go wo </div> <!-- to o -->
+    <div class="line">oa oi on os oo op ot</div><!-- from o -->
+    <div class="line">va vn vi ov sv nv</div>
+    <div class="line">voodoo owing avium</div>
+    <div class="line">bo bi ba bs bt bp bn</div><!-- from b -->
+    <div class="line">nb pb gb vb ob</div><!-- to b -->
+    <div class="line">wow baobab</div>
+    <div class="line">sh oh vh hh ah nh gh</div><!-- to h -->
+    <div class="line">high ought ohm ship</div>
+    <div class="line">sjjj ojo hjp gjh pju </div><!-- to j again... a bit tight but doable -->
+    <div class="line">yoyo gym hay by pity </div><!-- 'by' is ugly but spot on for reproduction -->
+    <div class="line">hee nee iee ee tee ae</div><!-- ee and to e -->
+    <div class="line">pee see</div><!-- to e -->
+    <div class="line">we ve oe ge je</div><!-- to e -->
+    <div class="line">oc ic sc gc pc tc</div><!-- to c -->
+    <div class="line">science museum </div><!-- from e/c -->
+    <div class="line">ci eei cn een cu eeu</div>
+    <div class="line">ich icb ceh web</div><!-- from e/c -->
+    <div class="line">ca eea cg eeg co eeo</div> <!-- from e/c -->
+    <div class="line">cs ces cp cep ct cet</div> <!-- from e/c -->
+    <div class="line">kick book kk ks ke kn</div> <!-- k -->
+    <div class="line">Kentucky </div>
+    <div class="line">ar ir pr sr gr jr</div><!-- to r -->
+    <div class="line">through here</div><!-- to r -->
+    <div class="line">library for wrist</div> <!-- to/from r -->
+    <div class="line">cru euro bar</div><!-- to/from r -->
+    <div class="line">elf of if pff</div><!-- to f --> 
+    <div class="line">ifa ifn iff ifi ifn ifs ifo ifr ifp ift</div>
+    <div class="line">buffy feel ifjords fifteen</div><!-- from f -->
+    <div class="line">aqua qa qo qr iqs qqt</div><!-- q -->
+    <div class="line">lily ile else lp ill ilk</div><!-- from l -->
+    <div class="line">exe axa oxo gx hx</div> <!-- from/to x -->
+    <div class="line">jazz zed zigzag</div> <!-- from/to z -->
+    <div class="line">pjotr sjib gja gga jji yji zji</div>
+    <div class="line">ppotr spib gpa jpa yjp zpi</div>
+    <div class="line">fjord qja</div><!-- to j -->
+    <div class="line">no do po so go jo vo oo eeo co</div><!-- to n, to v -->
+    <div class="line">na da pa sa ga ja va oa eea ca</div>
+    <div class="line">law dew ow ww </div>
+    <div class="line">we ve be wu vu bu </div>
+  </div>
+  
+
+  
+
+  <h2><a name="wordfade">Wordfade</a></h2>
+  
+  Prerequisite: 'nodots' setting in cogncur_converter.js:
+  <div class="line lh3" data-cogncur-nodots=2>time for a jug of tea in the inn the Otter</div>
+  <br/><br/>
+  <div class="lines repeat  wordfade_spectext lh3 nospacebetween" data-nspaces=6>
+    <div class="line">inn 1 1 1 1 1 1 1</div>
+    <div class="line">nut 1 1 1 1 1 1 1</div>
+    <div class="line">tip 1 1 1 1 1 1 1</div>
+    <div class="line">jar 1 1 1 1 1 1 1</div>
+    <div class="line">ant 1 1 1 1 1 1 1</div>
+    <div class="line">cop 1 1 1 1 1 1 1</div>
+    <div class="line">oil 1 1 1 1 1 1 1</div>
+    <div class="line">axe 1 1 1 1 1 1 1</div>
+    <div class="line">xen 1 1 1 1 1 1 1</div>
+  </div>
+  
+
+  <h2><a name="overlap">Overlapping entry / connecting strokes</a></h2>
+  This setting will only because apparent when using wordfade.
+
+  <table>
+    <tr>
+      <th>0: no overlap</th>
+      <th>1: overlap</th>
+    </tr>
+    <tr>
+      <td>    
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=0>
+          <div class="line">aa 1 1 0 1 0 </div>
+          <div class="line">na 1 1 0 1 0 </div>
+          <div class="line">va 1 1 0 1 0 </div>
+          <div class="line">ea 1 1 0 1 0 </div>
+          <div class="line">ga 1 1 0 1 0 </div>
+          <div class="line">pa 1 1 0 1 0 </div>
+          <div class="line">oa 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td>    
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=1>
+          <div class="line">aa 1 1 0 1 0 </div>
+          <div class="line">na 1 1 0 1 0 </div>
+          <div class="line">va 1 1 0 1 0 </div>
+          <div class="line">ea 1 1 0 1 0 </div>
+          <div class="line">ga 1 1 0 1 0 </div>
+          <div class="line">pa 1 1 0 1 0 </div>
+          <div class="line">oa 1 1 0 1 0 </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>    
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=0>
+          <div class="line">cc 1 1 0 1 0 </div>
+          <div class="line">nc 1 1 0 1 0 </div>
+          <div class="line">vc 1 1 0 1 0 </div>
+          <div class="line">ec 1 1 0 1 0 </div>
+          <div class="line">gc 1 1 0 1 0 </div>
+          <div class="line">pc 1 1 0 1 0 </div>
+          <div class="line">oc 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td>    
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=1>
+          <div class="line">cc 1 1 0 1 0 </div>
+          <div class="line">nc 1 1 0 1 0 </div>
+          <div class="line">vc 1 1 0 1 0 </div>
+          <div class="line">ec 1 1 0 1 0 </div>
+          <div class="line">gc 1 1 0 1 0 </div>
+          <div class="line">pc 1 1 0 1 0 </div>
+          <div class="line">oc 1 1 0 1 0 </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>    
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=0>
+          <div class="line">oo 1 1 0 1 0 </div>
+          <div class="line">no 1 1 0 1 0 </div>
+          <div class="line">vo 1 1 0 1 0 </div>
+          <div class="line">eo 1 1 0 1 0 </div>
+          <div class="line">go 1 1 0 1 0 </div>
+          <div class="line">po 1 1 0 1 0 </div>
+          <div class="line">oo 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td>    
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=1>
+          <div class="line">oo 1 1 0 1 0 </div>
+          <div class="line">no 1 1 0 1 0 </div>
+          <div class="line">vo 1 1 0 1 0 </div>
+          <div class="line">eo 1 1 0 1 0 </div>
+          <div class="line">go 1 1 0 1 0 </div>
+          <div class="line">po 1 1 0 1 0 </div>
+          <div class="line">oo 1 1 0 1 0 </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>    
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=0>
+          <div class="line">tt 1 1 0 1 0 </div>
+          <div class="line">nt 1 1 0 1 0 </div>
+          <div class="line">vt 1 1 0 1 0 </div>
+          <div class="line">et 1 1 0 1 0 </div>
+          <div class="line">gt 1 1 0 1 0 </div>
+          <div class="line">pt 1 1 0 1 0 </div>
+          <div class="line">ot 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td>    
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=1>
+          <div class="line">tt 1 1 0 1 0 </div>
+          <div class="line">nt 1 1 0 1 0 </div>
+          <div class="line">vt 1 1 0 1 0 </div>
+          <div class="line">et 1 1 0 1 0 </div>
+          <div class="line">gt 1 1 0 1 0 </div>
+          <div class="line">pt 1 1 0 1 0 </div>
+          <div class="line">ot 1 1 0 1 0 </div>
+        </div>
+      </td>
+    </tr>
+    
+  </table>
+  
+  <br/>
+  <hr/>
+  
+  <h2>Misc</h2>
+  <br/>
+  <div class="line rh4">Designed by liesbeth@syboor.eu</div>
+  
+  <br/>
+  <div class="cursive rh12">sleeves</div>
+  <div class="rawcursive rh12">ϫs Νl Βe υe ψv αe ωsЁ</div>
+  <div class="rawcursive rh12">ϫ s Ν l Β &nbsp;e υ &nbsp;e ψ v α &nbsp;e ω s Ё</div>
+  <style>
+    .c1 {
+      color: #00bf00
+    }
+    .c2 {
+      color: #bf00bf;
+    }
+    .c3 {
+      color: invisible;
+    }
+    .c4 {
+      color: #db9f30;
+    }
+    .c5 {
+      color: #5a5ae7;
+    }
+    .c6 {
+      color: #5eb3cd
+    }
+  </style>
+  <div class="rawcursive rh12">
+    ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ <br/>
+    ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ<br/>
+    <span class="c4">Ϫ</span>m<span class="c5">Δ</span>i<span class="c4">Ε</span>n<span class="c5">Δ</span>i<span class="c4">Ε</span>m<span class="c5">Δ</span>u<span class="c4">Ε</span>mЀ<br/>
+    
+  </div>
+
+  <div class="rawcursive rh12 dotted-font">
+    ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ <br/>
+    ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ<br/>
+    <span class="c4">Ϫ</span>m<span class="c5">Δ</span>i<span class="c4">Ε</span>n<span class="c5">Δ</span>i<span class="c4">Ε</span>m<span class="c5">Δ</span>u<span class="c4">Ε</span>mЀ<br/>
+    
+  </div>
+  <div class="rawcursive rh12 dotted-arrows2-font">
+    ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ <br/>
+    ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ<br/>
+    <span class="c4">Ϫ</span>m<span class="c5">Δ</span>i<span class="c4">Ε</span>n<span class="c5">Δ</span>i<span class="c4">Ε</span>m<span class="c5">Δ</span>u<span class="c4">Ε</span>mЀ<br/>
+    
+  </div>
+
+
+  <div class="rawline nolines rh12" style="position: relative; top: 0">
+    <div class="" style="position: absolute; top: 0; z-index: 1; width: 100%">ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ</div>
+    <div class="arrows-font" style="position: absolute; top: 0; z-index: 1; width: 100%">ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ</div></div>
+  <div class="rawline nolines rh12" style="position: relative; top: 0">
+    <div class="" style="position: absolute; top: 0; z-index: 1; width: 100%">ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ</div>
+    <div class="arrows-font" style="position: absolute; top: 0; z-index: 1; width: 100%">ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ</div></div>
+
+
+  <div class="cursive rh12 invisible-connections">minimum</div>
+  </div>
+  <div class="rawcursive rh12">
+    ϫsΝlΒ<span class="c1">e</span>υ<span class="c1">e</span>ψvα<span class="c1">e</span>ωsЁ<br/>
+    ϫsΝl<span class="c4">Β</span><span class="c1">e</span><span class="c4">υ</span><span class="c1">e</span>ψv<span class="c4">α</span><span class="c1">e</span>ωsЁ<br/>
+    ϫsΝlΒ<span class="c1">e</span><span class="c6">υ</span><span class="c1">e</span><span class="c6">ψ</span>vα<span class="c1">e</span><span class="c6">ω</span>sЁ<br/>
+  </div>
+  
+  <div style="width: 450px; height: 150px; overflow: hidden; background-color: #FFFFD8; text-align: center;  background-image: -webkit-box-shadow: inset 0 0 5px 5px #4CBEFD; box-shadow: inset 0 0 5px 5px #4CBEFD;);">
+  <!--
+    <div style="font-family: Ruluko; font-size: 19pt; margin-top: 18px; margin-bottom: 10px;">Try out my <span class='letter' style="color: #971C6D;">D 'Nealian</span> cursive font.</div>
+    <div class="line rh5" style="text-align: left; margin-left: 35px"></div>
+    <div class="rawline rh3" style="font-family: SchoolCursiveGuides">Also available with guides.</div>
+    -->
+  </div>
+  
+  <br/>
+  <br/>
+  <div class="lines rh8">
+    <div class='line'>m  n  v  a  d</div>
+  </div>
+  
+</body>

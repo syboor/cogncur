@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cogncur converter for legacy applications</title>
+
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="/fonts/cogncur/webapps/cogncur.css" />
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/fonts/cogncur/webapps/cogncur_converter.js?v=20211017"></script><!-- functions for converting text to Schoolschrift glyphs -->
+  
+  <script>
+    $(document).ready(function () {
+	    var romphoogte = 3.0;
+      
+      var cogncur_settings = {};
+	
+      function clipboard() {
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText) { // only works over https
+          navigator.clipboard.writeText($('#output').text());
+          $('#button_clipboard').val('Copied');
+        } else {
+          $('#button_clipboard').val('Copy failed, no https?');
+        }
+      }
+      
+      function update() {
+        var converter = get_cogncur_converter(cogncur_settings);
+        var text = $('#input').val();
+        var html;
+        text = converter.convert(text);
+        $('#output').text(text); /* For screen, we use a textarea, as that is best for copy-pasting to a word proecssor */
+        $('#output-print').text(text); /* For printing, use a normal div, since a textarea has limited (fixed) height */
+
+        // Also set the font-size
+        var fs = Math.floor(romphoogte * 12.5);
+        $('#output').css('font-size', fs);
+        $('#output-print').css('font-size', fs);
+      }
+     
+      /* Update when the input text is changed */
+      $('#input').change(function () {
+        update(true);  
+      });
+      $('#input').keyup(function () {
+        update(true);  
+      });
+      
+      /* Update when the settings are changed */
+      function update_settings() {
+        cogncur_settings = {};
+        $('.converter-setting:checked').each(function() {
+          cogncur_settings[$(this).attr('name')] = $(this).attr('value');
+        });
+        
+        update();
+      }
+      $('.converter-setting').click(update_settings);
+	  
+      $('#font-increase').click(function () {
+        var fs = $('#output').css('font-size');
+        romphoogte = romphoogte + .5;
+        update(true);
+      
+      });
+
+      $('#font-decrease').click(function () {
+        var fs = $('#output').css('font-size');
+        romphoogte = romphoogte - .5;
+        if (romphoogte < 1.5) romphoogte = 1.5;
+        update(true);
+        
+      });
+
+      $('#button_clipboard').click(clipboard);
+
+      update_settings();
+      
+    });
+    
+  
+  </script>
+  <style>
+    @media print {
+      html body * {
+        display: none;	
+      }
+      #output-print {
+        display: block;
+      }
+      body .uitgelicht-raw, body .resultaat {
+        display: none;
+      }
+    }
+    @media screen {
+      #output-print {
+        display: none;
+      }
+    }
+    #output {
+      white-space: pre-wrap;
+      background-color: #fff;
+      padding: 10px;
+      width: 100%;
+      height: 500px;
+      margin-top: 10px;
+      max-width: 100vw;
+    }
+    #output-print {
+      white-space: pre-wrap;
+    }
+    .input textarea {
+      width: 100%;
+      box-sizing: border-box;
+      max-width: 100vw;
+    }
+
+    .resultaat {
+      width: 48em;
+      max-width: 100vw;
+    }
+    .resultaat textarea {
+      width: 100%;
+      box-sizing: border-box;
+      clear: both;
+    }
+    .resultaat, .uitgelicht-raw {
+      /* Inline-block allows the float defined in the HTML *after* this element, to still appear next to this element.
+         * Without inline-block, the float will appear under this element and next to the next one.
+       */
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .button {
+      display: inline-block;
+      min-width: 1.2em;
+      text-align: center;
+      border: 1px solid #999;
+      margin: 0px;
+      padding: 0px;
+      padding: 2px 10px 2px 10px;
+      box-sizing: border-box;
+    }
+    .button:hover {
+      background-color: rgba(0,0,0,.08);
+      border: 1px solid #555;
+    } 
+
+  </style>
+
+</head>
+
+
+
+<body class="wide">
+
+
+<div class="crumbs"><a href="/handschrift/">Handschrift</a> &gt; Schoolschrijver</div>
+
+
+<div class="cursive rh3" id="output-print"></div>
+
+<h1>Cogncur converter for legacy applications</h1>
+<p>Unfortunately, some applications - such as Powerpoint and Canva Pro - do not support advanced OpenType features. If you use my font Cogncur with these applications, it's not possible to type cursive text directly into the application. However, you can use this webpage to generate text that you can copy & paste into Powerpoint.</p>
+
+<b>Requirements: </b>
+<ul>
+  <li>You must have the Cogncur font installed on your computer (for Powerpoint) or uploaded to Canva Pro.
+  <li>You must be able to copy-paste from this webpage into your target application.
+  <li>The application that you copy-paste must support Unicode characters.
+</ul>
+<br/>
+<b>How to use:</b>
+<ul>
+  <li>Type your text into the Input box.
+  <li>Press the "Copy to clipboard" button above the Output box. Alternatively, you can select part of the output text and press Ctrl+C.
+  <li>Paste the text into your application using Ctrl-V. The text might contain a lot of boxes, but that's OK.
+  <li>Select the text in your application and change the font to Cogncur.
+</ul>
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap">
+  <div class="col">
+    <div class="input">
+      <h2>Input</h2>
+      <textarea name="input" id="input" rows=10>Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
+"It's a fine life!"
+      </textarea>
+    </div>
+
+
+
+    <h2>Result <span class="button" id="font-increase">+</span> <span class="button" id="font-decrease">-</span> &nbsp; &nbsp; 
+    <input type="button" id="button_clipboard" name="button_clipboard" value="Copy to clipboard" style="font-size: 12pt"> </h2>
+
+    <div class="resultaat">
+      <!-- If the user copy-pastes from a textarea, the whitespace behaviour ('pre') is preserved.
+           IF you copy-pasts from an ordinary div, whitespace will collapse. -->
+      <textarea class="cursive rh3" id="output" disabled></textarea>
+    </div>
+  </div>
+
+  <div class="col">
+    <h2>Stylistic sets</h2>
+    <div class="settings">
+      N.I. <code>ss01</code> No entry strokes from baseline</i><br/>
+      <input class="converter-setting" type='checkbox' name='exit_strokes' value=1> <code>ss02</code> No exit strokes on <i>s</i> and <i>p</i><br/>
+      <input class="converter-setting" type='checkbox' name='dp_variant' value=1> <code>ss03</code> Shorter sticks on <i>p</i> and <i>d</i><br/>
+      N.I. <code>ss04</code> <i>f</i> connects from the middle, <i>q</i> from the bottom<br/>
+      N.I. <code>ss05</code> <i>f</i> and <i>q</i> have a pencil lift<br/>
+      N.I. <code>ss06</code> <i>s</i> is wider<br/>
+      N.I. <code>ss07</code> <i>r</i> is more print-like<br/>
+      <input class="converter-setting" type='checkbox' name='t_variant' value=1> <code>ss08</code> <i>t</i> is more print-like<br/>
+      <input class="converter-setting" type='checkbox' name='t_variant' value=2> <code>ss09</code> <i>t</i> is more print-like and has straight connection<br/>
+      N.I. <code>ss10</code> <i>z</i> has a low loop<br/>
+      <input class="converter-setting" type='checkbox' name='rz_top_variant' value=1> <code>ss11</code> <i>r</i> and <i>z</i> have a pointy top<br/>
+      <input class="converter-setting" type='checkbox' name='undercurves' value=1> <code>ss12</code> use undercurves<br/>
+      <input class="converter-setting" type='checkbox' name='y_variant' value=1> <code>ss13</code> <i>y</i> starts with an angle, like <i>i</i><br/>
+      <input class="converter-setting" type='checkbox' name='w_variant' value=1> <code>ss14</code> <i>w</i> starts with a curve, like <i>n</i><br/>
+      N.I. <code>ss15</code> <i>p</i> starts with a curve<br/>
+      N.I. <code>ss16</code> <i>p</i> doesn't close<br/>
+      N.I. <code>ss17</code> ...reserved...<br/>
+      N.I. <code>ss18</code> ...reserved...<br/>
+      <input class="converter-setting" type='checkbox' name='uppercase_cgl_variant' value=1> <code>ss19</code> <i>C</i>, <i>G</i> and <i>L</i> don't start with a loop<br/>
+      <input class="converter-setting" type='checkbox' name='uppercase_amn_variant' value=2> <code>ss20</code> <i>A</i>, <i>M</i> and <i>N</i> look like their lowercase counterparts<br/>
+      
+
+
+    <h2>Other features</h2>
+    <div class="settings">
+      <input class="converter-setting" type='checkbox' name='smartquotes' value=1 checked=1> Smart quotes<br>
+      <input class="converter-setting" type='checkbox' name='ij_ligature' value=1> Dutch 'ij' ligature
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
