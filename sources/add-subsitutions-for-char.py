@@ -42,8 +42,6 @@ def add_subs(glyphname, connects_as, end_piece):
     
 
 # How to add a new character in
-add_subs('q1', 'a', 'ceq1');
-add_subs('q2', 'a', 'ceq2');
-add_subs('q3', 'a', 'ceq3');
+add_subs('s1', 's1', 'ces');
 
 # NB the character should still be added manually to the appropriate ww'calt' classes
