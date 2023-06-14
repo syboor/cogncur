@@ -98,12 +98,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      */
     nodots: 0,
     
-    /* TODO no_extra_s_bit:
-     0 = the connections from b, o, v, w have an extra bit of s so that the s touches the connection
-     1 = no
-     */
-    no_extra_s_bit: 0,
-    
     /* no_tt_ligature:
      0 = yes, 'tt' forms a ligature with the crossbars connected
      1 = no
@@ -344,6 +338,16 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccf1j : '\ue13E', // special case
     cef1  : '\ue13F',
     cef2  : '\ue140',
+    ccf4i : '\ue141',
+    ccf4n : '\ue142',
+    ccf4h : '\ue143',
+    ccf4o : '\ue144',
+    ccf4a : '\ue145',
+    ccf4e : '\ue146',
+    ccf4s : '\ue147',
+    ccf4t1: '\ue148',
+    ccf4t : '\ue149',
+    cef4  : '\ue14C',
     
     
   }
@@ -457,8 +461,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     result = variantsConversion2(result);
 
     result = dotlessConversion(result);
-    result = ligatureConversion(result);
-    result = extrasbitConversion(result);
     
     // ONLY trim off the space we added at the start
     if (result.substring(0,1) == " ") result = result.substring(1);
@@ -504,13 +506,18 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
 
     if (settings.fq_connection_variant == 1) {
-      input = input.replace(/f/g, variants.f1);
+      if (settings.fq_continuity_variant == 1) {
+        input = input.replaceAll('f', variants.f4);
+      } else {
+        input = input.replaceAll('f', variants.f1);
+      }
     }
 
     if (settings.y_variant == 1) {
       input = input.replaceAll('y', variants.y1);
       input = input.replaceAll(variants.ij, variants.ij1);
     } // note that Y will be replaced in variantsConversion2
+    
     if (settings.w_variant == 1) {
       input = input.replace(/w/g, variants.w1);
     }
@@ -520,11 +527,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   function variantsConversion2(input) {
     // In this function, convert all variants that have no impact on the connecting strokes used.
     // This function will be called with connecting strokes already in place.
-    if (settings.dp_variant == 1) {
-      input = input.replace(/d/g, variants.d1);
-      input = input.replace(/p/g, variants.p1);
-    }
-    
     if (settings.exit_strokes == 1) {
       input = input.replaceAll(connectors.ces, connectors.cfs);
       input = input.replaceAll(connectors.cep, connectors.cfp);
@@ -549,7 +551,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
 
     
-    if (settings.t_variant == 2) { // TODO: expand with the rest of the uppercase letters
+    if (settings.t_variant == 2) { 
       input = input.replaceAll(connectors.ccAt1, connectors.ccAi);
       input = input.replaceAll(connectors.ccBt1, connectors.ccBi);
       input = input.replaceAll(connectors.ccet1, connectors.ccei);
@@ -570,7 +572,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       
     }
 
-    if (settings.undercurves) { // TODO: expand with the rest of the uppercase letters
+    if (settings.undercurves) { 
       input = input.replaceAll(connectors.ccAi, connectors.ccAt1);
       input = input.replaceAll(connectors.ccBi, connectors.ccBt1);
       input = input.replaceAll(connectors.ccei, connectors.ccet1);
@@ -588,8 +590,22 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replaceAll(connectors.ccti, connectors.cctt1);
       input = input.replaceAll(connectors.ccvi, connectors.ccvt1);
       input = input.replaceAll(connectors.cgi, connectors.cgt1);
-      
     }
+
+    if (settings.fq_continuity_variant == 1) {
+      input = input.replaceAll('f', variants.f2);
+
+      input = input.replaceAll(connectors.cef, connectors.cef2);
+      input = input.replaceAll(connectors.ccqj, connectors.ccqi); // the special 'extra wide' connection is not needed if the f doesn't have a loop but just a stick
+    }
+
+    if (settings.dp_variant == 1) {
+      input = input.replaceAll('d', variants.d1);
+      input = input.replaceAll('p', variants.p1);
+      input = input.replaceAll(variants.f4, variants.f5);
+      input = input.replaceAll(variants.f2, variants.f3);
+    }
+    
 
 
     return input;
@@ -603,7 +619,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     var zoekVervangParen = [
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([aà-ådgqæ])", connectors.ccna],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([eè-ë])", connectors.ccne],
-      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([bfhkl"+variants.f1+"])", connectors.ccnh],
+      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccnh],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+variants.y1+variants.ij1+"])", connectors.ccni],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccnn],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([sš])", connectors.ccns],
@@ -613,7 +629,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([sš])([aà-ådgqæ])", connectors.ccsa],
       ["([sš])([eè-ë])", connectors.ccse],
-      ["([sš])([bfhkl"+variants.f1+"])", connectors.ccsh],
+      ["([sš])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccsh],
       ["([sš])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccsi],
       ["([sš])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccsn],
       ["([sš])([sš])", connectors.ccss],
@@ -623,7 +639,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([pß])([aà-ådgqæ])", connectors.ccpa],
       ["([pß])([eè-ë])", connectors.ccpe],
-      ["([pß])([bfhkl"+variants.f1+"])", connectors.ccph],
+      ["([pß])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccph],
       ["([pß])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccpi],
       ["([pß])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccpn],
       ["([pß])([sš])", connectors.ccps],
@@ -633,7 +649,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([aà-ådgqæ])", connectors.ccqa],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([eè-ë])", connectors.ccqe],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([bfhkl"+variants.f1+"])", connectors.ccqh],
+      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccqh],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccqi],
       ["([fq])([jȷ])", connectors.ccqj], // special connector for 'fj' and 'qj'
       ["([zžQZ"+variants.z1+variants.z1caron+"])([jȷ])", connectors.ccqi], // but no need or 'zj'
@@ -645,7 +661,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["(["+variants.f1+"])([aà-ådgqæ])", connectors.ccf1a],
       ["(["+variants.f1+"])([eè-ë])", connectors.ccf1e],
-      ["(["+variants.f1+"])([bfhkl"+variants.f1+"])", connectors.ccf1h],
+      ["(["+variants.f1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccf1h],
       ["(["+variants.f1+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccf1i],
       ["(["+variants.f1+"])([jȷ])", connectors.ccf1j], // special connector for 'fj' and 'qj'
       ["(["+variants.f1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccf1n],
@@ -654,10 +670,20 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+variants.f1+"])(["+variants.t1+"])", connectors.ccf1t1],
       ["(["+variants.f1+"])([tŧ])", connectors.ccf1t],
 
+      ["(["+variants.f4+"])([aà-ådgqæ])", connectors.ccf4a],
+      ["(["+variants.f4+"])([eè-ë])", connectors.ccf4e],
+      ["(["+variants.f4+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccf4h],
+      ["(["+variants.f4+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccf4i],
+      ["(["+variants.f4+"])([jȷ])", connectors.ccf4i], // not special, just use 'ccf4i'
+      ["(["+variants.f4+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccf4n],
+      ["(["+variants.f4+"])([sš])", connectors.ccf4s],
+      ["(["+variants.f4+"])([cçoò-öøœ])", connectors.ccf4o],
+      ["(["+variants.f4+"])(["+variants.t1+"])", connectors.ccf4t1],
+      ["(["+variants.f4+"])([tŧ])", connectors.ccf4t],
 
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([aà-ådgqæ])", connectors.ccga],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([eè-ë])", connectors.ccge],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([bfhkl"+variants.f1+"])", connectors.ccgh],
+      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccgh],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.IJ+variants.ij1+"])", connectors.ccgi],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccgn],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([sš])", connectors.ccgs],
@@ -667,7 +693,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([bvw"+variants.w1+"])([aà-ådgqæ])", connectors.ccva],
       ["([bvw"+variants.w1+"])([eè-ë])", connectors.ccve],
-      ["([bvw"+variants.w1+"])([bfhkl"+variants.f1+"])", connectors.ccvh],
+      ["([bvw"+variants.w1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccvh],
       ["([bvw"+variants.w1+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccvi],
       ["([bvw"+variants.w1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccvn],
       ["([bvw"+variants.w1+"])([sš])", connectors.ccvs],
@@ -677,7 +703,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([oò-öø])([aà-ådgqæ])", connectors.ccoa],
       ["([oò-öø])([eè-ë])", connectors.ccoe],
-      ["([oò-öø])([bfhkl"+variants.f1+"])", connectors.ccoh],
+      ["([oò-öø])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccoh],
       ["([oò-öø])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccoi],
       ["([oò-öø])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccon],
       ["([oò-öø])([sš])", connectors.ccos],
@@ -688,7 +714,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([aà-ådgqæ])", connectors.ccea],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([eè-ë])", connectors.ccee],
-      ["([ceè-ëçœæCÇEÈ-ËŒÆL])([bfhkl"+variants.f1+"])", connectors.cceh],
+      ["([ceè-ëçœæCÇEÈ-ËŒÆL])([bfhkl"+variants.f1+variants.f4+"])", connectors.cceh],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccei],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccen],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([sš])", connectors.cces],
@@ -698,7 +724,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([tŧ])([aà-ådgqæ])", connectors.ccta],
       ["([tŧ])([eè-ë])", connectors.ccte],
-      ["([tŧ])([bfhkl"+variants.f1+"])", connectors.ccth],
+      ["([tŧ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccth],
       ["([tŧ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccti],
       ["([tŧ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.cctn],
       ["([tŧ])([sš])", connectors.ccts],
@@ -708,7 +734,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([A])([aà-ådgqæ])", connectors.ccAa],
       ["([A])([eè-ë])", connectors.ccAe],
-      ["([A])([bfhkl"+variants.f1+"])", connectors.ccAh],
+      ["([A])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccAh],
       ["([A])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccAi],
       ["([A])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccAn],
       ["([A])([sš])", connectors.ccAs],
@@ -718,7 +744,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([BSŠ])([aà-ådgqæ])", connectors.ccBa],
       ["([BSŠ])([eè-ë])", connectors.ccBe],
-      ["([BSŠ])([bfhkl"+variants.f1+"])", connectors.ccBh],
+      ["([BSŠ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccBh],
       ["([BSŠ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccBi],
       ["([BSŠ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccBn],
       ["([BSŠ])([sš])", connectors.ccBs],
@@ -728,7 +754,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([DOÒ-ÖØVW])([aà-ådgqæ])", connectors.ccOa],
       ["([DOÒ-ÖØVW])([eè-ë])", connectors.ccOe],
-      ["([DOÒ-ÖØVW])([bfhkl"+variants.f1+"])", connectors.ccOh],
+      ["([DOÒ-ÖØVW])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccOh],
       ["([DOÒ-ÖØVW])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccOi],
       ["([DOÒ-ÖØVW])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccOn],
       ["([DOÒ-ÖØVW])([sš])", connectors.ccOs],
@@ -738,7 +764,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([P])([aà-ådgqæ])", connectors.ccPa],
       ["([P])([eè-ë])", connectors.ccPe],
-      ["([P])([bfhkl"+variants.f1+"])", connectors.ccPh],
+      ["([P])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccPh],
       ["([P])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccPi],
       ["([P])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccPn],
       ["([P])([sš])", connectors.ccPs],
@@ -748,7 +774,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([FT])([aà-ådgqæ])", connectors.ccFa],
       ["([FT])([eè-ë])", connectors.ccFe],
-      ["([FT])([bfhkl"+variants.f1+"])", connectors.ccFh],
+      ["([FT])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccFh],
       ["([FT])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccFi],
       ["([FT])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccFn],
       ["([FT])([sš])", connectors.ccFs],
@@ -758,7 +784,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([IÌ-Ï])([aà-ådgqæ])", connectors.ccIa],
       ["([IÌ-Ï])([eè-ë])", connectors.ccIe],
-      ["([IÌ-Ï])([bfhkl"+variants.f1+"])", connectors.ccIh],
+      ["([IÌ-Ï])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccIh],
       ["([IÌ-Ï])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccIi],
       ["([IÌ-Ï])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccIn],
       ["([IÌ-Ï])([sš])", connectors.ccIs],
@@ -768,7 +794,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
       ["([NÑ])([aà-ådgqæ])", connectors.ccNa],
       ["([NÑ])([eè-ë])", connectors.ccNe],
-      ["([NÑ])([bfhkl"+variants.f1+"])", connectors.ccNh],
+      ["([NÑ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccNh],
       ["([NÑ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccNi],
       ["([NÑ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccNn],
       ["([NÑ])([sš])", connectors.ccNs],
@@ -801,7 +827,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     var zoekVervangParen = [
       ["("+left+")([aà-ådgqæ])", connectors.cga, connectors.csa, connectors.csa],
       ["("+left+")([eè-ë])",connectors.cge, connectors.cge, connectors.cse],
-      ["("+left+")([bfhkl"+variants.f1+"])", connectors.cgh, connectors.cgh, connectors.csh],
+      ["("+left+")([bfhkl"+variants.f1+variants.f4+"])", connectors.cgh, connectors.cgh, connectors.csh],
       ["("+left+")([iì-ïıjȷpuù-üwß"+variants.r1+variants.y1+variants.ij1+"])", connectors.cgi, connectors.cgi, connectors.csi], 
       ["("+left+")([mnñrvxẋyýÿ"+variants.ij+variants.w1+"])", connectors.cgn, connectors.cgn, connectors.csn],
       ["("+left+")([zž])", connectors.cgz, connectors.cgz, connectors.csz], // special case, parallel with internal stroke of 'z'
@@ -850,6 +876,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([qzž"+variants.z1+variants.z1caron+"])("+right+")", connectors.ceq], // except f, Q, Z
       ["([f])("+right+")", connectors.cef],
       ["(["+variants.f1+"])("+right+")", connectors.cef1],
+      ["(["+variants.f4+"])("+right+")", connectors.cef4],
       ["([QZ])("+right+")", connectors.ceQ],
       ["([pß])("+right+")",  connectors.cep],
       ["([sš])("+right+")",  connectors.ces],
@@ -930,37 +957,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     return input;
   }
 
-  function ligatureConversion(input) {
-    // ligature 'tt': connect the two crossbars together
-    if (settings.no_tt_ligature == 0) {
-      input = input.replaceAll('tΚt', 'ϐ');
-      input = input.replaceAll('tѤt', 'ϐ');
-    }
-    
-    // TODO: Dutch 'ij' ligature
-    return input;
-  }
-  
-  function extrasbitConversion(input) {
-    // connections from b/o/v/w towards s
-    if (settings.no_extra_s_bit >= 1) {
-      input = input.replaceAll('ο', 'ϑ');
-      input = input.replaceAll('ε', 'ϒ');
-    }
-    return input;
-  }  
-  
-  /* The add_ and remove_ function deal with already converted text.
-   * They are used by cogncur_lines in cases where part of a word is visible,
-   * part is not.
-   */
-   
-  // Before splitting a word into a visible and invisible part, the tt ligatures should
-  // revert to invidual letters.
-  function remove_tt_ligature(input) {
-    return input.replaceAll('ϐ', 'tΚt');
-  }  
- 
   // If any part of the word is invisible, no dots (i and j) or crossbars (t and x)
   // should be present anywhere in the word.
   function remove_dots(visible_input, invisible_input) {
@@ -975,19 +971,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
     return visible_input;
   }    
-  // If the visible part of the word ends with a connection from b/o/v/w towards s
-  // (which means the invisible part starts with s), change the connection
-  // to a 'proper' connection (without an extra bit of s sticking to it).
-  function remove_extra_s_bit(visible_input, invisible_input) {
-    visible_input = visible_input.replace(/ο$/g, "ϑ");
-    visible_input = visible_input.replace(/ε$/g, "ϒ");
-    return visible_input;
-  }
-  // If the entire word was visible - so that the t's never got their crossbars removed - add the tt ligature back in
-  function add_tt_ligature(visible_input, invisible_input) {
-    return visible_input.replaceAll('tΚt', 'ϐ');
-    return visible_input.replaceAll('tѤt', 'ϐ');
-  }
   
   init(the_settings, the_element);
 
@@ -1004,9 +987,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     glyphs: glyphs,
     settings: settings,
     remove_dots: remove_dots,
-    remove_extra_s_bit: remove_extra_s_bit,
-    add_tt_ligature: add_tt_ligature,
-    remove_tt_ligature: remove_tt_ligature
   }
 });
 
