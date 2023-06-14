@@ -29,16 +29,40 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      */
     t_variant: 0,
     
+    /* f_connection_variant:
+        0 = f connects from the baseline
+        1 = f connects from the midline
+     */
+    f_connection_variant: 0,
+
+    /* q_connection_variant:
+        0 = q connects from the baseline
+        1 = q connects from the bottom
+     */
+    q_connection_variant: 0,
+
     /* fq_connection_variant:
-        0 = both f and q connect from the baseline
-        1 = f connects from the midline; q connects from the bottom of the stick (no loop)
+        Combined setting for f_connection_variant and q_connection_variant.
+        For compatibility with the stylistic sets.
      */
     fq_connection_variant: 0,
     
-    /* fq_continuity_variant:
-        0 = f has a pencil lift (no loop)
-        1 = q has a pencil lift (??? how to combine with fq_connection_variant?)
+    /* f_continuity_variant:
+        0 = f has a continuous stroke; it uses a loop to return to the point where the connection starts
+        1 = f has a pencil lift
      */
+    f_continuity_variant: 0,
+
+    /* q_continuity_variant:
+        0 = q has a continuous stroke; if the connection is from the baseline, it uses a loop to get there
+        1 = q has a pencil lift (will always connect from the baseline, regardless of q_connection_variant setting)
+     */
+    q_continuity_variant: 0,
+
+    /* fq_continuity_variant:
+        Combined setting for f_continuity_variant and q_continuity_variant.
+        For compatibility with the stylistic sets.
+      */
     fq_continuity_variant: 0,
 
     
@@ -349,6 +373,31 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccf4t : '\ue149',
     cef4  : '\ue14C',
     
+    ccq1i : '\ue14D',
+    ccq1n : '\ue14E',
+    ccq1h : '\ue14F',
+    ccq1o : '\ue150',
+    ccq1a : '\ue151',
+    ccq1e : '\ue152',
+    ccq1s : '\ue153',
+    ccq1t1: '\ue154',
+    ccq1t : '\ue155',
+    ccq1j : '\ue157',
+    ceq1  : '\ue158',
+
+    ccq2i : '\ue159',
+    ccq2n : '\ue15A',
+    ccq2h : '\ue15B',
+    ccq2o : '\ue15C',
+    ccq2a : '\ue15D',
+    ccq2e : '\ue15E',
+    ccq2s : '\ue15F',
+    ccq2t1: '\ue160',
+    ccq2t : '\ue161',
+    ccq2j : '\ue163',
+    ceq2  : '\ue164',
+    ceq3  : '\ue165',
+
     
   }
   var variants = {
@@ -382,6 +431,10 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     f3 : '\ue0fc',
     f4 : '\ue0fd',
     f5 : '\ue0fe',
+    q1 : '\ue0ff',
+    q2 : '\ue100',
+    q3 : '\ue101',
+    q4 : '\ue102',
     
     C1 : '\ue114',
     C1cedilla : '\ue115',
@@ -389,7 +442,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     L1 : '\ue117'
   }
   
-  var letterglyphs_lc = 'a-zà-åçè-ëì-ïıñò-öøšŧù-üẋýÿžœæß' + variants.t1 + variants.t1dotless + variants.xdotless + variants.jdotless + variants.r1 + variants.z1 + variants.z1caron + variants.d1 + variants.p1 + variants.ij + variants.y1 + variants.ij1 + variants.w1 + variants.f1 + variants.f2 + variants.f3 + variants.f4 + variants.f5; // kleine letters + variants
+  var letterglyphs_lc = 'a-zà-åçè-ëì-ïıñò-öøšŧù-üẋýÿžœæß' + variants.t1 + variants.t1dotless + variants.xdotless + variants.jdotless + variants.r1 + variants.z1 + variants.z1caron + variants.d1 + variants.p1 + variants.ij + variants.y1 + variants.ij1 + variants.w1 + variants.f1 + variants.f2 + variants.f3 + variants.f4 + variants.f5 + variants.q1 + variants.q2 + variants.q3 + variants.q4; // kleine letters + variants
   var letterglyphs_uc_connected = 'AÀ-ÅBDCÇEÈ-ËFGHIÌ-ÏJKLMNÑOÒ-ÖØPQRSŠTUÙ-ÜVWXYÝŸZŒÆ' + variants.A1 + variants.M1 + variants.N1 + variants.A2 + variants.M2 + variants.N2 + variants.IJ + variants.Y1 + variants.IJ1 + variants.W1 + variants.Z1 + variants.C1 + variants.C1cedilla + variants.G1 + variants.L1;
   var letterglyphs_uc_unconnected = ''; 
   var letterglyphs_uc = letterglyphs_uc_connected + letterglyphs_uc_unconnected;
@@ -438,6 +491,17 @@ var get_cogncur_converter = (function (the_settings, the_element) {
         }
         
       }
+    }
+    
+    // In the stylistic sets, 'fq' are a combined setting.
+    // In Javascript, you can choose between using the combined setting or using settings per letter.
+    if (settings.fq_connection_variant) {
+      settings.f_connection_variant = settings.fq_connection_variant;
+      settings.q_connection_variant = settings.fq_connection_variant;
+    }
+    if (settings.fq_continuity_variant) {
+      settings.f_continuity_variant = settings.fq_continuity_variant;
+      settings.q_continuity_variant = settings.fq_continuity_variant;
     }
     
     return settings;
@@ -505,11 +569,20 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replace(/ž/g, variants.z1caron);
     }
 
-    if (settings.fq_connection_variant == 1) {
-      if (settings.fq_continuity_variant == 1) {
+    if (settings.f_connection_variant == 1) {
+      if (settings.f_continuity_variant == 1) {
         input = input.replaceAll('f', variants.f4);
       } else {
         input = input.replaceAll('f', variants.f1);
+      }
+    }
+
+
+    if (settings.q_connection_variant == 1 && settings.q_continuity_variant == 0) {
+      if (settings.dp_variant == 1) {
+        input = input.replaceAll('q', variants.q2);
+      } else {
+        input = input.replaceAll('q', variants.q1); // yes, this shorter stick is actually relevant for the connections
       }
     }
 
@@ -592,21 +665,29 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replaceAll(connectors.cgi, connectors.cgt1);
     }
 
-    if (settings.fq_continuity_variant == 1) {
+    if (settings.f_continuity_variant == 1) {
       input = input.replaceAll('f', variants.f2);
 
       input = input.replaceAll(connectors.cef, connectors.cef2);
-      input = input.replaceAll(connectors.ccqj, connectors.ccqi); // the special 'extra wide' connection is not needed if the f doesn't have a loop but just a stick
     }
+
+
+    if (settings.q_continuity_variant == 1) {
+      input = input.replaceAll('q', variants.q3);
+      input = input.replaceAll(connectors.ceq, connectors.ceq3);
+
+      input = input.replaceAll(connectors.ccqj, connectors.ccqi); // the special 'extra wide' connection is not needed if the q doesn't have a loop but just a stick
+    }
+
 
     if (settings.dp_variant == 1) {
       input = input.replaceAll('d', variants.d1);
       input = input.replaceAll('p', variants.p1);
       input = input.replaceAll(variants.f4, variants.f5);
       input = input.replaceAll(variants.f2, variants.f3);
+      input = input.replaceAll(variants.q3, variants.q4);
     }
     
-
 
     return input;
   }
@@ -617,7 +698,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     // - variants that can be user input (with a standard unicode mapping < \ue8000
     // - variants that require different connections than the standard letter, produced by variantsConversion1()
     var zoekVervangParen = [
-      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([aà-ådgqæ])", connectors.ccna],
+      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccna],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([eè-ë])", connectors.ccne],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccnh],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+variants.y1+variants.ij1+"])", connectors.ccni],
@@ -627,7 +708,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])(["+variants.t1+"])", connectors.ccnt1],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([tŧ])", connectors.ccnt],
 
-      ["([sš])([aà-ådgqæ])", connectors.ccsa],
+      ["([sš])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccsa],
       ["([sš])([eè-ë])", connectors.ccse],
       ["([sš])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccsh],
       ["([sš])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccsi],
@@ -637,7 +718,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([sš])(["+variants.t1+"])", connectors.ccst1],
       ["([sš])([tŧ])", connectors.ccst],
 
-      ["([pß])([aà-ådgqæ])", connectors.ccpa],
+      ["([pß])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccpa],
       ["([pß])([eè-ë])", connectors.ccpe],
       ["([pß])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccph],
       ["([pß])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccpi],
@@ -647,7 +728,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([pß])(["+variants.t1+"])", connectors.ccpt1],
       ["([pß])([tŧ])", connectors.ccpt],
       
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([aà-ådgqæ])", connectors.ccqa],
+      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccqa],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([eè-ë])", connectors.ccqe],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccqh],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccqi],
@@ -659,7 +740,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])(["+variants.t1+"])", connectors.ccqt1],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([tŧ])", connectors.ccqt],
 
-      ["(["+variants.f1+"])([aà-ådgqæ])", connectors.ccf1a],
+      ["(["+variants.f1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccf1a],
       ["(["+variants.f1+"])([eè-ë])", connectors.ccf1e],
       ["(["+variants.f1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccf1h],
       ["(["+variants.f1+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccf1i],
@@ -670,7 +751,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+variants.f1+"])(["+variants.t1+"])", connectors.ccf1t1],
       ["(["+variants.f1+"])([tŧ])", connectors.ccf1t],
 
-      ["(["+variants.f4+"])([aà-ådgqæ])", connectors.ccf4a],
+      ["(["+variants.f4+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccf4a],
       ["(["+variants.f4+"])([eè-ë])", connectors.ccf4e],
       ["(["+variants.f4+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccf4h],
       ["(["+variants.f4+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccf4i],
@@ -681,7 +762,30 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+variants.f4+"])(["+variants.t1+"])", connectors.ccf4t1],
       ["(["+variants.f4+"])([tŧ])", connectors.ccf4t],
 
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([aà-ådgqæ])", connectors.ccga],
+      ["(["+variants.q1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccq1a],
+      ["(["+variants.q1+"])([eè-ë])", connectors.ccq1e],
+      ["(["+variants.q1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccq1h],
+      ["(["+variants.q1+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccq1i],
+      ["(["+variants.q1+"])([jȷ])", connectors.ccq1j], // special connector for 'fj' and 'qj'
+      ["(["+variants.q1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccq1n],
+      ["(["+variants.q1+"])([sš])", connectors.ccq1s],
+      ["(["+variants.q1+"])([cçoò-öøœ])", connectors.ccq1o],
+      ["(["+variants.q1+"])(["+variants.t1+"])", connectors.ccq1t1],
+      ["(["+variants.q1+"])([tŧ])", connectors.ccq1t],
+
+      ["(["+variants.q2+"])([aà-ådgqæ"+variants.q2+variants.q2+"])", connectors.ccq2a],
+      ["(["+variants.q2+"])([eè-ë])", connectors.ccq2e],
+      ["(["+variants.q2+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccq2h],
+      ["(["+variants.q2+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccq2i],
+      ["(["+variants.q2+"])([jȷ])", connectors.ccq2i], // no special connector needed
+      ["(["+variants.q2+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccq2n],
+      ["(["+variants.q2+"])([sš])", connectors.ccq2s],
+      ["(["+variants.q2+"])([cçoò-öøœ])", connectors.ccq2o],
+      ["(["+variants.q2+"])(["+variants.t1+"])", connectors.ccq2t1],
+      ["(["+variants.q2+"])([tŧ])", connectors.ccq2t],
+
+
+      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccga],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([eè-ë])", connectors.ccge],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccgh],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.IJ+variants.ij1+"])", connectors.ccgi],
@@ -691,7 +795,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])(["+variants.t1+"])", connectors.ccgt1], 
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([tŧ])", connectors.ccgt],
 
-      ["([bvw"+variants.w1+"])([aà-ådgqæ])", connectors.ccva],
+      ["([bvw"+variants.w1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccva],
       ["([bvw"+variants.w1+"])([eè-ë])", connectors.ccve],
       ["([bvw"+variants.w1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccvh],
       ["([bvw"+variants.w1+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccvi],
@@ -701,7 +805,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([bvw"+variants.w1+"])(["+variants.t1+"])", connectors.ccvt1], 
       ["([bvw"+variants.w1+"])([tŧ])", connectors.ccvt],
 
-      ["([oò-öø])([aà-ådgqæ])", connectors.ccoa],
+      ["([oò-öø])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccoa],
       ["([oò-öø])([eè-ë])", connectors.ccoe],
       ["([oò-öø])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccoh],
       ["([oò-öø])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccoi],
@@ -712,7 +816,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([oò-öø])([tŧ])", connectors.ccot],
 
 
-      ["([ceè-ëçœæCÇEÈ-ËŒÆL])([aà-ådgqæ])", connectors.ccea],
+      ["([ceè-ëçœæCÇEÈ-ËŒÆL])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccea],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([eè-ë])", connectors.ccee],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([bfhkl"+variants.f1+variants.f4+"])", connectors.cceh],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccei],
@@ -722,7 +826,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])(["+variants.t1+"])", connectors.ccet1], 
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([tŧ])", connectors.ccet],
 
-      ["([tŧ])([aà-ådgqæ])", connectors.ccta],
+      ["([tŧ])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccta],
       ["([tŧ])([eè-ë])", connectors.ccte],
       ["([tŧ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccth],
       ["([tŧ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccti],
@@ -732,7 +836,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([tŧ])(["+variants.t1+"])", connectors.cctt1],
       ["([tŧ])([tŧ])", connectors.cctt],
 
-      ["([A])([aà-ådgqæ])", connectors.ccAa],
+      ["([A])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccAa],
       ["([A])([eè-ë])", connectors.ccAe],
       ["([A])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccAh],
       ["([A])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccAi],
@@ -742,7 +846,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([A])(["+variants.t1+"])", connectors.ccAt1],
       ["([A])([tŧ])", connectors.ccAt],
 
-      ["([BSŠ])([aà-ådgqæ])", connectors.ccBa],
+      ["([BSŠ])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccBa],
       ["([BSŠ])([eè-ë])", connectors.ccBe],
       ["([BSŠ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccBh],
       ["([BSŠ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccBi],
@@ -752,7 +856,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([BSŠ])(["+variants.t1+"])", connectors.ccBt1],
       ["([BSŠ])([tŧ])", connectors.ccBt],
 
-      ["([DOÒ-ÖØVW])([aà-ådgqæ])", connectors.ccOa],
+      ["([DOÒ-ÖØVW])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccOa],
       ["([DOÒ-ÖØVW])([eè-ë])", connectors.ccOe],
       ["([DOÒ-ÖØVW])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccOh],
       ["([DOÒ-ÖØVW])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccOi],
@@ -762,7 +866,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([DOÒ-ÖØVW])(["+variants.t1+"])", connectors.ccOt1],
       ["([DOÒ-ÖØVW])([tŧ])", connectors.ccOt],
 
-      ["([P])([aà-ådgqæ])", connectors.ccPa],
+      ["([P])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccPa],
       ["([P])([eè-ë])", connectors.ccPe],
       ["([P])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccPh],
       ["([P])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccPi],
@@ -772,7 +876,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([P])(["+variants.t1+"])", connectors.ccPt1],
       ["([P])([tŧ])", connectors.ccPt],
 
-      ["([FT])([aà-ådgqæ])", connectors.ccFa],
+      ["([FT])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccFa],
       ["([FT])([eè-ë])", connectors.ccFe],
       ["([FT])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccFh],
       ["([FT])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccFi],
@@ -782,7 +886,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([FT])(["+variants.t1+"])", connectors.ccFt1],
       ["([FT])([tŧ])", connectors.ccFt],
 
-      ["([IÌ-Ï])([aà-ådgqæ])", connectors.ccIa],
+      ["([IÌ-Ï])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccIa],
       ["([IÌ-Ï])([eè-ë])", connectors.ccIe],
       ["([IÌ-Ï])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccIh],
       ["([IÌ-Ï])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccIi],
@@ -792,7 +896,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([IÌ-Ï])(["+variants.t1+"])", connectors.ccIt1],
       ["([IÌ-Ï])([tŧ])", connectors.ccIt],
 
-      ["([NÑ])([aà-ådgqæ])", connectors.ccNa],
+      ["([NÑ])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccNa],
       ["([NÑ])([eè-ë])", connectors.ccNe],
       ["([NÑ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccNh],
       ["([NÑ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccNi],
@@ -825,7 +929,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     
     // aanhalen
     var zoekVervangParen = [
-      ["("+left+")([aà-ådgqæ])", connectors.cga, connectors.csa, connectors.csa],
+      ["("+left+")([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.cga, connectors.csa, connectors.csa],
       ["("+left+")([eè-ë])",connectors.cge, connectors.cge, connectors.cse],
       ["("+left+")([bfhkl"+variants.f1+variants.f4+"])", connectors.cgh, connectors.cgh, connectors.csh],
       ["("+left+")([iì-ïıjȷpuù-üwß"+variants.r1+variants.y1+variants.ij1+"])", connectors.cgi, connectors.cgi, connectors.csi], 
@@ -877,6 +981,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([f])("+right+")", connectors.cef],
       ["(["+variants.f1+"])("+right+")", connectors.cef1],
       ["(["+variants.f4+"])("+right+")", connectors.cef4],
+      ["(["+variants.q1+"])("+right+")", connectors.ceq1],
+      ["(["+variants.q2+"])("+right+")", connectors.ceq2],
       ["([QZ])("+right+")", connectors.ceQ],
       ["([pß])("+right+")",  connectors.cep],
       ["([sš])("+right+")",  connectors.ces],
