@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="/resources/style.css" />
-  <link rel="stylesheet" type="text/css" href="./cogncur.css" />
+  <link rel="stylesheet" type="text/css" href="../webapps/cogncur.css" />
   <script src="/js/jquery-3.4.1.min.js"></script>
-  <script src="./cogncur_converter.js"></script><!-- functions for converting text to Schoolschrift glyphs -->
-  <script src="./cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script src="../webapps/cogncur_converter.js"></script><!-- functions for converting text to Schoolschrift glyphs -->
+  <script src="../webapps/cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
   <script>
     cogncur_converter.init({
     });
@@ -456,7 +456,7 @@
   </div>      
 
   
-  <h3>Lowercase letter variants with no effect on connectors</h3>
+  <h3>Letter variants with no effect on connectors</h3>
   <div class="glyph_table">
     <div class="glyph_header">
       <div class="glyph_name">name</div>
@@ -484,7 +484,11 @@
   Some letters can be replaced by a variant version without changing the connections. These letter variants are not listed in the tables for contextual alternates. Their substition - through stylistic sets - must happen after contextual alternates substitution.
   
 
-  <h3>Lowercase letter variants with effect on connectors</h3>
+  <h3>Letter variants with effect on connectors</h3>
+
+  Some letters can be replaced by a variant version, but the variant will require a change in the connectors used before or after the letter (or both). These letter variants are listed in the tables for contextual alternates. Their substition - through stylistic sets - must happen before contextual alternates substitution.
+
+
   <div class="glyph_table">
     <div class="glyph_header">
       <div class="glyph_name">name</div>
@@ -529,8 +533,58 @@
       <div class="glyph_name">ss14</div>
     </div>
   </div>
-
-  Some letters can be replaced by a variant version, but the variant will require a change in the connectors used before or after the letter (or both). These letter variants are listed in the tables for contextual alternates. Their substition - through stylistic sets - must happen before contextual alternates substitution.
+  <br/><br/>
+  <div class="glyph_table">
+    <div class="glyph_header">
+      <div class="glyph_name">name</div>
+      <div class="glyph_glyph">glyph</div>
+      <div class="glyph_glyph">context</div>
+      <div class="glyph_unicode">unicode</div>
+      <div class="glyph_name">stylistic set</div>
+    </div>
+    <div class="glyph_cell" data-cogncur-uppercase-cgl-variant=1>
+      <div class="glyph_name">C1</div>
+      <div class="glyph_glyph rawcursive" data-variant="C1"></div>
+      <div class="glyph_glyph cursive traceable red-letters">C</div>
+      <div class="glyph_unicode" data-value-from-variant="C1"></div>
+      <div class="glyph_name">ss19</div>
+    </div>
+    <div class="glyph_cell" data-cogncur-uppercase-cgl-variant=1>
+      <div class="glyph_name">G1</div>
+      <div class="glyph_glyph rawcursive" data-variant="G1"></div>
+      <div class="glyph_glyph cursive traceable red-letters">G</div>
+      <div class="glyph_unicode" data-value-from-variant="G1"></div>
+      <div class="glyph_name">ss19</div>
+    </div>
+    <div class="glyph_cell" data-cogncur-uppercase-cgl-variant=1>
+      <div class="glyph_name">L1</div>
+      <div class="glyph_glyph rawcursive" data-variant="L1"></div>
+      <div class="glyph_glyph cursive traceable red-letters">L</div>
+      <div class="glyph_unicode" data-value-from-variant="L1"></div>
+      <div class="glyph_name">ss19</div>
+    </div>
+    <div class="glyph_cell" data-cogncur-uppercase-amn-variant=1>
+      <div class="glyph_name">A2</div>
+      <div class="glyph_glyph rawcursive" data-variant="A2"></div>
+      <div class="glyph_glyph cursive traceable red-letters">A</div>
+      <div class="glyph_unicode" data-value-from-variant="A2"></div>
+      <div class="glyph_name">ss20</div>
+    </div>
+    <div class="glyph_cell" data-cogncur-uppercase-amn-variant=1>
+      <div class="glyph_name">M2</div>
+      <div class="glyph_glyph rawcursive" data-variant="M2"></div>
+      <div class="glyph_glyph cursive traceable red-letters">M</div>
+      <div class="glyph_unicode" data-value-from-variant="M2"></div>
+      <div class="glyph_name">ss20</div>
+    </div>
+    <div class="glyph_cell" data-cogncur-uppercase-amn-variant=1>
+      <div class="glyph_name">N2</div>
+      <div class="glyph_glyph rawcursive" data-variant="N2"></div>
+      <div class="glyph_glyph cursive traceable red-letters">N</div>
+      <div class="glyph_unicode" data-value-from-variant="N2"></div>
+      <div class="glyph_name">ss20</div>
+    </div>
+  </div>
 
   <h3>Pseudo-digraph ligatures</h3>
   <div class="glyph_table">

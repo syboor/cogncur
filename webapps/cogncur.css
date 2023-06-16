@@ -230,7 +230,7 @@
 
 
 .letter, .rawletter { /* Voor een cursive letter binnen een regel instructietekst */
-  font-family: "CogncurWeb";
+  font-family: "Cogncur";
   font-size: 150%;
   line-height: 66%;
   display: inline-block;

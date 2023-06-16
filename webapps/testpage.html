@@ -14,6 +14,16 @@
     cogncur_converter.init({
     });
   </script>
+  <style>
+    table.kerningpairs {
+    
+    }
+    table.kerningpairs td {
+      padding-right: 10px;
+      white-space: nowrap;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body class="max">
   <h1>Testpage Cogncur</h1>  
@@ -545,42 +555,48 @@
   </table>
 
   <h2><a name="letterswhitespace">Whitespace at end of word</a></h2>
+  <table class="kerningpairs">
+    <tr>
+      <td class="cursive rh12">a i<br/>a,<br/>a;<br/>a!<br/>a/<br/>a)<br/>a?<br/>a"<br/></td>
+      <td class="cursive rh12">n i<br/>n,<br/>n;<br/>n!<br/>n/<br/>n)<br/>n?<br/>n"<br/></td>
+      <td class="cursive rh12">M i<br/>M,<br/>M;<br/>M!<br/>M/<br/>M)<br/>M?<br/>M"<br/></td>
+      <td class="cursive rh12">l i<br/>l,<br/>l;<br/>l!<br/>l/<br/>l)<br/>l?<br/>l"<br/></td>
+      <td class="cursive rh12">H i<br/>H,<br/>H;<br/>H!<br/>H/<br/>H)<br/>H?<br/>H"<br/></td>
+      <td class="cursive rh12">h i<br/>h,<br/>h;<br/>h!<br/>h/<br/>h)<br/>h?<br/>h"<br/></td>
+      <td class="cursive rh12">d i<br/>d,<br/>d;<br/>d!<br/>d/<br/>h)<br/>d?<br/>d"<br/></td>
+      <td class="cursive rh12">i i<br/>i,<br/>i;<br/>i!<br/>i/<br/>i)<br/>i?<br/>i"<br/></td>
+      <td class="cursive rh12">U i<br/>U,<br/>U;<br/>U!<br/>U/<br/>U)<br/>U?<br/>U"<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/></td>
+      <td class="cursive rh12">z i<br/>z,<br/>z;<br/>z!<br/>z/<br/>z)<br/>z?<br/>z"<br/></td>
+      <td class="cursive rh12">f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/></td>
+      <td class="cursive rh12" data-cogncur-f-continuity-variant=1>f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/></td>
+      <td class="cursive rh12" data-cogncur-f-continuity-variant=1 data-cogncur-f-connection-variant=1>f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/></td>
+      <td class="cursive rh12" data-cogncur-q-connection-variant=1 data-cogncur-dp-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/></td>
+      <td class="cursive rh12" data-cogncur-q-continuity-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/></td>
+      <td class="cursive rh12">Z i<br/>Z,<br/>Z;<br/>Z!<br/>Z/<br/>Z)<br/>Z?<br/>Z"<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/></td>
+      <td class="cursive rh12">s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
+      <td class="cursive rh12" data-cogncur-s-variant=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
+      <td class="cursive rh12">ß i<br/>ß,<br/>ß;<br/>ß!<br/>ß/<br/>ß)<br/>ß?<br/>ß"<br/></td>
+      <td class="cursive rh12" data-cogncur-exit-strokes=1>p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/></td>
+      <td class="cursive rh12" data-cogncur-exit-strokes=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">g i<br/>g,<br/>g;<br/>g!<br/>g/<br/>g)<br/>g?<br/>g"<br/></td>
+      <td class="cursive rh12">G i<br/>G,<br/>G;<br/>G!<br/>G/<br/>G)<br/>G?<br/>G"<br/></td>
+      <td class="cursive rh12" data-cogncur-uppercase-cgl-variant=1>G i<br/>G,<br/>G;<br/>G!<br/>G/<br/>G)<br/>G?<br/>G"<br/></td>
+      <td class="cursive rh12">j i<br/>j,<br/>j;<br/>j!<br/>j/<br/>j)<br/>j?<br/>j"<br/></td>
+      <td class="cursive rh12">J i<br/>J,<br/>J;<br/>J!<br/>J/<br/>J)<br/>J?<br/>J"<br/></td>
+      <td class="cursive rh12" data-cogncur-ij-ligature=1>ij i<br/>ij,<br/>ij;<br/>ij!<br/>ij/<br/>ij)<br/>ij?<br/>ij"<br/></td>
+    </tr>
+  </table>
+
+  
   <div class="cursive rh12">
-    i i o i n i s i j i q i<br/>
-    e i p i l i h i v i z i<br/>
-    f i t i b i c i A i B i<br/>
-    C i D i E i F i G i H i<br/>
-    I i J i K i L i M i N i<br/>
-    O i P i f i<br/>
-    i,i,o,o,n,n,s,s,j,j,q,q,t,t,<br/>
-    e,e,p,p,l,l,v,v,z,z,a,a,b,b,<br/>
-    f,f,<br/>
-    A,B,C,D,E,F,G,H,I,J,K,L,M,
-    N,O,P,T<br/>
-    i, i, o, o, n, n, s, s,<br/>
-    j, j, q, q, e, e, p, p,<br/>
-    l, l, v, v, z, z, a, a,<br/>
-    t, t, f, f, b, b, c, c,<br/>
-    A, B, C, D, E, F, G, H,<br/>
-    I, J, P, L<br/>
-    i! o! n! s! j! q! e! p!<br/>
-    t! b! v! w! c! A! B! C!<br/>
-    D! E! F! G! H! I! J! K!<br/>
-    L! M! N! O! P! f! <br/>
-    Ho, ho, ho! St... St...<br/> 
-    no. no. no. is it so?<br/>
-    i? o? n? s? j? q? e? p?<br/>
-    t? b? v? w? c? A? B? C?<br/>
-    D? E? F? G? H? I? J? K?<br/>
-    L? M? N? O? P? f?<br/>
-    i' o' n' s' j' q' e' p'<br/>
-    t' b' v' w' c' A' B' C'<br/>
-    D' E' F' G' H' I' J' K'<br/>
-    L' M' N' O' P' f' <br/>
-    i" o" n" s" j" q" e" p"<br/>
-    t" b" v" w" c" A" B" C"<br/>
-    D" E" F" G" H" I" J" K"<br/>
-    L" M" N" O" P" f" <br/>
     what? why? how?<br/>
     m'n z'n it's I'll he's<br/>
     parents' s'! s'? s'.<br/>

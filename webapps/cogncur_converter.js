@@ -360,6 +360,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     cfs  : '\ue0d5', // invisible exit stroke for s
     cfp  : '\ue0d6', // invisible exit stroke for p
     
+    ceß  : '\ue0d7',
     ceG1 : '\ue0d8',
     ceQ  : '\ue0d9',
     ceE  : '\ue0da',
@@ -635,6 +636,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     if (settings.exit_strokes == 1) {
       input = input.replaceAll(connectors.ces, connectors.cfs);
       input = input.replaceAll(connectors.cep, connectors.cfp);
+      input = input.replaceAll(connectors.ceß, connectors.cfp);
     }
 
     if (settings.y_variant == 1) {
@@ -1028,8 +1030,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([à-åaımnñruù-üxẋ"+variants.r1+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
       ["([M])("+right+")", connectors.ceM],
       ["([lH])("+right+")", connectors.ceH],
-      ["([hkX])("+right+")", connectors.ceh],
-      ["([diì-ïKRUÙ-Ü"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+"])("+right+")", connectors.ced],
+      ["([hk])("+right+")", connectors.ceh],
+      ["([diì-ïKRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+"])("+right+")", connectors.ced],
       ["([qzž"+variants.z1+variants.z1caron+"])("+right+")", connectors.ceq], // except f, Q, Z
       ["([f])("+right+")", connectors.cef],
       ["(["+variants.f1+"])("+right+")", connectors.cef1],
@@ -1037,7 +1039,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+variants.q1+"])("+right+")", connectors.ceq1],
       ["(["+variants.q2+"])("+right+")", connectors.ceq2],
       ["([QZ])("+right+")", connectors.ceQ],
-      ["([pß])("+right+")",  connectors.cep],
+      ["([p])("+right+")",  connectors.cep],
+      ["([ß])("+right+")",  connectors.ceß],
       ["([sš"+variants.s1+"])("+right+")",  connectors.ces],
       ["([gȷyýÿG"+variants.y1+"])("+right+")", connectors.ceg], // anything without stuff above the midline
       ["([jJYÝŸ"+variants.ij+variants.ij1+variants.IJ+"])("+right+")", connectors.cej], // anything with dots or stuff above the midline

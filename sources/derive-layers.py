@@ -44,7 +44,7 @@ for glyph in font.selection.byGlyphs:
 
   # Create GCall
   layer = glyph.layers['Skeleton'];
-  layer.stroke('calligraphic', 136, 15, 45 * math.pi/180.0);
+  layer.stroke('calligraphic', 136, 34, 45 * math.pi/180.0);
   extra = glyph.layers['ExtraCall'];
   glyph.layers['GCall'] = layer + extra;
 

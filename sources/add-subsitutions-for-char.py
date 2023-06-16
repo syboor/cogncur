@@ -42,6 +42,7 @@ def add_subs(glyphname, connects_as, end_piece):
     
 
 # How to add a new character in
-add_subs('s1', 's1', 'ces');
+#add_subs('s1', 's1', 'ces');
+add_subs('germandbls', 'i', 'cegermandbls');
 
 # NB the character should still be added manually to the appropriate ww'calt' classes
