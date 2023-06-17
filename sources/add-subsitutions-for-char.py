@@ -1,5 +1,5 @@
-# This scirpt helps you add a new character that does not require any new connections.
-# I.e. accented characters.
+# This scripts adds a new character to all the "multiple substitution" tables.
+# You still need to add it the the match classes and back classes of the contextual alternates table.
 
 import fontforge;
 import math;
@@ -43,6 +43,6 @@ def add_subs(glyphname, connects_as, end_piece):
 
 # How to add a new character in
 #add_subs('s1', 's1', 'ces');
-add_subs('germandbls', 'i', 'cegermandbls');
+#add_subs('germandbls', 'i', 'cegermandbls');
+add_subs('t1', 't1', 'cet1');
 
-# NB the character should still be added manually to the appropriate ww'calt' classes

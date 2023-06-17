@@ -3,24 +3,18 @@
 
 var get_cogncur_converter = (function (the_settings, the_element) {
   var settings = {
-    /* aanhalen_variant:
-        0 = aanhalen vanaf de grondlijn
-        1 = geen aanhalen bij c/a/d/g/o/q, de rest vanaf de grondlijn
-        2 = korte aanhalen, geen aanhalen bij i/u/w
+    /* entrystrokes_variant:
+        0 = entrystrokes from the baseline
+        1 = a/c/d/g/o/q have no entry strokes. Other letters have entrystrokes from justb elow the midline. i/u/w have an entry stroke followed by a sharp angle.
+        2 = like 1, but letters i/u/w don't have entry strokes at all, they start down from the midline. NB this also effects uppercase U, W, Y
      */
-    entry_strokes: 0,
+    entrystrokes: 0,
     
-    /* exit_strokes:
+    /* existrokes:
         0 = many exit strokes
         1 = no exit strokes for s en p
      */
-    exit_strokes: 0,
-    
-    /* aanhalen_overlap:
-      0 = weinig overlap tussen aanhalen en letters
-      1 = meer overlap tussen aanhaal en letters bij t, o, a/c/d/g/q. De aanhaal gaat door tot het keerpunt.
-     */
-    aanhalen_overlap: 0,
+    existrokes: 0,
     
     /* t_variant:
         0 = doorverbonden t
@@ -342,21 +336,36 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     cgz1 : '\ue0C9', // special case
     cgz  : '\ue0CA', // special case
     cgs1 : '\ue0CB', // special case
+    cgj  : '\ue0CC', // identical to ... but different for kerning purposes
+    cgp  : '\ue0CD', // identical to ... but different for kerning purposes
+    cgf  : '\ue0CE', // identical to ... but different for kerning purposes
+    cgg  : '\ue0CF', // identical to ... but different for kerning purposes
+    cgy  : '\ue0D0', // identical to ... but different for kerning purposes
+    cgy1 : '\ue0D1', // identical to ... but different for kerning purposes
 
+    csi  : '\ue11d',
+    csn  : '\ue11e',
+    csh  : '\ue11f',
+    cso  : '\ue120',
+    csa  : '\ue121',
+    cse  : '\ue122',
+    css  : '\ue123',
+    cst1 : '\ue124',
+    cst  : '\ue125',
+    csz1 : '\ue126', // special case
+    csz  : '\ue127', // special case
+    css1 : '\ue128', // special case
+    csj  : '\ue129', // identical to ... but different for kerning purposes
+    csp  : '\ue12a', // identical to ... but different for kerning purposes
+    csf  : '\ue12b', // identical to ... but different for kerning purposes
+    csg  : '\ue12c', // identical to ... but different for kerning purposes
+    csy  : '\ue12d', // identical to ... but different for kerning purposes
+    csy1 : '\ue12e', // identical to ... but different for kerning purposes
 
-    csi  : '\ue060', // todo
-    csn  : '\ue061', // todo
-    csh  : '\ue062', // todo
-    cso  : '\ue063', // todo
-    csa  : '\ue064', // todo
-    cse  : '\ue065', // todo
-    css  : '\ue066', // todo
-    cst1 : '\ue067', // todo
-    cst  : '\ue068', // todo
-    csz1 : '',
-    csz  : '',
-    css1 : '',
     
+    cet1 : '\ue0d3',
+
+    cfß  : '\ue0d4',
     cfs  : '\ue0d5', // invisible exit stroke for s
     cfp  : '\ue0d6', // invisible exit stroke for p
     
@@ -543,13 +552,13 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     result = variantsConversion1(result);
     result = quotesConversion(result);
     
-    result = aanhalenConversion(result); // this substitution needs to know whether it's beginning of the string or not
+    result = entrystrokesConversion(result); // this substitution needs to know whether it's beginning of the string or not
 
     result = " " + result + " "; // add extra space
 
-    result = afhalenConversion(result);
-    result = letterparenConversion(result);
-    result = letterparenConversion(result);
+    result = exitstrokesConversion(result);
+    result = joinsConversion(result);
+    result = joinsConversion(result);
     // result = beginnetjesConversion(result);
     result = variantsConversion2(result);
 
@@ -633,10 +642,10 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   function variantsConversion2(input) {
     // In this function, convert all variants that have no impact on the connecting strokes used.
     // This function will be called with connecting strokes already in place.
-    if (settings.exit_strokes == 1) {
+    if (settings.existrokes == 1) {
       input = input.replaceAll(connectors.ces, connectors.cfs);
       input = input.replaceAll(connectors.cep, connectors.cfp);
-      input = input.replaceAll(connectors.ceß, connectors.cfp);
+      input = input.replaceAll(connectors.ceß, connectors.cfß);
     }
 
     if (settings.y_variant == 1) {
@@ -700,8 +709,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
 
     if (settings.f_continuity_variant == 1) {
+      input = input.replaceAll('f'+connectors.ccqj, variants.f2+connectors.ccqi);
       input = input.replaceAll('f', variants.f2);
-
       input = input.replaceAll(connectors.cef, connectors.cef2);
     }
 
@@ -727,7 +736,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   }
 
 
-  function letterparenConversion(input) {
+  function joinsConversion(input) {
     // This function needs to match the following variants:
     // - variants that can be user input (with a standard unicode mapping < \ue8000
     // - variants that require different connections than the standard letter, produced by variantsConversion1()
@@ -972,8 +981,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     return input;
   }
 
-  function aanhalenConversion(input) {
-    /* Deze functie voegt de aanhalen toe (aan het begin van het woord) */
+  function entrystrokesConversion(input) {
+    /* Deze functie voegt de entrystrokes toe (aan het begin van het woord) */
 
     // LF door de connectorglyphs toe te voegen aan de regexp, wordt het mogelijk deze functie herhaald aan te roepen.
     // Herhaald aanroepen is nodig om ook tekens te converteren die als rechterbuur 'gecaptured' zijn in 
@@ -981,57 +990,55 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     // NB in ES2018 kan dit met (non-capturing) lookahead assertions, maar dat wordt niet door alle browsers ondersteund :(
     var left  = "[^" + letterglyphs_lc + letterglyphs_uc_connected + connectorglyphs + "]|^"; // 'non-word' teken links van de letter waar we een aanhaal aan willen toevoegen
     
-    // aanhalen
+    // entrystrokes
     var zoekVervangParen = [
-      ["("+left+")([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.cga, connectors.csa, connectors.csa],
-      ["("+left+")([eè-ë])",connectors.cge, connectors.cge, connectors.cse],
-      ["("+left+")([bfhkl"+variants.f1+variants.f4+"])", connectors.cgh, connectors.cgh, connectors.csh],
-      ["("+left+")([iì-ïıjȷpuù-üwß"+variants.r1+variants.y1+variants.ij1+"])", connectors.cgi, connectors.cgi, connectors.csi], 
-      ["("+left+")([mnñrvxẋyýÿ"+variants.ij+variants.w1+"])", connectors.cgn, connectors.cgn, connectors.csn],
-      ["("+left+")([zž])", connectors.cgz, connectors.cgz, connectors.csz], // special case, parallel with internal stroke of 'z'
-      ["("+left+")(["+variants.z1+variants.z1caron+"])", connectors.cgz1, connectors.cgz1, connectors.csz1], // special case, parallel with internal stroke of 'z'
-      ["("+left+")([sš])",connectors.cgs, connectors.cgs, connectors.css],
-      ["("+left+")(["+variants.s1+"])",connectors.cgs1, connectors.cgs1, connectors.css1],
+      ["("+left+")([aà-ådqæ"+variants.q1+variants.q2+"])", connectors.cga, connectors.csa, connectors.csa],
+      ["("+left+")([g])", connectors.cgg, connectors.csg, connectors.csg],
+      ["("+left+")([eè-ë])",connectors.cge, connectors.cse, connectors.cse],
+      ["("+left+")([bhkl])", connectors.cgh, connectors.csh, connectors.csh],
+      ["("+left+")([f"+variants.f1+variants.f4+"])", connectors.cgf, connectors.csf, connectors.csf],
+      ["("+left+")([iì-ïıuù-üwß"+variants.r1+"])", connectors.cgi, connectors.csi, connectors.csi], 
+      ["("+left+")(["+variants.y1+variants.ij1+"])", connectors.cgy1, connectors.csy1, connectors.csy1], 
+      ["("+left+")([jȷ])", connectors.cgj, connectors.csj, connectors.csj], 
+      ["("+left+")([p])", connectors.cgp, connectors.csp, connectors.csp], 
+      ["("+left+")([mnñrvxẋyýÿ"+variants.ij+variants.w1+"])", connectors.cgn, connectors.csn, connectors.csn],
+      ["("+left+")([yýÿ"+variants.ij+variants.w1+"])", connectors.cgy, connectors.csy, connectors.csy],
+      ["("+left+")([zž])", connectors.cgz, connectors.csz, connectors.csz], // special case, parallel with internal stroke of 'z'
+      ["("+left+")(["+variants.z1+variants.z1caron+"])", connectors.cgz1, connectors.csz1, connectors.csz1], // special case, parallel with internal stroke of 'z'
+      ["("+left+")([sš])",connectors.cgs, connectors.css, connectors.css],
+      ["("+left+")(["+variants.s1+"])",connectors.cgs1, connectors.css1, connectors.css1],
       ["("+left+")([cçoò-öøœ])", connectors.cgo, connectors.cso, connectors.cso],
       ["("+left+")(["+variants.t1+"])", connectors.cgt1, connectors.cst1, connectors.cst1],
-      ["("+left+")([tŧ])", connectors.cgt, connectors.cgt, connectors.cst],
+      ["("+left+")([tŧ])", connectors.cgt, connectors.cst, connectors.cst]
     ];
+
     for (var i = 0; i < zoekVervangParen.length; i++) {
       var zoek = new RegExp(zoekVervangParen[i][0], "gu");
-      var vervang = "$1" + zoekVervangParen[i][settings.entry_strokes + 1] + "$2";
+      var vervang = "$1" + zoekVervangParen[i][parseInt(settings.entrystrokes) + 1] + "$2";
       input = input.replace(zoek, vervang);
     }
-    
-    /*
-    if (settings.aanhalen_overlap == 1) {
-      input = input.replaceAll('Ϧ', 'Њ'); // a/d/g/q 
-      input = input.replaceAll('Ϭc', 'Ћc'); // c
-      input = input.replaceAll('Ϭo', 'Ќo'); // o
-      input = input.replaceAll('ϯt', 'Ѝt'); // t
-    }
-    */
-
     
    
     return input;
   }
 
-  function afhalenConversion(input) {
-    /* Deze functie voegt de afhalen toe (aan het eind van het woord). */
+  function exitstrokesConversion(input) {
+    /* Deze functie voegt de exitstrokes toe (aan het eind van het woord). */
 
     // LF door de connectorglyphs toe te voegen aan de regexp, wordt het mogelijk deze functie herhaald aan te roepen.
     // Herhaald aanroepen is nodig om ook tekens te converteren die als rechterbuur 'gecaptured' zijn in 
     //   de regex bij een eerdere omzetting; dit probleem speelt bij reeksen hoofdletters.
     // NB in ES2018 kan dit met (non-capturing) lookahead assertions, maar dat wordt niet door alle browsers ondersteund :(
-    var right = "[^" + letterglyphs_lc + connectorglyphs + "]"; // 'non-word' teken rechts van de letter waar we aan afhaal aan willen toevoegen. Let op dat we ook afhalen toevoegen binnen een reeks van hoofdletters 
+    var right = "[^" + letterglyphs_lc + connectorglyphs + "]"; // 'non-word' teken rechts van de letter waar we aan afhaal aan willen toevoegen. Let op dat we ook exitstrokes toevoegen binnen een reeks van hoofdletters 
     
-    // afhalen
+    // exitstrokes
     var zoekVervangParen = [
       ["([à-åaımnñruù-üxẋ"+variants.r1+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
       ["([M])("+right+")", connectors.ceM],
       ["([lH])("+right+")", connectors.ceH],
       ["([hk])("+right+")", connectors.ceh],
-      ["([diì-ïKRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+"])("+right+")", connectors.ced],
+      ["([diì-ïKRUÙ-ÜX"+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+"])("+right+")", connectors.ced],
+      ["(["+variants.t1+"])("+right+")", connectors.cet1],
       ["([qzž"+variants.z1+variants.z1caron+"])("+right+")", connectors.ceq], // except f, Q, Z
       ["([f])("+right+")", connectors.cef],
       ["(["+variants.f1+"])("+right+")", connectors.cef1],
@@ -1052,7 +1059,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([tŧ])("+right+")", connectors.cet],
       ["([A])("+right+")", connectors.ceA],
       ["([BSŠ])("+right+")", connectors.ceB],
-      ["([DOÒ-ÖØVW])("+right+")", connectors.ceO],
+      ["([OÒ-ÖØVW])("+right+")", connectors.ceO],
+      ["([D])("+right+")", connectors.ceD],
       ["([P])("+right+")", connectors.ceP],
       ["([FT])("+right+")", connectors.ceF],
       ["([IÌ-Ï])("+right+")", connectors.ceI],

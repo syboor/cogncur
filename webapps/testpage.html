@@ -46,64 +46,39 @@
     <li><a href="#arrows">Arrows</a></li>
     <li><a href="#wordfade">Wordfade</a></li>
     <li><a href="#overlap">Overlapping entry / connecting strokes</a></li>
-    <li>Witruimte
   </ul>
 
   
   <!-- 
-  DONE: exit-strokes (afhalen), interpunctie en spatie.
-    
   TODO: verbindingen naar o en a doortrekken... (nuttig voor webtoepassingen, maar geen probleem in het desktop font -> gewoon altijd doen)
   
-  LATER: komma na t, b, v, w moet dichterbij de letter. Dus right-bearing van de t moet minder, alle verbindingen cctX moeten breder :(
-    Maar: eerst uitroepteken doen en kijken welke problemen dat oplevert...
-    1. DONE adjust r-bearing for optimal word space. 
-    2. DONE if comma still needs to be closer, use kerning (it's more than wide enough to kern closer)
-    3. DONE: why doesn't it kern in Chrome? -> use the DEV build to create the font. TODO: maybe try a newer version?
+  TODO: ??? create shorter versions of ? and !  Or maybe only do this when using capitals???
     
-  TODO: special exit stroke ceX (instead of cen) for symmetry purposes...
+  TODO: (optional) no entry strokes for i/u/w (sharp letters)
+  TODO: uppercase U/W/Y with entry stroke??? But... isn't this confusing, given the wavy, horizontal entry stroke on J?
     
-  TODO: shorter stick variants (+ add the substitution rules into the web font itself)
-    - TODO: create shorter versions of ? and !  Or maybe only do this when using capitals???
-    
-  DONE: quotes and apostrophe. apostrophe will be low, single quote will be higher.
-    - program the high/low apostrophe rule into the font. This should probably be a contextual alt?
-    - NB no smart quotes in the font!
-  
-  TODO: kerning for remaining interpunction
-  - after word: colon, semicolon, guillemot, upside down quotes, slash, bracket
-  - before word: guillemot, low opening quotes, apostrophe (because of contractions!!!), slash, bracket
-    - redo this when we have letters without entry stroke from the baseline
-  NB when kerning combinations of interpunction (especially quotes combined with other interpunction), make
-  certain these combination only appear in ONE kerning table!!!
-    
-  LATER: more kerning before question mark ? 
-  - split off exit stroke for i/j/A1/N1/M1. Kern cen -> ? closer together (but not for i, j, A1, N1, M1)
-  - kerning for specific uppercase letters (probably done on the ligatures themselves, not on an extra exit stroke
-  - 4 kerning tables:
-    - letter-interpunction
-    - interpunction-interpunction
-    - interpunction-letter
-    - letter-uppercase
+  TODO: kerning before word
+  - for 'csa' letters: create real ligatures
+    - automatically, for every glyph starting with 'cs' in the 'start-continued' table
+    - do we need to unlik them?
+    - delete all layers; copy into skeleton layer; set left bearing to 34 based on the 'skeleton' layer
+    - create an 'rlig' substitution table, and add these letters to them
+    - leave the ss01 as is (only substituting the entry strokes themselves, not the ligatures)
+    - how to add them to the correct kerning classes???
+    - use a separate kerning table, so if we need to start over, we don't delete other kerning
+  - upside down exclamation mark
+  - guillemot, low opening quotes, apostrophe (because of contractions!!!), slash, bracket
+  - ?? kerning combinations of interpunction (in a separate table)
+  - kerning interpunction before uppercase also in separate table; maybe use automatic classes?
   
   LATER: language specific ligatures and substitutions: Danish 'ae'
   
   TODO: create starting points fonts
   
-  TODO: test multiple substitution (from contextual alternates) in Word and Photoshop
-  -> it works in: Windows font viewer, MS Word (after activating calt), Chromium, LibreOffice :)
-  -> doesn't work in Photoshop CS6
-  -> TODO: other Adobe products -> it works in Photoshop version 24.
-  
   TODO: 
   - testing/documentation matrix: per feature: what it should look like, what a 'failure' looks like, questions to ask (does it work automatically?). Features: contextual alternates; kerning; stylistic sets; multilinguage support; 'ij' ligature
   - how to 'flatten' stylistic sets for MS Word
   
-  DOCU: test how to activate the 'ij' ligature in Word and Photoshop
-  - NO: it won't work automatically (based on Unicode codepoint) without OpenType? Libre
-  - Word / LibreOffice: select document language at the bottom of the window
-  - Yes, can we suppress it for selected words by changing language? YES
-
   TODO: revisit merging points of N2, M2 and U.
   
   TODO: Use symbols for lines??? (at least in the regular fonts...). Pick 3 symbols: fully lined, fully lined without bottom descender, baseline + midline, baseline only (standard | symbol). Broken pipe (|)???
@@ -377,103 +352,64 @@
     </tr>
   </table>
 
-  <h3>f variant</h3>
+  <h3>f variants</h3>
   <table>
     <tr>
-      <th>f_connection_variant 0, f_continuity_variant 0</th>
-      <th>f_connection_variant 1, f_continuity_variant 0</th>
-    </tr>
-    <tr>
-      <td class="lines rh8 nospacebetween" data-cogncur-f-connection-variant=0>
-        <div class="line">fi fn ff fo fa fe fs ft fj&nbsp;</div>
+      <td class="lines rh8 nospacebetween" >
+        <div class="line" data-cogncur-f-connection-variant=0>fi fn ff fo fa fe fs ft fj&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
       </td>
-      <td class="lines rh8 nospacebetween" data-cogncur-f-connection-variant=1>
-        <div class="line">fi fn ff fo fa fe fs ft fj&nbsp;</div>
-      </td>
-    </tr>
-    <tr>
-      <th>f_connection_variant 0, f_continuity_variant 1</th>
-      <th>f_connection_variant 1, f_continuity_variant 1</th>
-    </tr>
-    <tr>
-      <td class="lines rh8 nospacebetween" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1>
-        <div class="line">fi fn ff fo fa fe fs ft fj&nbsp;</div>
-      </td>
-      <td class="lines rh8 nospacebetween" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1>
-        <div class="line">fi fn ff fo fa fe fs ft fj&nbsp;</div>
-      </td>
-    </tr>
-    <tr>
-      <th>f_connection_variant 0, f_continuity_variant 1, dp_variant 1</th>
-      <th>f_connection_variant 1, f_continuity_variant 1, dp_variant 1</th>
-    </tr>
-    <tr>
-      <td class="lines rh8 nospacebetween" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>
-        <div class="line">fi fn ff fo fa fe fs ft fj&nbsp;</div>
-      </td>
-      <td class="lines rh8 nospacebetween" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>
-        <div class="line">fi fn ff fo fa fe fs ft fj&nbsp;</div>
+      <td class="lines rh8 nospacebetween" data-cogncur-t-variant=1 data-cogncur-s-variant=1>
+        <div class="line" data-cogncur-f-connection-variant=0>fs ft&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=1>fs ft&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1>fs ft&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>fs ft&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1>fs ft&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>fs ft&nbsp;</div>
       </td>
     </tr>
   </table>
 
-
-  <h3>q variant</h3>
+  <h3>q variants</h3>
   <table>
     <tr>
-      <th>q_connection_variant 0</th>
-      <th>q_connection_variant 1</th>
-    </tr>
-    <tr>
-      <td class="lines rh8 nospacebetween" data-cogncur-q-connection-variant=0>
-        <div class="line">qi qn ql qo qq qe qs qt qj&nbsp;</div>
+      <td class="lines rh8 nospacebetween" >
+        <div class="line" data-cogncur-q-connection-variant=0>qu qn ql qo qq qe qs qt qj&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=0 data-cogncur-dp-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=0 data-cogncur-q-continuity-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
       </td>
-      <td class="lines rh8 nospacebetween" data-cogncur-q-connection-variant=1>
-        <div class="line">qi qn ql qo qq qe qs qt qj&nbsp;</div>
-      </td>
-    </tr>
-    <tr>
-      <th>q_continuity_variant 1</th>
-    </tr>
-    <tr>
-      <td class="lines rh8 nospacebetween" data-cogncur-q-connection-variant=0 data-cogncur-q-continuity-variant=1>
-        <div class="line">qi qn ql qo qq qe qs qt qj&nbsp;</div>
-      </td>
-      <td class="lines rh8 nospacebetween" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1>
-      </td>
-    </tr>
-    <tr>
-      <th>q_continuity_variant 1, dp_variant 1</th>
-      <th>q_connection_variant 1, dp_variant 1</th>
-    </tr>
-    <tr>
-      <td class="lines rh8 nospacebetween" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>
-        <div class="line">qi qn ql qo qq qe qs qt qj&nbsp;</div>
-      </td>
-      <td class="lines rh8 nospacebetween" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=0 data-cogncur-dp-variant=1>
-        <div class="line">qi qn ql qo qq qe qs qt qj&nbsp;</div>
-      </td>
-    </tr>
-  </table>
-
-  <h3>s variant</h3>
-  <table>
-    <tr>
-      <th>0</th>
-      <th>1</th>
-    </tr>
-    <tr>
-      <td class="lines rh8 nospacebetween" data-cogncur-s-variant=0>
-        <div class="line">kiss ms eggs ifs buts mess s &nbsp;</div>
-        <div class="line">As Bs Cs Ds Es Fs Ns Ps&nbsp;</div>
-      </td>
-      <td class="lines rh8 nospacebetween" data-cogncur-s-variant=1>
-        <div class="line">kiss ms eggs ifs buts mess s&nbsp;</div>
-        <div class="line">As Bs Cs Ds Es Fs Ns Ps&nbsp;</div>
+      <td class="lines rh8 nospacebetween" data-cogncur-t-variant=1 data-cogncur-s-variant=1>
+        <div class="line" data-cogncur-q-connection-variant=0>qs qt&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1>qs qt&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>qs qt&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=0 data-cogncur-q-continuity-variant=1>qs qt&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1  data-cogncur-dp-variant=1>qs qt&nbsp;</div>
       </td>
     </tr>
   </table>
   
+  <h3>s variants</h3>
+  <table>
+    <tr>
+      <td class="lines rh8 nospacebetween" >
+        <div class="line" data-cogncur-s-variant=0>is es ss ps fs zs gs vs os ts As Bs Os Fs Ps Is Ns&nbsp;</div>
+        <div class="line" data-cogncur-s-variant=1>is es ss ps fs zs gs vs os ts As Bs Os Fs Ps Is Ns&nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-fq-connection-variant=1 >
+        <div class="line" data-cogncur-s-variant=0>fs qs &nbsp;</div>
+        <div class="line" data-cogncur-s-variant=1>fs qs&nbsp;</div>
+      </td>
+    </tr>
+  </table>
+  
+
+
 
   <h2><a name="upper">Uppercase letters and connections</a></h2>
   <div class="cursive rh8">
@@ -582,8 +518,8 @@
       <td class="cursive rh12">s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
       <td class="cursive rh12" data-cogncur-s-variant=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
       <td class="cursive rh12">ß i<br/>ß,<br/>ß;<br/>ß!<br/>ß/<br/>ß)<br/>ß?<br/>ß"<br/></td>
-      <td class="cursive rh12" data-cogncur-exit-strokes=1>p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/></td>
-      <td class="cursive rh12" data-cogncur-exit-strokes=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
+      <td class="cursive rh12" data-cogncur-existrokes=1>p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/></td>
+      <td class="cursive rh12" data-cogncur-existrokes=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
     </tr>
     <tr>
       <td class="cursive rh12">g i<br/>g,<br/>g;<br/>g!<br/>g/<br/>g)<br/>g?<br/>g"<br/></td>
@@ -592,6 +528,38 @@
       <td class="cursive rh12">j i<br/>j,<br/>j;<br/>j!<br/>j/<br/>j)<br/>j?<br/>j"<br/></td>
       <td class="cursive rh12">J i<br/>J,<br/>J;<br/>J!<br/>J/<br/>J)<br/>J?<br/>J"<br/></td>
       <td class="cursive rh12" data-cogncur-ij-ligature=1>ij i<br/>ij,<br/>ij;<br/>ij!<br/>ij/<br/>ij)<br/>ij?<br/>ij"<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">b i<br/>b,<br/>b;<br/>b!<br/>b/<br/>b)<br/>b?<br/>b"<br/></td>
+      <td class="cursive rh12">v i<br/>v,<br/>v;<br/>v!<br/>v/<br/>v)<br/>v?<br/>v"<br/></td>
+      <td class="cursive rh12">o i<br/>o,<br/>o;<br/>o!<br/>o/<br/>o)<br/>o?<br/>o"<br/></td>
+     </tr>
+    <tr>
+      <td class="cursive rh12">c i<br/>c,<br/>c;<br/>c!<br/>c/<br/>c)<br/>c?<br/>c"<br/></td>
+      <td class="cursive rh12">e i<br/>e,<br/>e;<br/>e!<br/>e/<br/>e)<br/>e?<br/>e"<br/></td>
+      <td class="cursive rh12">C i<br/>C,<br/>C;<br/>C!<br/>C/<br/>C)<br/>C?<br/>C"<br/></td>
+      <td class="cursive rh12" data-cogncur-uppercase-cgl-variant=1>C i<br/>C,<br/>C;<br/>C!<br/>C/<br/>C)<br/>C?<br/>C"<br/></td>
+      <td class="cursive rh12">E i<br/>E,<br/>E;<br/>E!<br/>E/<br/>E)<br/>E?<br/>E"<br/></td>
+      <td class="cursive rh12">L i<br/>L,<br/>L;<br/>L!<br/>L/<br/>L)<br/>L?<br/>L"<br/></td>
+     </tr>
+    <tr>
+      <td class="cursive rh12">t i<br/>t,<br/>t;<br/>t!<br/>t/<br/>t)<br/>t?<br/>t"<br/></td>
+      <td class="cursive rh12" data-cogncur-t-variant=1>t i<br/>t,<br/>t;<br/>t!<br/>t/<br/>t)<br/>t?<br/>t"<br/></td>
+      <td class="cursive rh12">A i<br/>A,<br/>A;<br/>A!<br/>A/<br/>A)<br/>A?<br/>A"<br/></td>
+      <td class="cursive rh12">B i<br/>B,<br/>B;<br/>B!<br/>B/<br/>B)<br/>B?<br/>B"<br/></td>
+      <td class="cursive rh12">S i<br/>S,<br/>S;<br/>S!<br/>S/<br/>S)<br/>S?<br/>S"<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">D i<br/>D,<br/>D;<br/>D!<br/>D/<br/>D)<br/>D?<br/>D"<br/></td>
+      <td class="cursive rh12">O i<br/>O,<br/>O;<br/>O!<br/>O/<br/>O)<br/>O?<br/>O"<br/></td>
+      <td class="cursive rh12">V i<br/>V,<br/>V;<br/>V!<br/>V/<br/>V)<br/>V?<br/>V"<br/></td>
+      <td class="cursive rh12">P i<br/>P,<br/>P;<br/>P!<br/>P/<br/>P)<br/>P?<br/>P"<br/></td>
+      <td class="cursive rh12">F i<br/>F,<br/>F;<br/>F!<br/>F/<br/>F)<br/>F?<br/>F"<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">I i<br/>I,<br/>I;<br/>I!<br/>I/<br/>I)<br/>I?<br/>I"<br/></td>
+      <td class="cursive rh12">N i<br/>N,<br/>N;<br/>N!<br/>N/<br/>N)<br/>N?<br/>N"<br/></td>
+      <td class="cursive rh12" data-cogncur-uppercase-amn-variant=1>N i<br/>N,<br/>N;<br/>N!<br/>N/<br/>N)<br/>N?<br/>N"<br/></td>
     </tr>
   </table>
 
@@ -604,13 +572,6 @@
     <i>no. no. no. is it so?</i><Br/>
     <strong>no. no. no. is it so?</strong><Br/>
   </div>
-  Note that H and l need special kerning because the letter glyphs overlap their exit stroke.
-  <div class="cursive rh12">
-    H? l? h? f? H! l! h! f!<br/>
-    H' l' h' f' H. l. h. f.<br/>
-    n? d? i?<br/>
-    g? y? j?<br/>
-  </div>   
 
   <h2><a name="letterswhitespace">Whitespace at start of word</a></h2>
   <div class="cursive rh12">
@@ -887,11 +848,11 @@
   <table>
     <tr>
       <th>0: all entry strokes from baseline</th>
-      <th>1: no entry strokes for c/a/d/g/o/q</th>
-      <th>2: short entry strokes, none for c/a/d/g/o/q/t</th>
+      <th>1: entry strokes not from baseline</th>
+      <th>2: N.I. no entry strokes for i/u/w (sharp letters)</th>
     </tr>
     <tr>
-      <td data-cogncur-aanhalen-variant=0>
+      <td data-cogncur-entrystrokes=0 style="border-left: 1px solid #999">
         <div class="lines rh6 nospacebetween">
           <div class="line">ant dodo</div>
           <div class="line">goat quail</div>
@@ -901,15 +862,18 @@
           <div class="line">ink up why</div>
           <div class="line">my name van</div>
           <div class="line">zip you xenon</div>
+          <div class="line" data-cogncur-rz-top-variant=1 data-cogncur-y-variant=1>zip you xenon</div>
           <div class="line">stop sign</div>
+          <div class="line" data-cogncur-s-variant=1>stop sign</div>
           <div class="line">cat orca</div>
           <div class="line">robot rat</div>
           <div class="line">jellyfish jar</div>
           <div class="line">pumpkin party</div>
           <div class="line">time turner</div>
+          <div class="line" data-cogncur-t-variant=1>time turner</div>
         </div>
       </td>
-      <td data-cogncur-aanhalen-variant=1>
+      <td data-cogncur-entrystrokes=1 style="border-left: 1px solid #999">
         <div class="lines rh6 nospacebetween">
           <div class="line">ant dodo</div>
           <div class="line">goat quail</div>
@@ -919,15 +883,18 @@
           <div class="line">ink up why</div>
           <div class="line">my name van</div>
           <div class="line">zip you xenon</div>
+          <div class="line" data-cogncur-rz-top-variant=1 data-cogncur-y-variant=1>zip you xenon</div>
           <div class="line">stop sign</div>
+          <div class="line" data-cogncur-s-variant=1>stop sign</div>
           <div class="line">cat orca</div>
           <div class="line">robot rat</div>
           <div class="line">jellyfish jar</div>
           <div class="line">pumpkin party</div>
           <div class="line">time turner</div>
+          <div class="line" data-cogncur-t-variant=1>time turner</div>
         </div>
       </td>
-      <td data-cogncur-aanhalen-variant=2>
+      <td data-cogncur-entrystrokes=2  style="border-left: 1px solid #999">
         <div class="lines rh6 nospacebetween">
           <div class="line">ant dodo</div>
           <div class="line">goat quail</div>
@@ -937,79 +904,20 @@
           <div class="line">ink up why</div>
           <div class="line">my name van</div>
           <div class="line">zip you xenon</div>
+          <div class="line" data-cogncur-rz-top-variant=1 data-cogncur-y-variant=1>zip you xenon</div>
           <div class="line">stop sign</div>
+          <div class="line" data-cogncur-s-variant=1>stop sign</div>
           <div class="line">cat orca</div>
           <div class="line">robot rat</div>
           <div class="line">jellyfish jar</div>
           <div class="line">pumpkin party</div>
           <div class="line">time turner</div>
+          <div class="line" data-cogncur-t-variant=1>time turner</div>
         </div>
       </td>
      </tr>
    </table>
-  <h3>Non-connected upper case with/without entry strokes for lowercase</h3>
-  <table>
-    <tr>
-      <th>With entry strokes</th>
-      <th>Without entry strokes</th>
-      <th>Mixed entry strokes</th>
-    </tr>
-    <tr>
-      <td data-cogncur-aanhalen-variant=0 data-cogncur-hoofdletter-i-variant=1>
-        <Div class='lines rh6 nospacebetween'>
-          <div class="line">Big Band Bend Blend</div>
-          <div class="line">Dear Dancing Donald Duck</div>
-          <div class="line">Far Field Flip Ftt</div>
-          <div class="line">Gladly God Gave Gift</div>
-          <div class="line">Hey Happy Hippo</div>
-          <div class="line">Ink Iglo Iffy</div>
-          <div class="line">Old Oscar On Oxygen</div>
-          <div class="line">Off Ozz Oil Otter</div>
-          <div class="line">Piss Poor Plucky Prop</div>
-          <div class="line">Slip Sat Stick Set</div>
-          <div class="line">Trip Tent Toys Tyler Tt</div>
-          <div class="line">Van Veela Vie Vho Vt</div>
-          <div class="line">Who Wants Will Wet</div>
-        </div>
-      </td>
-      <td data-cogncur-aanhalen-variant=2 data-cogncur-hoofdletter-i-variant=1>
-        <Div class='lines rh6 nospacebetween'>
-          <div class="line">Big Band Bend Blend</div>
-          <div class="line">Dear Dancing Donald Duck</div>
-          <div class="line">Far Field Flip Ftt</div>
-          <div class="line">Gladly God Gave Gift</div>
-          <div class="line">Hey Happy Hippo</div>
-          <div class="line">Ink Iglo Iffy</div>
-          <div class="line">Old Oscar On Oxygen</div>
-          <div class="line">Off Ozz Oil Otter</div>
-          <div class="line">Piss Poor Plucky Prop</div>
-          <div class="line">Slip Sat Stick Set</div>
-          <div class="line">Trip Tent Toys Tyler Tt</div>
-          <div class="line">Van Veela Vie Vho Vt</div>
-          <div class="line">Who Wants Will Wet</div>
-        </div>
-      </td>
-      <td data-cogncur-aanhalen-variant=1 data-cogncur-hoofdletter-i-variant=1>
-        <Div class='lines rh6 nospacebetween'>
-          <div class="line">Big Band Bend Blend</div>
-          <div class="line">Dear Dancing Donald Duck</div>
-          <div class="line">Far Field Flip Ftt</div>
-          <div class="line">Gladly God Gave Gift</div>
-          <div class="line">Hey Happy Hippo</div>
-          <div class="line">Ink Iglo Iffy</div>
-          <div class="line">Old Oscar On Oxygen</div>
-          <div class="line">Off Ozz Oil Otter</div>
-          <div class="line">Piss Poor Plucky Prop</div>
-          <div class="line">Slip Sat Stick Set</div>
-          <div class="line">Trip Tent Toys Tyler Tt</div>
-          <div class="line">Van Veela Vie Vho Vt</div>
-          <div class="line">Who Wants Will Wet</div>
-        </div>
-      </td>
-    </tr>
-  </table>
-  </div>
-  
+ 
   <h2><a name="exit">Exit strokes</a></h2>
   <table>
     <tr>
@@ -1017,8 +925,8 @@
       <th>1: no exit strokes for p and s</th>
     </tr>
     <tr>
-      <td data-cogncur-exit-strokes=0>
-        <div class="lines rh6 nospacebetween" style="text-align: right">
+      <td data-cogncur-existrokes=0>
+        <div class="lines rh6 nospacebetween" style="text-align: right; border-right: 1px solid #999">
           <div class="line">ski gym red</div>
           <div class="line">win far hill</div>
           <div class="line">flu lick hat</div>
@@ -1037,8 +945,8 @@
           <div class="line">shoe flee zinc</div>
         </div>
       </td>
-      <td data-cogncur-exit-strokes=1>
-        <div class="lines rh6 nospacebetween" style="text-align: right">
+      <td data-cogncur-existrokes=1>
+        <div class="lines rh6 nospacebetween" style="text-align: right; border-right: 1px solid #999">
           <div class="line">ski gym red</div>
           <div class="line">win far hill</div>
           <div class="line">flu lick hat</div>
@@ -1068,7 +976,7 @@
       <th>entry strokes 2</th>
     </tr>
     <tr>
-      <td data-cogncur-aanhalen-variant=0>
+      <td data-cogncur-entrystrokes-variant=0>
         <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="startpunt-overlay-rood" data-nlines="1">
           <div class="line">a b c d e f g h i</div>
           <div class="line">j k l m n o p q r </div>
@@ -1088,7 +996,7 @@
           
         </div>
       </td>
-      <td data-cogncur-aanhalen-variant=2>
+      <td data-cogncur-entrystrokes-variant=2>
         <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="startpunt-overlay-rood" data-nlines="1">
           <div class="line">a b c d e f g h i</div>
           <div class="line">j k l m n o p q r </div>
@@ -1160,7 +1068,7 @@
       <th>entry strokes 2</th>
     </tr>
     <tr>
-      <td data-cogncur-aanhalen-variant=0>
+      <td data-cogncur-entrystrokes-variant=0>
         <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="arrows-font red" data-nlines="1">
           <div class="line">a b c d e f g h i</div>
           <div class="line">j k l m n o p q r </div>
@@ -1175,7 +1083,7 @@
           <div class="line">Tick Flee Tree Fog</div>
         </div>
       </td>
-      <td data-cogncur-aanhalen-variant=2>
+      <td data-cogncur-entrystrokes-variant=2>
         <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="arrows-font red" data-nlines="1">
           <div class="line">a b c d e f g h i</div>
           <div class="line">j k l m n o p q r </div>
@@ -1200,7 +1108,7 @@
       <th>entry strokes 2</th>
     </tr>
     <tr>
-      <td data-cogncur-aanhalen-variant=0>
+      <td data-cogncur-entrystrokes-variant=0>
         <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="morearrows-font red" data-nlines="1">
           <div class="line">a b c d e f g h i</div>
           <div class="line">j k l m n o p q r </div>
@@ -1215,7 +1123,7 @@
           <div class="line">Tick Flee Tree Fog</div>
         </div>
       </td>
-      <td data-cogncur-aanhalen-variant=2>
+      <td data-cogncur-entrystrokes-variant=2>
         <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="morearrows-font red" data-nlines="1">
           <div class="line">a b c d e f g h i</div>
           <div class="line">j k l m n o p q r </div>
@@ -1391,7 +1299,7 @@
     </tr>
     <tr>
       <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=0>
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=0>
           <div class="line">aa 1 1 0 1 0 </div>
           <div class="line">na 1 1 0 1 0 </div>
           <div class="line">va 1 1 0 1 0 </div>
@@ -1402,7 +1310,7 @@
         </div>
       </td>
       <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=1>
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=1>
           <div class="line">aa 1 1 0 1 0 </div>
           <div class="line">na 1 1 0 1 0 </div>
           <div class="line">va 1 1 0 1 0 </div>
@@ -1415,7 +1323,7 @@
     </tr>
     <tr>
       <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=0>
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=0>
           <div class="line">cc 1 1 0 1 0 </div>
           <div class="line">nc 1 1 0 1 0 </div>
           <div class="line">vc 1 1 0 1 0 </div>
@@ -1426,7 +1334,7 @@
         </div>
       </td>
       <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=1>
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=1>
           <div class="line">cc 1 1 0 1 0 </div>
           <div class="line">nc 1 1 0 1 0 </div>
           <div class="line">vc 1 1 0 1 0 </div>
@@ -1439,7 +1347,7 @@
     </tr>
     <tr>
       <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=0>
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=0>
           <div class="line">oo 1 1 0 1 0 </div>
           <div class="line">no 1 1 0 1 0 </div>
           <div class="line">vo 1 1 0 1 0 </div>
@@ -1450,7 +1358,7 @@
         </div>
       </td>
       <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=1>
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=1>
           <div class="line">oo 1 1 0 1 0 </div>
           <div class="line">no 1 1 0 1 0 </div>
           <div class="line">vo 1 1 0 1 0 </div>
@@ -1463,7 +1371,7 @@
     </tr>
     <tr>
       <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=0>
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=0>
           <div class="line">tt 1 1 0 1 0 </div>
           <div class="line">nt 1 1 0 1 0 </div>
           <div class="line">vt 1 1 0 1 0 </div>
@@ -1474,7 +1382,7 @@
         </div>
       </td>
       <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-aanhalen-overlap=1>
+        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=1>
           <div class="line">tt 1 1 0 1 0 </div>
           <div class="line">nt 1 1 0 1 0 </div>
           <div class="line">vt 1 1 0 1 0 </div>
@@ -1497,8 +1405,8 @@
   
   <br/>
   <div class="cursive rh12">sleeves</div>
-  <div class="rawcursive rh12">ϫs Νl Βe υe ψv αe ωsЁ</div>
-  <div class="rawcursive rh12">ϫ s Ν l Β &nbsp;e υ &nbsp;e ψ v α &nbsp;e ω s Ё</div>
+  
+  <div class="rawcursive rh12">s  l  e  e  v  e  s</div>
   <style>
     .c1 {
       color: #00bf00
@@ -1519,55 +1427,5 @@
       color: #5eb3cd
     }
   </style>
-  <div class="rawcursive rh12">
-    ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ <br/>
-    ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ<br/>
-    <span class="c4">Ϫ</span>m<span class="c5">Δ</span>i<span class="c4">Ε</span>n<span class="c5">Δ</span>i<span class="c4">Ε</span>m<span class="c5">Δ</span>u<span class="c4">Ε</span>mЀ<br/>
-    
-  </div>
-
-  <div class="rawcursive rh12 dotted-font">
-    ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ <br/>
-    ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ<br/>
-    <span class="c4">Ϫ</span>m<span class="c5">Δ</span>i<span class="c4">Ε</span>n<span class="c5">Δ</span>i<span class="c4">Ε</span>m<span class="c5">Δ</span>u<span class="c4">Ε</span>mЀ<br/>
-    
-  </div>
-  <div class="rawcursive rh12 dotted-arrows2-font">
-    ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ <br/>
-    ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ<br/>
-    <span class="c4">Ϫ</span>m<span class="c5">Δ</span>i<span class="c4">Ε</span>n<span class="c5">Δ</span>i<span class="c4">Ε</span>m<span class="c5">Δ</span>u<span class="c4">Ε</span>mЀ<br/>
-    
-  </div>
-
-
-  <div class="rawline nolines rh12" style="position: relative; top: 0">
-    <div class="" style="position: absolute; top: 0; z-index: 1; width: 100%">ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ</div>
-    <div class="arrows-font" style="position: absolute; top: 0; z-index: 1; width: 100%">ϫs<span class="c1">Μe</span>ψv<span class="c1">αe</span>ψnЀ</span> ϨlΔiΚϐΓl<span class="c1">ΒeЅ</span> ϬoνwβlΖsЁ</div></div>
-  <div class="rawline nolines rh12" style="position: relative; top: 0">
-    <div class="" style="position: absolute; top: 0; z-index: 1; width: 100%">ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ</div>
-    <div class="arrows-font" style="position: absolute; top: 0; z-index: 1; width: 100%">ϫsΜeψvαeψnЀ <span class="c2">Ϩl</span>ΔiΚϐ<span class="c2">Γl</span>ΒeЅ Ϭoνw<span class="c2">βl</span>ΖsЁ</div></div>
-
-
-  <div class="cursive rh12 invisible-connections">minimum</div>
-  </div>
-  <div class="rawcursive rh12">
-    ϫsΝlΒ<span class="c1">e</span>υ<span class="c1">e</span>ψvα<span class="c1">e</span>ωsЁ<br/>
-    ϫsΝl<span class="c4">Β</span><span class="c1">e</span><span class="c4">υ</span><span class="c1">e</span>ψv<span class="c4">α</span><span class="c1">e</span>ωsЁ<br/>
-    ϫsΝlΒ<span class="c1">e</span><span class="c6">υ</span><span class="c1">e</span><span class="c6">ψ</span>vα<span class="c1">e</span><span class="c6">ω</span>sЁ<br/>
-  </div>
-  
-  <div style="width: 450px; height: 150px; overflow: hidden; background-color: #FFFFD8; text-align: center;  background-image: -webkit-box-shadow: inset 0 0 5px 5px #4CBEFD; box-shadow: inset 0 0 5px 5px #4CBEFD;);">
-  <!--
-    <div style="font-family: Ruluko; font-size: 19pt; margin-top: 18px; margin-bottom: 10px;">Try out my <span class='letter' style="color: #971C6D;">D 'Nealian</span> cursive font.</div>
-    <div class="line rh5" style="text-align: left; margin-left: 35px"></div>
-    <div class="rawline rh3" style="font-family: SchoolCursiveGuides">Also available with guides.</div>
-    -->
-  </div>
-  
-  <br/>
-  <br/>
-  <div class="lines rh8">
-    <div class='line'>m  n  v  a  d</div>
-  </div>
   
 </body>
