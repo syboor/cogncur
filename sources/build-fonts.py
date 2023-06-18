@@ -24,10 +24,22 @@ font.fontname = 'CogncurCalligraphic';
 font.familyname = font.fullname = 'Cogncur Calligraphic';
 font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurcall.ttf', layer='GCall');
 
-font.fontname = 'CogncurUpright';
+font.fontname = 'CogncurVertical';
 font.familyname = font.fullname = 'Cogncur Vertical';
 font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurvertical.ttf', layer='GOutline');
 
 font.fontname = 'Cogncur';
 font.familyname = font.fullname = 'Cogncur Regular';
 font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncur.ttf', layer='GRegOutl');
+
+font.fontname = 'CogncurObliqueStartDots';
+font.familyname = font.fullname = 'Cogncur Oblique StartDots';
+font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurobliquestartdots.ttf', layer='GSlStartDot');
+
+font.fontname = 'CogncurVerticalStartDots';
+font.familyname = font.fullname = 'Cogncur Vertical StartDots';
+font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurverticalstartdots.ttf', layer='GStartDot');
+
+font.fontname = 'CogncurStartDots';
+font.familyname = font.fullname = 'Cogncur Regular StartDots';
+font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurstartdots.ttf', layer='GRegStartDot');

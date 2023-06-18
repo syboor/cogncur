@@ -27,6 +27,29 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: "CogncurVertical-Start";
+  src: url("/fonts/cogncur/fonts/cogncurverticalstartdots.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Cogncur-Start";
+  src: url("/fonts/cogncur/fonts/cogncurstartdots.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CogncurOblique-Start";
+  src: url("/fonts/cogncur/fonts/cogncurobliquestartdots.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
+
 .desktop {
   font-family: "Cogncur";
 }
@@ -70,7 +93,27 @@
   font-family: "Cogncur-Start";
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
-
+.cursive.startpunten-font i, .cursive .startpunten-font i, .startpunten-font .cursive i,
+.rawcursive.startpunten-font i, .rawcursive .startpunten-font i, .startpunten-font .rawcursive i,
+.line.startpunten-font i, .line .startpunten-font i, .startpunten-font .line i,
+.rawline.startpunten-font i, .rawline .startpunten-font i, .startpunten-font .rawline i,
+.letter.startpunten-font i, .letter .startpunten-font i, .startpunten-font .letter i,
+.rawletter.startpunten-font i, .rawletter .startpunten-font i, .startpunten-font .rawletter i,
+.hokjes.startpunten-font i, .hokjes .startpunten-font i, .startpunten-font .hokjes i,
+.word-startpunten-font i, .word .startpunten-font i, .startpunten-font .word,
+.cursive.startpunten-font em, .cursive .startpunten-font em, .startpunten-font .cursive em,
+.rawcursive.startpunten-font em, .rawcursive .startpunten-font em, .startpunten-font .rawcursive em,
+.line.startpunten-font em, .line .startpunten-font em, .startpunten-font .line em,
+.rawline.startpunten-font em, .rawline .startpunten-font em, .startpunten-font .rawline em,
+.letter.startpunten-font em, .letter .startpunten-font em, .startpunten-font .letter em,
+.rawletter.startpunten-font em, .rawletter .startpunten-font em, .startpunten-font .rawletter em,
+.hokjes.startpunten-font em, .hokjes .startpunten-font em, .startpunten-font .hokjes em,
+.word-startpunten-font em, .word .startpunten-font em, .startpunten-font .word {
+  font-family: "CogncurOblique-Start";
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
 
 .cursive.arrows-font, .cursive .arrows-font, .arrows-font .cursive,
 .rawcursive.arrows-font, .rawcursive .arrows-font, .arrows-font .rawcursive,

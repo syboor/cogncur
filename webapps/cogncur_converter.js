@@ -650,6 +650,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
     if (settings.y_variant == 1) {
       input = input.replaceAll('Y', variants.Y1);
+      input = input.replaceAll('IJ', variants.IJ1);
     }
     if (settings.w_variant == 1) {
       input = input.replaceAll('W', variants.W1);
@@ -1082,8 +1083,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replaceAll('j', 'ȷ');
     }
     if (settings.nodots >= 2) {
-      input = input.replaceAll('t', 'ŧ');
-      input = input.replaceAll('x', 'ẋ');
+      input = input.replaceAll(variants.t1, variants.t1dotless);
+      input = input.replaceAll('x', variants.xdotless);
     }
     return input;
   }
@@ -1136,8 +1137,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       visible_input = visible_input.replaceAll(variants.t1, variants.t1dotless);
       visible_input = visible_input.replaceAll('x', variants.xdotless);
       
-      // 'tt' ligature needs to be reverted to two (barless) t's
-      visible_input = visible_input.replaceAll('ϐ', 'ŧΚŧ');
     }
     return visible_input;
   }    
