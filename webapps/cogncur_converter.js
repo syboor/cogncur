@@ -1,36 +1,20 @@
-﻿/* Based on from http://www.voorzanger.nl/JAVASCRIPT/schoolschrijver.js by Bart Voorzanger 
-   Adapted by Liesbeth Flobbe
-   
-   © 2018-2020 Bart Voorzanger, Liesbeth Flobbe.
-   Commercieel gebruik niet toegestaan.
-   
-   
-   Dit script is alleen getest in een 'converteer alles van originele kale tekst' situatie.
-   Het los aanroepen van de functies om verschillende variants verbonden schrift in elkaar 
-   om te zetten, is niet doorontwikkeld en ook niet getest.
-
+﻿/* © 2023 Liesbeth Flobbe.
  */
 
 var get_cogncur_converter = (function (the_settings, the_element) {
   var settings = {
-    /* aanhalen_variant:
-        0 = aanhalen vanaf de grondlijn
-        1 = geen aanhalen bij c/a/d/g/o/q, de rest vanaf de grondlijn
-        2 = korte aanhalen, geen aanhalen bij i/u/w
+    /* entrystrokes_variant:
+        0 = entrystrokes from the baseline
+        1 = a/c/d/g/o/q have no entry strokes. Other letters have entrystrokes from justb elow the midline. i/u/w have an entry stroke followed by a sharp angle.
+        2 = like 1, but letters i/u/w don't have entry strokes at all, they start down from the midline. NB this also effects uppercase U, W, Y
      */
-    entry_strokes: 0,
+    entrystrokes: 0,
     
-    /* exit_strokes:
+    /* existrokes:
         0 = many exit strokes
         1 = no exit strokes for s en p
      */
-    exit_strokes: 0,
-    
-    /* aanhalen_overlap:
-      0 = weinig overlap tussen aanhalen en letters
-      1 = meer overlap tussen aanhaal en letters bij t, o, a/c/d/g/q. De aanhaal gaat door tot het keerpunt.
-     */
-    aanhalen_overlap: 0,
+    existrokes: 0,
     
     /* t_variant:
         0 = doorverbonden t
@@ -38,6 +22,48 @@ var get_cogncur_converter = (function (the_settings, the_element) {
         2 = moderne t, rechte verbindingen
      */
     t_variant: 0,
+    
+    /* f_connection_variant:
+        0 = f connects from the baseline
+        1 = f connects from the midline
+     */
+    f_connection_variant: 0,
+
+    /* q_connection_variant:
+        0 = q connects from the baseline
+        1 = q connects from the bottom
+     */
+    q_connection_variant: 0,
+
+    /* fq_connection_variant:
+        Combined setting for f_connection_variant and q_connection_variant.
+        For compatibility with the stylistic sets.
+     */
+    fq_connection_variant: 0,
+    
+    /* f_continuity_variant:
+        0 = f has a continuous stroke; it uses a loop to return to the point where the connection starts
+        1 = f has a pencil lift
+     */
+    f_continuity_variant: 0,
+
+    /* q_continuity_variant:
+        0 = q has a continuous stroke; if the connection is from the baseline, it uses a loop to get there
+        1 = q has a pencil lift (will always connect from the baseline, regardless of q_connection_variant setting)
+     */
+    q_continuity_variant: 0,
+
+    /* fq_continuity_variant:
+        Combined setting for f_continuity_variant and q_continuity_variant.
+        For compatibility with the stylistic sets.
+      */
+    fq_continuity_variant: 0,
+
+    /* s_variant:
+        0 = s goes straight down
+        1 = s has a belly
+     */
+    s_variant: 0,
     
     /* undercursves:
        0 = normal, straight connections
@@ -95,12 +121,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      */
     nodots: 0,
     
-    /* TODO no_extra_s_bit:
-     0 = the connections from b, o, v, w have an extra bit of s so that the s touches the connection
-     1 = no
-     */
-    no_extra_s_bit: 0,
-    
     /* no_tt_ligature:
      0 = yes, 'tt' forms a ligature with the crossbars connected
      1 = no
@@ -135,6 +155,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccns : '\ue006',
     ccnt1: '\ue007',
     ccnt : '\ue008',
+    ccns1: '\ue009',
     cen  : '\ue00b',
     ccoi : '\ue00c',
     ccon : '\ue00d',
@@ -145,6 +166,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccos : '\ue012',
     ccot1: '\ue013',
     ccot : '\ue014',
+    ccos1: '\ue015',
     ceo  : '\ue017',
     ccei : '\ue018',
     ccen : '\ue019',
@@ -155,6 +177,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     cces : '\ue01e',
     ccet1: '\ue01f',
     ccet : '\ue020',
+    cces1: '\ue021',
     cee  : '\ue023',
     ccvi : '\ue024',
     ccvn : '\ue025',
@@ -165,6 +188,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccvs : '\ue02A',
     ccvt1: '\ue02B',
     ccvt : '\ue02C',
+    ccvs1: '\ue02D',
     cev  : '\ue02F',
     ccgi : '\ue030',
     ccgn : '\ue031',
@@ -175,6 +199,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccgs : '\ue036',
     ccgt1: '\ue037',
     ccgt : '\ue038',
+    ccgs1: '\ue039',
     ceg  : '\ue03B',
     ccsi : '\ue03C',
     ccsn : '\ue03D',
@@ -185,6 +210,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccss : '\ue042',
     ccst1: '\ue043',
     ccst : '\ue044',
+    ccss1: '\ue045',
     ces  : '\ue047',
     ccpi : '\ue048',
     ccpn : '\ue049',
@@ -195,6 +221,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccps : '\ue04E',
     ccpt1: '\ue04F',
     ccpt : '\ue050',
+    ccps1: '\ue051',
     cep  : '\ue053',
     ccqi : '\ue054',
     ccqn : '\ue055',
@@ -205,6 +232,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccqs : '\ue05A',
     ccqt1: '\ue05B',
     ccqt : '\ue05C',
+    ccqs1: '\ue05D',
     ccqj : '\ue05E', // special case
     ceq  : '\ue05F',
     ccti : '\ue060',
@@ -216,6 +244,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccts : '\ue066',
     cctt1: '\ue067',
     cctt : '\ue068',
+    ccts1: '\ue069',
     cet  : '\ue06B',
     ccOi : '\ue06C',
     ccOn : '\ue06D',
@@ -226,6 +255,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccOs : '\ue072',
     ccOt1: '\ue073',
     ccOt : '\ue074',
+    ccOs1: '\ue075',
     ceO  : '\ue077',
     ccBi : '\ue078',
     ccBn : '\ue079',
@@ -236,6 +266,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccBs : '\ue07E',
     ccBt1: '\ue07F',
     ccBt : '\ue080',
+    ccBs1: '\ue081',
     ceB  : '\ue083',
     ccAi : '\ue084',
     ccAn : '\ue085',
@@ -246,6 +277,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccAs : '\ue08A',
     ccAt1: '\ue08B',
     ccAt : '\ue08C',
+    ccAs1: '\ue08D',
     ceA  : '\ue08F',
     ccPi : '\ue090',
     ccPn : '\ue091',
@@ -256,6 +288,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccPs : '\ue096',
     ccPt1: '\ue097',
     ccPt : '\ue098',
+    ccPs1: '\ue099',
     ceP  : '\ue09B',
     ccFi : '\ue09C',
     ccFn : '\ue09D',
@@ -266,6 +299,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccFs : '\ue0A2',
     ccFt1: '\ue0A3',
     ccFt : '\ue0A4',
+    ccFs1: '\ue0A5',
     ceF  : '\ue0A7',
     ccIi : '\ue0A8',
     ccIn : '\ue0A9',
@@ -276,6 +310,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccIs : '\ue0AE',
     ccIt1: '\ue0AF',
     ccIt : '\ue0B0',
+    ccIs1: '\ue0B1',
     ceI  : '\ue0B3',
     ccNi : '\ue0B4',
     ccNn : '\ue0B5',
@@ -286,6 +321,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ccNs : '\ue0BA',
     ccNt1: '\ue0BB',
     ccNt : '\ue0BC',
+    ccNs1: '\ue0BD',
     ceN  : '\ue0BF',
     
     cgi  : '\ue0C0',
@@ -299,23 +335,41 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     cgt  : '\ue0C8',
     cgz1 : '\ue0C9', // special case
     cgz  : '\ue0CA', // special case
+    cgs1 : '\ue0CB', // special case
+    cgj  : '\ue0CC', // identical to ... but different for kerning purposes
+    cgp  : '\ue0CD', // identical to ... but different for kerning purposes
+    cgf  : '\ue0CE', // identical to ... but different for kerning purposes
+    cgg  : '\ue0CF', // identical to ... but different for kerning purposes
+    cgy  : '\ue0D0', // identical to ... but different for kerning purposes
+    cgy1 : '\ue0D1', // identical to ... but different for kerning purposes
 
+    csi  : '\ue11d',
+    csn  : '\ue11e',
+    csh  : '\ue11f',
+    cso  : '\ue120',
+    csa  : '\ue121',
+    cse  : '\ue122',
+    css  : '\ue123',
+    cst1 : '\ue124',
+    cst  : '\ue125',
+    csz1 : '\ue126', // special case
+    csz  : '\ue127', // special case
+    css1 : '\ue128', // special case
+    csj  : '\ue129', // identical to ... but different for kerning purposes
+    csp  : '\ue12a', // identical to ... but different for kerning purposes
+    csf  : '\ue12b', // identical to ... but different for kerning purposes
+    csg  : '\ue12c', // identical to ... but different for kerning purposes
+    csy  : '\ue12d', // identical to ... but different for kerning purposes
+    csy1 : '\ue12e', // identical to ... but different for kerning purposes
 
-    csi  : '\ue060', // todo
-    csn  : '\ue061', // todo
-    csh  : '\ue062', // todo
-    cso  : '\ue063', // todo
-    csa  : '\ue064', // todo
-    cse  : '\ue065', // todo
-    css  : '\ue066', // todo
-    cst1 : '\ue067', // todo
-    cst  : '\ue068', // todo
-    csz1 : '',
-    csz  : '',
     
+    cet1 : '\ue0d3',
+
+    cfß  : '\ue0d4',
     cfs  : '\ue0d5', // invisible exit stroke for s
     cfp  : '\ue0d6', // invisible exit stroke for p
     
+    ceß  : '\ue0d7',
     ceG1 : '\ue0d8',
     ceQ  : '\ue0d9',
     ceE  : '\ue0da',
@@ -327,7 +381,60 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     cef  : '\ue0e0', // replaces ceq for kerning purposes (due to the overhang of f)
     ceM  : '\ue0e1', // replaces cen for symmetry purposes
     ceC1 : '\ue0e2', // replaces cee for kerning purposes
-    ceH  : '\ue0e3' // replaces cen for kerning purposes (due to the overhang of l)
+    ceH  : '\ue0e3', // replaces cen for kerning purposes (due to the overhang of l)
+    
+    ccf1i : '\ue134',
+    ccf1n : '\ue135',
+    ccf1h : '\ue136',
+    ccf1o : '\ue137',
+    ccf1a : '\ue138',
+    ccf1e : '\ue139',
+    ccf1s : '\ue13A',
+    ccf1t1: '\ue13B',
+    ccf1t : '\ue13C',
+    ccf1s1: '\ue13D',
+    ccf1j : '\ue13E', // special case
+    cef1  : '\ue13F',
+    cef2  : '\ue140',
+    ccf4i : '\ue141',
+    ccf4n : '\ue142',
+    ccf4h : '\ue143',
+    ccf4o : '\ue144',
+    ccf4a : '\ue145',
+    ccf4e : '\ue146',
+    ccf4s : '\ue147',
+    ccf4t1: '\ue148',
+    ccf4t : '\ue149',
+    ccf4s1: '\ue14A',
+    cef4  : '\ue14C',
+    
+    ccq1i : '\ue14D',
+    ccq1n : '\ue14E',
+    ccq1h : '\ue14F',
+    ccq1o : '\ue150',
+    ccq1a : '\ue151',
+    ccq1e : '\ue152',
+    ccq1s : '\ue153',
+    ccq1t1: '\ue154',
+    ccq1t : '\ue155',
+    ccq1s1: '\ue156',
+    ccq1j : '\ue157',
+    ceq1  : '\ue158',
+
+    ccq2i : '\ue159',
+    ccq2n : '\ue15A',
+    ccq2h : '\ue15B',
+    ccq2o : '\ue15C',
+    ccq2a : '\ue15D',
+    ccq2e : '\ue15E',
+    ccq2s : '\ue15F',
+    ccq2t1: '\ue160',
+    ccq2t : '\ue161',
+    ccq2s1: '\ue162',
+    ccq2j : '\ue163',
+    ceq2  : '\ue164',
+    ceq3  : '\ue165',
+
     
   }
   var variants = {
@@ -356,6 +463,16 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     IJ1: '\ue0f7',
     W1 : '\ue0f8',
     Z1 : '\ue0f9',
+    f1 : '\ue0fa',
+    f2 : '\ue0fb',
+    f3 : '\ue0fc',
+    f4 : '\ue0fd',
+    f5 : '\ue0fe',
+    q1 : '\ue0ff',
+    q2 : '\ue100',
+    q3 : '\ue101',
+    q4 : '\ue102',
+    s1 : '\ue103',
     
     C1 : '\ue114',
     C1cedilla : '\ue115',
@@ -363,7 +480,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     L1 : '\ue117'
   }
   
-  var letterglyphs_lc = 'a-zà-åçè-ëì-ïıñò-öøšŧù-üẋýÿžœæß' + variants.t1 + variants.t1dotless + variants.xdotless + variants.jdotless + variants.r1 + variants.z1 + variants.z1caron + variants.d1 + variants.p1 + variants.ij + variants.y1 + variants.ij1 + variants.w1; // kleine letters + variants
+  var letterglyphs_lc = 'a-zà-åçè-ëì-ïıñò-öøšŧù-üẋýÿžœæß' + variants.t1 + variants.t1dotless + variants.xdotless + variants.jdotless + variants.r1 + variants.z1 + variants.z1caron + variants.d1 + variants.p1 + variants.ij + variants.y1 + variants.ij1 + variants.w1 + variants.f1 + variants.f2 + variants.f3 + variants.f4 + variants.f5 + variants.q1 + variants.q2 + variants.q3 + variants.q4 + variants.s1; // kleine letters + variants
   var letterglyphs_uc_connected = 'AÀ-ÅBDCÇEÈ-ËFGHIÌ-ÏJKLMNÑOÒ-ÖØPQRSŠTUÙ-ÜVWXYÝŸZŒÆ' + variants.A1 + variants.M1 + variants.N1 + variants.A2 + variants.M2 + variants.N2 + variants.IJ + variants.Y1 + variants.IJ1 + variants.W1 + variants.Z1 + variants.C1 + variants.C1cedilla + variants.G1 + variants.L1;
   var letterglyphs_uc_unconnected = ''; 
   var letterglyphs_uc = letterglyphs_uc_connected + letterglyphs_uc_unconnected;
@@ -414,6 +531,17 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       }
     }
     
+    // In the stylistic sets, 'fq' are a combined setting.
+    // In Javascript, you can choose between using the combined setting or using settings per letter.
+    if (settings.fq_connection_variant) {
+      settings.f_connection_variant = settings.fq_connection_variant;
+      settings.q_connection_variant = settings.fq_connection_variant;
+    }
+    if (settings.fq_continuity_variant) {
+      settings.f_continuity_variant = settings.fq_continuity_variant;
+      settings.q_continuity_variant = settings.fq_continuity_variant;
+    }
+    
     return settings;
   };
      
@@ -424,19 +552,17 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     result = variantsConversion1(result);
     result = quotesConversion(result);
     
-    result = aanhalenConversion(result); // this substitution needs to know whether it's beginning of the string or not
+    result = entrystrokesConversion(result); // this substitution needs to know whether it's beginning of the string or not
 
     result = " " + result + " "; // add extra space
 
-    result = afhalenConversion(result);
-    result = letterparenConversion(result);
-    result = letterparenConversion(result);
+    result = exitstrokesConversion(result);
+    result = joinsConversion(result);
+    result = joinsConversion(result);
     // result = beginnetjesConversion(result);
     result = variantsConversion2(result);
 
     result = dotlessConversion(result);
-    result = ligatureConversion(result);
-    result = extrasbitConversion(result);
     
     // ONLY trim off the space we added at the start
     if (result.substring(0,1) == " ") result = result.substring(1);
@@ -481,10 +607,32 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replace(/ž/g, variants.z1caron);
     }
 
+    if (settings.s_variant == 1) { // todo: s1caron
+      input = input.replace(/s/g, variants.s1);
+    }
+
+    if (settings.f_connection_variant == 1) {
+      if (settings.f_continuity_variant == 1) {
+        input = input.replaceAll('f', variants.f4);
+      } else {
+        input = input.replaceAll('f', variants.f1);
+      }
+    }
+
+
+    if (settings.q_connection_variant == 1 && settings.q_continuity_variant == 0) {
+      if (settings.dp_variant == 1) {
+        input = input.replaceAll('q', variants.q2);
+      } else {
+        input = input.replaceAll('q', variants.q1); // yes, this shorter stick is actually relevant for the connections
+      }
+    }
+
     if (settings.y_variant == 1) {
       input = input.replaceAll('y', variants.y1);
       input = input.replaceAll(variants.ij, variants.ij1);
     } // note that Y will be replaced in variantsConversion2
+    
     if (settings.w_variant == 1) {
       input = input.replace(/w/g, variants.w1);
     }
@@ -494,14 +642,10 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   function variantsConversion2(input) {
     // In this function, convert all variants that have no impact on the connecting strokes used.
     // This function will be called with connecting strokes already in place.
-    if (settings.dp_variant == 1) {
-      input = input.replace(/d/g, variants.d1);
-      input = input.replace(/p/g, variants.p1);
-    }
-    
-    if (settings.exit_strokes == 1) {
+    if (settings.existrokes == 1) {
       input = input.replaceAll(connectors.ces, connectors.cfs);
       input = input.replaceAll(connectors.cep, connectors.cfp);
+      input = input.replaceAll(connectors.ceß, connectors.cfß);
     }
 
     if (settings.y_variant == 1) {
@@ -523,7 +667,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
 
     
-    if (settings.t_variant == 2) { // TODO: expand with the rest of the uppercase letters
+    if (settings.t_variant == 2) { 
       input = input.replaceAll(connectors.ccAt1, connectors.ccAi);
       input = input.replaceAll(connectors.ccBt1, connectors.ccBi);
       input = input.replaceAll(connectors.ccet1, connectors.ccei);
@@ -544,7 +688,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       
     }
 
-    if (settings.undercurves) { // TODO: expand with the rest of the uppercase letters
+    if (settings.undercurves) { 
       input = input.replaceAll(connectors.ccAi, connectors.ccAt1);
       input = input.replaceAll(connectors.ccBi, connectors.ccBt1);
       input = input.replaceAll(connectors.ccei, connectors.ccet1);
@@ -562,178 +706,265 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replaceAll(connectors.ccti, connectors.cctt1);
       input = input.replaceAll(connectors.ccvi, connectors.ccvt1);
       input = input.replaceAll(connectors.cgi, connectors.cgt1);
-      
     }
 
+    if (settings.f_continuity_variant == 1) {
+      input = input.replaceAll('f'+connectors.ccqj, variants.f2+connectors.ccqi);
+      input = input.replaceAll('f', variants.f2);
+      input = input.replaceAll(connectors.cef, connectors.cef2);
+    }
+
+
+    if (settings.q_continuity_variant == 1) {
+      input = input.replaceAll('q', variants.q3);
+      input = input.replaceAll(connectors.ceq, connectors.ceq3);
+
+      input = input.replaceAll(connectors.ccqj, connectors.ccqi); // the special 'extra wide' connection is not needed if the q doesn't have a loop but just a stick
+    }
+
+
+    if (settings.dp_variant == 1) {
+      input = input.replaceAll('d', variants.d1);
+      input = input.replaceAll('p', variants.p1);
+      input = input.replaceAll(variants.f4, variants.f5);
+      input = input.replaceAll(variants.f2, variants.f3);
+      input = input.replaceAll(variants.q3, variants.q4);
+    }
+    
 
     return input;
   }
 
 
-  function letterparenConversion(input) {
+  function joinsConversion(input) {
     // This function needs to match the following variants:
     // - variants that can be user input (with a standard unicode mapping < \ue8000
     // - variants that require different connections than the standard letter, produced by variantsConversion1()
     var zoekVervangParen = [
-      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([aà-ådgqæ])", connectors.ccna],
+      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccna],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([eè-ë])", connectors.ccne],
-      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([bfhkl])", connectors.ccnh],
+      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccnh],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+variants.y1+variants.ij1+"])", connectors.ccni],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccnn],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([sš])", connectors.ccns],
+      ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])(["+variants.s1+"])", connectors.ccns1],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([cçoò-öøœ])", connectors.ccno],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])(["+variants.t1+"])", connectors.ccnt1],
       ["([à-åadhiì-ïıklmnñruù-üxẋHKMRUÙ-ÜX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([tŧ])", connectors.ccnt],
 
-      ["([sš])([aà-ådgqæ])", connectors.ccsa],
-      ["([sš])([eè-ë])", connectors.ccse],
-      ["([sš])([bfhkl])", connectors.ccsh],
-      ["([sš])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccsi],
-      ["([sš])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccsn],
-      ["([sš])([sš])", connectors.ccss],
-      ["([sš])([cçoò-öøœ])", connectors.ccso],
-      ["([sš])(["+variants.t1+"])", connectors.ccst1],
-      ["([sš])([tŧ])", connectors.ccst],
+      ["([sš"+variants.s1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccsa],
+      ["([sš"+variants.s1+"])([eè-ë])", connectors.ccse],
+      ["([sš"+variants.s1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccsh],
+      ["([sš"+variants.s1+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccsi],
+      ["([sš"+variants.s1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccsn],
+      ["([sš"+variants.s1+"])([sš])", connectors.ccss],
+      ["([sš"+variants.s1+"])(["+variants.s1+"])", connectors.ccss1],
+      ["([sš"+variants.s1+"])([cçoò-öøœ])", connectors.ccso],
+      ["([sš"+variants.s1+"])(["+variants.t1+"])", connectors.ccst1],
+      ["([sš"+variants.s1+"])([tŧ])", connectors.ccst],
 
-      ["([pß])([aà-ådgqæ])", connectors.ccpa],
+      ["([pß])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccpa],
       ["([pß])([eè-ë])", connectors.ccpe],
-      ["([pß])([bfhkl])", connectors.ccph],
+      ["([pß])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccph],
       ["([pß])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccpi],
       ["([pß])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccpn],
       ["([pß])([sš])", connectors.ccps],
+      ["([pß])(["+variants.s1+"])", connectors.ccps1],
       ["([pß])([cçoò-öøœ])", connectors.ccpo],
       ["([pß])(["+variants.t1+"])", connectors.ccpt1],
       ["([pß])([tŧ])", connectors.ccpt],
       
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([aà-ådgqæ])", connectors.ccqa],
+      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccqa],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([eè-ë])", connectors.ccqe],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([bfhkl])", connectors.ccqh],
+      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccqh],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccqi],
       ["([fq])([jȷ])", connectors.ccqj], // special connector for 'fj' and 'qj'
       ["([zžQZ"+variants.z1+variants.z1caron+"])([jȷ])", connectors.ccqi], // but no need or 'zj'
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccqn],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([sš])", connectors.ccqs],
+      ["([fqzžQZ"+variants.z1+variants.z1caron+"])(["+variants.s1+"])", connectors.ccqs1],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([cçoò-öøœ])", connectors.ccqo],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])(["+variants.t1+"])", connectors.ccqt1],
       ["([fqzžQZ"+variants.z1+variants.z1caron+"])([tŧ])", connectors.ccqt],
 
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([aà-ådgqæ])", connectors.ccga],
+      ["(["+variants.f1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccf1a],
+      ["(["+variants.f1+"])([eè-ë])", connectors.ccf1e],
+      ["(["+variants.f1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccf1h],
+      ["(["+variants.f1+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccf1i],
+      ["(["+variants.f1+"])([jȷ])", connectors.ccf1j], // special connector for 'fj' and 'qj'
+      ["(["+variants.f1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccf1n],
+      ["(["+variants.f1+"])([sš])", connectors.ccf1s],
+      ["(["+variants.f1+"])(["+variants.s1+"])", connectors.ccf1s1],
+      ["(["+variants.f1+"])([cçoò-öøœ])", connectors.ccf1o],
+      ["(["+variants.f1+"])(["+variants.t1+"])", connectors.ccf1t1],
+      ["(["+variants.f1+"])([tŧ])", connectors.ccf1t],
+
+      ["(["+variants.f4+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccf4a],
+      ["(["+variants.f4+"])([eè-ë])", connectors.ccf4e],
+      ["(["+variants.f4+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccf4h],
+      ["(["+variants.f4+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccf4i],
+      ["(["+variants.f4+"])([jȷ])", connectors.ccf4i], // not special, just use 'ccf4i'
+      ["(["+variants.f4+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccf4n],
+      ["(["+variants.f4+"])([sš])", connectors.ccf4s],
+      ["(["+variants.f4+"])(["+variants.s1+"])", connectors.ccf4s1],
+      ["(["+variants.f4+"])([cçoò-öøœ])", connectors.ccf4o],
+      ["(["+variants.f4+"])(["+variants.t1+"])", connectors.ccf4t1],
+      ["(["+variants.f4+"])([tŧ])", connectors.ccf4t],
+
+      ["(["+variants.q1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccq1a],
+      ["(["+variants.q1+"])([eè-ë])", connectors.ccq1e],
+      ["(["+variants.q1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccq1h],
+      ["(["+variants.q1+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccq1i],
+      ["(["+variants.q1+"])([jȷ])", connectors.ccq1j], // special connector for 'fj' and 'qj'
+      ["(["+variants.q1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccq1n],
+      ["(["+variants.q1+"])([sš])", connectors.ccq1s],
+      ["(["+variants.q1+"])(["+variants.s1+"])", connectors.ccq1s1],
+      ["(["+variants.q1+"])([cçoò-öøœ])", connectors.ccq1o],
+      ["(["+variants.q1+"])(["+variants.t1+"])", connectors.ccq1t1],
+      ["(["+variants.q1+"])([tŧ])", connectors.ccq1t],
+
+      ["(["+variants.q2+"])([aà-ådgqæ"+variants.q2+variants.q2+"])", connectors.ccq2a],
+      ["(["+variants.q2+"])([eè-ë])", connectors.ccq2e],
+      ["(["+variants.q2+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccq2h],
+      ["(["+variants.q2+"])([iì-ïıpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccq2i],
+      ["(["+variants.q2+"])([jȷ])", connectors.ccq2i], // no special connector needed
+      ["(["+variants.q2+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccq2n],
+      ["(["+variants.q2+"])([sš])", connectors.ccq2s],
+      ["(["+variants.q2+"])(["+variants.s1+"])", connectors.ccq2s1],
+      ["(["+variants.q2+"])([cçoò-öøœ])", connectors.ccq2o],
+      ["(["+variants.q2+"])(["+variants.t1+"])", connectors.ccq2t1],
+      ["(["+variants.q2+"])([tŧ])", connectors.ccq2t],
+
+
+      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccga],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([eè-ë])", connectors.ccge],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([bfhkl])", connectors.ccgh],
+      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccgh],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.IJ+variants.ij1+"])", connectors.ccgi],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccgn],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([sš])", connectors.ccgs],
+      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])(["+variants.s1+"])", connectors.ccgs1],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([cçoò-öøœ])", connectors.ccgo],
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])(["+variants.t1+"])", connectors.ccgt1], 
       ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([tŧ])", connectors.ccgt],
 
-      ["([bvw"+variants.w1+"])([aà-ådgqæ])", connectors.ccva],
+      ["([bvw"+variants.w1+"])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccva],
       ["([bvw"+variants.w1+"])([eè-ë])", connectors.ccve],
-      ["([bvw"+variants.w1+"])([bfhkl])", connectors.ccvh],
+      ["([bvw"+variants.w1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccvh],
       ["([bvw"+variants.w1+"])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccvi],
       ["([bvw"+variants.w1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccvn],
       ["([bvw"+variants.w1+"])([sš])", connectors.ccvs],
+      ["([bvw"+variants.w1+"])(["+variants.s1+"])", connectors.ccvs1],
       ["([bvw"+variants.w1+"])([cçoò-öøœ])", connectors.ccvo],
       ["([bvw"+variants.w1+"])(["+variants.t1+"])", connectors.ccvt1], 
       ["([bvw"+variants.w1+"])([tŧ])", connectors.ccvt],
 
-      ["([oò-öø])([aà-ådgqæ])", connectors.ccoa],
+      ["([oò-öø])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccoa],
       ["([oò-öø])([eè-ë])", connectors.ccoe],
-      ["([oò-öø])([bfhkl])", connectors.ccoh],
+      ["([oò-öø])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccoh],
       ["([oò-öø])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccoi],
       ["([oò-öø])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccon],
       ["([oò-öø])([sš])", connectors.ccos],
+      ["([oò-öø])(["+variants.s1+"])", connectors.ccos1],
       ["([oò-öø])([cçoò-öøœ])", connectors.ccoo],
       ["([oò-öø])(["+variants.t1+"])", connectors.ccot1], 
       ["([oò-öø])([tŧ])", connectors.ccot],
 
 
-      ["([ceè-ëçœæCÇEÈ-ËŒÆL])([aà-ådgqæ])", connectors.ccea],
+      ["([ceè-ëçœæCÇEÈ-ËŒÆL])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccea],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([eè-ë])", connectors.ccee],
-      ["([ceè-ëçœæCÇEÈ-ËŒÆL])([bfhkl])", connectors.cceh],
+      ["([ceè-ëçœæCÇEÈ-ËŒÆL])([bfhkl"+variants.f1+variants.f4+"])", connectors.cceh],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccei],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccen],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([sš])", connectors.cces],
+      ["([ceè-ëçœæCÇEÈ-ËŒÆL])(["+variants.s1+"])", connectors.cces1],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([cçoò-öøœ])", connectors.cceo],
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])(["+variants.t1+"])", connectors.ccet1], 
       ["([ceè-ëçœæCÇEÈ-ËŒÆL])([tŧ])", connectors.ccet],
 
-      ["([tŧ])([aà-ådgqæ])", connectors.ccta],
+      ["([tŧ])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccta],
       ["([tŧ])([eè-ë])", connectors.ccte],
-      ["([tŧ])([bfhkl])", connectors.ccth],
+      ["([tŧ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccth],
       ["([tŧ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccti],
       ["([tŧ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.cctn],
       ["([tŧ])([sš])", connectors.ccts],
+      ["([tŧ])(["+variants.s1+"])", connectors.ccts1],
       ["([tŧ])([cçoò-öøœ])", connectors.ccto],
       ["([tŧ])(["+variants.t1+"])", connectors.cctt1],
       ["([tŧ])([tŧ])", connectors.cctt],
 
-      ["([A])([aà-ådgqæ])", connectors.ccAa],
+      ["([A])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccAa],
       ["([A])([eè-ë])", connectors.ccAe],
-      ["([A])([bfhkl])", connectors.ccAh],
+      ["([A])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccAh],
       ["([A])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccAi],
       ["([A])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccAn],
       ["([A])([sš])", connectors.ccAs],
+      ["([A])(["+variants.s1+"])", connectors.ccAs1],
       ["([A])([cçoò-öøœ])", connectors.ccAo],
       ["([A])(["+variants.t1+"])", connectors.ccAt1],
       ["([A])([tŧ])", connectors.ccAt],
 
-      ["([BSŠ])([aà-ådgqæ])", connectors.ccBa],
+      ["([BSŠ])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccBa],
       ["([BSŠ])([eè-ë])", connectors.ccBe],
-      ["([BSŠ])([bfhkl])", connectors.ccBh],
+      ["([BSŠ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccBh],
       ["([BSŠ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccBi],
       ["([BSŠ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccBn],
       ["([BSŠ])([sš])", connectors.ccBs],
+      ["([BSŠ])(["+variants.s1+"])", connectors.ccBs1],
       ["([BSŠ])([cçoò-öøœ])", connectors.ccBo],
       ["([BSŠ])(["+variants.t1+"])", connectors.ccBt1],
       ["([BSŠ])([tŧ])", connectors.ccBt],
 
-      ["([DOÒ-ÖØVW])([aà-ådgqæ])", connectors.ccOa],
+      ["([DOÒ-ÖØVW])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccOa],
       ["([DOÒ-ÖØVW])([eè-ë])", connectors.ccOe],
-      ["([DOÒ-ÖØVW])([bfhkl])", connectors.ccOh],
+      ["([DOÒ-ÖØVW])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccOh],
       ["([DOÒ-ÖØVW])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccOi],
       ["([DOÒ-ÖØVW])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccOn],
       ["([DOÒ-ÖØVW])([sš])", connectors.ccOs],
+      ["([DOÒ-ÖØVW])(["+variants.s1+"])", connectors.ccOs1],
       ["([DOÒ-ÖØVW])([cçoò-öøœ])", connectors.ccOo],
       ["([DOÒ-ÖØVW])(["+variants.t1+"])", connectors.ccOt1],
       ["([DOÒ-ÖØVW])([tŧ])", connectors.ccOt],
 
-      ["([P])([aà-ådgqæ])", connectors.ccPa],
+      ["([P])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccPa],
       ["([P])([eè-ë])", connectors.ccPe],
-      ["([P])([bfhkl])", connectors.ccPh],
+      ["([P])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccPh],
       ["([P])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccPi],
       ["([P])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccPn],
       ["([P])([sš])", connectors.ccPs],
+      ["([P])(["+variants.s1+"])", connectors.ccPs1],
       ["([P])([cçoò-öøœ])", connectors.ccPo],
       ["([P])(["+variants.t1+"])", connectors.ccPt1],
       ["([P])([tŧ])", connectors.ccPt],
 
-      ["([FT])([aà-ådgqæ])", connectors.ccFa],
+      ["([FT])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccFa],
       ["([FT])([eè-ë])", connectors.ccFe],
-      ["([FT])([bfhkl])", connectors.ccFh],
+      ["([FT])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccFh],
       ["([FT])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccFi],
       ["([FT])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccFn],
       ["([FT])([sš])", connectors.ccFs],
+      ["([FT])(["+variants.s1+"])", connectors.ccFs1],
       ["([FT])([cçoò-öøœ])", connectors.ccFo],
       ["([FT])(["+variants.t1+"])", connectors.ccFt1],
       ["([FT])([tŧ])", connectors.ccFt],
 
-      ["([IÌ-Ï])([aà-ådgqæ])", connectors.ccIa],
+      ["([IÌ-Ï])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccIa],
       ["([IÌ-Ï])([eè-ë])", connectors.ccIe],
-      ["([IÌ-Ï])([bfhkl])", connectors.ccIh],
+      ["([IÌ-Ï])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccIh],
       ["([IÌ-Ï])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccIi],
       ["([IÌ-Ï])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccIn],
       ["([IÌ-Ï])([sš])", connectors.ccIs],
+      ["([IÌ-Ï])(["+variants.s1+"])", connectors.ccIs1],
       ["([IÌ-Ï])([cçoò-öøœ])", connectors.ccIo],
       ["([IÌ-Ï])(["+variants.t1+"])", connectors.ccIt1],
       ["([IÌ-Ï])([tŧ])", connectors.ccIt],
 
-      ["([NÑ])([aà-ådgqæ])", connectors.ccNa],
+      ["([NÑ])([aà-ådgqæ"+variants.q1+variants.q2+"])", connectors.ccNa],
       ["([NÑ])([eè-ë])", connectors.ccNe],
-      ["([NÑ])([bfhkl])", connectors.ccNh],
+      ["([NÑ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccNh],
       ["([NÑ])([iì-ïıjȷpuù-üwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccNi],
       ["([NÑ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccNn],
       ["([NÑ])([sš])", connectors.ccNs],
+      ["([NÑ])(["+variants.s1+"])", connectors.ccNs1],
       ["([NÑ])([cçoò-öøœ])", connectors.ccNo],
       ["([NÑ])(["+variants.t1+"])", connectors.ccNt1],
       ["([NÑ])([tŧ])", connectors.ccNt]
@@ -750,8 +981,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     return input;
   }
 
-  function aanhalenConversion(input) {
-    /* Deze functie voegt de aanhalen toe (aan het begin van het woord) */
+  function entrystrokesConversion(input) {
+    /* Deze functie voegt de entrystrokes toe (aan het begin van het woord) */
 
     // LF door de connectorglyphs toe te voegen aan de regexp, wordt het mogelijk deze functie herhaald aan te roepen.
     // Herhaald aanroepen is nodig om ook tekens te converteren die als rechterbuur 'gecaptured' zijn in 
@@ -759,61 +990,65 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     // NB in ES2018 kan dit met (non-capturing) lookahead assertions, maar dat wordt niet door alle browsers ondersteund :(
     var left  = "[^" + letterglyphs_lc + letterglyphs_uc_connected + connectorglyphs + "]|^"; // 'non-word' teken links van de letter waar we een aanhaal aan willen toevoegen
     
-    // aanhalen
+    // entrystrokes
     var zoekVervangParen = [
-      ["("+left+")([aà-ådgqæ])", connectors.cga, connectors.csa, connectors.csa],
-      ["("+left+")([eè-ë])",connectors.cge, connectors.cge, connectors.cse],
-      ["("+left+")([bfhkl])", connectors.cgh, connectors.cgh, connectors.csh],
-      ["("+left+")([iì-ïıjȷpuù-üwß"+variants.r1+variants.y1+variants.ij1+"])", connectors.cgi, connectors.cgi, connectors.csi], 
-      ["("+left+")([mnñrvxẋyýÿ"+variants.ij+variants.w1+"])", connectors.cgn, connectors.cgn, connectors.csn],
-      ["("+left+")([zž])", connectors.cgz, connectors.cgz, connectors.csz], // special case, parallel with internal stroke of 'z'
-      ["("+left+")(["+variants.z1+variants.z1caron+"])", connectors.cgz1, connectors.cgz1, connectors.csz1], // special case, parallel with internal stroke of 'z'
-      ["("+left+")([sš])",connectors.cgs, connectors.cgs, connectors.css],
+      ["("+left+")([aà-ådqæ"+variants.q1+variants.q2+"])", connectors.cga, connectors.csa, connectors.csa],
+      ["("+left+")([g])", connectors.cgg, connectors.csg, connectors.csg],
+      ["("+left+")([eè-ë])",connectors.cge, connectors.cse, connectors.cse],
+      ["("+left+")([bhkl])", connectors.cgh, connectors.csh, connectors.csh],
+      ["("+left+")([f"+variants.f1+variants.f4+"])", connectors.cgf, connectors.csf, connectors.csf],
+      ["("+left+")([iì-ïıuù-üwß"+variants.r1+"])", connectors.cgi, connectors.csi, connectors.csi], 
+      ["("+left+")(["+variants.y1+variants.ij1+"])", connectors.cgy1, connectors.csy1, connectors.csy1], 
+      ["("+left+")([jȷ])", connectors.cgj, connectors.csj, connectors.csj], 
+      ["("+left+")([p])", connectors.cgp, connectors.csp, connectors.csp], 
+      ["("+left+")([mnñrvxẋyýÿ"+variants.ij+variants.w1+"])", connectors.cgn, connectors.csn, connectors.csn],
+      ["("+left+")([yýÿ"+variants.ij+variants.w1+"])", connectors.cgy, connectors.csy, connectors.csy],
+      ["("+left+")([zž])", connectors.cgz, connectors.csz, connectors.csz], // special case, parallel with internal stroke of 'z'
+      ["("+left+")(["+variants.z1+variants.z1caron+"])", connectors.cgz1, connectors.csz1, connectors.csz1], // special case, parallel with internal stroke of 'z'
+      ["("+left+")([sš])",connectors.cgs, connectors.css, connectors.css],
+      ["("+left+")(["+variants.s1+"])",connectors.cgs1, connectors.css1, connectors.css1],
       ["("+left+")([cçoò-öøœ])", connectors.cgo, connectors.cso, connectors.cso],
       ["("+left+")(["+variants.t1+"])", connectors.cgt1, connectors.cst1, connectors.cst1],
-      ["("+left+")([tŧ])", connectors.cgt, connectors.cgt, connectors.cst],
+      ["("+left+")([tŧ])", connectors.cgt, connectors.cst, connectors.cst]
     ];
+
     for (var i = 0; i < zoekVervangParen.length; i++) {
       var zoek = new RegExp(zoekVervangParen[i][0], "gu");
-      var vervang = "$1" + zoekVervangParen[i][settings.entry_strokes + 1] + "$2";
+      var vervang = "$1" + zoekVervangParen[i][parseInt(settings.entrystrokes) + 1] + "$2";
       input = input.replace(zoek, vervang);
     }
-    
-    /*
-    if (settings.aanhalen_overlap == 1) {
-      input = input.replaceAll('Ϧ', 'Њ'); // a/d/g/q 
-      input = input.replaceAll('Ϭc', 'Ћc'); // c
-      input = input.replaceAll('Ϭo', 'Ќo'); // o
-      input = input.replaceAll('ϯt', 'Ѝt'); // t
-    }
-    */
-
     
    
     return input;
   }
 
-  function afhalenConversion(input) {
-    /* Deze functie voegt de afhalen toe (aan het eind van het woord). */
+  function exitstrokesConversion(input) {
+    /* Deze functie voegt de exitstrokes toe (aan het eind van het woord). */
 
     // LF door de connectorglyphs toe te voegen aan de regexp, wordt het mogelijk deze functie herhaald aan te roepen.
     // Herhaald aanroepen is nodig om ook tekens te converteren die als rechterbuur 'gecaptured' zijn in 
     //   de regex bij een eerdere omzetting; dit probleem speelt bij reeksen hoofdletters.
     // NB in ES2018 kan dit met (non-capturing) lookahead assertions, maar dat wordt niet door alle browsers ondersteund :(
-    var right = "[^" + letterglyphs_lc + connectorglyphs + "]"; // 'non-word' teken rechts van de letter waar we aan afhaal aan willen toevoegen. Let op dat we ook afhalen toevoegen binnen een reeks van hoofdletters 
+    var right = "[^" + letterglyphs_lc + connectorglyphs + "]"; // 'non-word' teken rechts van de letter waar we aan afhaal aan willen toevoegen. Let op dat we ook exitstrokes toevoegen binnen een reeks van hoofdletters 
     
-    // afhalen
+    // exitstrokes
     var zoekVervangParen = [
       ["([à-åaımnñruù-üxẋ"+variants.r1+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
       ["([M])("+right+")", connectors.ceM],
       ["([lH])("+right+")", connectors.ceH],
-      ["([hkX])("+right+")", connectors.ceh],
-      ["([diì-ïKRUÙ-Ü"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+"])("+right+")", connectors.ced],
+      ["([hk])("+right+")", connectors.ceh],
+      ["([diì-ïKRUÙ-ÜX"+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+"])("+right+")", connectors.ced],
+      ["(["+variants.t1+"])("+right+")", connectors.cet1],
       ["([qzž"+variants.z1+variants.z1caron+"])("+right+")", connectors.ceq], // except f, Q, Z
       ["([f])("+right+")", connectors.cef],
+      ["(["+variants.f1+"])("+right+")", connectors.cef1],
+      ["(["+variants.f4+"])("+right+")", connectors.cef4],
+      ["(["+variants.q1+"])("+right+")", connectors.ceq1],
+      ["(["+variants.q2+"])("+right+")", connectors.ceq2],
       ["([QZ])("+right+")", connectors.ceQ],
-      ["([pß])("+right+")",  connectors.cep],
-      ["([sš])("+right+")",  connectors.ces],
+      ["([p])("+right+")",  connectors.cep],
+      ["([ß])("+right+")",  connectors.ceß],
+      ["([sš"+variants.s1+"])("+right+")",  connectors.ces],
       ["([gȷyýÿG"+variants.y1+"])("+right+")", connectors.ceg], // anything without stuff above the midline
       ["([jJYÝŸ"+variants.ij+variants.ij1+variants.IJ+"])("+right+")", connectors.cej], // anything with dots or stuff above the midline
       ["([bvw"+variants.w1+"])("+right+")", connectors.cev],
@@ -824,7 +1059,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([tŧ])("+right+")", connectors.cet],
       ["([A])("+right+")", connectors.ceA],
       ["([BSŠ])("+right+")", connectors.ceB],
-      ["([DOÒ-ÖØVW])("+right+")", connectors.ceO],
+      ["([OÒ-ÖØVW])("+right+")", connectors.ceO],
+      ["([D])("+right+")", connectors.ceD],
       ["([P])("+right+")", connectors.ceP],
       ["([FT])("+right+")", connectors.ceF],
       ["([IÌ-Ï])("+right+")", connectors.ceI],
@@ -891,37 +1127,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     return input;
   }
 
-  function ligatureConversion(input) {
-    // ligature 'tt': connect the two crossbars together
-    if (settings.no_tt_ligature == 0) {
-      input = input.replaceAll('tΚt', 'ϐ');
-      input = input.replaceAll('tѤt', 'ϐ');
-    }
-    
-    // TODO: Dutch 'ij' ligature
-    return input;
-  }
-  
-  function extrasbitConversion(input) {
-    // connections from b/o/v/w towards s
-    if (settings.no_extra_s_bit >= 1) {
-      input = input.replaceAll('ο', 'ϑ');
-      input = input.replaceAll('ε', 'ϒ');
-    }
-    return input;
-  }  
-  
-  /* The add_ and remove_ function deal with already converted text.
-   * They are used by cogncur_lines in cases where part of a word is visible,
-   * part is not.
-   */
-   
-  // Before splitting a word into a visible and invisible part, the tt ligatures should
-  // revert to invidual letters.
-  function remove_tt_ligature(input) {
-    return input.replaceAll('ϐ', 'tΚt');
-  }  
- 
   // If any part of the word is invisible, no dots (i and j) or crossbars (t and x)
   // should be present anywhere in the word.
   function remove_dots(visible_input, invisible_input) {
@@ -936,19 +1141,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
     return visible_input;
   }    
-  // If the visible part of the word ends with a connection from b/o/v/w towards s
-  // (which means the invisible part starts with s), change the connection
-  // to a 'proper' connection (without an extra bit of s sticking to it).
-  function remove_extra_s_bit(visible_input, invisible_input) {
-    visible_input = visible_input.replace(/ο$/g, "ϑ");
-    visible_input = visible_input.replace(/ε$/g, "ϒ");
-    return visible_input;
-  }
-  // If the entire word was visible - so that the t's never got their crossbars removed - add the tt ligature back in
-  function add_tt_ligature(visible_input, invisible_input) {
-    return visible_input.replaceAll('tΚt', 'ϐ');
-    return visible_input.replaceAll('tѤt', 'ϐ');
-  }
   
   init(the_settings, the_element);
 
@@ -965,9 +1157,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     glyphs: glyphs,
     settings: settings,
     remove_dots: remove_dots,
-    remove_extra_s_bit: remove_extra_s_bit,
-    add_tt_ligature: add_tt_ligature,
-    remove_tt_ligature: remove_tt_ligature
   }
 });
 

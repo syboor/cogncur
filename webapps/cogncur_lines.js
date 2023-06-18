@@ -428,9 +428,7 @@ var get_cogncur_lines = (function () {
       var input_losseletters = input_word.split('\u200A'); // A word can be split into separate groups of leters
       var output_losseletters = [];
       input_losseletters.forEach(function (input_losseletter) {
-        // remove tt ligature (otherwise we can't even count letters)
-        input_losseletter = cogncur_converter.remove_tt_ligature(input_losseletter);
-        
+       
         var starts_with_connector = input_losseletter.match('^[' + cogncur_converter.connectorglyphs + ']') ? true : false;
         var output_losseletter = '';
         var word_from = from;
@@ -440,9 +438,7 @@ var get_cogncur_lines = (function () {
         if (input_losseletter.trim()) {
           var visible_input = input_losseletter.slice(0,word_from);
           var invisible_input = input_losseletter.slice(word_from);
-          visible_input = cogncur_converter.remove_extra_s_bit(visible_input, invisible_input);
           visible_input = cogncur_converter.remove_dots(visible_input, invisible_input);
-          visible_input = cogncur_converter.add_tt_ligature(visible_input, invisible_input);
           output_losseletter = visible_input + '<span class="invisible">' + invisible_input + '</span>';
         }
         output_losseletters.push(output_losseletter);

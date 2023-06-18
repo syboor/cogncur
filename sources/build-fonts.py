@@ -16,17 +16,17 @@
 import fontforge;
 font = fontforge.activeFont();
 
-font.fontname = 'CogncurSlant';
-font.familyname = font.fullname = 'Cogncur Slant';
-font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurslant.ttf', layer='GSlOutl');
+font.fontname = 'CogncurOblique';
+font.familyname = font.fullname = 'Cogncur Oblique';
+font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncuroblique.ttf', layer='GSlOutl');
 
 font.fontname = 'CogncurCalligraphic';
 font.familyname = font.fullname = 'Cogncur Calligraphic';
 font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurcall.ttf', layer='GCall');
 
 font.fontname = 'CogncurUpright';
-font.familyname = font.fullname = 'Cogncur Upright';
-font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurupright.ttf', layer='GOutline');
+font.familyname = font.fullname = 'Cogncur Vertical';
+font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurvertical.ttf', layer='GOutline');
 
 font.fontname = 'Cogncur';
 font.familyname = font.fullname = 'Cogncur Regular';

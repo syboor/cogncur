@@ -1,0 +1,56 @@
+COGNCUR USER GUIDE
+
+1. Quick start guide
+- obtaining the font (links)
+- installing the font (screenshot)
+- quick MS Word setup
+- what's in this guide
+
+
+2. Feature guide
+- 'typeface features' aka what it looks like
+- font styles (i.e. different slants)
+- didactic features (integrated guides, guide characters, overlay fonts, etc)
+- technical features
+  - OpenType features
+  - workarounds
+
+3. Application guide
+- worksheet generator (online)
+- Microsoft Word
+  - setting all the features
+  - inserting accented characters ('e' may look like 'c')
+  - flattening stylistic sets through fontsquirrel.com
+  - ??? how to use integrated guides or overlay fonts
+- LibreOffice
+- Powerpoint
+- Canva Pro
+- Adobe Indesign
+  - using overlay fonts
+- Adobe Illustrator
+- (maybe in the far future...  
+
+4. Sharing and contributing
+- Reporting application support and providing screenshots
+- Creating / distributing your own font
+  - naming guidelines
+- Help appreciated and offered
+  - converting to Google Fonts build process
+  - I'm not really ready to accept 'ready-made' contributions to the font files. Github unfortunately is not up to the job of comparing changes in the .sfd format.
+  - limited mentoring in creating a derivate font???
+- Feature requests 
+  - provide as many reasons as you can other than 'imitating existing curriculum / material'. Describe how the new letter variant is easier to teach, more consistent with other letters, etc.
+  - but if you are trying to match with existing material
+    - provide a full alphabet (uppercase and lowercase) and a small sample of connected text, so that I can see for myself if Cogncur is a good match for your material
+    - please name the material and describe how it can be obtained
+    - if the requested feature is used in multiple (competing) curricula, please inform me about all of them
+    - please describe how the material can be obtained, how many people use it, and what kind of community there is around the material (i.e. forums or other communities that share material based on Creative Commons licenses)
+  - provide sufficient samples of the letter you want changed:
+    - provide samples of connected text with the letter
+      - at the beginning of the ord
+      - in the middle of the word
+      - at the end of the word
+      - before and after the letter 'e'
+      - after the letters 'o' and 'v'
+    - provide the uppercase version of the same letter as well
+
