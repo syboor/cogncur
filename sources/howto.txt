@@ -1,0 +1,11 @@
+CREATE ACCENTED CHARACTERS
+Do not 'Build glyph' in slanted layers; the accents will not have the correct position over the characters.
+ 
+Instead:
+- select your accented characters
+- switch to the Skeleton layer
+- Element > Build Glyph
+- Edit > Unlink references
+- do the same for the Extra and ExtraCall layers (Build Glyph, Unlink references)
+- run the 'derive-layers.py' script.
+ 
