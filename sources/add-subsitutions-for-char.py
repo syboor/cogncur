@@ -105,3 +105,14 @@ add_subs('ccedilla', 'o', 'cee');
 
 # TODO oobreve eebreve oomacron eemacron\
 
+add_subs('oobreve', 'o', 'ceo');
+add_subs('oomacron', 'o', 'ceo');
+add_subs('eebreve', 'e', 'cee');
+add_subs('eemacron', 'e', 'cee');
+add_subs('aabreve', 'a', 'cen');
+add_subs('aamacron', 'a', 'cen');
+add_subs('uubreve', 'i', 'cen');
+add_subs('uumacron', 'i', 'cen');
+
+
+
