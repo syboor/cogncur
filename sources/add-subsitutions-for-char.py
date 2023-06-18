@@ -1,5 +1,6 @@
 # This scripts adds a new character to all the "multiple substitution" tables.
 # You still need to add it the the match classes and back classes of the contextual alternates table.
+# Note: this is only for lowercase letters. Uppercase letters only need to be added to 1 substitution table: stand-alone.
 
 import fontforge;
 import math;
@@ -44,5 +45,63 @@ def add_subs(glyphname, connects_as, end_piece):
 # How to add a new character in
 #add_subs('s1', 's1', 'ces');
 #add_subs('germandbls', 'i', 'cegermandbls');
-add_subs('t1', 't1', 'cet1');
+#add_subs('t1', 't1', 'cet1');
+
+#add_subs('acaron', 'a', 'cen');
+#add_subs('ecaron', 'e', 'cee');
+#add_subs('icaron', 'i', 'cen');
+#add_subs('ocaron', 'o', 'ceo');
+#add_subs('ucaron', 'i', 'cen');
+#add_subs('scaron', 's', 'ces');
+#add_subs('zcaron', 'n', 'ceq');
+#add_subs('s1caron', 's1', 'ces');
+#add_subs('z1caron', 'i', 'ceq');
+
+#add_subs('atilde', 'a', 'cen');
+#add_subs('ntilde', 'n', 'cen');
+#add_subs('etilde', 'e', 'cee');
+#add_subs('otilde', 'o', 'ceo');
+#add_subs('utilde', 'i', 'cen');
+#add_subs('itilde', 'i', 'cen');
+
+#add_subs('ygrave', 'n', 'ceg');
+#add_subs('yacute', 'n', 'ceg');
+#add_subs('ycircumflex', 'n', 'ceg');
+#add_subs('ytilde', 'n', 'ceg');
+
+#add_subs('y1grave', 'i', 'ceg');
+#add_subs('y1acute', 'i', 'ceg');
+#add_subs('y1circumflex', 'i', 'ceg');
+#add_subs('y1tilde', 'i', 'ceg');
+
+add_subs('adieresis', 'a', 'cen');
+add_subs('aring', 'a', 'cen');
+add_subs('amacron', 'a', 'cen');
+add_subs('abreve', 'a', 'cen');
+
+add_subs('edieresis', 'e', 'cee');
+add_subs('emacron', 'e', 'cee');
+add_subs('ebreve', 'e', 'cee');
+
+add_subs('idieresis', 'i', 'cen');
+add_subs('imacron', 'i', 'cen');
+add_subs('ibreve', 'i', 'cen');
+
+add_subs('odieresis', 'o', 'ceo');
+add_subs('omacron', 'o', 'ceo');
+add_subs('obreve', 'o', 'ceo');
+
+add_subs('udieresis', 'i', 'cen');
+add_subs('uring', 'i', 'cen');
+add_subs('umacron', 'i', 'cen');
+add_subs('ubreve', 'i', 'cen');
+
+add_subs('ydieresis', 'n', 'ceg');
+add_subs('ymacron', 'n', 'ceg');
+add_subs('y1diaeresis', 'i', 'ceg');
+add_subs('y1macron', 'i', 'ceg');
+
+add_subs('ccedilla', 'o', 'cee');
+
+# TODO oobreve eebreve oomacron eemacron\
 
