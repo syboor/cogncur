@@ -84,9 +84,9 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     dp_variant: 0,
 
     /* uppercase_amn_variant:
-        0 = German variants 
-        1 = Dutch/American variants: proportionally enlarged lowercase cursive
-        2 = Dutch/American variants: not-proportionally enlarged lowercase cursive
+        0 = German letters 
+        1 = Dutch/American letters: proportionally enlarged lowercase cursive
+        2 = Dutch/American letters: not-proportionally enlarged lowercase cursive
      */
     uppercase_amn_variant: 0,
     
@@ -342,6 +342,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     cgg  : '\ue0CF', // identical to ... but different for kerning purposes
     cgy  : '\ue0D0', // identical to ... but different for kerning purposes
     cgy1 : '\ue0D1', // identical to ... but different for kerning purposes
+    cggermandbls: '\ue0D2', // identical to ... but different for kerning purposes
 
     csi  : '\ue11d',
     csn  : '\ue11e',
@@ -361,6 +362,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     csg  : '\ue12c', // identical to ... but different for kerning purposes
     csy  : '\ue12d', // identical to ... but different for kerning purposes
     csy1 : '\ue12e', // identical to ... but different for kerning purposes
+    csgermandbls : '\ue12f', // identical to ... but different for kerning purposes
 
     
     cet1 : '\ue0d3',
@@ -437,14 +439,211 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
     
   }
-  var variants = {
+  var letters = {
+    space : '\u0020',
+    exclam : '\u0021',
+    quotedbl : '\u0022',
+    quotesingle : '\u0027',
+    parenleft : '\u0028',
+    parenright : '\u0029',
+    asterisk : '\u002a',
+    plus : '\u002b',
+    comma : '\u002c',
+    hyphen : '\u002d',
+    period : '\u002e',
+    glyph415 : '\u002f',
+    colon : '\u003a',
+    semicolon : '\u003b',
+    question : '\u003f',
+    A : '\u0041',
+    B : '\u0042',
+    C : '\u0043',
+    D : '\u0044',
+    E : '\u0045',
+    F : '\u0046',
+    G : '\u0047',
+    H : '\u0048',
+    I : '\u0049',
+    J : '\u004a',
+    K : '\u004b',
+    L : '\u004c',
+    M : '\u004d',
+    N : '\u004e',
+    O : '\u004f',
+    P : '\u0050',
+    Q : '\u0051',
+    R : '\u0052',
+    S : '\u0053',
+    T : '\u0054',
+    U : '\u0055',
+    V : '\u0056',
+    W : '\u0057',
+    X : '\u0058',
+    Y : '\u0059',
+    Z : '\u005a',
+    bracketleft : '\u005b',
+    backslash : '\u005c',
+    bracketright : '\u005d',
+    underscore : '\u005f',
+    a : '\u0061',
+    b : '\u0062',
+    c : '\u0063',
+    d : '\u0064',
+    e : '\u0065',
+    f : '\u0066',
+    g : '\u0067',
+    h : '\u0068',
+    i : '\u0069',
+    j : '\u006a',
+    k : '\u006b',
+    l : '\u006c',
+    m : '\u006d',
+    n : '\u006e',
+    o : '\u006f',
+    p : '\u0070',
+    q : '\u0071',
+    r : '\u0072',
+    s : '\u0073',
+    t : '\u0074',
+    u : '\u0075',
+    v : '\u0076',
+    w : '\u0077',
+    x : '\u0078',
+    y : '\u0079',
+    z : '\u007a',
+    braceleft : '\u007b',
+    bar : '\u007c',
+    braceright : '\u007d',
+    exclamdown : '\u00a1',
+    guillemotleft : '\u00ab',
+    guillemotright : '\u00bb',
+    questiondown : '\u00bf',
+    Agrave : '\u00c0',
+    Aacute : '\u00c1',
+    Acircumflex : '\u00c2',
+    Atilde : '\u00c3',
+    Adieresis : '\u00c4',
+    Aring : '\u00c5',
+    Ccedilla : '\u00c7',
+    Egrave : '\u00c8',
+    Eacute : '\u00c9',
+    Ecircumflex : '\u00ca',
+    Edieresis : '\u00cb',
+    Igrave : '\u00cc',
+    Iacute : '\u00cd',
+    Icircumflex : '\u00ce',
+    Idieresis : '\u00cf',
+    Ntilde : '\u00d1',
+    Ograve : '\u00d2',
+    Oacute : '\u00d3',
+    Ocircumflex : '\u00d4',
+    Otilde : '\u00d5',
+    Odieresis : '\u00d6',
+    Ugrave : '\u00d9',
+    Uacute : '\u00da',
+    Ucircumflex : '\u00db',
+    Udieresis : '\u00dc',
+    Yacute : '\u00dd',
+    germandbls : '\u00df',
+    agrave : '\u00e0',
+    aacute : '\u00e1',
+    acircumflex : '\u00e2',
+    atilde : '\u00e3',
+    adieresis : '\u00e4',
+    aring : '\u00e5',
+    ae : '\u00e6',
+    ccedilla : '\u00e7',
+    egrave : '\u00e8',
+    eacute : '\u00e9',
+    ecircumflex : '\u00ea',
+    edieresis : '\u00eb',
+    igrave : '\u00ec',
+    iacute : '\u00ed',
+    icircumflex : '\u00ee',
+    idieresis : '\u00ef',
+    ntilde : '\u00f1',
+    ograve : '\u00f2',
+    oacute : '\u00f3',
+    ocircumflex : '\u00f4',
+    otilde : '\u00f5',
+    odieresis : '\u00f6',
+    ugrave : '\u00f9',
+    uacute : '\u00fa',
+    ucircumflex : '\u00fb',
+    udieresis : '\u00fc',
+    yacute : '\u00fd',
+    ydieresis : '\u00ff',
+    Amacron : '\u0100',
+    amacron : '\u0101',
+    Abreve : '\u0102',
+    abreve : '\u0103',
+    Emacron : '\u0112',
+    emacron : '\u0113',
+    Ebreve : '\u0114',
+    ebreve : '\u0115',
+    ecaron : '\u011b',
+    itilde : '\u0129',
+    Imacron : '\u012a',
+    imacron : '\u012b',
+    Ibreve : '\u012c',
+    ibreve : '\u012d',
+    dotlessi : '\u0131',
+    IJ : '\u0132',
+    ij : '\u0133',
+    Omacron : '\u014c',
+    omacron : '\u014d',
+    Obreve : '\u014e',
+    obreve : '\u014f',
+    oe : '\u0153',
+    Scaron : '\u0160',
+    scaron : '\u0161',
+    Utilde : '\u0168',
+    utilde : '\u0169',
+    Umacron : '\u016a',
+    umacron : '\u016b',
+    Ubreve : '\u016c',
+    ubreve : '\u016d',
+    Uring : '\u016e',
+    uring : '\u016f',
+    Ycircumflex : '\u0176',
+    ycircumflex : '\u0177',
+    Ydieresis : '\u0178',
+    Zcaron : '\u017d',
+    zcaron : '\u017e',
+    acaron : '\u01ce',
+    icaron : '\u01d0',
+    ocaron : '\u01d2',
+    ucaron : '\u01d4',
+    ymacron : '\u0233',
+    dotlessj : '\u0237',
+    gravecomb : '\u0300',
+    acutecomb : '\u0301',
+    uni0302 : '\u0302',
+    tildecomb : '\u0303',
+    uni0304 : '\u0304',
+    uni0306 : '\u0306',
+    uni0308 : '\u0308',
+    uni030A : '\u030a',
+    uni030C : '\u030c',
+    uni0327 : '\u0327',
+    etilde : '\u1ebd',
+    ygrave : '\u1ef3',
+    ytilde : '\u1ef9',
+    uni2010 : '\u2010',
+    uni2011 : '\u2011',
+    endash : '\u2013',
+    emdash : '\u2014',
+    quoteleft : '\u2018',
+    quoteright : '\u2019',
+    quotesinglbase : '\u201a',
+    quotedblleft : '\u201c',
+    quotedblright : '\u201d',
+    quotedblbase : '\u201e',
+    guilsinglleft : '\u2039',
+    guilsinglright : '\u203a',
     t1 : '\ue0e4',
-    t1dotless: '\ue0e5',
-    xdotless: '\ue0e6',
-    idotless: '\u0131', // ı ; standard unicode mapping, so can be valid user input
-    jdotless: '\u0237',  // ȷ ; standard unicode mapping, so can be valid user input
-    IJ: '\u0132',
-    ij: '\u0133',
+    t1dotless : '\ue0e5',
+    xdotless : '\ue0e6',
     A1 : '\ue0e7',
     M1 : '\ue0e8',
     N1 : '\ue0e9',
@@ -457,10 +656,11 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     d1 : '\ue0f0',
     p1 : '\ue0f1',
     y1 : '\ue0f2',
-    ij1: '\ue0f3',
+    ij1 : '\ue0f3',
     w1 : '\ue0f4',
+    y1macron : '\ue0f5',
     Y1 : '\ue0f6',
-    IJ1: '\ue0f7',
+    IJ1 : '\ue0f7',
     W1 : '\ue0f8',
     Z1 : '\ue0f9',
     f1 : '\ue0fa',
@@ -473,15 +673,183 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     q3 : '\ue101',
     q4 : '\ue102',
     s1 : '\ue103',
-    
+    r2 : '\ue104',
+    z2 : '\ue105',
+    z3 : '\ue106',
+    Z2 : '\ue107',
+    Z3 : '\ue108',
+    z2caron : '\ue109',
+    z3caron : '\ue10a',
+    Z2caron : '\ue10b',
+    Z3caron : '\ue10c',
+    s1caron : '\ue10d',
+    p2 : '\ue10e',
+    p3 : '\ue10f',
+    p4 : '\ue110',
+    p5 : '\ue111',
+    p6 : '\ue112',
+    p7 : '\ue113',
     C1 : '\ue114',
     C1cedilla : '\ue115',
     G1 : '\ue116',
-    L1 : '\ue117'
+    L1 : '\ue117',
+    y1grave : '\ue118',
+    y1acute : '\ue119',
+    y1circumflex : '\ue11a',
+    y1diaeresis : '\ue11b',
+    y1tilde : '\ue11c',
+    A2grave : '\ue167',
+    A2acute : '\ue168',
+    A2circumflex : '\ue169',
+    A2dieresis : '\ue16a',
+    A2tilde : '\ue16b',
+    A2macron : '\ue16c',
+    A2breve : '\ue16d',
+    A2ring : '\ue16e',
+    N2tilde : '\ue16f',
+    Y1acute : '\ue170',
+    Y1circumflex : '\ue171',
+    Y1dieresis : '\ue172',
+    Z1caron : '\ue173',
+    loo : '\ue174',
+    lee : '\ue175',
+    laa : '\ue176',
+    luu : '\ue177',
+    oomacron : '\ue178',
+    oobreve : '\ue179',
+    eemacron : '\ue17a',
+    eebreve : '\ue17b',
+    aamacron : '\ue17c',
+    aabreve : '\ue17d',
+    uumacron : '\ue17e',
+    uubreve : '\ue17f'
   }
   
-  var letterglyphs_lc = 'a-zà-åăāçè-ëĕēì-ïĭīıñò-öøŏōšŧù-üŭūẋýÿžœæß' + variants.t1 + variants.t1dotless + variants.xdotless + variants.jdotless + variants.r1 + variants.z1 + variants.z1caron + variants.d1 + variants.p1 + variants.ij + variants.y1 + variants.ij1 + variants.w1 + variants.f1 + variants.f2 + variants.f3 + variants.f4 + variants.f5 + variants.q1 + variants.q2 + variants.q3 + variants.q4 + variants.s1; // kleine letters + variants
-  var letterglyphs_uc_connected = 'AÀ-ÅĂĀBDCÇEÈ-ËĔĒFGHIÌ-ÏĪĪJKLMNÑOÒ-ÖØŎŌPQRSŠTUÙ-ÜŬŪVWXYÝŸZŒÆ' + variants.A1 + variants.M1 + variants.N1 + variants.A2 + variants.M2 + variants.N2 + variants.IJ + variants.Y1 + variants.IJ1 + variants.W1 + variants.Z1 + variants.C1 + variants.C1cedilla + variants.G1 + variants.L1;
+  var fix_whitespace_ligatures = {
+    csa_a : '\ue801',
+    csn_n : '\ue802',
+    csi_i : '\ue803',
+    csh_h : '\ue804',
+    cso_o : '\ue805',
+    cso_c : '\ue806',
+    cse_e : '\ue807',
+    csi_u : '\ue808',
+    csn_m : '\ue809',
+    csh_l : '\ue80a',
+    csn_v : '\ue80b',
+    csi_w : '\ue80c',
+    csh_b : '\ue80d',
+    csa_d : '\ue80e',
+    csj_j : '\ue80f',
+    csg_g : '\ue810',
+    csy_y : '\ue811',
+    csh_k : '\ue812',
+    csp_p : '\ue813',
+    css_s : '\ue814',
+    csa_q : '\ue815',
+    csf_f : '\ue816',
+    csn_x : '\ue817',
+    csz_z : '\ue818',
+    csn_r : '\ue819',
+    cst_t : '\ue81a',
+    cst1_t1 : '\ue81b',
+    csi_dotlessi : '\ue81c',
+    csj_dotlessj : '\ue81d',
+    csi_r1 : '\ue81e',
+    csz1_z1 : '\ue81f',
+    csz1_z1caron : '\ue820',
+    csy_ij : '\ue821',
+    csy1_y1 : '\ue822',
+    csy1_ij1 : '\ue823',
+    csn_w1 : '\ue824',
+    csf_f1 : '\ue825',
+    csf_f2 : '\ue826',
+    csf_f3 : '\ue827',
+    csf_f4 : '\ue828',
+    csf_f5 : '\ue829',
+    csa_q1 : '\ue82a',
+    csa_q2 : '\ue82b',
+    csa_q3 : '\ue82c',
+    css1_s1 : '\ue82d',
+    css1_s1caron : '\ue82e',
+    csgermandbls_germandbls : '\ue82f',
+    csa_agrave : '\ue830',
+    csa_aacute : '\ue831',
+    csa_acircumflex : '\ue832',
+    cse_egrave : '\ue833',
+    cse_eacute : '\ue834',
+    cse_ecircumflex : '\ue835',
+    csi_igrave : '\ue836',
+    csi_iacute : '\ue837',
+    csi_icircumflex : '\ue838',
+    cso_ograve : '\ue839',
+    cso_oacute : '\ue83a',
+    cso_ocircumflex : '\ue83b',
+    csi_ugrave : '\ue83c',
+    csi_uacute : '\ue83d',
+    csi_ucircumflex : '\ue83e',
+    css_scaron : '\ue83f',
+    csn_zcaron : '\ue840',
+    csa_acaron : '\ue841',
+    cse_ecaron : '\ue842',
+    csi_icaron : '\ue843',
+    cso_ocaron : '\ue844',
+    csi_ucaron : '\ue845',
+    csa_atilde : '\ue846',
+    csn_ntilde : '\ue847',
+    csy_ygrave : '\ue848',
+    csy_yacute : '\ue849',
+    csy_ycircumflex : '\ue84a',
+    csy_ytilde : '\ue84b',
+    cse_etilde : '\ue84c',
+    cso_otilde : '\ue84d',
+    csi_utilde : '\ue84e',
+    csy1_y1grave : '\ue84f',
+    csy1_y1acute : '\ue850',
+    csy1_y1circumflex : '\ue851',
+    csy1_y1diaeresis : '\ue852',
+    csy1_y1tilde : '\ue853',
+    csi_itilde : '\ue854',
+    csa_adieresis : '\ue855',
+    csa_aring : '\ue856',
+    csa_amacron : '\ue857',
+    csa_abreve : '\ue858',
+    cse_edieresis : '\ue859',
+    cse_emacron : '\ue85a',
+    cse_ebreve : '\ue85b',
+    csi_idieresis : '\ue85c',
+    csi_imacron : '\ue85d',
+    csi_ibreve : '\ue85e',
+    cso_odieresis : '\ue85f',
+    cso_omacron : '\ue860',
+    cso_obreve : '\ue861',
+    csi_udieresis : '\ue862',
+    csi_umacron : '\ue863',
+    csi_ubreve : '\ue864',
+    csi_uring : '\ue865',
+    csy_ydieresis : '\ue866',
+    csy_ymacron : '\ue867',
+    csy1_y1macron : '\ue868',
+    cso_ccedilla : '\ue869',
+    csa_ae : '\ue86a',
+    cso_oe : '\ue86b',
+    cse_eemacron : '\ue86c',
+    cse_eebreve : '\ue86d',
+    csa_aamacron : '\ue86e',
+    csa_aabreve : '\ue86f',
+    csi_uumacron : '\ue870',
+    csi_uubreve : '\ue871',
+    cso_oomacron : '\ue872',
+    cso_oobreve : '\ue873',
+    csa_q4 : '\ue874',
+    csa_d1 : '\ue875',
+    csp_p1 : '\ue876',
+
+    
+  }
+  
+  var letterglyphs_lc = 'a-zà-åăāçè-ëĕēì-ïĭīıñò-öøŏōšŧù-üŭūẋýÿžœæß' + letters.t1 + letters.t1dotless + letters.xdotless + letters.jdotless + letters.r1 + letters.z1 + letters.z1caron + letters.d1 + letters.p1 + letters.ij + letters.y1 + letters.ij1 + letters.w1 + letters.f1 + letters.f2 + letters.f3 + letters.f4 + letters.f5 + letters.q1 + letters.q2 + letters.q3 + letters.q4 + letters.s1; // kleine letters + letters
+  var letterglyphs_uc_connected = 'AÀ-ÅĂĀBDCÇEÈ-ËĔĒFGHIÌ-ÏĪĪJKLMNÑOÒ-ÖØŎŌPQRSŠTUÙ-ÜŬŪVWXYÝŸZŒÆ' + letters.A1 + letters.M1 + letters.N1 + letters.A2 + letters.M2 + letters.N2 + letters.IJ + letters.Y1 + letters.IJ1 + letters.W1 + letters.Z1 + letters.C1 + letters.C1cedilla + letters.G1 + letters.L1;
   var letterglyphs_uc_unconnected = ''; 
   var letterglyphs_uc = letterglyphs_uc_connected + letterglyphs_uc_unconnected;
   var letterglyphs = letterglyphs_lc + letterglyphs_uc;
@@ -549,7 +917,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     var result = input;
 
     result = hoofdletterIConversion(result);
-    result = variantsConversion1(result);
+    result = lettersConversion1(result);
     result = quotesConversion(result);
     
     result = entrystrokesConversion(result); // this substitution needs to know whether it's beginning of the string or not
@@ -560,9 +928,11 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     result = joinsConversion(result);
     result = joinsConversion(result);
     // result = beginnetjesConversion(result);
-    result = variantsConversion2(result);
+    result = lettersConversion2(result);
 
     result = dotlessConversion(result);
+    
+    result = fixwhitespaceligaturesConversion(result);
     
     // ONLY trim off the space we added at the start
     if (result.substring(0,1) == " ") result = result.substring(1);
@@ -577,70 +947,70 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     return input;
   }
 
-  function variantsConversion1(input) {
-    // In this function, convert all variants that require different connecting strokes than the standard version of the letter.
-    // The variants produced by this function need to be matched by the function inserting the connecting strokes
+  function lettersConversion1(input) {
+    // In this function, convert all letters that require different connecting strokes than the standard version of the letter.
+    // The letters produced by this function need to be matched by the function inserting the connecting strokes
     if (settings.t_variant >= 1) {
-      input = input.replace(/t/g, variants.t1);
+      input = input.replace(/t/g, letters.t1);
     }
 
     if (settings.ij_ligature == 1) {
-      input = input.replace(/ij/g, variants.ij);
-      input = input.replace(/IJ/g, variants.IJ);
+      input = input.replace(/ij/g, letters.ij);
+      input = input.replace(/IJ/g, letters.IJ);
     }
 
     // TODO: accented A???
     if (settings.uppercase_amn_variant == 1) {
-      input = input.replace(/A/g, variants.A1);
-      input = input.replace(/M/g, variants.M1);
-      input = input.replace(/N/g, variants.N1);
+      input = input.replace(/A/g, letters.A1);
+      input = input.replace(/M/g, letters.M1);
+      input = input.replace(/N/g, letters.N1);
     }
     if (settings.uppercase_amn_variant == 2) {
-      input = input.replace(/A/g, variants.A2);
-      input = input.replace(/M/g, variants.M2);
-      input = input.replace(/N/g, variants.N2);
+      input = input.replace(/A/g, letters.A2);
+      input = input.replace(/M/g, letters.M2);
+      input = input.replace(/N/g, letters.N2);
     }
 
     if (settings.rz_top_variant == 1) {
-      input = input.replace(/r/g, variants.r1);
-      input = input.replace(/z/g, variants.z1);
-      input = input.replace(/ž/g, variants.z1caron);
+      input = input.replace(/r/g, letters.r1);
+      input = input.replace(/z/g, letters.z1);
+      input = input.replace(/ž/g, letters.z1caron);
     }
 
     if (settings.s_variant == 1) { // todo: s1caron
-      input = input.replace(/s/g, variants.s1);
+      input = input.replace(/s/g, letters.s1);
     }
 
     if (settings.f_connection_variant == 1) {
       if (settings.f_continuity_variant == 1) {
-        input = input.replaceAll('f', variants.f4);
+        input = input.replaceAll('f', letters.f4);
       } else {
-        input = input.replaceAll('f', variants.f1);
+        input = input.replaceAll('f', letters.f1);
       }
     }
 
 
     if (settings.q_connection_variant == 1 && settings.q_continuity_variant == 0) {
       if (settings.dp_variant == 1) {
-        input = input.replaceAll('q', variants.q2);
+        input = input.replaceAll('q', letters.q2);
       } else {
-        input = input.replaceAll('q', variants.q1); // yes, this shorter stick is actually relevant for the connections
+        input = input.replaceAll('q', letters.q1); // yes, this shorter stick is actually relevant for the connections
       }
     }
 
     if (settings.y_variant == 1) {
-      input = input.replaceAll('y', variants.y1);
-      input = input.replaceAll(variants.ij, variants.ij1);
-    } // note that Y will be replaced in variantsConversion2
+      input = input.replaceAll('y', letters.y1);
+      input = input.replaceAll(letters.ij, letters.ij1);
+    } // note that Y will be replaced in lettersConversion2
     
     if (settings.w_variant == 1) {
-      input = input.replace(/w/g, variants.w1);
+      input = input.replace(/w/g, letters.w1);
     }
 
     return input;
   }
-  function variantsConversion2(input) {
-    // In this function, convert all variants that have no impact on the connecting strokes used.
+  function lettersConversion2(input) {
+    // In this function, convert all letters that have no impact on the connecting strokes used.
     // This function will be called with connecting strokes already in place.
     if (settings.existrokes == 1) {
       input = input.replaceAll(connectors.ces, connectors.cfs);
@@ -649,21 +1019,21 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
 
     if (settings.y_variant == 1) {
-      input = input.replaceAll('Y', variants.Y1);
-      input = input.replaceAll('IJ', variants.IJ1);
+      input = input.replaceAll('Y', letters.Y1);
+      input = input.replaceAll('IJ', letters.IJ1);
     }
     if (settings.w_variant == 1) {
-      input = input.replaceAll('W', variants.W1);
+      input = input.replaceAll('W', letters.W1);
     }
     if (settings.rz_top_variant == 1) {
-      input = input.replaceAll('Z', variants.Z1);
+      input = input.replaceAll('Z', letters.Z1);
     }
     if (settings.uppercase_cgl_variant == 1) {
-      input = input.replaceAll('C', variants.C1);
-      input = input.replaceAll('Ç', variants.C1cedilla);
-      input = input.replaceAll('G' + connectors.ceg, variants.G1 + connectors.ceG1);
-      input = input.replaceAll('G', variants.G1);
-      input = input.replaceAll('L', variants.L1);
+      input = input.replaceAll('C', letters.C1);
+      input = input.replaceAll('Ç', letters.C1cedilla);
+      input = input.replaceAll('G' + connectors.ceg, letters.G1 + connectors.ceG1);
+      input = input.replaceAll('G', letters.G1);
+      input = input.replaceAll('L', letters.L1);
       input = input.replaceAll(connectors.ceC, connectors.ceC1); // for kerning with the question mark
     }
 
@@ -710,14 +1080,14 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
 
     if (settings.f_continuity_variant == 1) {
-      input = input.replaceAll('f'+connectors.ccqj, variants.f2+connectors.ccqi);
-      input = input.replaceAll('f', variants.f2);
+      input = input.replaceAll('f'+connectors.ccqj, letters.f2+connectors.ccqi);
+      input = input.replaceAll('f', letters.f2);
       input = input.replaceAll(connectors.cef, connectors.cef2);
     }
 
 
     if (settings.q_continuity_variant == 1) {
-      input = input.replaceAll('q', variants.q3);
+      input = input.replaceAll('q', letters.q3);
       input = input.replaceAll(connectors.ceq, connectors.ceq3);
 
       input = input.replaceAll(connectors.ccqj, connectors.ccqi); // the special 'extra wide' connection is not needed if the q doesn't have a loop but just a stick
@@ -725,11 +1095,19 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
 
     if (settings.dp_variant == 1) {
-      input = input.replaceAll('d', variants.d1);
-      input = input.replaceAll('p', variants.p1);
-      input = input.replaceAll(variants.f4, variants.f5);
-      input = input.replaceAll(variants.f2, variants.f3);
-      input = input.replaceAll(variants.q3, variants.q4);
+      console.log('before dp: ' + input);
+      input = input.replace(new RegExp('[d]', 'gu'), letters.d1);
+      input = input.replace(new RegExp('[p]', 'gu'), letters.p1);
+      input = input.replace(new RegExp('['+letters.f4+']', 'gu'), letters.f5); // NB without a RegExp, it's not unicode-safe!!!
+      input = input.replace(new RegExp('['+letters.f2+']', 'gu'), letters.f3); // NB without a RegExp, it's not unicode-safe!!!
+      input = input.replace(new RegExp('['+letters.q3+']', 'gu'), letters.q4); // NB without a RegExp, it's not unicode-safe!!!
+      
+      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csa_d+']', 'gu'), fix_whitespace_ligatures.csa_d1);
+      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csp_p+']', 'gu'), fix_whitespace_ligatures.csp_p1);
+      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csf_f4+']', 'gu'), fix_whitespace_ligatures.csf_f5);
+      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csf_f2+']', 'gu'), fix_whitespace_ligatures.csf_f3);
+      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csa_q3+']', 'gu'), fix_whitespace_ligatures.csa_q4);
+      console.log('after dp: ' + input);
     }
     
 
@@ -738,244 +1116,244 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
 
   function joinsConversion(input) {
-    // This function needs to match the following variants:
-    // - variants that can be user input (with a standard unicode mapping < \ue8000
-    // - variants that require different connections than the standard letter, produced by variantsConversion1()
-    var zoekVervangParen = [
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccna],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([eè-ëĕē])", connectors.ccne],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccnh],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+variants.y1+variants.ij1+"])", connectors.ccni],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccnn],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([sš])", connectors.ccns],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])(["+variants.s1+"])", connectors.ccns1],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([cçoò-öøŏōœ])", connectors.ccno],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])(["+variants.t1+"])", connectors.ccnt1],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+variants.t1+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+variants.r1+"])([tŧ])", connectors.ccnt],
+    // This function needs to match the following letters:
+    // - letters that can be user input (with a standard unicode mapping < \ue8000
+    // - letters that require different connections than the standard letter, produced by lettersConversion1()
+    var replacementPairs = [
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccna],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([eè-ëĕē])", connectors.ccne],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccnh],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.y1+letters.ij1+"])", connectors.ccni],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccnn],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([sš])", connectors.ccns],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])(["+letters.s1+"])", connectors.ccns1],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([cçoò-öøŏōœ])", connectors.ccno],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])(["+letters.t1+"])", connectors.ccnt1],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([tŧ])", connectors.ccnt],
 
-      ["([sš"+variants.s1+"])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccsa],
-      ["([sš"+variants.s1+"])([eè-ëĕē])", connectors.ccse],
-      ["([sš"+variants.s1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccsh],
-      ["([sš"+variants.s1+"])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccsi],
-      ["([sš"+variants.s1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccsn],
-      ["([sš"+variants.s1+"])([sš])", connectors.ccss],
-      ["([sš"+variants.s1+"])(["+variants.s1+"])", connectors.ccss1],
-      ["([sš"+variants.s1+"])([cçoò-öøŏōœ])", connectors.ccso],
-      ["([sš"+variants.s1+"])(["+variants.t1+"])", connectors.ccst1],
-      ["([sš"+variants.s1+"])([tŧ])", connectors.ccst],
+      ["([sš"+letters.s1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccsa],
+      ["([sš"+letters.s1+"])([eè-ëĕē])", connectors.ccse],
+      ["([sš"+letters.s1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccsh],
+      ["([sš"+letters.s1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccsi],
+      ["([sš"+letters.s1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccsn],
+      ["([sš"+letters.s1+"])([sš])", connectors.ccss],
+      ["([sš"+letters.s1+"])(["+letters.s1+"])", connectors.ccss1],
+      ["([sš"+letters.s1+"])([cçoò-öøŏōœ])", connectors.ccso],
+      ["([sš"+letters.s1+"])(["+letters.t1+"])", connectors.ccst1],
+      ["([sš"+letters.s1+"])([tŧ])", connectors.ccst],
 
-      ["([pß])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccpa],
+      ["([pß])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccpa],
       ["([pß])([eè-ëĕē])", connectors.ccpe],
-      ["([pß])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccph],
-      ["([pß])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccpi],
-      ["([pß])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccpn],
+      ["([pß])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccph],
+      ["([pß])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccpi],
+      ["([pß])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccpn],
       ["([pß])([sš])", connectors.ccps],
-      ["([pß])(["+variants.s1+"])", connectors.ccps1],
+      ["([pß])(["+letters.s1+"])", connectors.ccps1],
       ["([pß])([cçoò-öøŏōœ])", connectors.ccpo],
-      ["([pß])(["+variants.t1+"])", connectors.ccpt1],
+      ["([pß])(["+letters.t1+"])", connectors.ccpt1],
       ["([pß])([tŧ])", connectors.ccpt],
       
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccqa],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([eè-ëĕē])", connectors.ccqe],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccqh],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([iì-ïĭīıpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccqi],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccqa],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([eè-ëĕē])", connectors.ccqe],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccqh],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccqi],
       ["([fq])([jȷ])", connectors.ccqj], // special connector for 'fj' and 'qj'
-      ["([zžQZ"+variants.z1+variants.z1caron+"])([jȷ])", connectors.ccqi], // but no need or 'zj'
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccqn],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([sš])", connectors.ccqs],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])(["+variants.s1+"])", connectors.ccqs1],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([cçoò-öøŏōœ])", connectors.ccqo],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])(["+variants.t1+"])", connectors.ccqt1],
-      ["([fqzžQZ"+variants.z1+variants.z1caron+"])([tŧ])", connectors.ccqt],
+      ["([zžQZ"+letters.z1+letters.z1caron+"])([jȷ])", connectors.ccqi], // but no need or 'zj'
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccqn],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([sš])", connectors.ccqs],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])(["+letters.s1+"])", connectors.ccqs1],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([cçoò-öøŏōœ])", connectors.ccqo],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])(["+letters.t1+"])", connectors.ccqt1],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([tŧ])", connectors.ccqt],
 
-      ["(["+variants.f1+"])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccf1a],
-      ["(["+variants.f1+"])([eè-ëĕē])", connectors.ccf1e],
-      ["(["+variants.f1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccf1h],
-      ["(["+variants.f1+"])([iì-ïĭīıpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccf1i],
-      ["(["+variants.f1+"])([jȷ])", connectors.ccf1j], // special connector for 'fj' and 'qj'
-      ["(["+variants.f1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccf1n],
-      ["(["+variants.f1+"])([sš])", connectors.ccf1s],
-      ["(["+variants.f1+"])(["+variants.s1+"])", connectors.ccf1s1],
-      ["(["+variants.f1+"])([cçoò-öøŏōœ])", connectors.ccf1o],
-      ["(["+variants.f1+"])(["+variants.t1+"])", connectors.ccf1t1],
-      ["(["+variants.f1+"])([tŧ])", connectors.ccf1t],
+      ["(["+letters.f1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccf1a],
+      ["(["+letters.f1+"])([eè-ëĕē])", connectors.ccf1e],
+      ["(["+letters.f1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccf1h],
+      ["(["+letters.f1+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccf1i],
+      ["(["+letters.f1+"])([jȷ])", connectors.ccf1j], // special connector for 'fj' and 'qj'
+      ["(["+letters.f1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccf1n],
+      ["(["+letters.f1+"])([sš])", connectors.ccf1s],
+      ["(["+letters.f1+"])(["+letters.s1+"])", connectors.ccf1s1],
+      ["(["+letters.f1+"])([cçoò-öøŏōœ])", connectors.ccf1o],
+      ["(["+letters.f1+"])(["+letters.t1+"])", connectors.ccf1t1],
+      ["(["+letters.f1+"])([tŧ])", connectors.ccf1t],
 
-      ["(["+variants.f4+"])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccf4a],
-      ["(["+variants.f4+"])([eè-ëĕē])", connectors.ccf4e],
-      ["(["+variants.f4+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccf4h],
-      ["(["+variants.f4+"])([iì-ïĭīıpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccf4i],
-      ["(["+variants.f4+"])([jȷ])", connectors.ccf4i], // not special, just use 'ccf4i'
-      ["(["+variants.f4+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccf4n],
-      ["(["+variants.f4+"])([sš])", connectors.ccf4s],
-      ["(["+variants.f4+"])(["+variants.s1+"])", connectors.ccf4s1],
-      ["(["+variants.f4+"])([cçoò-öøŏōœ])", connectors.ccf4o],
-      ["(["+variants.f4+"])(["+variants.t1+"])", connectors.ccf4t1],
-      ["(["+variants.f4+"])([tŧ])", connectors.ccf4t],
+      ["(["+letters.f4+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccf4a],
+      ["(["+letters.f4+"])([eè-ëĕē])", connectors.ccf4e],
+      ["(["+letters.f4+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccf4h],
+      ["(["+letters.f4+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccf4i],
+      ["(["+letters.f4+"])([jȷ])", connectors.ccf4i], // not special, just use 'ccf4i'
+      ["(["+letters.f4+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccf4n],
+      ["(["+letters.f4+"])([sš])", connectors.ccf4s],
+      ["(["+letters.f4+"])(["+letters.s1+"])", connectors.ccf4s1],
+      ["(["+letters.f4+"])([cçoò-öøŏōœ])", connectors.ccf4o],
+      ["(["+letters.f4+"])(["+letters.t1+"])", connectors.ccf4t1],
+      ["(["+letters.f4+"])([tŧ])", connectors.ccf4t],
 
-      ["(["+variants.q1+"])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccq1a],
-      ["(["+variants.q1+"])([eè-ëĕē])", connectors.ccq1e],
-      ["(["+variants.q1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccq1h],
-      ["(["+variants.q1+"])([iì-ïĭīıpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccq1i],
-      ["(["+variants.q1+"])([jȷ])", connectors.ccq1j], // special connector for 'fj' and 'qj'
-      ["(["+variants.q1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccq1n],
-      ["(["+variants.q1+"])([sš])", connectors.ccq1s],
-      ["(["+variants.q1+"])(["+variants.s1+"])", connectors.ccq1s1],
-      ["(["+variants.q1+"])([cçoò-öøŏōœ])", connectors.ccq1o],
-      ["(["+variants.q1+"])(["+variants.t1+"])", connectors.ccq1t1],
-      ["(["+variants.q1+"])([tŧ])", connectors.ccq1t],
+      ["(["+letters.q1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccq1a],
+      ["(["+letters.q1+"])([eè-ëĕē])", connectors.ccq1e],
+      ["(["+letters.q1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccq1h],
+      ["(["+letters.q1+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccq1i],
+      ["(["+letters.q1+"])([jȷ])", connectors.ccq1j], // special connector for 'fj' and 'qj'
+      ["(["+letters.q1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccq1n],
+      ["(["+letters.q1+"])([sš])", connectors.ccq1s],
+      ["(["+letters.q1+"])(["+letters.s1+"])", connectors.ccq1s1],
+      ["(["+letters.q1+"])([cçoò-öøŏōœ])", connectors.ccq1o],
+      ["(["+letters.q1+"])(["+letters.t1+"])", connectors.ccq1t1],
+      ["(["+letters.q1+"])([tŧ])", connectors.ccq1t],
 
-      ["(["+variants.q2+"])([aà-åăādgqæ"+variants.q2+variants.q2+"])", connectors.ccq2a],
-      ["(["+variants.q2+"])([eè-ëĕē])", connectors.ccq2e],
-      ["(["+variants.q2+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccq2h],
-      ["(["+variants.q2+"])([iì-ïĭīıpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccq2i],
-      ["(["+variants.q2+"])([jȷ])", connectors.ccq2i], // no special connector needed
-      ["(["+variants.q2+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccq2n],
-      ["(["+variants.q2+"])([sš])", connectors.ccq2s],
-      ["(["+variants.q2+"])(["+variants.s1+"])", connectors.ccq2s1],
-      ["(["+variants.q2+"])([cçoò-öøŏōœ])", connectors.ccq2o],
-      ["(["+variants.q2+"])(["+variants.t1+"])", connectors.ccq2t1],
-      ["(["+variants.q2+"])([tŧ])", connectors.ccq2t],
+      ["(["+letters.q2+"])([aà-åăādgqæ"+letters.q2+letters.q2+"])", connectors.ccq2a],
+      ["(["+letters.q2+"])([eè-ëĕē])", connectors.ccq2e],
+      ["(["+letters.q2+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccq2h],
+      ["(["+letters.q2+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccq2i],
+      ["(["+letters.q2+"])([jȷ])", connectors.ccq2i], // no special connector needed
+      ["(["+letters.q2+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccq2n],
+      ["(["+letters.q2+"])([sš])", connectors.ccq2s],
+      ["(["+letters.q2+"])(["+letters.s1+"])", connectors.ccq2s1],
+      ["(["+letters.q2+"])([cçoò-öøŏōœ])", connectors.ccq2o],
+      ["(["+letters.q2+"])(["+letters.t1+"])", connectors.ccq2t1],
+      ["(["+letters.q2+"])([tŧ])", connectors.ccq2t],
 
 
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccga],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([eè-ëĕē])", connectors.ccge],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccgh],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.IJ+variants.ij1+"])", connectors.ccgi],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccgn],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([sš])", connectors.ccgs],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])(["+variants.s1+"])", connectors.ccgs1],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([cçoò-öøŏōœ])", connectors.ccgo],
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])(["+variants.t1+"])", connectors.ccgt1], 
-      ["([gjȷyýÿGJYÝŸ"+variants.ij+variants.ij1+variants.y1+variants.IJ+"])([tŧ])", connectors.ccgt],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccga],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([eè-ëĕē])", connectors.ccge],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccgh],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.IJ+letters.ij1+"])", connectors.ccgi],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccgn],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([sš])", connectors.ccgs],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])(["+letters.s1+"])", connectors.ccgs1],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([cçoò-öøŏōœ])", connectors.ccgo],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])(["+letters.t1+"])", connectors.ccgt1], 
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([tŧ])", connectors.ccgt],
 
-      ["([bvw"+variants.w1+"])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccva],
-      ["([bvw"+variants.w1+"])([eè-ëĕē])", connectors.ccve],
-      ["([bvw"+variants.w1+"])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccvh],
-      ["([bvw"+variants.w1+"])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccvi],
-      ["([bvw"+variants.w1+"])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccvn],
-      ["([bvw"+variants.w1+"])([sš])", connectors.ccvs],
-      ["([bvw"+variants.w1+"])(["+variants.s1+"])", connectors.ccvs1],
-      ["([bvw"+variants.w1+"])([cçoò-öøŏōœ])", connectors.ccvo],
-      ["([bvw"+variants.w1+"])(["+variants.t1+"])", connectors.ccvt1], 
-      ["([bvw"+variants.w1+"])([tŧ])", connectors.ccvt],
+      ["([bvw"+letters.w1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccva],
+      ["([bvw"+letters.w1+"])([eè-ëĕē])", connectors.ccve],
+      ["([bvw"+letters.w1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccvh],
+      ["([bvw"+letters.w1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccvi],
+      ["([bvw"+letters.w1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccvn],
+      ["([bvw"+letters.w1+"])([sš])", connectors.ccvs],
+      ["([bvw"+letters.w1+"])(["+letters.s1+"])", connectors.ccvs1],
+      ["([bvw"+letters.w1+"])([cçoò-öøŏōœ])", connectors.ccvo],
+      ["([bvw"+letters.w1+"])(["+letters.t1+"])", connectors.ccvt1], 
+      ["([bvw"+letters.w1+"])([tŧ])", connectors.ccvt],
 
-      ["([oò-öøŏō])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccoa],
+      ["([oò-öøŏō])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccoa],
       ["([oò-öøŏō])([eè-ëĕē])", connectors.ccoe],
-      ["([oò-öøŏō])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccoh],
-      ["([oò-öøŏō])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccoi],
-      ["([oò-öøŏō])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccon],
+      ["([oò-öøŏō])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccoh],
+      ["([oò-öøŏō])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccoi],
+      ["([oò-öøŏō])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccon],
       ["([oò-öøŏō])([sš])", connectors.ccos],
-      ["([oò-öøŏō])(["+variants.s1+"])", connectors.ccos1],
+      ["([oò-öøŏō])(["+letters.s1+"])", connectors.ccos1],
       ["([oò-öøŏō])([cçoò-öøŏōœ])", connectors.ccoo],
-      ["([oò-öøŏō])(["+variants.t1+"])", connectors.ccot1], 
+      ["([oò-öøŏō])(["+letters.t1+"])", connectors.ccot1], 
       ["([oò-öøŏō])([tŧ])", connectors.ccot],
 
 
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccea],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccea],
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([eè-ëĕē])", connectors.ccee],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([bfhkl"+variants.f1+variants.f4+"])", connectors.cceh],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccei],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccen],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([bfhkl"+letters.f1+letters.f4+"])", connectors.cceh],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccei],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccen],
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([sš])", connectors.cces],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])(["+variants.s1+"])", connectors.cces1],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])(["+letters.s1+"])", connectors.cces1],
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([cçoò-öøŏōœ])", connectors.cceo],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])(["+variants.t1+"])", connectors.ccet1], 
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])(["+letters.t1+"])", connectors.ccet1], 
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([tŧ])", connectors.ccet],
 
-      ["([tŧ])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccta],
+      ["([tŧ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccta],
       ["([tŧ])([eè-ëĕē])", connectors.ccte],
-      ["([tŧ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccth],
-      ["([tŧ])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccti],
-      ["([tŧ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.cctn],
+      ["([tŧ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccth],
+      ["([tŧ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccti],
+      ["([tŧ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.cctn],
       ["([tŧ])([sš])", connectors.ccts],
-      ["([tŧ])(["+variants.s1+"])", connectors.ccts1],
+      ["([tŧ])(["+letters.s1+"])", connectors.ccts1],
       ["([tŧ])([cçoò-öøŏōœ])", connectors.ccto],
-      ["([tŧ])(["+variants.t1+"])", connectors.cctt1],
+      ["([tŧ])(["+letters.t1+"])", connectors.cctt1],
       ["([tŧ])([tŧ])", connectors.cctt],
 
-      ["([AÀ-ÅĂĀ])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccAa],
+      ["([AÀ-ÅĂĀ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccAa],
       ["([AÀ-ÅĂĀ])([eè-ëĕē])", connectors.ccAe],
-      ["([AÀ-ÅĂĀ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccAh],
-      ["([AÀ-ÅĂĀ])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccAi],
-      ["([AÀ-ÅĂĀ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccAn],
+      ["([AÀ-ÅĂĀ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccAh],
+      ["([AÀ-ÅĂĀ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccAi],
+      ["([AÀ-ÅĂĀ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccAn],
       ["([AÀ-ÅĂĀ])([sš])", connectors.ccAs],
-      ["([AÀ-ÅĂĀ])(["+variants.s1+"])", connectors.ccAs1],
+      ["([AÀ-ÅĂĀ])(["+letters.s1+"])", connectors.ccAs1],
       ["([AÀ-ÅĂĀ])([cçoò-öøŏōœ])", connectors.ccAo],
-      ["([AÀ-ÅĂĀ])(["+variants.t1+"])", connectors.ccAt1],
+      ["([AÀ-ÅĂĀ])(["+letters.t1+"])", connectors.ccAt1],
       ["([AÀ-ÅĂĀ])([tŧ])", connectors.ccAt],
 
-      ["([BSŠ])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccBa],
+      ["([BSŠ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccBa],
       ["([BSŠ])([eè-ëĕē])", connectors.ccBe],
-      ["([BSŠ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccBh],
-      ["([BSŠ])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccBi],
-      ["([BSŠ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccBn],
+      ["([BSŠ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccBh],
+      ["([BSŠ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccBi],
+      ["([BSŠ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccBn],
       ["([BSŠ])([sš])", connectors.ccBs],
-      ["([BSŠ])(["+variants.s1+"])", connectors.ccBs1],
+      ["([BSŠ])(["+letters.s1+"])", connectors.ccBs1],
       ["([BSŠ])([cçoò-öøŏōœ])", connectors.ccBo],
-      ["([BSŠ])(["+variants.t1+"])", connectors.ccBt1],
+      ["([BSŠ])(["+letters.t1+"])", connectors.ccBt1],
       ["([BSŠ])([tŧ])", connectors.ccBt],
 
-      ["([DOÒ-ÖØŎŌVW])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccOa],
+      ["([DOÒ-ÖØŎŌVW])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccOa],
       ["([DOÒ-ÖØŎŌVW])([eè-ëĕē])", connectors.ccOe],
-      ["([DOÒ-ÖØŎŌVW])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccOh],
-      ["([DOÒ-ÖØŎŌVW])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccOi],
-      ["([DOÒ-ÖØŎŌVW])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccOn],
+      ["([DOÒ-ÖØŎŌVW])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccOh],
+      ["([DOÒ-ÖØŎŌVW])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccOi],
+      ["([DOÒ-ÖØŎŌVW])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccOn],
       ["([DOÒ-ÖØŎŌVW])([sš])", connectors.ccOs],
-      ["([DOÒ-ÖØŎŌVW])(["+variants.s1+"])", connectors.ccOs1],
+      ["([DOÒ-ÖØŎŌVW])(["+letters.s1+"])", connectors.ccOs1],
       ["([DOÒ-ÖØŎŌVW])([cçoò-öøŏōœ])", connectors.ccOo],
-      ["([DOÒ-ÖØŎŌVW])(["+variants.t1+"])", connectors.ccOt1],
+      ["([DOÒ-ÖØŎŌVW])(["+letters.t1+"])", connectors.ccOt1],
       ["([DOÒ-ÖØŎŌVW])([tŧ])", connectors.ccOt],
 
-      ["([P])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccPa],
+      ["([P])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccPa],
       ["([P])([eè-ëĕē])", connectors.ccPe],
-      ["([P])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccPh],
-      ["([P])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccPi],
-      ["([P])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccPn],
+      ["([P])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccPh],
+      ["([P])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccPi],
+      ["([P])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccPn],
       ["([P])([sš])", connectors.ccPs],
-      ["([P])(["+variants.s1+"])", connectors.ccPs1],
+      ["([P])(["+letters.s1+"])", connectors.ccPs1],
       ["([P])([cçoò-öøŏōœ])", connectors.ccPo],
-      ["([P])(["+variants.t1+"])", connectors.ccPt1],
+      ["([P])(["+letters.t1+"])", connectors.ccPt1],
       ["([P])([tŧ])", connectors.ccPt],
 
-      ["([FT])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccFa],
+      ["([FT])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccFa],
       ["([FT])([eè-ëĕē])", connectors.ccFe],
-      ["([FT])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccFh],
-      ["([FT])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccFi],
-      ["([FT])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccFn],
+      ["([FT])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccFh],
+      ["([FT])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccFi],
+      ["([FT])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccFn],
       ["([FT])([sš])", connectors.ccFs],
-      ["([FT])(["+variants.s1+"])", connectors.ccFs1],
+      ["([FT])(["+letters.s1+"])", connectors.ccFs1],
       ["([FT])([cçoò-öøŏōœ])", connectors.ccFo],
-      ["([FT])(["+variants.t1+"])", connectors.ccFt1],
+      ["([FT])(["+letters.t1+"])", connectors.ccFt1],
       ["([FT])([tŧ])", connectors.ccFt],
 
-      ["([IÌ-ÏĪĪ])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccIa],
+      ["([IÌ-ÏĪĪ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccIa],
       ["([IÌ-ÏĪĪ])([eè-ëĕē])", connectors.ccIe],
-      ["([IÌ-ÏĪĪ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccIh],
-      ["([IÌ-ÏĪĪ])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccIi],
-      ["([IÌ-ÏĪĪ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccIn],
+      ["([IÌ-ÏĪĪ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccIh],
+      ["([IÌ-ÏĪĪ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccIi],
+      ["([IÌ-ÏĪĪ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccIn],
       ["([IÌ-ÏĪĪ])([sš])", connectors.ccIs],
-      ["([IÌ-ÏĪĪ])(["+variants.s1+"])", connectors.ccIs1],
+      ["([IÌ-ÏĪĪ])(["+letters.s1+"])", connectors.ccIs1],
       ["([IÌ-ÏĪĪ])([cçoò-öøŏōœ])", connectors.ccIo],
-      ["([IÌ-ÏĪĪ])(["+variants.t1+"])", connectors.ccIt1],
+      ["([IÌ-ÏĪĪ])(["+letters.t1+"])", connectors.ccIt1],
       ["([IÌ-ÏĪĪ])([tŧ])", connectors.ccIt],
 
-      ["([NÑ])([aà-åăādgqæ"+variants.q1+variants.q2+"])", connectors.ccNa],
+      ["([NÑ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccNa],
       ["([NÑ])([eè-ëĕē])", connectors.ccNe],
-      ["([NÑ])([bfhkl"+variants.f1+variants.f4+"])", connectors.ccNh],
-      ["([NÑ])([iì-ïĭīıjȷpuù-üŭūwß"+variants.r1+variants.z1+variants.z1caron+variants.y1+variants.ij1+"])", connectors.ccNi],
-      ["([NÑ])([mnñrvxẋyýÿzž"+variants.ij+variants.w1+"])", connectors.ccNn],
+      ["([NÑ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccNh],
+      ["([NÑ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccNi],
+      ["([NÑ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccNn],
       ["([NÑ])([sš])", connectors.ccNs],
-      ["([NÑ])(["+variants.s1+"])", connectors.ccNs1],
+      ["([NÑ])(["+letters.s1+"])", connectors.ccNs1],
       ["([NÑ])([cçoò-öøŏōœ])", connectors.ccNo],
-      ["([NÑ])(["+variants.t1+"])", connectors.ccNt1],
+      ["([NÑ])(["+letters.t1+"])", connectors.ccNt1],
       ["([NÑ])([tŧ])", connectors.ccNt]
 
       // 
     ];
 
-    for (i = 0; i < zoekVervangParen.length; i++) {
-      var zoek = new RegExp(zoekVervangParen[i][0], "gu");
-      var vervang = "$1" + zoekVervangParen[i][1] + "$2";
+    for (i = 0; i < replacementPairs.length; i++) {
+      var zoek = new RegExp(replacementPairs[i][0], "gu");
+      var vervang = "$1" + replacementPairs[i][1] + "$2";
       input = input.replace(zoek, vervang);
     }
     
@@ -992,30 +1370,31 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     var left  = "[^" + letterglyphs_lc + letterglyphs_uc_connected + connectorglyphs + "]|^"; // 'non-word' teken links van de letter waar we een aanhaal aan willen toevoegen
     
     // entrystrokes
-    var zoekVervangParen = [
-      ["("+left+")([aà-åăādqæ"+variants.q1+variants.q2+"])", connectors.cga, connectors.csa, connectors.csa],
+    var replacementPairs = [
+      ["("+left+")([aà-åăādqæ"+letters.q1+letters.q2+"])", connectors.cga, connectors.csa, connectors.csa],
       ["("+left+")([g])", connectors.cgg, connectors.csg, connectors.csg],
       ["("+left+")([eè-ëĕē])",connectors.cge, connectors.cse, connectors.cse],
       ["("+left+")([bhkl])", connectors.cgh, connectors.csh, connectors.csh],
-      ["("+left+")([f"+variants.f1+variants.f4+"])", connectors.cgf, connectors.csf, connectors.csf],
-      ["("+left+")([iì-ïĭīıuù-üŭūwß"+variants.r1+"])", connectors.cgi, connectors.csi, connectors.csi], 
-      ["("+left+")(["+variants.y1+variants.ij1+"])", connectors.cgy1, connectors.csy1, connectors.csy1], 
+      ["("+left+")([f"+letters.f1+letters.f4+"])", connectors.cgf, connectors.csf, connectors.csf],
+      ["("+left+")([iì-ïĭīıuù-üŭūw"+letters.r1+"])", connectors.cgi, connectors.csi, connectors.csi], 
+      ["("+left+")([ß])", connectors.cggermandbls, connectors.csgermandbls, connectors.csgermandbls], 
+      ["("+left+")(["+letters.y1+letters.ij1+"])", connectors.cgy1, connectors.csy1, connectors.csy1], 
       ["("+left+")([jȷ])", connectors.cgj, connectors.csj, connectors.csj], 
       ["("+left+")([p])", connectors.cgp, connectors.csp, connectors.csp], 
-      ["("+left+")([mnñrvxẋyýÿ"+variants.ij+variants.w1+"])", connectors.cgn, connectors.csn, connectors.csn],
-      ["("+left+")([yýÿ"+variants.ij+variants.w1+"])", connectors.cgy, connectors.csy, connectors.csy],
+      ["("+left+")([mnñrvxẋ"+letters.w1+"])", connectors.cgn, connectors.csn, connectors.csn],
+      ["("+left+")([yýÿ"+letters.ij+"])", connectors.cgy, connectors.csy, connectors.csy],
       ["("+left+")([zž])", connectors.cgz, connectors.csz, connectors.csz], // special case, parallel with internal stroke of 'z'
-      ["("+left+")(["+variants.z1+variants.z1caron+"])", connectors.cgz1, connectors.csz1, connectors.csz1], // special case, parallel with internal stroke of 'z'
+      ["("+left+")(["+letters.z1+letters.z1caron+"])", connectors.cgz1, connectors.csz1, connectors.csz1], // special case, parallel with internal stroke of 'z'
       ["("+left+")([sš])",connectors.cgs, connectors.css, connectors.css],
-      ["("+left+")(["+variants.s1+"])",connectors.cgs1, connectors.css1, connectors.css1],
+      ["("+left+")(["+letters.s1+"])",connectors.cgs1, connectors.css1, connectors.css1],
       ["("+left+")([cçoò-öøŏōœ])", connectors.cgo, connectors.cso, connectors.cso],
-      ["("+left+")(["+variants.t1+"])", connectors.cgt1, connectors.cst1, connectors.cst1],
+      ["("+left+")(["+letters.t1+"])", connectors.cgt1, connectors.cst1, connectors.cst1],
       ["("+left+")([tŧ])", connectors.cgt, connectors.cst, connectors.cst]
     ];
 
-    for (var i = 0; i < zoekVervangParen.length; i++) {
-      var zoek = new RegExp(zoekVervangParen[i][0], "gu");
-      var vervang = "$1" + zoekVervangParen[i][parseInt(settings.entrystrokes) + 1] + "$2";
+    for (var i = 0; i < replacementPairs.length; i++) {
+      var zoek = new RegExp(replacementPairs[i][0], "gu");
+      var vervang = "$1" + replacementPairs[i][parseInt(settings.entrystrokes) + 1] + "$2";
       input = input.replace(zoek, vervang);
     }
     
@@ -1033,26 +1412,26 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     var right = "[^" + letterglyphs_lc + connectorglyphs + "]"; // 'non-word' teken rechts van de letter waar we aan afhaal aan willen toevoegen. Let op dat we ook exitstrokes toevoegen binnen een reeks van hoofdletters 
     
     // exitstrokes
-    var zoekVervangParen = [
-      ["([à-åăāaımnñruù-üŭūxẋ"+variants.r1+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
+    var replacementPairs = [
+      ["([à-åăāaımnñruù-üŭūxẋ"+letters.r1+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
       ["([M])("+right+")", connectors.ceM],
       ["([lH])("+right+")", connectors.ceH],
       ["([hk])("+right+")", connectors.ceh],
-      ["([diì-ïĭīKRUÙ-ÜŬŪX"+variants.A1+variants.M1+variants.N1+variants.A2+variants.N2+variants.M2+"])("+right+")", connectors.ced],
-      ["(["+variants.t1+"])("+right+")", connectors.cet1],
-      ["([qzž"+variants.z1+variants.z1caron+"])("+right+")", connectors.ceq], // except f, Q, Z
+      ["([diì-ïĭīKRUÙ-ÜŬŪX"+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+"])("+right+")", connectors.ced],
+      ["(["+letters.t1+"])("+right+")", connectors.cet1],
+      ["([qzž"+letters.z1+letters.z1caron+"])("+right+")", connectors.ceq], // except f, Q, Z
       ["([f])("+right+")", connectors.cef],
-      ["(["+variants.f1+"])("+right+")", connectors.cef1],
-      ["(["+variants.f4+"])("+right+")", connectors.cef4],
-      ["(["+variants.q1+"])("+right+")", connectors.ceq1],
-      ["(["+variants.q2+"])("+right+")", connectors.ceq2],
+      ["(["+letters.f1+"])("+right+")", connectors.cef1],
+      ["(["+letters.f4+"])("+right+")", connectors.cef4],
+      ["(["+letters.q1+"])("+right+")", connectors.ceq1],
+      ["(["+letters.q2+"])("+right+")", connectors.ceq2],
       ["([QZ])("+right+")", connectors.ceQ],
       ["([p])("+right+")",  connectors.cep],
       ["([ß])("+right+")",  connectors.ceß],
-      ["([sš"+variants.s1+"])("+right+")",  connectors.ces],
-      ["([gȷyýÿG"+variants.y1+"])("+right+")", connectors.ceg], // anything without stuff above the midline
-      ["([jJYÝŸ"+variants.ij+variants.ij1+variants.IJ+"])("+right+")", connectors.cej], // anything with dots or stuff above the midline
-      ["([bvw"+variants.w1+"])("+right+")", connectors.cev],
+      ["([sš"+letters.s1+"])("+right+")",  connectors.ces],
+      ["([gȷyýÿG"+letters.y1+"])("+right+")", connectors.ceg], // anything without stuff above the midline
+      ["([jJYÝŸ"+letters.ij+letters.ij1+letters.IJ+"])("+right+")", connectors.cej], // anything with dots or stuff above the midline
+      ["([bvw"+letters.w1+"])("+right+")", connectors.cev],
       ["([oò-öøŏō])("+right+")", connectors.ceo],
       ["([ceè-ëĕēçœæ])("+right+")", connectors.cee], // except E, C, L
       ["([CÇL])("+right+")", connectors.ceC], // for kerning
@@ -1067,9 +1446,9 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([IÌ-ÏĪĪ])("+right+")", connectors.ceI],
       ["([NÑ])("+right+")", connectors.ceN]
     ];
-    for (var i = 0; i < zoekVervangParen.length; i++) {
-      var zoek = new RegExp(zoekVervangParen[i][0], "gu");
-      var vervang = "$1" + zoekVervangParen[i][1] + "$2";
+    for (var i = 0; i < replacementPairs.length; i++) {
+      var zoek = new RegExp(replacementPairs[i][0], "gu");
+      var vervang = "$1" + replacementPairs[i][1] + "$2";
       input = input.replace(zoek, vervang);
     }
     
@@ -1083,9 +1462,22 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replaceAll('j', 'ȷ');
     }
     if (settings.nodots >= 2) {
-      input = input.replaceAll(variants.t1, variants.t1dotless);
-      input = input.replaceAll('x', variants.xdotless);
+      input = input.replaceAll(letters.t1, letters.t1dotless);
+      input = input.replaceAll('x', letters.xdotless);
     }
+    return input;
+  }
+
+  function fixwhitespaceligaturesConversion(input) {
+    var glyph, parts, glyph1, glyph2;
+    for (const name in fix_whitespace_ligatures) {
+      glyph = fix_whitespace_ligatures[name];
+      parts = name.split('_');
+      if (parts[1]) {
+        input = input.replace(new RegExp(connectors[parts[0]] + letters[parts[1]], 'gu'), glyph);
+      }
+    }
+
     return input;
   }
 
@@ -1113,11 +1505,11 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replace(/(^|\s)"/g, '$1' + doubleopen);
       // ": before a space or at the end of the string, it's a closing quote
       input = input.replace(/"(\s|$)/g, doubleclose + '$1');
-      // ': if not after an s ("parents' wishes") and before a space or at the end of the string, it's a closing quote
+      // ': if not after an s ("Parents' wishes") and before a space or at the end of the string, it's a closing quote
       input = input.replace(/([^s])'(\s|$)/g, '$1' + singleclose + '$2');
       // ': after an s and before a space, but also after an opening quote on the same line, it's a closing quote
       // (please, for the love of god, use double quotes if you're going to have an apostrophe inside a quote, OK?!?)
-      var zoek = new RegExp(singleopen + '([^\n\r\'' + singleclose + ']+)' + "s'" + '(\\s|$)', 'g');
+      var zoek = new RegExp(singleopen + '([^\n\r\'' + singleclose + ']+)' + "s'" + '(\\s|$)', 'gu');
       input = input.replace(zoek, singleopen + '$1s' + singleclose + '$2');
       
    }
@@ -1132,10 +1524,10 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   // should be present anywhere in the word.
   function remove_dots(visible_input, invisible_input) {
     if (invisible_input) {
-      visible_input = visible_input.replaceAll('i', variants.idotless);
-      visible_input = visible_input.replaceAll('j', variants.jdotless);
-      visible_input = visible_input.replaceAll(variants.t1, variants.t1dotless);
-      visible_input = visible_input.replaceAll('x', variants.xdotless);
+      visible_input = visible_input.replaceAll('i', letters.idotless);
+      visible_input = visible_input.replaceAll('j', letters.jdotless);
+      visible_input = visible_input.replaceAll(letters.t1, letters.t1dotless);
+      visible_input = visible_input.replaceAll('x', letters.xdotless);
       
     }
     return visible_input;
@@ -1151,7 +1543,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     letterglyphs_uc: letterglyphs_uc,
     connectorglyphs: connectorglyphs,
     connectors: connectors,
-    variants: variants,
+    letters: letters,
     numberglyphs: numberglyphs,
     glyphs: glyphs,
     settings: settings,

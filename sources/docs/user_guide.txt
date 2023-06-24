@@ -32,6 +32,18 @@ COGNCUR USER GUIDE
 
 4. Sharing and contributing
 - Reporting application support and providing screenshots
+  - checklist OpenType support
+    - add purpose of testsheet
+    - add entry 'outside the em-square':
+      In cursive fonts, letters overlap horizontally. Letters from different lines touch each other vertically or sometimes even overlap. Technically, this means that parts of letters fall outside of the em-square. This can cause two different kinds of problem with some applications. 1. Part of letters may be 'cut off' and not shown or printed. 2. The application may base line distance not on the em-square but (incorrectly) on the size of the largest letters in the font.
+      Check that no parts of letters are cut off. Check the descender of the letter 'j', the top of uppercase letters like 'F', and accented uppercase letters like 'Ñ'. It's not enough to just 'look' on screen at the application, you should also use the application to create a PDF and then check the resulting PDF in Acrobat Reader.
+      If parts of letters are cut off on screen, this may be limited to a specific view (like print pre-view), so create a PDF to see if the problem persists. If parts of letters are cut off in PDFs, experiment with different methods of producing a PDF. For example, instead of the "Save to PDF" or "Export to PDF" function, use the print function and select as the printer "Microsoft Print to PDF", or install other PDF "printer devices" from Adobe Acrobat or Foxit.
+      Line distance: if the line distance is set to 1, ascenders and descenders should just about touch each other. If there is too much distance between lines: 1. check that the paragraph distance is set to 0 or let your lines 'wrap around' so they are part of the same paragraph. 2. try setting the line distance to an absolute point size instead of to a relative size.
+    - add entry 'accented characters'
+      Check that you can insert accented characters through the 'Insert Symbol' dialog. Check that accented characters automatically connect to other letters. The accente 'e' character may appear as a 'c' in the 'Insert Symbol' dialog. 
+      Note: the 'Insert Symbol' dialog also gives you access to the fonts 'Private use' characters which have various kinds of connections added to them. 
+    
+    
 - Creating / distributing your own font
   - naming guidelines
 - Help appreciated and offered
@@ -53,4 +65,20 @@ COGNCUR USER GUIDE
       - before and after the letter 'e'
       - after the letters 'o' and 'v'
     - provide the uppercase version of the same letter as well
+
+
+MODIFICATION DOCS
+Glyph guide: explain which glyphs connect to which glyphs
+Modification guide: how to change... (scenarios)
+- how to 'flatten' stylistic sets
+- how to change a glyph
+  - no changes to connections
+  - re-using different connections
+    - 'u' with a curved connection
+    - a new uppercase letter 'H' (trying out various connections)
+  - creating new connections
+- adding an accented character
+
+Worksheet guide: how to create worksheets
+Advanced guide: how to use overlay fonts
 
