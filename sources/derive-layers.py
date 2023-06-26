@@ -18,12 +18,6 @@ for glyph in font.selection.byGlyphs:
   layer.stroke('circular', 68);
   extra = glyph.layers['Extra'];
   glyph.layers['GOutline'] = layer + extra;
-  
-  # Create GFlat layer
-  flat = glyph.layers['GOutline'];
-  flat.removeOverlap();
-  # Todo: remove references. But how? 
-  glyph.layers['GFlat'] = flat;
 
   # Create GSlOutl layer
   layer = glyph.layers['Skeleton'];
@@ -48,6 +42,20 @@ for glyph in font.selection.byGlyphs:
   extra = glyph.layers['ExtraCall'];
   glyph.layers['GCall'] = layer + extra;
 
+  # Create GStartDot layer
+  layer = glyph.layers['StartDot'];
+  layer.stroke('circular', 102);
+  glyph.layers['GStartDot'] = layer;
 
+  # Create GSlOutl layer
+  layer = glyph.layers['StartDot'];
+  layer.transform(skew);
+  layer.stroke('circular', 102);
+  glyph.layers['GSlStartDot'] = layer;
 
+  # Create GRegOutl layer
+  layer = glyph.layers['StartDot'];
+  layer.transform(skew2);
+  layer.stroke('circular', 102);
+  glyph.layers['GRegStartDot'] = layer;
 

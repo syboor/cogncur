@@ -46,6 +46,8 @@ def add_subs(glyphname, connects_as, end_piece):
 #add_subs('s1', 's1', 'ces');
 #add_subs('germandbls', 'i', 'cegermandbls');
 #add_subs('t1', 't1', 'cet1');
+#add_subs('ae', 'a', 'cee');
+add_subs('oe', 'o', 'cee');
 
 #add_subs('acaron', 'a', 'cen');
 #add_subs('ecaron', 'e', 'cee');
@@ -53,9 +55,9 @@ def add_subs(glyphname, connects_as, end_piece):
 #add_subs('ocaron', 'o', 'ceo');
 #add_subs('ucaron', 'i', 'cen');
 #add_subs('scaron', 's', 'ces');
-#add_subs('zcaron', 'n', 'ceq');
+#add_subs('zcaron', 'z', 'ceq');
 #add_subs('s1caron', 's1', 'ces');
-#add_subs('z1caron', 'i', 'ceq');
+#add_subs('z1caron', 'z1', 'ceq');
 
 #add_subs('atilde', 'a', 'cen');
 #add_subs('ntilde', 'n', 'cen');
@@ -64,15 +66,15 @@ def add_subs(glyphname, connects_as, end_piece):
 #add_subs('utilde', 'i', 'cen');
 #add_subs('itilde', 'i', 'cen');
 
-#add_subs('ygrave', 'n', 'ceg');
-#add_subs('yacute', 'n', 'ceg');
-#add_subs('ycircumflex', 'n', 'ceg');
-#add_subs('ytilde', 'n', 'ceg');
+#add_subs('ygrave', 'y', 'ceg');
+#add_subs('yacute', 'y', 'ceg');
+#add_subs('ycircumflex', 'y', 'ceg');
+#add_subs('ytilde', 'y', 'ceg');
 
-#add_subs('y1grave', 'i', 'ceg');
-#add_subs('y1acute', 'i', 'ceg');
-#add_subs('y1circumflex', 'i', 'ceg');
-#add_subs('y1tilde', 'i', 'ceg');
+#add_subs('y1grave', 'y1', 'ceg');
+#add_subs('y1acute', 'y1', 'ceg');
+#add_subs('y1circumflex', 'y1', 'ceg');
+#add_subs('y1tilde', 'y1', 'ceg');
 
 add_subs('adieresis', 'a', 'cen');
 add_subs('aring', 'a', 'cen');

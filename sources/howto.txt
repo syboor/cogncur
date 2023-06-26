@@ -6,6 +6,6 @@ Instead:
 - switch to the Skeleton layer
 - Element > Build Glyph
 - Edit > Unlink references
-- do the same for the Extra and ExtraCall layers (Build Glyph, Unlink references)
+- do the same for these layers: Extra, ExtraCall, StartDot (so for each layer: Build Glyph, Unlink references)
 - run the 'derive-layers.py' script.
  

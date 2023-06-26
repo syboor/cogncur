@@ -55,7 +55,7 @@
   TODO: ??? create shorter versions of ? and !  Or maybe only do this when using capitals???
     
   TODO: (optional) no entry strokes for i/u/w (sharp letters)
-  TODO: uppercase U/W/Y with entry stroke??? But... isn't this confusing, given the wavy, horizontal entry stroke on J?
+  TODO: ??? uppercase U/W/Y with entry stroke??? But... isn't this confusing, given the wavy, horizontal entry stroke on J?
     
   TODO: kerning before word
   - for 'csa' letters: create real ligatures
@@ -71,7 +71,7 @@
   - ?? kerning combinations of interpunction (in a separate table)
   - kerning interpunction before uppercase also in separate table; maybe use automatic classes?
   
-  LATER: language specific ligatures and substitutions: Danish 'ae'
+  LATER: language specific ligatures and substitutions: Danish 'ae' and French 'oe'
   
   TODO: create starting points fonts
   
@@ -82,6 +82,11 @@
   TODO: revisit merging points of N2, M2 and U.
   
   TODO: Use symbols for lines??? (at least in the regular fonts...). Pick 3 symbols: fully lined, fully lined without bottom descender, baseline + midline, baseline only (standard | symbol). Broken pipe (|)???
+  
+  TODO: test line dimension (we know the proportions are OK, but does the lineheight match the names on the stylesheet?)
+  
+  TODO: test csa substitution (with required ligatures) in javascript
+  TODO: do oobreve etc conversion
   
   -->
   
@@ -493,73 +498,75 @@
   <h2><a name="letterswhitespace">Whitespace at end of word</a></h2>
   <table class="kerningpairs">
     <tr>
-      <td class="cursive rh12">a i<br/>a,<br/>a;<br/>a!<br/>a/<br/>a)<br/>a?<br/>a"<br/></td>
-      <td class="cursive rh12">n i<br/>n,<br/>n;<br/>n!<br/>n/<br/>n)<br/>n?<br/>n"<br/></td>
-      <td class="cursive rh12">M i<br/>M,<br/>M;<br/>M!<br/>M/<br/>M)<br/>M?<br/>M"<br/></td>
-      <td class="cursive rh12">l i<br/>l,<br/>l;<br/>l!<br/>l/<br/>l)<br/>l?<br/>l"<br/></td>
-      <td class="cursive rh12">H i<br/>H,<br/>H;<br/>H!<br/>H/<br/>H)<br/>H?<br/>H"<br/></td>
-      <td class="cursive rh12">h i<br/>h,<br/>h;<br/>h!<br/>h/<br/>h)<br/>h?<br/>h"<br/></td>
-      <td class="cursive rh12">d i<br/>d,<br/>d;<br/>d!<br/>d/<br/>h)<br/>d?<br/>d"<br/></td>
-      <td class="cursive rh12">i i<br/>i,<br/>i;<br/>i!<br/>i/<br/>i)<br/>i?<br/>i"<br/></td>
-      <td class="cursive rh12">U i<br/>U,<br/>U;<br/>U!<br/>U/<br/>U)<br/>U?<br/>U"<br/></td>
+      <td class="cursive rh12">a i<br/>a,<br/>a;<br/>a!<br/>a/<br/>a)<br/>a?<br/>a"<br/>a-</td>
+      <td class="cursive rh12">n i<br/>n,<br/>n;<br/>n!<br/>n/<br/>n)<br/>n?<br/>n"<br/>n-</td>
+      <td class="cursive rh12">M i<br/>M,<br/>M;<br/>M!<br/>M/<br/>M)<br/>M?<br/>M"<br/>M-</td>
+      <td class="cursive rh12">l i<br/>l,<br/>l;<br/>l!<br/>l/<br/>l)<br/>l?<br/>l"<br/>l-</td>
+      <td class="cursive rh12">H i<br/>H,<br/>H;<br/>H!<br/>H/<br/>H)<br/>H?<br/>H"<br/>H-</td>
+      <td class="cursive rh12">h i<br/>h,<br/>h;<br/>h!<br/>h/<br/>h)<br/>h?<br/>h"<br/>h-</td>
+      <td class="cursive rh12">d i<br/>d,<br/>d;<br/>d!<br/>d/<br/>h)<br/>d?<br/>d"<br/>d-</td>
+      <td class="cursive rh12">i i<br/>i,<br/>i;<br/>i!<br/>i/<br/>i)<br/>i?<br/>i"<br/>i-</td>
+      <td class="cursive rh12">U i<br/>U,<br/>U;<br/>U!<br/>U/<br/>U)<br/>U?<br/>U"<br/>U-</td>
     </tr>
     <tr>
-      <td class="cursive rh12">q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/></td>
-      <td class="cursive rh12">z i<br/>z,<br/>z;<br/>z!<br/>z/<br/>z)<br/>z?<br/>z"<br/></td>
-      <td class="cursive rh12">f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/></td>
-      <td class="cursive rh12" data-cogncur-f-continuity-variant=1>f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/></td>
-      <td class="cursive rh12" data-cogncur-f-continuity-variant=1 data-cogncur-f-connection-variant=1>f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/></td>
-      <td class="cursive rh12" data-cogncur-q-connection-variant=1 data-cogncur-dp-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/></td>
-      <td class="cursive rh12" data-cogncur-q-continuity-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/></td>
-      <td class="cursive rh12">Z i<br/>Z,<br/>Z;<br/>Z!<br/>Z/<br/>Z)<br/>Z?<br/>Z"<br/></td>
+      <td class="cursive rh12">q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/>g-</td>
+      <td class="cursive rh12">z i<br/>z,<br/>z;<br/>z!<br/>z/<br/>z)<br/>z?<br/>z"<br/>z-</td>
+      <td class="cursive rh12">f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/>f-</td>
+      <td class="cursive rh12" data-cogncur-f-continuity-variant=1>f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/>f-</td>
+      <td class="cursive rh12" data-cogncur-f-continuity-variant=1 data-cogncur-f-connection-variant=1>f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/>f-</td>
+      <td class="cursive rh12" data-cogncur-q-connection-variant=1 data-cogncur-dp-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/>f-</td>
+      <td class="cursive rh12" data-cogncur-q-continuity-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/>f-</td>
+      <td class="cursive rh12">Z i<br/>Z,<br/>Z;<br/>Z!<br/>Z/<br/>Z)<br/>Z?<br/>Z"<br/>Z-</td>
     </tr>
     <tr>
-      <td class="cursive rh12">p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/></td>
-      <td class="cursive rh12">s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
-      <td class="cursive rh12" data-cogncur-s-variant=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
-      <td class="cursive rh12">ß i<br/>ß,<br/>ß;<br/>ß!<br/>ß/<br/>ß)<br/>ß?<br/>ß"<br/></td>
-      <td class="cursive rh12" data-cogncur-existrokes=1>p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/></td>
-      <td class="cursive rh12" data-cogncur-existrokes=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/></td>
+      <td class="cursive rh12">p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/>p-</td>
+      <td class="cursive rh12">s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/>s-</td>
+      <td class="cursive rh12" data-cogncur-s-variant=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/>s-</td>
+      <td class="cursive rh12">ß i<br/>ß,<br/>ß;<br/>ß!<br/>ß/<br/>ß)<br/>ß?<br/>ß"<br/>ß-</td>
+      <td class="cursive rh12" data-cogncur-existrokes=1>p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/>p-</td>
+      <td class="cursive rh12" data-cogncur-existrokes=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/>s-</td>
     </tr>
     <tr>
-      <td class="cursive rh12">g i<br/>g,<br/>g;<br/>g!<br/>g/<br/>g)<br/>g?<br/>g"<br/></td>
-      <td class="cursive rh12">G i<br/>G,<br/>G;<br/>G!<br/>G/<br/>G)<br/>G?<br/>G"<br/></td>
-      <td class="cursive rh12" data-cogncur-uppercase-cgl-variant=1>G i<br/>G,<br/>G;<br/>G!<br/>G/<br/>G)<br/>G?<br/>G"<br/></td>
-      <td class="cursive rh12">j i<br/>j,<br/>j;<br/>j!<br/>j/<br/>j)<br/>j?<br/>j"<br/></td>
-      <td class="cursive rh12">J i<br/>J,<br/>J;<br/>J!<br/>J/<br/>J)<br/>J?<br/>J"<br/></td>
-      <td class="cursive rh12" data-cogncur-ij-ligature=1>ij i<br/>ij,<br/>ij;<br/>ij!<br/>ij/<br/>ij)<br/>ij?<br/>ij"<br/></td>
+      <td class="cursive rh12">g i<br/>g,<br/>g;<br/>g!<br/>g/<br/>g)<br/>g?<br/>g"<br/>g-</td>
+      <td class="cursive rh12">G i<br/>G,<br/>G;<br/>G!<br/>G/<br/>G)<br/>G?<br/>G"<br/>G-</td>
+      <td class="cursive rh12" data-cogncur-uppercase-cgl-variant=1>G i<br/>G,<br/>G;<br/>G!<br/>G/<br/>G)<br/>G?<br/>G"<br/>G!</td>
+      <td class="cursive rh12">j i<br/>j,<br/>j;<br/>j!<br/>j/<br/>j)<br/>j?<br/>j"<br/>j-</td>
+      <td class="cursive rh12">J i<br/>J,<br/>J;<br/>J!<br/>J/<br/>J)<br/>J?<br/>J"<br/>J-</td>
+      <td class="cursive rh12" data-cogncur-ij-ligature=1>ij i<br/>ij,<br/>ij;<br/>ij!<br/>ij/<br/>ij)<br/>ij?<br/>ij"<br/>ij-</td>
     </tr>
     <tr>
-      <td class="cursive rh12">b i<br/>b,<br/>b;<br/>b!<br/>b/<br/>b)<br/>b?<br/>b"<br/></td>
-      <td class="cursive rh12">v i<br/>v,<br/>v;<br/>v!<br/>v/<br/>v)<br/>v?<br/>v"<br/></td>
-      <td class="cursive rh12">o i<br/>o,<br/>o;<br/>o!<br/>o/<br/>o)<br/>o?<br/>o"<br/></td>
+      <td class="cursive rh12">b i<br/>b,<br/>b;<br/>b!<br/>b/<br/>b)<br/>b?<br/>b"<br/>b-</td>
+      <td class="cursive rh12">v i<br/>v,<br/>v;<br/>v!<br/>v/<br/>v)<br/>v?<br/>v"<br/>v-</td>
+      <td class="cursive rh12">o i<br/>o,<br/>o;<br/>o!<br/>o/<br/>o)<br/>o?<br/>o"<br/>o-</td>
+      <td class="cursive rh12">t i<br/>t,<br/>t;<br/>t!<br/>t/<br/>t)<br/>t?<br/>t"<br/>t-</td>
+      <td class="cursive rh12" data-cogncur-t-variant=1>t i<br/>t,<br/>t;<br/>t!<br/>t/<br/>t)<br/>t?<br/>t"<br/>t-</td>
      </tr>
     <tr>
-      <td class="cursive rh12">c i<br/>c,<br/>c;<br/>c!<br/>c/<br/>c)<br/>c?<br/>c"<br/></td>
-      <td class="cursive rh12">e i<br/>e,<br/>e;<br/>e!<br/>e/<br/>e)<br/>e?<br/>e"<br/></td>
-      <td class="cursive rh12">C i<br/>C,<br/>C;<br/>C!<br/>C/<br/>C)<br/>C?<br/>C"<br/></td>
-      <td class="cursive rh12" data-cogncur-uppercase-cgl-variant=1>C i<br/>C,<br/>C;<br/>C!<br/>C/<br/>C)<br/>C?<br/>C"<br/></td>
-      <td class="cursive rh12">E i<br/>E,<br/>E;<br/>E!<br/>E/<br/>E)<br/>E?<br/>E"<br/></td>
-      <td class="cursive rh12">L i<br/>L,<br/>L;<br/>L!<br/>L/<br/>L)<br/>L?<br/>L"<br/></td>
+      <td class="cursive rh12">c i<br/>c,<br/>c;<br/>c!<br/>c/<br/>c)<br/>c?<br/>c"<br/>c-</td>
+      <td class="cursive rh12">e i<br/>e,<br/>e;<br/>e!<br/>e/<br/>e)<br/>e?<br/>e"<br/>e-</td>
+      <td class="cursive rh12">C i<br/>C,<br/>C;<br/>C!<br/>C/<br/>C)<br/>C?<br/>C"<br/>C-</td>
+      <td class="cursive rh12" data-cogncur-uppercase-cgl-variant=1>C i<br/>C,<br/>C;<br/>C!<br/>C/<br/>C)<br/>C?<br/>C"<br/>C-</td>
+      <td class="cursive rh12">E i<br/>E,<br/>E;<br/>E!<br/>E/<br/>E)<br/>E?<br/>E"<br/>E-</td>
+      <td class="cursive rh12">L i<br/>L,<br/>L;<br/>L!<br/>L/<br/>L)<br/>L?<br/>L"<br/>L-</td>
      </tr>
     <tr>
-      <td class="cursive rh12">t i<br/>t,<br/>t;<br/>t!<br/>t/<br/>t)<br/>t?<br/>t"<br/></td>
-      <td class="cursive rh12" data-cogncur-t-variant=1>t i<br/>t,<br/>t;<br/>t!<br/>t/<br/>t)<br/>t?<br/>t"<br/></td>
-      <td class="cursive rh12">A i<br/>A,<br/>A;<br/>A!<br/>A/<br/>A)<br/>A?<br/>A"<br/></td>
-      <td class="cursive rh12">B i<br/>B,<br/>B;<br/>B!<br/>B/<br/>B)<br/>B?<br/>B"<br/></td>
-      <td class="cursive rh12">S i<br/>S,<br/>S;<br/>S!<br/>S/<br/>S)<br/>S?<br/>S"<br/></td>
+      <td class="cursive rh12">t i<br/>t,<br/>t;<br/>t!<br/>t/<br/>t)<br/>t?<br/>t"<br/>t-</td>
+      <td class="cursive rh12" data-cogncur-t-variant=1>t i<br/>t,<br/>t;<br/>t!<br/>t/<br/>t)<br/>t?<br/>t"<br/>t-</td>
+      <td class="cursive rh12">A i<br/>A,<br/>A;<br/>A!<br/>A/<br/>A)<br/>A?<br/>A"<br/>A-</td>
+      <td class="cursive rh12">B i<br/>B,<br/>B;<br/>B!<br/>B/<br/>B)<br/>B?<br/>B"<br/>B-</td>
+      <td class="cursive rh12">S i<br/>S,<br/>S;<br/>S!<br/>S/<br/>S)<br/>S?<br/>S"<br/>S-</td>
     </tr>
     <tr>
-      <td class="cursive rh12">D i<br/>D,<br/>D;<br/>D!<br/>D/<br/>D)<br/>D?<br/>D"<br/></td>
-      <td class="cursive rh12">O i<br/>O,<br/>O;<br/>O!<br/>O/<br/>O)<br/>O?<br/>O"<br/></td>
-      <td class="cursive rh12">V i<br/>V,<br/>V;<br/>V!<br/>V/<br/>V)<br/>V?<br/>V"<br/></td>
-      <td class="cursive rh12">P i<br/>P,<br/>P;<br/>P!<br/>P/<br/>P)<br/>P?<br/>P"<br/></td>
-      <td class="cursive rh12">F i<br/>F,<br/>F;<br/>F!<br/>F/<br/>F)<br/>F?<br/>F"<br/></td>
+      <td class="cursive rh12">D i<br/>D,<br/>D;<br/>D!<br/>D/<br/>D)<br/>D?<br/>D"<br/>D-</td>
+      <td class="cursive rh12">O i<br/>O,<br/>O;<br/>O!<br/>O/<br/>O)<br/>O?<br/>O"<br/>O-</td>
+      <td class="cursive rh12">V i<br/>V,<br/>V;<br/>V!<br/>V/<br/>V)<br/>V?<br/>V"<br/>V-</td>
+      <td class="cursive rh12">P i<br/>P,<br/>P;<br/>P!<br/>P/<br/>P)<br/>P?<br/>P"<br/>P-</td>
+      <td class="cursive rh12">F i<br/>F,<br/>F;<br/>F!<br/>F/<br/>F)<br/>F?<br/>F"<br/>F-</td>
     </tr>
     <tr>
-      <td class="cursive rh12">I i<br/>I,<br/>I;<br/>I!<br/>I/<br/>I)<br/>I?<br/>I"<br/></td>
-      <td class="cursive rh12">N i<br/>N,<br/>N;<br/>N!<br/>N/<br/>N)<br/>N?<br/>N"<br/></td>
-      <td class="cursive rh12" data-cogncur-uppercase-amn-variant=1>N i<br/>N,<br/>N;<br/>N!<br/>N/<br/>N)<br/>N?<br/>N"<br/></td>
+      <td class="cursive rh12">I i<br/>I,<br/>I;<br/>I!<br/>I/<br/>I)<br/>I?<br/>I"<br/>I-</td>
+      <td class="cursive rh12">N i<br/>N,<br/>N;<br/>N!<br/>N/<br/>N)<br/>N?<br/>N"<br/>N-</td>
+      <td class="cursive rh12" data-cogncur-uppercase-amn-variant=1>N i<br/>N,<br/>N;<br/>N!<br/>N/<br/>N)<br/>N?<br/>N"<br/>N-</td>
     </tr>
   </table>
 
@@ -574,28 +581,118 @@
   </div>
 
   <h2><a name="letterswhitespace">Whitespace at start of word</a></h2>
-  <div class="cursive rh12">
-    i ii oi ni si ji qi ei<br/>
-    i pi li hi vi zi ti bi<br/>
-    i ci xi fi Ai Bi Ci Di<br/>
-    i Ei Fi Gi Hi Ji Ki Mi<br/>
-    i Ni Oi Pi<br/>
-    i. ii. oi. ni. si. ji. qi. ei.<br/>
-    i. pi. li. hi. vi. zi. ti. bi.<br/>
-    i. ci. xi. fi. Ai. Bi. Ci. Di.<br/>
-    i. Ei. Fi. Gi. Hi. Ji. Ki. Mi.<br/>
-    i. Ni. Oi. Pi.<br/>
-    ‘i’ ‘ii’ ‘oi’ ‘ni’ ‘si’ ‘ji’ ‘qi’ ‘ei’<br/>
-    ‘i’ ‘pi’ ‘li’ ‘hi’ ‘vi’ ‘zi’ ‘ti’ ‘bi’<br/>
-    ‘i’ ‘ci’ ‘xi’ ‘fi’ ‘Ai’ ‘Bi’ ‘Ci’ ‘Di’<br/>
-    ‘i’ ‘Ei’ ‘Fi’ ‘Gi’ ‘Hi’ ‘Ji’ ‘Ki’ ‘Mi’<br/>
-    ‘i’ ‘Ni’ ‘Oi’ ‘Pi’ ‘!’ ‘?’<br/>
-  </div>   
-  <div class="cursive rh12"  data-cogncur-uppercase-amn-variant=1>
-    ‘i’ ‘Ai’ ‘Mi’ ‘Ni’<br/>
-  </div>
-  
-  <h2><a name="letterswhitespace">Whitespace - both sides</a></h2>
+  <table class="kerningpairs">
+    <tr>
+      <td class="cursive rh12">i a<br/>(a<br/>/a<br/>¡a<br/>¿a<br/>“a<br/>-a<br/></td>
+      <td class="cursive rh12">i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
+      <td class="cursive rh12" data-cogncur-dp-variant=1>i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
+      <td class="cursive rh12">i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
+      <td class="cursive rh12" data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
+      <td class="cursive rh12">i g<br/>(g<br/>/g<br/>¡g<br/>¿g<br/>“g<br/>-g<br/></td>
+      <td class="cursive rh12">i e<br/>(e<br/>/e<br/>¡e<br/>¿e<br/>“e<br/>-e<br/></td>
+      <td class="cursive rh12">i b<br/>(b<br/>/b<br/>¡b<br/>¿b<br/>“b<br/>-b<br/></td>
+      <td class="cursive rh12">i f<br/>(f<br/>/f<br/>¡f<br/>¿f<br/>“f<br/>-f<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">i i<br/>(i<br/>/i<br/>¡i<br/>¿i<br/>“i<br/>-i<br/></td>
+      <td class="cursive rh12" data-cogncur-y-variant=1>i y<br/>(y<br/>/y<br/>¡y<br/>¿y<br/>“y<br/>-y<br/></td>
+      <td class="cursive rh12">i j<br/>(j<br/>/j<br/>¡j<br/>¿j<br/>“j<br/>-j<br/></td>
+      <td class="cursive rh12">i p<br/>(p<br/>/p<br/>¡p<br/>¿p<br/>“p<br/>-p<br/></td>
+      <td class="cursive rh12" data-cogncur-y-variant=0>i y<br/>(y<br/>/y<br/>¡y<br/>¿y<br/>“y<br/>-y<br/></td>
+      <td class="cursive rh12">i n<br/>(n<br/>/n<br/>¡n<br/>¿n<br/>“n<br/>-n<br/></td>
+      <td class="cursive rh12">i ß<br/>(ß<br/>/ß<br/>¡ß<br/>¿ß<br/>“ß<br/>-ß<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">i z<br/>(z<br/>/z<br/>¡z<br/>¿z<br/>“z<br/>-z<br/></td>
+      <td class="cursive rh12" data-cogncur-rz-top-variant=1>i z<br/>(z<br/>/z<br/>¡z<br/>¿z<br/>“z<br/>-z<br/></td>
+      <td class="cursive rh12">i s<br/>(s<br/>/s<br/>¡s<br/>¿s<br/>“s<br/>-s<br/></td>
+      <td class="cursive rh12" data-cogncur-s-variant=1>i s<br/>(s<br/>/s<br/>¡s<br/>¿s<br/>“s<br/>-s<br/></td>
+      <td class="cursive rh12">i o<br/>(o<br/>/o<br/>¡o<br/>¿o<br/>“o<br/>-o<br/></td>
+      <td class="cursive rh12">i t<br/>(t<br/>/t<br/>¡t<br/>¿t<br/>“t<br/>-t<br/></td>
+      <td class="cursive rh12" data-cogncur-t-variant=1>i t<br/>(t<br/>/t<br/>¡t<br/>¿t<br/>“t<br/>-t<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">i A<br/>(A<br/>/A<br/>¡A<br/>¿A<br/>“A<br/>-A<br/></td>
+      <td class="cursive rh12">i Á<br/>(Á<br/>/Á<br/>¡Á<br/>¿Á<br/>“Á<br/>-Á<br/></td>
+      <td class="cursive rh12">i N<br/>(N<br/>/N<br/>¡N<br/>¿N<br/>“N<br/>-N<br/></td>
+      <td class="cursive rh12">i M<br/>(M<br/>/M<br/>¡M<br/>¿M<br/>“M<br/>-M<br/></td>
+      <td class="cursive rh12">i C<br/>(C<br/>/C<br/>¡C<br/>¿C<br/>“C<br/>-C<br/></td>
+      <td class="cursive rh12">i G<br/>(G<br/>/G<br/>¡G<br/>¿G<br/>“G<br/>-G<br/></td>
+      <td class="cursive rh12">i L<br/>(L<br/>/L<br/>¡L<br/>¿L<br/>“L<br/>-L<br/></td>
+    </tr>
+    <tr data-cogncur-uppercase-amn-variant=2 data-cogncur-uppercase-cgl-variant=1>
+      <td class="cursive rh12">i A<br/>(A<br/>/A<br/>¡A<br/>¿A<br/>“A<br/>-A<br/></td>
+      <td class="cursive rh12">i Á<br/>(Á<br/>/Á<br/>¡Á<br/>¿Á<br/>“Á<br/>-Á<br/></td>
+      <td class="cursive rh12">i N<br/>(N<br/>/N<br/>¡N<br/>¿N<br/>“N<br/>-N<br/></td>
+      <td class="cursive rh12">i M<br/>(M<br/>/M<br/>¡M<br/>¿M<br/>“M<br/>-M<br/></td>
+      <td class="cursive rh12">i C<br/>(C<br/>/C<br/>¡C<br/>¿C<br/>“C<br/>-C<br/></td>
+      <td class="cursive rh12">i G<br/>(G<br/>/G<br/>¡G<br/>¿G<br/>“G<br/>-G<br/></td>
+      <td class="cursive rh12">i L<br/>(L<br/>/L<br/>¡L<br/>¿L<br/>“L<br/>-L<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">i B<br/>(B<br/>/B<br/>¡B<br/>¿B<br/>“B<br/>-B<br/></td>
+      <td class="cursive rh12">i D<br/>(D<br/>/D<br/>¡D<br/>¿D<br/>“D<br/>-D<br/></td>
+      <td class="cursive rh12">i E<br/>(E<br/>/E<br/>¡E<br/>¿E<br/>“E<br/>-E<br/></td>
+      <td class="cursive rh12">i F<br/>(F<br/>/F<br/>¡F<br/>¿F<br/>“F<br/>-F<br/></td>
+      <td class="cursive rh12">i H<br/>(H<br/>/H<br/>¡H<br/>¿H<br/>“H<br/>-H<br/></td>
+      <td class="cursive rh12">i I<br/>(I<br/>/I<br/>¡I<br/>¿I<br/>“I<br/>-I<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">i J<br/>(J<br/>/J<br/>¡J<br/>¿J<br/>“J<br/>-J<br/></td>
+      <td class="cursive rh12">i K<br/>(K<br/>/K<br/>¡K<br/>¿K<br/>“K<br/>-K<br/></td>
+      <td class="cursive rh12">i O<br/>(O<br/>/O<br/>¡O<br/>¿O<br/>“O<br/>-O<br/></td>
+      <td class="cursive rh12">i P<br/>(P<br/>/P<br/>¡P<br/>¿P<br/>“P<br/>-P<br/></td>
+      <td class="cursive rh12">i Q<br/>(Q<br/>/Q<br/>¡Q<br/>¿Q<br/>“Q<br/>-Q<br/></td>
+      <td class="cursive rh12">i R<br/>(R<br/>/R<br/>¡R<br/>¿R<br/>“R<br/>-R<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">i S<br/>(S<br/>/S<br/>¡S<br/>¿S<br/>“S<br/>-S<br/></td>
+      <td class="cursive rh12">i T<br/>(T<br/>/T<br/>¡T<br/>¿T<br/>“T<br/>-T<br/></td>
+      <td class="cursive rh12">i U<br/>(U<br/>/U<br/>¡U<br/>¿U<br/>“U<br/>-U<br/></td>
+      <td class="cursive rh12">i V<br/>(V<br/>/V<br/>¡V<br/>¿V<br/>“V<br/>-V<br/></td>
+      <td class="cursive rh12">i W<br/>(W<br/>/W<br/>¡W<br/>¿W<br/>“W<br/>-W<br/></td>
+      <td class="cursive rh12" data-cogncur-w-variant=1>i W<br/>(W<br/>/W<br/>¡W<br/>¿W<br/>“W<br/>-W<br/></td>
+    </tr>
+    <tr>
+      <td class="cursive rh12">i X<br/>(X<br/>/X<br/>¡X<br/>¿X<br/>“X<br/>-X<br/></td>
+      <td class="cursive rh12">i Y<br/>(Y<br/>/Y<br/>¡Y<br/>¿Y<br/>“Y<br/>-Y<br/></td>
+      <td class="cursive rh12" data-cogncur-y-variant=1>i Y<br/>(Y<br/>/Y<br/>¡Y<br/>¿Y<br/>“Y<br/>-Y<br/></td>
+      <td class="cursive rh12">i Z<br/>(Z<br/>/Z<br/>¡Z<br/>¿Z<br/>“Z<br/>-Z<br/></td>
+      <td class="cursive rh12" data-cogncur-rz-top-variant=1>i Z<br/>(Z<br/>/Z<br/>¡Z<br/>¿Z<br/>“Z<br/>-Z<br/></td>
+      <td class="cursive rh12" data-cogncur-rz-top-variant=1>i Ž<br/>(Ž<br/>/Ž<br/>¡Ž<br/>¿Ž<br/>“Ž<br/>-Ž<br/></td>
+    </tr>
+    <tr data-cogncur-entrystrokes=1>
+      <td class="cursive rh12">i a<br/>(a<br/>/a<br/>¡a<br/>¿a<br/>“a<br/>-a<br/></td>
+      <td class="cursive rh12">i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
+      <td class="cursive rh12" data-cogncur-dp-variant=1>i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
+      <td class="cursive rh12">i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
+      <td class="cursive rh12" data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
+      <td class="cursive rh12">i g<br/>(g<br/>/g<br/>¡g<br/>¿g<br/>“g<br/>-g<br/></td>
+      <td class="cursive rh12">i e<br/>(e<br/>/e<br/>¡e<br/>¿e<br/>“e<br/>-e<br/></td>
+      <td class="cursive rh12">i b<br/>(b<br/>/b<br/>¡b<br/>¿b<br/>“b<br/>-b<br/></td>
+      <td class="cursive rh12">i f<br/>(f<br/>/f<br/>¡f<br/>¿f<br/>“f<br/>-f<br/></td>
+    </tr>
+    <tr data-cogncur-entrystrokes=1>
+      <td class="cursive rh12">i i<br/>(i<br/>/i<br/>¡i<br/>¿i<br/>“i<br/>-i<br/></td>
+      <td class="cursive rh12" data-cogncur-y-variant=1>i y<br/>(y<br/>/y<br/>¡y<br/>¿y<br/>“y<br/>-y<br/></td>
+      <td class="cursive rh12">i j<br/>(j<br/>/j<br/>¡j<br/>¿j<br/>“j<br/>-j<br/></td>
+      <td class="cursive rh12">i p<br/>(p<br/>/p<br/>¡p<br/>¿p<br/>“p<br/>-p<br/></td>
+      <td class="cursive rh12" data-cogncur-y-variant=0>i y<br/>(y<br/>/y<br/>¡y<br/>¿y<br/>“y<br/>-y<br/></td>
+      <td class="cursive rh12">i n<br/>(n<br/>/n<br/>¡n<br/>¿n<br/>“n<br/>-n<br/></td>
+      <td class="cursive rh12">i ß<br/>(ß<br/>/ß<br/>¡ß<br/>¿ß<br/>“ß<br/>-ß<br/></td>
+    </tr>
+    <tr data-cogncur-entrystrokes=1>
+      <td class="cursive rh12">i z<br/>(z<br/>/z<br/>¡z<br/>¿z<br/>“z<br/>-z<br/></td>
+      <td class="cursive rh12" data-cogncur-rz-top-variant=1>i z<br/>(z<br/>/z<br/>¡z<br/>¿z<br/>“z<br/>-z<br/></td>
+      <td class="cursive rh12">i s<br/>(s<br/>/s<br/>¡s<br/>¿s<br/>“s<br/>-s<br/></td>
+      <td class="cursive rh12" data-cogncur-s-variant=1>i s<br/>(s<br/>/s<br/>¡s<br/>¿s<br/>“s<br/>-s<br/></td>
+      <td class="cursive rh12">i o<br/>(o<br/>/o<br/>¡o<br/>¿o<br/>“o<br/>-o<br/></td>
+      <td class="cursive rh12">i t<br/>(t<br/>/t<br/>¡t<br/>¿t<br/>“t<br/>-t<br/></td>
+      <td class="cursive rh12" data-cogncur-t-variant=1>i t<br/>(t<br/>/t<br/>¡t<br/>¿t<br/>“t<br/>-t<br/></td>
+    </tr>    
+  </table>
+
+  <h2><a name="letterswhitespaceboth">Whitespace - both sides</a></h2>
   <div class="cursive rh12">
     ‘i’ ‘o’ ‘n’ ‘s’ ‘j’ ‘q’ ‘e’<br/>
     ‘p’ ‘l’ ‘h’ ‘v’ ‘z’ ‘t’ ‘b’<br/>
@@ -619,10 +716,49 @@
     /N/ /O/ /P/ /!/ /?/<br/>
 
   </div>   
-  <div class="cursive rh12"  data-cogncur-uppercase-amn-variant=1>
-    /A/ /M/ /N/ !A! !M! !N!<br/>
+  
+  <h2><a name="letterswhitespaceupper">Whitespace - between uppercase</a></h2>
+  <div class="lines nospacebetween rh8">
+    <div class="line">AIAIA ACACA AVAVA ARARA</div>
+    <div class="line">OIOIO TOTOT MOMOM OZOZO</div>
+    <div class="line">KOKOK XOXOX OGOGO OQOQO</div>
+    <div class="line">AOAOA EOEOE UOUOU FOFOF</div>
+    <div class="line">LILIL SISIS YIYIY RIRIR</div>
+    <div class="line">LELEL XEXEX CECEC GEGEG</div>
+    <div class="line">ENENE EIEIE EAEAE EZEZE</div>
+    <div class="line">UVUVU USUSU KUKUK QUQUQ</div>
   </div>
-
+  <br/>
+  <div class="lines nospacebetween rh8">
+    <div class="line">AA AD AG AI AU AT AY AW AJ AS AX AZ</div>
+    <div class="line">HA NK NC UI JU MT UY HV NJ JS MX HZ</div>
+    <div class="line">BA BR BO BI BU BT BY BV BJ BS BX BZ</div>
+    <div class="line">GA GL GQ GI GU GT GY GW GJ GS GX GZ</div>
+    <div class="line">DA DE DO DI DU DT DY DV DJ DS DX DZ</div>
+    <div class="line">EA EN EC EI EU ET EY EW EJ ES EX EZ</div>
+    <div class="line">IA IE IQ II IU IT IY IV IJ IS IX IZ</div>
+    <div class="line">QA QR QQ QI QU QT QY QV QJ QS QX QZ</div>
+    <div class="line">KA KR KG KI KU KT KY KV KJ KS KX KZ</div>
+    <div class="line">LA LE LG LI LU LT LY LV LJ LS LX LZ</div>
+    <div class="line">OA OD OG OI OU OT OY OV OJ OS OX OZ</div>
+    <div class="line">PA PH PC PI PU PT PY PW PJ PS PX PZ</div>
+    <div class="line">CA CK CQ CI CU CT CY CW CJ CS CX CZ</div>
+    <div class="line">TA TE TO TI TU TT TY TV TJ TS TX TZ</div>
+    <div class="line">YA YM YG YI YU YT YY YV YJ YS YX YZ</div>
+    <div class="line">FA FL FO FI FU FT FY FV FJ FS FX FZ</div>
+    <div class="line">VA VR WO WI VU VT WY VW VJ WS WX WZ</div>
+    <div class="line">SA SF SC SI SU ST SY SV SJ SS SX SZ</div>
+    <div class="line">ZA ZK ZG ZI ZU ZT ZY ZW ZJ ZS ZX ZZ</div>
+    <div class="line">XA XK XG XI XU XT XY XW XJ XS XX XZ</div>
+    <div class="line">RA RP RQ RI RU RT RY RV RJ RS RX RZ</div>
+  </div>
+  <br/>
+  <div class="lines nospacebetween rh8" data-cogncur-y-variant=1>
+    <div class="line">YA YM YG YI YU YT YY YV YJ YS YX YZ</div>
+    <div class="line">AY MY GY IY UY TY YY VY JY SY XY ZY</div>
+  </div>
+  </div>   
+  
   <h2><a name="smartquotes">Smart quotes</a></h2>
   No smart quotes, but two apostrophes of different height.
   <div class="cursive rh6" data-cogncur-smartquotes=0>
@@ -737,75 +873,75 @@
 
   <h2><a name="special">Special characters</a></h2>
   <h3>Footnotes</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line ">D'Nealian© Trademark® designed¹ by² Donaldª N. Thurber³.</div>
-    <div class="line traceable morearrows-overlay-rood">D'Nealian© Trademark® designed¹ by² Donaldª N. Thurber³.</div>
+    <div class="line traceable startpunt-overlay-rood">D'Nealian© Trademark® designed¹ by² Donaldª N. Thurber³.</div>
   </div>
   <h3>Currency</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">$ € ¥ £ ¢ &nbsp; €17.50 £19.95</div>
-    <div class="line traceable morearrows-overlay-rood">$ € ¥ £ ¢ &nbsp; €17.50 £19.95</div>
+    <div class="line traceable startpunt-overlay-rood">$ € ¥ £ ¢ &nbsp; €17.50 £19.95</div>
   </div>
   <h3>More interpuntion</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">% & * @ # |</div>
-    <div class="line traceable morearrows-overlay-rood">% & * @ # |</div>
+    <div class="line traceable startpunt-overlay-rood">% & * @ # |</div>
   </div>
   <h3>Acute</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">á é í ó ú ý Á É Í Ó &nbsp;Ý café née más mí</div>
-    <div class="line traceable morearrows-overlay-rood">á é í ó ú ý Á É Í Ó &nbsp;Ý café née más mí</div>
+    <div class="line traceable startpunt-overlay-rood">á é í ó ú ý Á É Í Ó &nbsp;Ý café née más mí</div>
   </div>
   <h3>Grave</h3>
   </div>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">à è ì ò ù À È Ì Ò &nbsp;Ù</div>
-    <div class="line traceable morearrows-overlay-rood">à è ì ò ù À È Ì Ò &nbsp;Ù</div>
+    <div class="line traceable startpunt-overlay-rood">à è ì ò ù À È Ì Ò &nbsp;Ù</div>
   </div>
   <h3>Circumflex</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">â ê î ô û Â Ê Î Ô &nbsp;Û</div>
-    <div class="line traceable morearrows-overlay-rood">â ê î ô û Â Ê Î Ô &nbsp;Û</div>
+    <div class="line traceable startpunt-overlay-rood">â ê î ô û Â Ê Î Ô &nbsp;Û</div>
   </div>
   <h3>Tilde</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">ã ñ õ Ã Ñ Õ</div>
-    <div class="line traceable morearrows-overlay-rood">ã ñ õ Ã Ñ Õ</div>
+    <div class="line traceable startpunt-overlay-rood">ã ñ õ Ã Ñ Õ</div>
   </div>
   <h3>Diaeresis</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">ä ë ï ö ü ÿ Ä Ë Ï Ö &nbsp;Ü Ÿ</div>
-    <div class="line traceable morearrows-overlay-rood">ä ë ï ö ü ÿ Ä Ë Ï Ö &nbsp;Ü Ÿ</div>
+    <div class="line traceable startpunt-overlay-rood">ä ë ï ö ü ÿ Ä Ë Ï Ö &nbsp;Ü Ÿ</div>
   </div>
   <h3>Ring</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">å Å</div>
-    <div class="line traceable morearrows-overlay-rood">å Å</div>
+    <div class="line traceable startpunt-overlay-rood">å Å</div>
   </div>
   <h3>Breve</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">ă ĕ ĭ ŏ ŭ Ă Ĕ Ī Ŏ Ŭ</div>
-    <div class="line traceable morearrows-overlay-rood">å Å</div>
+    <div class="line traceable startpunt-overlay-rood">å Å</div>
   </div>
   <h3>Macron</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">ā ē ī ō ū Ā Ē Ī Ō Ū</div>
-    <div class="line traceable morearrows-overlay-rood">å Å</div>
+    <div class="line traceable startpunt-overlay-rood">å Å</div>
   </div>
   <h3>Composite letters</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">æ œ ß Æ Œ sœur diæresis Ægypt eße aßa tßi</div>
-    <div class="line traceable morearrows-overlay-rood">æ œ ß Æ Œ sœur diæresis Ægypt eße aßa tßi</div>
+    <div class="line traceable startpunt-overlay-rood">æ œ ß Æ Œ sœur diæresis Ægypt eße aßa tßi</div>
   </div>
   <h3>Other</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">ç ı ø š ž Ç Ø Š garçon Ça eššo Štl ažure øžøñë</div>
-    <div class="line traceable morearrows-overlay-rood">ç ı ø š ž Ç Ø Š garçon Ça eššo Štl ažure øžøñë</div>
+    <div class="line traceable startpunt-overlay-rood">ç ı ø š ž Ç Ø Š garçon Ça eššo Štl ažure øžøñë</div>
   </div>
   <h3>Unsupported characters with combining accents</h3>
-  <div class="lines rh6">
+  <div class="lines rh6 nospacebetween">
     <div class="line rh6">Ǹ ǹ Ń ń ů ũ Ũ</div> 
-    <div class="line traceable morearrows-overlay-rood">Ǹ ǹ Ń ń ů ũ Ũ</div> 
+    <div class="line traceable startpunt-overlay-rood">Ǹ ǹ Ń ń ů ũ Ũ</div> 
   </div>
   
   <h2><a name="lines rh6">Lines</a></h2>
@@ -986,7 +1122,7 @@
       <th>entry strokes 2</th>
     </tr>
     <tr>
-      <td data-cogncur-entrystrokes-variant=0>
+      <td data-cogncur-entrystrokes=0>
         <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="startpunt-overlay-rood" data-nlines="1">
           <div class="line">a b c d e f g h i</div>
           <div class="line">j k l m n o p q r </div>
@@ -996,6 +1132,8 @@
           <div class="line">S T U V W X Y Z</div>
           <div class="line">à è ì ò ù À È Ì Ò Ù</div>
           <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
+          <div class="line" data-cogncur-dp-variant=1 data-cogncur-s-variant=1 data-cogncur-t-variant=1 data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>d p s t y w r z ij</div>
+          <div class="line" data-cogncur-uppercase-amn-variant=2 data-cogncur-uppercase-cgl-variant=1  data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>A M N C G L Y W R Z IJ</div>
           <div class="line">ant baboon cat dodo</div>
           <div class="line">Egg Fang Good Hat</div>
           <div class="line">Tick Flee Tree Fog</div>
@@ -1006,7 +1144,7 @@
           
         </div>
       </td>
-      <td data-cogncur-entrystrokes-variant=2>
+      <td data-cogncur-entrystrokes=2>
         <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="startpunt-overlay-rood" data-nlines="1">
           <div class="line">a b c d e f g h i</div>
           <div class="line">j k l m n o p q r </div>
@@ -1016,6 +1154,8 @@
           <div class="line">S T U V W X Y Z</div>
           <div class="line">à è ì ò ù À È Ì Ò Ù</div>
           <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
+          <div class="line" data-cogncur-dp-variant=1 data-cogncur-s-variant=1 data-cogncur-t-variant=1 data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>d p s t y w r z ij</div>
+          <div class="line" data-cogncur-uppercase-amn-variant=2 data-cogncur-uppercase-cgl-variant=1  data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>A M N C G L Y W R Z IJ</div>
           <div class="line">ant baboon cat dodo</div>
           <div class="line">Egg Fang Good Hat</div>
           <div class="line">Tick Flee Tree Fog</div>
@@ -1284,9 +1424,9 @@
   <h2><a name="wordfade">Wordfade</a></h2>
   
   Prerequisite: 'nodots' setting in cogncur_converter.js:
-  <div class="line lh3" data-cogncur-nodots=2>time for a jug of tea in the inn the Otter</div>
+  <div class="line lh3" data-cogncur-nodots=2 data-cogncur-t-variant=1>time for a jug of tea in the inn the Otter</div>
   <br/><br/>
-  <div class="lines repeat  wordfade_spectext lh3 nospacebetween" data-nspaces=6>
+  <div class="lines repeat  wordfade_spectext lh3 nospacebetween" data-nspaces=6 data-cogncur-t-variant=1>
     <div class="line">inn 1 1 1 1 1 1 1</div>
     <div class="line">nut 1 1 1 1 1 1 1</div>
     <div class="line">tip 1 1 1 1 1 1 1</div>
@@ -1300,117 +1440,61 @@
   
 
   <h2><a name="overlap">Overlapping entry / connecting strokes</a></h2>
-  This setting will only because apparent when using wordfade.
+  This feature of the font will only become apparent when using 'wordfade'. Connecting strokes towards a and o continue all the way to the 'reversal' point.
 
-  <table>
-    <tr>
-      <th>0: no overlap</th>
-      <th>1: overlap</th>
-    </tr>
-    <tr>
-      <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=0>
-          <div class="line">aa 1 1 0 1 0 </div>
-          <div class="line">na 1 1 0 1 0 </div>
-          <div class="line">va 1 1 0 1 0 </div>
-          <div class="line">ea 1 1 0 1 0 </div>
-          <div class="line">ga 1 1 0 1 0 </div>
-          <div class="line">pa 1 1 0 1 0 </div>
-          <div class="line">oa 1 1 0 1 0 </div>
-        </div>
-      </td>
-      <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=1>
-          <div class="line">aa 1 1 0 1 0 </div>
-          <div class="line">na 1 1 0 1 0 </div>
-          <div class="line">va 1 1 0 1 0 </div>
-          <div class="line">ea 1 1 0 1 0 </div>
-          <div class="line">ga 1 1 0 1 0 </div>
-          <div class="line">pa 1 1 0 1 0 </div>
-          <div class="line">oa 1 1 0 1 0 </div>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=0>
-          <div class="line">cc 1 1 0 1 0 </div>
-          <div class="line">nc 1 1 0 1 0 </div>
-          <div class="line">vc 1 1 0 1 0 </div>
-          <div class="line">ec 1 1 0 1 0 </div>
-          <div class="line">gc 1 1 0 1 0 </div>
-          <div class="line">pc 1 1 0 1 0 </div>
-          <div class="line">oc 1 1 0 1 0 </div>
-        </div>
-      </td>
-      <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=1>
-          <div class="line">cc 1 1 0 1 0 </div>
-          <div class="line">nc 1 1 0 1 0 </div>
-          <div class="line">vc 1 1 0 1 0 </div>
-          <div class="line">ec 1 1 0 1 0 </div>
-          <div class="line">gc 1 1 0 1 0 </div>
-          <div class="line">pc 1 1 0 1 0 </div>
-          <div class="line">oc 1 1 0 1 0 </div>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=0>
-          <div class="line">oo 1 1 0 1 0 </div>
-          <div class="line">no 1 1 0 1 0 </div>
-          <div class="line">vo 1 1 0 1 0 </div>
-          <div class="line">eo 1 1 0 1 0 </div>
-          <div class="line">go 1 1 0 1 0 </div>
-          <div class="line">po 1 1 0 1 0 </div>
-          <div class="line">oo 1 1 0 1 0 </div>
-        </div>
-      </td>
-      <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=1>
-          <div class="line">oo 1 1 0 1 0 </div>
-          <div class="line">no 1 1 0 1 0 </div>
-          <div class="line">vo 1 1 0 1 0 </div>
-          <div class="line">eo 1 1 0 1 0 </div>
-          <div class="line">go 1 1 0 1 0 </div>
-          <div class="line">po 1 1 0 1 0 </div>
-          <div class="line">oo 1 1 0 1 0 </div>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=0>
-          <div class="line">tt 1 1 0 1 0 </div>
-          <div class="line">nt 1 1 0 1 0 </div>
-          <div class="line">vt 1 1 0 1 0 </div>
-          <div class="line">et 1 1 0 1 0 </div>
-          <div class="line">gt 1 1 0 1 0 </div>
-          <div class="line">pt 1 1 0 1 0 </div>
-          <div class="line">ot 1 1 0 1 0 </div>
-        </div>
-      </td>
-      <td>    
-        <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-entrystrokes-overlap=1>
-          <div class="line">tt 1 1 0 1 0 </div>
-          <div class="line">nt 1 1 0 1 0 </div>
-          <div class="line">vt 1 1 0 1 0 </div>
-          <div class="line">et 1 1 0 1 0 </div>
-          <div class="line">gt 1 1 0 1 0 </div>
-          <div class="line">pt 1 1 0 1 0 </div>
-          <div class="line">ot 1 1 0 1 0 </div>
-        </div>
-      </td>
-    </tr>
-    
-  </table>
+  <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6>
+    <div class="line">aa 1 1 0 1 0 </div>
+    <div class="line">na 1 1 0 1 0 </div>
+    <div class="line">va 1 1 0 1 0 </div>
+    <div class="line">ea 1 1 0 1 0 </div>
+    <div class="line">ga 1 1 0 1 0 </div>
+    <div class="line">pa 1 1 0 1 0 </div>
+    <div class="line">oa 1 1 0 1 0 </div>
+  </div>
+  <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6>
+    <div class="line">cc 1 1 0 1 0 </div>
+    <div class="line">nc 1 1 0 1 0 </div>
+    <div class="line">vc 1 1 0 1 0 </div>
+    <div class="line">ec 1 1 0 1 0 </div>
+    <div class="line">gc 1 1 0 1 0 </div>
+    <div class="line">pc 1 1 0 1 0 </div>
+    <div class="line">oc 1 1 0 1 0 </div>
+  </div>
+  <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6>
+    <div class="line">oo 1 1 0 1 0 </div>
+    <div class="line">no 1 1 0 1 0 </div>
+    <div class="line">vo 1 1 0 1 0 </div>
+    <div class="line">eo 1 1 0 1 0 </div>
+    <div class="line">go 1 1 0 1 0 </div>
+    <div class="line">po 1 1 0 1 0 </div>
+    <div class="line">oo 1 1 0 1 0 </div>
+  </div>
+  Note: t is not supported. Connecting strokes towards t can also be used (optionally) towards i,p,u,w so can not be lengthened to the top of t.
+  <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-t-variant=1>
+    <div class="line">tt 1 1 0 1 0 </div>
+  </div>
+  Connecting strokes from s and p depart from a reversal point:
+  <div class="lines rh8 nospacebetween red-connections">
+    <div class="line">pp pr pl ps</div>
+    <div class="line">ss st si sa</div>
+  </div>
   
   <br/>
   <hr/>
   
   <h2>Misc</h2>
   <br/>
+  <div class="cursive rh12 centered">Cogncur</div>
+  <div class="lines rh6 centered nospacebetween blueredlines">
+    <div class="line">a fully-connected, looped cursive font</div>
+    <div class="line">excellent for educational use</div>
+  </div>
+  <br/><br/>
+  <div class="lines rh4 centered nospacebetween blacklines" style="color: #0054ad">
+    <div class="line">a fully-connected, looped cursive font</div>
+    <div class="line">excellent for educational use</div>
+  </div>
+  <br/><br/>
   <div class="line rh4">Designed by liesbeth@syboor.eu</div>
   
   <br/>

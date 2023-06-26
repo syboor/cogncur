@@ -6,16 +6,16 @@ COGNCUR USER GUIDE
 - quick MS Word setup
 - what's in this guide
 
-
-2. Feature guide
+2. Feature guide / What is possible
 - 'typeface features' aka what it looks like
-- font styles (i.e. different slants)
+- letter variants through stylistic sets
+- font styles (i.e. different slants, edged versus monoline pen)
 - didactic features (integrated guides, guide characters, overlay fonts, etc)
 - technical features
   - OpenType features
   - workarounds
 
-3. Application guide
+3. Application guide / How to do it
 - worksheet generator (online)
 - Microsoft Word
   - setting all the features
@@ -31,13 +31,13 @@ COGNCUR USER GUIDE
 - (maybe in the far future...  
 
 4. Sharing and contributing
+- License information
 - Reporting application support and providing screenshots
-- Creating / distributing your own font
-  - naming guidelines
-- Help appreciated and offered
+  - finish checklist OpenType support
+- How you can help
+  - contribute to the Application Guide by providing corrections and/or screenshots
   - converting to Google Fonts build process
   - I'm not really ready to accept 'ready-made' contributions to the font files. Github unfortunately is not up to the job of comparing changes in the .sfd format.
-  - limited mentoring in creating a derivate font???
 - Feature requests 
   - provide as many reasons as you can other than 'imitating existing curriculum / material'. Describe how the new letter variant is easier to teach, more consistent with other letters, etc.
   - but if you are trying to match with existing material
@@ -53,4 +53,20 @@ COGNCUR USER GUIDE
       - before and after the letter 'e'
       - after the letters 'o' and 'v'
     - provide the uppercase version of the same letter as well
+
+
+MODIFICATION DOCS
+Glyph guide: explain which glyphs connect to which glyphs
+Modification guide: how to change... (scenarios)
+- how to 'flatten' stylistic sets
+- how to change a glyph
+  - no changes to connections
+  - re-using different connections
+    - 'u' with a curved connection
+    - a new uppercase letter 'H' (trying out various connections)
+  - creating new connections
+- adding an accented character
+
+Worksheet guide: how to create worksheets
+Advanced guide: how to use overlay fonts
 

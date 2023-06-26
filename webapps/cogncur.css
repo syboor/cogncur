@@ -27,6 +27,29 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: "CogncurVertical-Start";
+  src: url("/fonts/cogncur/fonts/cogncurverticalstartdots.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Cogncur-Start";
+  src: url("/fonts/cogncur/fonts/cogncurstartdots.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CogncurOblique-Start";
+  src: url("/fonts/cogncur/fonts/cogncurobliquestartdots.ttf?") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
+
 .desktop {
   font-family: "Cogncur";
 }
@@ -70,7 +93,27 @@
   font-family: "Cogncur-Start";
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
-
+.cursive.startpunten-font i, .cursive .startpunten-font i, .startpunten-font .cursive i,
+.rawcursive.startpunten-font i, .rawcursive .startpunten-font i, .startpunten-font .rawcursive i,
+.line.startpunten-font i, .line .startpunten-font i, .startpunten-font .line i,
+.rawline.startpunten-font i, .rawline .startpunten-font i, .startpunten-font .rawline i,
+.letter.startpunten-font i, .letter .startpunten-font i, .startpunten-font .letter i,
+.rawletter.startpunten-font i, .rawletter .startpunten-font i, .startpunten-font .rawletter i,
+.hokjes.startpunten-font i, .hokjes .startpunten-font i, .startpunten-font .hokjes i,
+.word-startpunten-font i, .word .startpunten-font i, .startpunten-font .word,
+.cursive.startpunten-font em, .cursive .startpunten-font em, .startpunten-font .cursive em,
+.rawcursive.startpunten-font em, .rawcursive .startpunten-font em, .startpunten-font .rawcursive em,
+.line.startpunten-font em, .line .startpunten-font em, .startpunten-font .line em,
+.rawline.startpunten-font em, .rawline .startpunten-font em, .startpunten-font .rawline em,
+.letter.startpunten-font em, .letter .startpunten-font em, .startpunten-font .letter em,
+.rawletter.startpunten-font em, .rawletter .startpunten-font em, .startpunten-font .rawletter em,
+.hokjes.startpunten-font em, .hokjes .startpunten-font em, .startpunten-font .hokjes em,
+.word-startpunten-font em, .word .startpunten-font em, .startpunten-font .word {
+  font-family: "CogncurOblique-Start";
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
 
 .cursive.arrows-font, .cursive .arrows-font, .arrows-font .cursive,
 .rawcursive.arrows-font, .rawcursive .arrows-font, .arrows-font .rawcursive,
@@ -247,21 +290,6 @@
   margin-bottom: 0em;
 }
 
-/* If we want to overlap descenders and ascenders, what do we need to do?
- - OK negative margin on lines
- - OK bottomline should be dashed instead of solid (it should look like a midline instead of a topline)
- - OK bottomline should be generated on last line
- - bottomline should be generated on lastrepeat dependent on distance between herhaalsets -> this distance should be in relative units to work...
- - OK topline should only be generated on first line
- - topline should have same thickness as baseline
-
- - it should be possible to overrule bottomline with a linestyle
-*/
-.overlapdescenders .line,
-.overlapdescenders .rawline {
-  margin-bottom: -0.33em;
-}
-
 .centered {
   text-align: center;
 }
@@ -299,8 +327,8 @@
   position: absolute;
   top: .33em;
   height: .325em; /* why??? */
-  border-bottom: 2px solid #48a6dd;
-  border-top: 2px dashed #48a6dd;
+  border-bottom: 2px solid #667aff;
+  border-top: 2px dashed #667aff;
   /* border-left: 1px dotted #99999a; */ /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
   z-index: -99;
 }
@@ -316,11 +344,9 @@
   height: .31em;
 }
 
-.rh2.overlapdescenders .line:first-child .outerlines, .rh2_67.overlapdescenders .line:first-child .outerlines, .lhwide.overlapdescenders .line:first-child .outerlines, .rh3.overlapdescenders .line:first-child .outerlines, .lh2.overlapdescenders .line:first-child .outerlines, .rh4.overlapdescenders .line:first-child .outerlines, .lh3.overlapdescenders .line:first-child .outerlines,
-.rh2.overlapdescenders .line.forcetopline .outerlines, .rh2_67.overlapdescenders .line.forcetopline .outerlines, .lhwide.overlapdescenders .line.forcetopline .outerlines, .rh3.overlapdescenders .line.forcetopline .outerlines, .lh2.overlapdescenders .line.forcetopline .outerlines, .rh4.overlapdescenders .line.forcetopline .outerlines, .lh3.overlapdescenders .line.forcetopline .outerlines {
-  border-top-width: 1px;
+.nospacebetween .outerlines {
+  border-bottom: 0px;
 }
-
 
 .rh5 .baselines, .rh6 .baselines, .ld4 .baselines, .rh6 .baselines, .lh4 .baselines, .rh7 .baselines {
   height: .31em;
@@ -344,18 +370,22 @@
   border-top-color: #000 !important;  
 }
 .blueredlines .baselines {
-  border-bottom-color: #cd309d !important;
+  border-bottom-color: #e01a6f !important;
 }
 /* .defaultlines should overrule blacklines */
 .blacklines .defaultlines .baselines, 
 .blueredlines .defaultlines .baselines {
-  border-bottom-color: #48a6dd !important;
-  border-top-color: #48a6dd !important;
+  border-bottom-color: #667aff !important;
+  border-top-color: #667aff !important;
 }
 
 .nolines .baselines {
   border-width: 0px !important; 
   background-color: transparent !important;
+}
+
+.nospacebetween .outerlines {
+  border-bottom: 0px;
 }
 .outerlines,
 .nospacebetween .line:last-child .outerlines,
@@ -363,8 +393,8 @@
   width: 100%;
   position: absolute;
   top: 0em;
-  border-top: 2px solid #48a6dd;
-  border-bottom: 2px solid #48a6dd; 
+  border-top: 2px solid #667aff;
+  border-bottom: 2px solid #667aff; 
   /* border-left: 1px dotted #99999a; *//* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
   height: 1em;
   box-sizing: border-box;
@@ -406,43 +436,8 @@
 }
 
 
-/* When overlappeping descenders/ascenders, we are overlapping the baseline with the topline,
- * so by default, we don't want a topline.
- */
-.overlapdescenders .outerlines {
-  border-top: none;
-}
-/* Sometimes we want a topline */
-.overlapdescenders .line:first-child .outerlines, .overlapdescenders .line.forcetopline .outerlines {
-  border-top: 2px solid #48a6dd;
-}
-/* Bottomline overlaps with midline, so should also be suppresed */
-.nospacebetween .outerlines, .overlapdescenders .outerlines {
-  border-bottom: 0px;
-}
-/* On the very last line, the bottom line should look like a midline.
- * The same is true on the last line of a repeat, but only if there is sufficient distance (> ldi4) between repeats  */
-.overlapdescenders .lastline .outerlines,
-.overlapdescenders.ldi7 .forcebottomline .outerlines, 
-.overlapdescenders.ldi8 .forcebottomline .outerlines, 
-.overlapdescenders.ldi9 .forcebottomline .outerlines, 
-.overlapdescenders.ldi10 .forcebottomline .outerlines, 
-.overlapdescenders.ldi11 .forcebottomline .outerlines, 
-.overlapdescenders.ldi12 .forcebottomline .outerlines, 
-.overlapdescenders.ldi13 .forcebottomline .outerlines, 
-.overlapdescenders.ldi14 .forcebottomline .outerlines, 
-.overlapdescenders.ldi15 .forcebottomline .outerlines, 
-.overlapdescenders.ldi16 .forcebottomline .outerlines, 
-.overlapdescenders.ldi17 .forcebottomline .outerlines, 
-.overlapdescenders.ldi18 .forcebottomline .outerlines, 
-.overlapdescenders.ldi19 .forcebottomline .outerlines, 
-.overlapdescenders.ldi20 .forcebottomline .outerlines 
-{ /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
-  border-bottom: 1px dashed #48a6dd;
-}
-
 .nospacebetween.forcebottomline .outerlines, .nospacebetween .forcebottomline .outerlines { /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
-  border-bottom: 2px solid #48a6dd;
+  border-bottom: 2px solid #667aff;
 }
 .rh2.nospacebetween.forcebottomline .outerlines, .rh2.nospacebetween .forcebottomline .outerlines, 
 .rh2 .nospacebetween.forcebottomline .outerlines, .rh2 .nospacebetween .forcebottomline .outerlines,
@@ -475,7 +470,7 @@
   border-width: 0px !important;
 }
 .noouterlines_fade .line:first-child .outerlines{
-  border-top-color: rgba(72,166,221,1) !important; /* #48a6dd but with transparency added for easier manipulation */;
+  border-top-color: rgba(72,166,221,1) !important; /* #667aff but with transparency added for easier manipulation */;
   border-top-width: 1px !important;
 }
 .noouterlines_fade .line:nth-child(2) .outerlines{
@@ -521,7 +516,7 @@
   border-top-color: transparent !important;
 }
 .norompline_fade .line:first-child .baselines{
-  border-top-color: rgba(72,166,221,1) !important; /* #48a6dd but with transparency added for easier manipulation */;
+  border-top-color: rgba(72,166,221,1) !important; /* #667aff but with transparency added for easier manipulation */;
 }
 .norompline_fade .line:nth-child(2) .baselines{
   border-top-color: rgba(72,166,221,.5) !important;
