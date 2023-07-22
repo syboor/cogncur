@@ -1,6 +1,6 @@
 # This scripts adds a new character to all the "multiple substitution" tables.
 # You still need to add it the the match classes and back classes of the contextual alternates table.
-# Note: this is only for lowercase letters. Uppercase letters only need to be added to 1 substitution table: stand-alone.
+# Note: this is only for lowercase letters. Uppercase letters only need to be added to 1 substitution table: start-alone.
 
 import fontforge;
 import math;
@@ -43,6 +43,10 @@ def add_subs(glyphname, connects_as, end_piece):
     
 
 # How to add a new character in
+
+
+add_subs('p2', 'n', 'cep');
+
 #add_subs('s1', 's1', 'ces');
 #add_subs('germandbls', 'i', 'cegermandbls');
 #add_subs('t1', 't1', 'cet1');

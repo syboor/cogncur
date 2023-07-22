@@ -23,6 +23,9 @@
       white-space: nowrap;
       border: 1px solid #ccc;
     }
+    table.kantlijn td {
+      border-left: 1px solid #f66;
+    }
   </style>
 </head>
 <body class="max">
@@ -52,28 +55,15 @@
   <!-- 
   TODO: verbindingen naar o en a doortrekken... (nuttig voor webtoepassingen, maar geen probleem in het desktop font -> gewoon altijd doen)
   
-  TODO: ??? create shorter versions of ? and !  Or maybe only do this when using capitals???
-    
   TODO: (optional) no entry strokes for i/u/w (sharp letters)
   TODO: ??? uppercase U/W/Y with entry stroke??? But... isn't this confusing, given the wavy, horizontal entry stroke on J?
     
-  TODO: kerning before word
-  - for 'csa' letters: create real ligatures
-    - automatically, for every glyph starting with 'cs' in the 'start-continued' table
-    - do we need to unlik them?
-    - delete all layers; copy into skeleton layer; set left bearing to 34 based on the 'skeleton' layer
-    - create an 'rlig' substitution table, and add these letters to them
-    - leave the ss01 as is (only substituting the entry strokes themselves, not the ligatures)
-    - how to add them to the correct kerning classes???
-    - use a separate kerning table, so if we need to start over, we don't delete other kerning
-  - upside down exclamation mark
-  - guillemot, low opening quotes, apostrophe (because of contractions!!!), slash, bracket
-  - ?? kerning combinations of interpunction (in a separate table)
-  - kerning interpunction before uppercase also in separate table; maybe use automatic classes?
-  
-  LATER: language specific ligatures and substitutions: Danish 'ae' and French 'oe'
-  
-  TODO: create starting points fonts
+  TODO: kerning between uppercase letters
+  - TODO: why does it not work in Chromium (but works in Office)?
+  - TODO: split up ceO into ceO and ceV (right now, everything is kerned for V)
+  - same for ceB vs ceS, ceQ vs ceZ
+
+  TODO: create 'edged' fonts at all slants
   
   TODO: 
   - testing/documentation matrix: per feature: what it should look like, what a 'failure' looks like, questions to ask (does it work automatically?). Features: contextual alternates; kerning; stylistic sets; multilinguage support; 'ij' ligature
@@ -281,28 +271,109 @@
     </tr>
   </table>
 
-  <h3>dp stick length variant</h3>
+  <h3>stick length variant</h3>
   <table>
     <tr>
       <th>0</th>
       <th>1</th>
     </tr>
     <tr>
-      <td class="lines rh8 nospacebetween" data-cogncur-dp-variant=0>
+      <td class="lines rh8 nospacebetween" data-cogncur-stick-variant=0>
         <div class="line">doppler effect &nbsp;</div>
         <div class="line">puppy flood &nbsp;</div>
 
       </td>
-      <td class="lines rh8 nospacebetween" data-cogncur-dp-variant=1>
+      <td class="lines rh8 nospacebetween" data-cogncur-stick-variant=1>
         <div class="line">doppler effect &nbsp;</div>
         <div class="line">puppy flood &nbsp;</div>
       </td>
     </tr>
   </table>
 
+  <h3>p variants</h3>
+  <table class="kantlijn">
+    <tr>
+      <th>curve 0, open 0</th>
+      <th>curve 1, open 0</th>
+      <th>curve 0, open 1</th>
+      <th>curve 1, open 1</th>
+    </tr>
+    <tr>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=0>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=0>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=1>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=1>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+      </td>
+    </tr>
+    <tr data-cogncur-stick-variant=1>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=0>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=0>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=1>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=1>
+        <div class="line">doppler effect &nbsp;</div>
+        <div class="line">puppy flood &nbsp;</div>
+      </td>
+    </tr>
+    <tr data-cogncur-entrystrokes=1 data-cogncur-exitstrokes=1>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=0>
+        <div class="line">puppy up &nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=0>
+        <div class="line">puppy up &nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=1>
+        <div class="line">puppy up &nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=1>
+        <div class="line">puppy up &nbsp;</div>
+      </td>
+    </tr>
+    <tr data-cogncur-entrystrokes=1 data-cogncur-exitstrokes=1 data-cogncur-stick-variant=1>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=0>
+        <div class="line">puppy up &nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=0>
+        <div class="line">puppy up &nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=1>
+        <div class="line">puppy up &nbsp;</div>
+      </td>
+      <td class="lines rh8 nospacebetween" data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=1>
+        <div class="line">puppy up &nbsp;</div>
+      </td>
+    </tr>
+
+
+  </table>
+
+
   <h3>ij ligature</h3>
   NB 'ij' ligature always should be enabled for Dutch
-  <table>
+  <table class="kantlijn">
     <tr>
       <th>0</th>
       <th>1</th>
@@ -322,7 +393,7 @@
   </table>
 
   <h3>y variant</h3>
-  <table>
+  <table class="kantlijn">
     <tr>
       <th>0</th>
       <th>1</th>
@@ -364,17 +435,17 @@
         <div class="line" data-cogncur-f-connection-variant=0>fi fn ff fo fa fe fs ft fj&nbsp;</div>
         <div class="line" data-cogncur-f-connection-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
         <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
-        <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-stick-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
         <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
-        <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-stick-variant=1>fi fn ff fo fa fe fs ft fj&nbsp;</div>
       </td>
       <td class="lines rh8 nospacebetween" data-cogncur-t-variant=1 data-cogncur-s-variant=1>
         <div class="line" data-cogncur-f-connection-variant=0>fs ft&nbsp;</div>
         <div class="line" data-cogncur-f-connection-variant=1>fs ft&nbsp;</div>
         <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1>fs ft&nbsp;</div>
-        <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>fs ft&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-stick-variant=1>fs ft&nbsp;</div>
         <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1>fs ft&nbsp;</div>
-        <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-dp-variant=1>fs ft&nbsp;</div>
+        <div class="line" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-stick-variant=1>fs ft&nbsp;</div>
       </td>
     </tr>
   </table>
@@ -385,16 +456,16 @@
       <td class="lines rh8 nospacebetween" >
         <div class="line" data-cogncur-q-connection-variant=0>qu qn ql qo qq qe qs qt qj&nbsp;</div>
         <div class="line" data-cogncur-q-connection-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
-        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=0 data-cogncur-dp-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=0 data-cogncur-stick-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
         <div class="line" data-cogncur-q-connection-variant=0 data-cogncur-q-continuity-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
-        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1 data-cogncur-stick-variant=1>qu qn ql qo qq qe qs qt qj&nbsp;</div>
       </td>
       <td class="lines rh8 nospacebetween" data-cogncur-t-variant=1 data-cogncur-s-variant=1>
         <div class="line" data-cogncur-q-connection-variant=0>qs qt&nbsp;</div>
         <div class="line" data-cogncur-q-connection-variant=1>qs qt&nbsp;</div>
-        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>qs qt&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1 data-cogncur-stick-variant=1>qs qt&nbsp;</div>
         <div class="line" data-cogncur-q-connection-variant=0 data-cogncur-q-continuity-variant=1>qs qt&nbsp;</div>
-        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1  data-cogncur-dp-variant=1>qs qt&nbsp;</div>
+        <div class="line" data-cogncur-q-connection-variant=1 data-cogncur-q-continuity-variant=1  data-cogncur-stick-variant=1>qs qt&nbsp;</div>
       </td>
     </tr>
   </table>
@@ -514,7 +585,7 @@
       <td class="cursive rh12">f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/>f-</td>
       <td class="cursive rh12" data-cogncur-f-continuity-variant=1>f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/>f-</td>
       <td class="cursive rh12" data-cogncur-f-continuity-variant=1 data-cogncur-f-connection-variant=1>f i<br/>f,<br/>f;<br/>f!<br/>f/<br/>f)<br/>f?<br/>f"<br/>f-</td>
-      <td class="cursive rh12" data-cogncur-q-connection-variant=1 data-cogncur-dp-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/>f-</td>
+      <td class="cursive rh12" data-cogncur-q-connection-variant=1 data-cogncur-stick-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/>f-</td>
       <td class="cursive rh12" data-cogncur-q-continuity-variant=1>q i<br/>q,<br/>q;<br/>q!<br/>q/<br/>q)<br/>q?<br/>q"<br/>f-</td>
       <td class="cursive rh12">Z i<br/>Z,<br/>Z;<br/>Z!<br/>Z/<br/>Z)<br/>Z?<br/>Z"<br/>Z-</td>
     </tr>
@@ -523,8 +594,8 @@
       <td class="cursive rh12">s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/>s-</td>
       <td class="cursive rh12" data-cogncur-s-variant=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/>s-</td>
       <td class="cursive rh12">ß i<br/>ß,<br/>ß;<br/>ß!<br/>ß/<br/>ß)<br/>ß?<br/>ß"<br/>ß-</td>
-      <td class="cursive rh12" data-cogncur-existrokes=1>p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/>p-</td>
-      <td class="cursive rh12" data-cogncur-existrokes=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/>s-</td>
+      <td class="cursive rh12" data-cogncur-exitstrokes=1>p i<br/>p,<br/>p;<br/>p!<br/>p/<br/>p)<br/>p?<br/>p"<br/>p-</td>
+      <td class="cursive rh12" data-cogncur-exitstrokes=1>s i<br/>s,<br/>s;<br/>s!<br/>s/<br/>s)<br/>s?<br/>s"<br/>s-</td>
     </tr>
     <tr>
       <td class="cursive rh12">g i<br/>g,<br/>g;<br/>g!<br/>g/<br/>g)<br/>g?<br/>g"<br/>g-</td>
@@ -585,9 +656,9 @@
     <tr>
       <td class="cursive rh12">i a<br/>(a<br/>/a<br/>¡a<br/>¿a<br/>“a<br/>-a<br/></td>
       <td class="cursive rh12">i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
-      <td class="cursive rh12" data-cogncur-dp-variant=1>i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
+      <td class="cursive rh12" data-cogncur-stick-variant=1>i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
       <td class="cursive rh12">i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
-      <td class="cursive rh12" data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
+      <td class="cursive rh12" data-cogncur-q-continuity-variant=1 data-cogncur-stick-variant=1>i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
       <td class="cursive rh12">i g<br/>(g<br/>/g<br/>¡g<br/>¿g<br/>“g<br/>-g<br/></td>
       <td class="cursive rh12">i e<br/>(e<br/>/e<br/>¡e<br/>¿e<br/>“e<br/>-e<br/></td>
       <td class="cursive rh12">i b<br/>(b<br/>/b<br/>¡b<br/>¿b<br/>“b<br/>-b<br/></td>
@@ -628,6 +699,7 @@
       <td class="cursive rh12">i C<br/>(C<br/>/C<br/>¡C<br/>¿C<br/>“C<br/>-C<br/></td>
       <td class="cursive rh12">i G<br/>(G<br/>/G<br/>¡G<br/>¿G<br/>“G<br/>-G<br/></td>
       <td class="cursive rh12">i L<br/>(L<br/>/L<br/>¡L<br/>¿L<br/>“L<br/>-L<br/></td>
+      <td class="cursive rh12">i Æ<br/>(Æ<br/>/Æ<br/>¡Æ<br/>¿Æ<br/>“Æ<br/>-Æ<br/></td>
     </tr>
     <tr>
       <td class="cursive rh12">i B<br/>(B<br/>/B<br/>¡B<br/>¿B<br/>“B<br/>-B<br/></td>
@@ -664,9 +736,9 @@
     <tr data-cogncur-entrystrokes=1>
       <td class="cursive rh12">i a<br/>(a<br/>/a<br/>¡a<br/>¿a<br/>“a<br/>-a<br/></td>
       <td class="cursive rh12">i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
-      <td class="cursive rh12" data-cogncur-dp-variant=1>i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
+      <td class="cursive rh12" data-cogncur-stick-variant=1>i d<br/>(d<br/>/d<br/>¡d<br/>¿d<br/>“d<br/>-d<br/></td>
       <td class="cursive rh12">i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
-      <td class="cursive rh12" data-cogncur-q-continuity-variant=1 data-cogncur-dp-variant=1>i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
+      <td class="cursive rh12" data-cogncur-q-continuity-variant=1 data-cogncur-stick-variant=1>i q<br/>(q<br/>/q<br/>¡q<br/>¿q<br/>“q<br/>-q<br/></td>
       <td class="cursive rh12">i g<br/>(g<br/>/g<br/>¡g<br/>¿g<br/>“g<br/>-g<br/></td>
       <td class="cursive rh12">i e<br/>(e<br/>/e<br/>¡e<br/>¿e<br/>“e<br/>-e<br/></td>
       <td class="cursive rh12">i b<br/>(b<br/>/b<br/>¡b<br/>¿b<br/>“b<br/>-b<br/></td>
@@ -727,7 +799,17 @@
     <div class="line">LELEL XEXEX CECEC GEGEG</div>
     <div class="line">ENENE EIEIE EAEAE EZEZE</div>
     <div class="line">UVUVU USUSU KUKUK QUQUQ</div>
+    <div class="line" data-cogncur-uppercase-cgl-variant=1 data-cogncur-uppercase-amn-variant=2>UNUNU ONONO ANANA LALAL</div>
+    <div class="line" data-cogncur-uppercase-cgl-variant=1 data-cogncur-uppercase-amn-variant=2>GUGUG MNMNM MIMIM ACACA</div>
   </div>
+  <br/>
+  <div class="lines nospacebetween rh8">
+    <div class="line">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+    <div class="line">AAA BBB CCC DDD EEE FFF</div>
+    <div class="line">GGG HHH III JJJ KKK LLL</div>
+    <div class="line">MMM NNN OOO PPP QQQ RRR</div>
+    <div class="line">SSS TTT UUU VVV WWW XXX</div>
+    <div class="line" data-cogncur-uppercase-cgl-variant=1 data-cogncur-uppercase-amn-variant=2>YYY ZZZ AAA NNN CCC LLL</div>
   <br/>
   <div class="lines nospacebetween rh8">
     <div class="line">AA AD AG AI AU AT AY AW AJ AS AX AZ</div>
@@ -1071,7 +1153,7 @@
       <th>1: no exit strokes for p and s</th>
     </tr>
     <tr>
-      <td data-cogncur-existrokes=0>
+      <td data-cogncur-exitstrokes=0>
         <div class="lines rh6 nospacebetween" style="text-align: right; border-right: 1px solid #999">
           <div class="line">ski gym red</div>
           <div class="line">win far hill</div>
@@ -1091,7 +1173,7 @@
           <div class="line">shoe flee zinc</div>
         </div>
       </td>
-      <td data-cogncur-existrokes=1>
+      <td data-cogncur-exitstrokes=1>
         <div class="lines rh6 nospacebetween" style="text-align: right; border-right: 1px solid #999">
           <div class="line">ski gym red</div>
           <div class="line">win far hill</div>
@@ -1132,7 +1214,7 @@
           <div class="line">S T U V W X Y Z</div>
           <div class="line">à è ì ò ù À È Ì Ò Ù</div>
           <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
-          <div class="line" data-cogncur-dp-variant=1 data-cogncur-s-variant=1 data-cogncur-t-variant=1 data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>d p s t y w r z ij</div>
+          <div class="line" data-cogncur-stick-variant=1 data-cogncur-s-variant=1 data-cogncur-t-variant=1 data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>d p s t y w r z ij</div>
           <div class="line" data-cogncur-uppercase-amn-variant=2 data-cogncur-uppercase-cgl-variant=1  data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>A M N C G L Y W R Z IJ</div>
           <div class="line">ant baboon cat dodo</div>
           <div class="line">Egg Fang Good Hat</div>
@@ -1154,7 +1236,7 @@
           <div class="line">S T U V W X Y Z</div>
           <div class="line">à è ì ò ù À È Ì Ò Ù</div>
           <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
-          <div class="line" data-cogncur-dp-variant=1 data-cogncur-s-variant=1 data-cogncur-t-variant=1 data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>d p s t y w r z ij</div>
+          <div class="line" data-cogncur-stick-variant=1 data-cogncur-s-variant=1 data-cogncur-t-variant=1 data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>d p s t y w r z ij</div>
           <div class="line" data-cogncur-uppercase-amn-variant=2 data-cogncur-uppercase-cgl-variant=1  data-cogncur-y-variant=1 data-cogncur-w-variant=1 data-cogncur-rz-top-variant=1 data-cogncur-ij-ligature=1>A M N C G L Y W R Z IJ</div>
           <div class="line">ant baboon cat dodo</div>
           <div class="line">Egg Fang Good Hat</div>
