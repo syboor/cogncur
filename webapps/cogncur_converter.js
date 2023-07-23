@@ -10,11 +10,11 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      */
     entrystrokes: 0,
     
-    /* existrokes:
+    /* exitstrokes:
         0 = many exit strokes
-        1 = no exit strokes for s en p
+        1 = no exit strokes for s en p. If using print-like r, replaces the weird exit stroke for print-like r with a more print-like end.
      */
-    existrokes: 0,
+    exitstrokes: 0,
     
     /* t_variant:
         0 = doorverbonden t
@@ -71,17 +71,23 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      */
     undercurves: 0,
     
-    /* rz_top_variant:
+    /* r_variant:
+      0 = cursive r, ends at baseline
+      1 = print-like r, ends at midline
+      */
+    r_variant: 0,
+    
+    /* rz_top_variant: (does not apply to print-like r)
         0 = wavy tops
         1 = pointy tops
      */
     rz_top_variant: 0,
     
-    /* dp_variant:
+    /* stick_variant:
         0 = sticks of d / p same length as loops
         1 = sticks shorter than loops
      */
-    dp_variant: 0,
+    stick_variant: 0,
 
     /* uppercase_amn_variant:
         0 = German letters 
@@ -114,6 +120,18 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      */
     w_variant: 0,
     
+    /* p_curve_variant
+       0 = p starts shart (like i)
+       1 = p starts with a curve (like n)
+     */
+    p_curve_variant: 0,
+    
+    /* p_open_variant
+       0 = p is closed
+       1 = p is open (like n with a longer stick)
+     */
+    p_open_variant: 0,
+
     /* nodots:
      0 = all dots (i and j) and crossbars present
      1 = no dots (i and j) but still crossbars (t)
@@ -437,7 +455,18 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ceq2  : '\ue164',
     ceq3  : '\ue165',
 
-    
+    ccr2i : '\ue18d',
+    ccr2n : '\ue18E',
+    ccr2h : '\ue18F',
+    ccr2o : '\ue190',
+    ccr2a : '\ue191',
+    ccr2e : '\ue192',
+    ccr2s : '\ue193',
+    ccr2t1: '\ue194',
+    ccr2t : '\ue195',
+    ccr2s1: '\ue196',
+    cer2  : '\ue198',    
+    cfr2  : '\ue199',    
   }
   var letters = {
     space : '\u0020',
@@ -524,6 +553,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     Atilde : '\u00c3',
     Adieresis : '\u00c4',
     Aring : '\u00c5',
+    AE : '\u00c6',
     Ccedilla : '\u00c7',
     Egrave : '\u00c8',
     Eacute : '\u00c9',
@@ -594,6 +624,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     omacron : '\u014d',
     Obreve : '\u014e',
     obreve : '\u014f',
+    OE : '\u0152',
     oe : '\u0153',
     Scaron : '\u0160',
     scaron : '\u0161',
@@ -844,11 +875,18 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     csa_q4 : '\ue874',
     csa_d1 : '\ue875',
     csp_p1 : '\ue876',
+    csn_p2 : '\ue877',
+    csn_p3 : '\ue878',
+    csp_p4 : '\ue879',
+    csp_p5 : '\ue87a',
+    csn_p6 : '\ue87b',
+    csn_p7 : '\ue87c',
+    csn_r2 : '\ue87d',
 
     
   }
   
-  var letterglyphs_lc = 'a-zà-åăāçè-ëĕēì-ïĭīıñò-öøŏōšŧù-üŭūẋýÿžœæß' + letters.t1 + letters.t1dotless + letters.xdotless + letters.jdotless + letters.r1 + letters.z1 + letters.z1caron + letters.d1 + letters.p1 + letters.ij + letters.y1 + letters.ij1 + letters.w1 + letters.f1 + letters.f2 + letters.f3 + letters.f4 + letters.f5 + letters.q1 + letters.q2 + letters.q3 + letters.q4 + letters.s1; // kleine letters + letters
+  var letterglyphs_lc = 'a-zà-åăāçè-ëĕēì-ïĭīıñò-öøŏōšŧù-üŭūẋýÿžœæß' + letters.t1 + letters.t1dotless + letters.xdotless + letters.jdotless + letters.r1 + letters.z1 + letters.z1caron + letters.d1 + letters.p1 + letters.p2 + letters.p3 + letters.p4 + letters.p5 + letters.p6 + letters.p7 + letters.ij + letters.y1 + letters.ij1 + letters.w1 + letters.f1 + letters.f2 + letters.f3 + letters.f4 + letters.f5 + letters.q1 + letters.q2 + letters.q3 + letters.q4 + letters.s1 + letters.r2; // kleine letters + letters
   var letterglyphs_uc_connected = 'AÀ-ÅĂĀBDCÇEÈ-ËĔĒFGHIÌ-ÏĪĪJKLMNÑOÒ-ÖØŎŌPQRSŠTUÙ-ÜŬŪVWXYÝŸZŒÆ' + letters.A1 + letters.M1 + letters.N1 + letters.A2 + letters.M2 + letters.N2 + letters.IJ + letters.Y1 + letters.IJ1 + letters.W1 + letters.Z1 + letters.C1 + letters.C1cedilla + letters.G1 + letters.L1;
   var letterglyphs_uc_unconnected = ''; 
   var letterglyphs_uc = letterglyphs_uc_connected + letterglyphs_uc_unconnected;
@@ -925,6 +963,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     result = " " + result + " "; // add extra space
 
     result = exitstrokesConversion(result);
+    result = exitstrokesConversion(result); // again, if you've got the same uppercaes letter twice, the second one will not be converted
     result = joinsConversion(result);
     result = joinsConversion(result);
     // result = beginnetjesConversion(result);
@@ -970,6 +1009,9 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replace(/M/g, letters.M2);
       input = input.replace(/N/g, letters.N2);
     }
+    if (settings.r_variant == 1) {
+      input = input.replace(/r/g, letters.r2);
+    }
 
     if (settings.rz_top_variant == 1) {
       input = input.replace(/r/g, letters.r1);
@@ -989,15 +1031,14 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       }
     }
 
-
     if (settings.q_connection_variant == 1 && settings.q_continuity_variant == 0) {
-      if (settings.dp_variant == 1) {
+      if (settings.stick_variant == 1) {
         input = input.replaceAll('q', letters.q2);
       } else {
         input = input.replaceAll('q', letters.q1); // yes, this shorter stick is actually relevant for the connections
       }
     }
-
+    
     if (settings.y_variant == 1) {
       input = input.replaceAll('y', letters.y1);
       input = input.replaceAll(letters.ij, letters.ij1);
@@ -1006,16 +1047,25 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     if (settings.w_variant == 1) {
       input = input.replace(/w/g, letters.w1);
     }
+    
+    if (settings.p_curve_variant == 1) {
+      input = input.replaceAll('p', letters.p2);
+    }
+    if (settings.p_open_variant == 1) {
+      input = input.replaceAll('p', letters.p4);
+      input = input.replaceAll(letters.p2, letters.p6);
+    }
 
     return input;
   }
   function lettersConversion2(input) {
     // In this function, convert all letters that have no impact on the connecting strokes used.
     // This function will be called with connecting strokes already in place.
-    if (settings.existrokes == 1) {
+    if (settings.exitstrokes == 1) {
       input = input.replaceAll(connectors.ces, connectors.cfs);
       input = input.replaceAll(connectors.cep, connectors.cfp);
       input = input.replaceAll(connectors.ceß, connectors.cfß);
+      input = input.replaceAll(connectors.cer2, connectors.cfr2);
     }
 
     if (settings.y_variant == 1) {
@@ -1094,20 +1144,24 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     }
 
 
-    if (settings.dp_variant == 1) {
-      console.log('before dp: ' + input);
-      input = input.replace(new RegExp('[d]', 'gu'), letters.d1);
-      input = input.replace(new RegExp('[p]', 'gu'), letters.p1);
-      input = input.replace(new RegExp('['+letters.f4+']', 'gu'), letters.f5); // NB without a RegExp, it's not unicode-safe!!!
-      input = input.replace(new RegExp('['+letters.f2+']', 'gu'), letters.f3); // NB without a RegExp, it's not unicode-safe!!!
-      input = input.replace(new RegExp('['+letters.q3+']', 'gu'), letters.q4); // NB without a RegExp, it's not unicode-safe!!!
+    if (settings.stick_variant == 1) {
+      input = input.replaceAll('d', letters.d1);
+      input = input.replaceAll('p', letters.p1);
+      input = input.replaceAll(letters.p2, letters.p3);
+      input = input.replaceAll(letters.p4, letters.p5);
+      input = input.replaceAll(letters.p6, letters.p7);
+      input = input.replaceAll(letters.f2, letters.f3);
+      input = input.replaceAll(letters.f4, letters.f5);
+      input = input.replaceAll(letters.q3, letters.q4);
       
-      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csa_d+']', 'gu'), fix_whitespace_ligatures.csa_d1);
-      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csp_p+']', 'gu'), fix_whitespace_ligatures.csp_p1);
-      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csf_f4+']', 'gu'), fix_whitespace_ligatures.csf_f5);
-      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csf_f2+']', 'gu'), fix_whitespace_ligatures.csf_f3);
-      input = input.replace(new RegExp('['+fix_whitespace_ligatures.csa_q3+']', 'gu'), fix_whitespace_ligatures.csa_q4);
-      console.log('after dp: ' + input);
+      input = input.replaceAll(fix_whitespace_ligatures.csa_d, fix_whitespace_ligatures.csa_d1);
+      input = input.replaceAll(fix_whitespace_ligatures.csp_p, fix_whitespace_ligatures.csp_p1);
+      input = input.replaceAll(fix_whitespace_ligatures.csn_p2, fix_whitespace_ligatures.csn_p3);
+      input = input.replaceAll(fix_whitespace_ligatures.csp_p4, fix_whitespace_ligatures.csp_p5);
+      input = input.replaceAll(fix_whitespace_ligatures.csn_p6, fix_whitespace_ligatures.csn_p7);
+      input = input.replaceAll(fix_whitespace_ligatures.csf_f4, fix_whitespace_ligatures.csf_f5);
+      input = input.replaceAll(fix_whitespace_ligatures.csf_f2, fix_whitespace_ligatures.csf_f3);
+      input = input.replaceAll(fix_whitespace_ligatures.csa_q3, fix_whitespace_ligatures.csa_q4);
     }
     
 
@@ -1120,38 +1174,38 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     // - letters that can be user input (with a standard unicode mapping < \ue8000
     // - letters that require different connections than the standard letter, produced by lettersConversion1()
     var replacementPairs = [
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccna],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([eè-ëĕē])", connectors.ccne],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccnh],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.y1+letters.ij1+"])", connectors.ccni],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccnn],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([sš])", connectors.ccns],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])(["+letters.s1+"])", connectors.ccns1],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([cçoò-öøŏōœ])", connectors.ccno],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])(["+letters.t1+"])", connectors.ccnt1],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+"])([tŧ])", connectors.ccnt],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccna],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([eè-ëĕē])", connectors.ccne],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccnh],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccni],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccnn],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([sš])", connectors.ccns],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])(["+letters.s1+"])", connectors.ccns1],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([cçoò-öøŏōœ])", connectors.ccno],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])(["+letters.t1+"])", connectors.ccnt1],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([tŧ])", connectors.ccnt],
 
       ["([sš"+letters.s1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccsa],
       ["([sš"+letters.s1+"])([eè-ëĕē])", connectors.ccse],
       ["([sš"+letters.s1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccsh],
-      ["([sš"+letters.s1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccsi],
-      ["([sš"+letters.s1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccsn],
+      ["([sš"+letters.s1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccsi],
+      ["([sš"+letters.s1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccsn],
       ["([sš"+letters.s1+"])([sš])", connectors.ccss],
       ["([sš"+letters.s1+"])(["+letters.s1+"])", connectors.ccss1],
       ["([sš"+letters.s1+"])([cçoò-öøŏōœ])", connectors.ccso],
       ["([sš"+letters.s1+"])(["+letters.t1+"])", connectors.ccst1],
       ["([sš"+letters.s1+"])([tŧ])", connectors.ccst],
 
-      ["([pß])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccpa],
-      ["([pß])([eè-ëĕē])", connectors.ccpe],
-      ["([pß])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccph],
-      ["([pß])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccpi],
-      ["([pß])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccpn],
-      ["([pß])([sš])", connectors.ccps],
-      ["([pß])(["+letters.s1+"])", connectors.ccps1],
-      ["([pß])([cçoò-öøŏōœ])", connectors.ccpo],
-      ["([pß])(["+letters.t1+"])", connectors.ccpt1],
-      ["([pß])([tŧ])", connectors.ccpt],
+      ["([pß"+letters.p2+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccpa],
+      ["([pß"+letters.p2+"])([eè-ëĕē])", connectors.ccpe],
+      ["([pß"+letters.p2+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccph],
+      ["([pß"+letters.p2+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccpi],
+      ["([pß"+letters.p2+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccpn],
+      ["([pß"+letters.p2+"])([sš])", connectors.ccps],
+      ["([pß"+letters.p2+"])(["+letters.s1+"])", connectors.ccps1],
+      ["([pß"+letters.p2+"])([cçoò-öøŏōœ])", connectors.ccpo],
+      ["([pß"+letters.p2+"])(["+letters.t1+"])", connectors.ccpt1],
+      ["([pß"+letters.p2+"])([tŧ])", connectors.ccpt],
       
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccqa],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([eè-ëĕē])", connectors.ccqe],
@@ -1159,7 +1213,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccqi],
       ["([fq])([jȷ])", connectors.ccqj], // special connector for 'fj' and 'qj'
       ["([zžQZ"+letters.z1+letters.z1caron+"])([jȷ])", connectors.ccqi], // but no need or 'zj'
-      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccqn],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccqn],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([sš])", connectors.ccqs],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])(["+letters.s1+"])", connectors.ccqs1],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([cçoò-öøŏōœ])", connectors.ccqo],
@@ -1171,7 +1225,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+letters.f1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccf1h],
       ["(["+letters.f1+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccf1i],
       ["(["+letters.f1+"])([jȷ])", connectors.ccf1j], // special connector for 'fj' and 'qj'
-      ["(["+letters.f1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccf1n],
+      ["(["+letters.f1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccf1n],
       ["(["+letters.f1+"])([sš])", connectors.ccf1s],
       ["(["+letters.f1+"])(["+letters.s1+"])", connectors.ccf1s1],
       ["(["+letters.f1+"])([cçoò-öøŏōœ])", connectors.ccf1o],
@@ -1183,7 +1237,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+letters.f4+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccf4h],
       ["(["+letters.f4+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccf4i],
       ["(["+letters.f4+"])([jȷ])", connectors.ccf4i], // not special, just use 'ccf4i'
-      ["(["+letters.f4+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccf4n],
+      ["(["+letters.f4+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccf4n],
       ["(["+letters.f4+"])([sš])", connectors.ccf4s],
       ["(["+letters.f4+"])(["+letters.s1+"])", connectors.ccf4s1],
       ["(["+letters.f4+"])([cçoò-öøŏōœ])", connectors.ccf4o],
@@ -1195,7 +1249,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+letters.q1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccq1h],
       ["(["+letters.q1+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccq1i],
       ["(["+letters.q1+"])([jȷ])", connectors.ccq1j], // special connector for 'fj' and 'qj'
-      ["(["+letters.q1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccq1n],
+      ["(["+letters.q1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccq1n],
       ["(["+letters.q1+"])([sš])", connectors.ccq1s],
       ["(["+letters.q1+"])(["+letters.s1+"])", connectors.ccq1s1],
       ["(["+letters.q1+"])([cçoò-öøŏōœ])", connectors.ccq1o],
@@ -1207,7 +1261,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+letters.q2+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccq2h],
       ["(["+letters.q2+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccq2i],
       ["(["+letters.q2+"])([jȷ])", connectors.ccq2i], // no special connector needed
-      ["(["+letters.q2+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccq2n],
+      ["(["+letters.q2+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccq2n],
       ["(["+letters.q2+"])([sš])", connectors.ccq2s],
       ["(["+letters.q2+"])(["+letters.s1+"])", connectors.ccq2s1],
       ["(["+letters.q2+"])([cçoò-öøŏōœ])", connectors.ccq2o],
@@ -1219,7 +1273,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([eè-ëĕē])", connectors.ccge],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccgh],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.IJ+letters.ij1+"])", connectors.ccgi],
-      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccgn],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccgn],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([sš])", connectors.ccgs],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])(["+letters.s1+"])", connectors.ccgs1],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([cçoò-öøŏōœ])", connectors.ccgo],
@@ -1229,8 +1283,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([bvw"+letters.w1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccva],
       ["([bvw"+letters.w1+"])([eè-ëĕē])", connectors.ccve],
       ["([bvw"+letters.w1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccvh],
-      ["([bvw"+letters.w1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccvi],
-      ["([bvw"+letters.w1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccvn],
+      ["([bvw"+letters.w1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccvi],
+      ["([bvw"+letters.w1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccvn],
       ["([bvw"+letters.w1+"])([sš])", connectors.ccvs],
       ["([bvw"+letters.w1+"])(["+letters.s1+"])", connectors.ccvs1],
       ["([bvw"+letters.w1+"])([cçoò-öøŏōœ])", connectors.ccvo],
@@ -1240,8 +1294,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([oò-öøŏō])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccoa],
       ["([oò-öøŏō])([eè-ëĕē])", connectors.ccoe],
       ["([oò-öøŏō])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccoh],
-      ["([oò-öøŏō])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccoi],
-      ["([oò-öøŏō])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccon],
+      ["([oò-öøŏō])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccoi],
+      ["([oò-öøŏō])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccon],
       ["([oò-öøŏō])([sš])", connectors.ccos],
       ["([oò-öøŏō])(["+letters.s1+"])", connectors.ccos1],
       ["([oò-öøŏō])([cçoò-öøŏōœ])", connectors.ccoo],
@@ -1252,8 +1306,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccea],
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([eè-ëĕē])", connectors.ccee],
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([bfhkl"+letters.f1+letters.f4+"])", connectors.cceh],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccei],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccen],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccei],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccen],
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([sš])", connectors.cces],
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])(["+letters.s1+"])", connectors.cces1],
       ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([cçoò-öøŏōœ])", connectors.cceo],
@@ -1263,19 +1317,31 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([tŧ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccta],
       ["([tŧ])([eè-ëĕē])", connectors.ccte],
       ["([tŧ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccth],
-      ["([tŧ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccti],
-      ["([tŧ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.cctn],
+      ["([tŧ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccti],
+      ["([tŧ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.cctn],
       ["([tŧ])([sš])", connectors.ccts],
       ["([tŧ])(["+letters.s1+"])", connectors.ccts1],
       ["([tŧ])([cçoò-öøŏōœ])", connectors.ccto],
       ["([tŧ])(["+letters.t1+"])", connectors.cctt1],
       ["([tŧ])([tŧ])", connectors.cctt],
 
+      ["(["+letters.r2+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccr2a],
+      ["(["+letters.r2+"])([eè-ëĕē])", connectors.ccr2e],
+      ["(["+letters.r2+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccr2h],
+      ["(["+letters.r2+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccr2i],
+      ["(["+letters.r2+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccr2n],
+      ["(["+letters.r2+"])([sš])", connectors.ccr2s],
+      ["(["+letters.r2+"])(["+letters.s1+"])", connectors.ccr2s1],
+      ["(["+letters.r2+"])([cçoò-öøŏōœ])", connectors.ccr2o],
+      ["(["+letters.r2+"])(["+letters.t1+"])", connectors.ccr2t1],
+      ["(["+letters.r2+"])([tŧ])", connectors.ccr2t],
+
+
       ["([AÀ-ÅĂĀ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccAa],
       ["([AÀ-ÅĂĀ])([eè-ëĕē])", connectors.ccAe],
       ["([AÀ-ÅĂĀ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccAh],
-      ["([AÀ-ÅĂĀ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccAi],
-      ["([AÀ-ÅĂĀ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccAn],
+      ["([AÀ-ÅĂĀ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccAi],
+      ["([AÀ-ÅĂĀ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccAn],
       ["([AÀ-ÅĂĀ])([sš])", connectors.ccAs],
       ["([AÀ-ÅĂĀ])(["+letters.s1+"])", connectors.ccAs1],
       ["([AÀ-ÅĂĀ])([cçoò-öøŏōœ])", connectors.ccAo],
@@ -1285,8 +1351,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([BSŠ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccBa],
       ["([BSŠ])([eè-ëĕē])", connectors.ccBe],
       ["([BSŠ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccBh],
-      ["([BSŠ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccBi],
-      ["([BSŠ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccBn],
+      ["([BSŠ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccBi],
+      ["([BSŠ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccBn],
       ["([BSŠ])([sš])", connectors.ccBs],
       ["([BSŠ])(["+letters.s1+"])", connectors.ccBs1],
       ["([BSŠ])([cçoò-öøŏōœ])", connectors.ccBo],
@@ -1296,8 +1362,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([DOÒ-ÖØŎŌVW])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccOa],
       ["([DOÒ-ÖØŎŌVW])([eè-ëĕē])", connectors.ccOe],
       ["([DOÒ-ÖØŎŌVW])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccOh],
-      ["([DOÒ-ÖØŎŌVW])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccOi],
-      ["([DOÒ-ÖØŎŌVW])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccOn],
+      ["([DOÒ-ÖØŎŌVW])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccOi],
+      ["([DOÒ-ÖØŎŌVW])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccOn],
       ["([DOÒ-ÖØŎŌVW])([sš])", connectors.ccOs],
       ["([DOÒ-ÖØŎŌVW])(["+letters.s1+"])", connectors.ccOs1],
       ["([DOÒ-ÖØŎŌVW])([cçoò-öøŏōœ])", connectors.ccOo],
@@ -1307,8 +1373,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([P])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccPa],
       ["([P])([eè-ëĕē])", connectors.ccPe],
       ["([P])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccPh],
-      ["([P])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccPi],
-      ["([P])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccPn],
+      ["([P])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccPi],
+      ["([P])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccPn],
       ["([P])([sš])", connectors.ccPs],
       ["([P])(["+letters.s1+"])", connectors.ccPs1],
       ["([P])([cçoò-öøŏōœ])", connectors.ccPo],
@@ -1318,8 +1384,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([FT])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccFa],
       ["([FT])([eè-ëĕē])", connectors.ccFe],
       ["([FT])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccFh],
-      ["([FT])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccFi],
-      ["([FT])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccFn],
+      ["([FT])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccFi],
+      ["([FT])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccFn],
       ["([FT])([sš])", connectors.ccFs],
       ["([FT])(["+letters.s1+"])", connectors.ccFs1],
       ["([FT])([cçoò-öøŏōœ])", connectors.ccFo],
@@ -1329,8 +1395,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([IÌ-ÏĪĪ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccIa],
       ["([IÌ-ÏĪĪ])([eè-ëĕē])", connectors.ccIe],
       ["([IÌ-ÏĪĪ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccIh],
-      ["([IÌ-ÏĪĪ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccIi],
-      ["([IÌ-ÏĪĪ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccIn],
+      ["([IÌ-ÏĪĪ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccIi],
+      ["([IÌ-ÏĪĪ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccIn],
       ["([IÌ-ÏĪĪ])([sš])", connectors.ccIs],
       ["([IÌ-ÏĪĪ])(["+letters.s1+"])", connectors.ccIs1],
       ["([IÌ-ÏĪĪ])([cçoò-öøŏōœ])", connectors.ccIo],
@@ -1340,8 +1406,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([NÑ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccNa],
       ["([NÑ])([eè-ëĕē])", connectors.ccNe],
       ["([NÑ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccNh],
-      ["([NÑ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccNi],
-      ["([NÑ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+"])", connectors.ccNn],
+      ["([NÑ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccNi],
+      ["([NÑ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccNn],
       ["([NÑ])([sš])", connectors.ccNs],
       ["([NÑ])(["+letters.s1+"])", connectors.ccNs1],
       ["([NÑ])([cçoò-öøŏōœ])", connectors.ccNo],
@@ -1380,8 +1446,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["("+left+")([ß])", connectors.cggermandbls, connectors.csgermandbls, connectors.csgermandbls], 
       ["("+left+")(["+letters.y1+letters.ij1+"])", connectors.cgy1, connectors.csy1, connectors.csy1], 
       ["("+left+")([jȷ])", connectors.cgj, connectors.csj, connectors.csj], 
-      ["("+left+")([p])", connectors.cgp, connectors.csp, connectors.csp], 
-      ["("+left+")([mnñrvxẋ"+letters.w1+"])", connectors.cgn, connectors.csn, connectors.csn],
+      ["("+left+")([p"+letters.p4+"])", connectors.cgp, connectors.csp, connectors.csp], 
+      ["("+left+")([mnñrvxẋ"+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.cgn, connectors.csn, connectors.csn],
       ["("+left+")([yýÿ"+letters.ij+"])", connectors.cgy, connectors.csy, connectors.csy],
       ["("+left+")([zž])", connectors.cgz, connectors.csz, connectors.csz], // special case, parallel with internal stroke of 'z'
       ["("+left+")(["+letters.z1+letters.z1caron+"])", connectors.cgz1, connectors.csz1, connectors.csz1], // special case, parallel with internal stroke of 'z'
@@ -1413,7 +1479,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     
     // exitstrokes
     var replacementPairs = [
-      ["([à-åăāaımnñruù-üŭūxẋ"+letters.r1+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
+      ["([à-åăāaımnñruù-üŭūxẋ"+letters.r1+letters.p4+letters.p6+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
       ["([M])("+right+")", connectors.ceM],
       ["([lH])("+right+")", connectors.ceH],
       ["([hk])("+right+")", connectors.ceh],
@@ -1426,7 +1492,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["(["+letters.q1+"])("+right+")", connectors.ceq1],
       ["(["+letters.q2+"])("+right+")", connectors.ceq2],
       ["([QZ])("+right+")", connectors.ceQ],
-      ["([p])("+right+")",  connectors.cep],
+      ["([p"+letters.p2+"])("+right+")",  connectors.cep],
       ["([ß])("+right+")",  connectors.ceß],
       ["([sš"+letters.s1+"])("+right+")",  connectors.ces],
       ["([gȷyýÿG"+letters.y1+"])("+right+")", connectors.ceg], // anything without stuff above the midline
@@ -1437,6 +1503,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([CÇL])("+right+")", connectors.ceC], // for kerning
       ["([EÈ-ËĔĒŒÆ])("+right+")", connectors.ceE], // for kerning
       ["([tŧ])("+right+")", connectors.cet],
+      ["(["+letters.r2+"])("+right+")", connectors.cer2],
       ["([AÀ-ÅĂĀ])("+right+")", connectors.ceA],
       ["([BSŠ])("+right+")", connectors.ceB],
       ["([OÒ-ÖØŎŌVW])("+right+")", connectors.ceO],
