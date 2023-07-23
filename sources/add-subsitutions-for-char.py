@@ -32,7 +32,7 @@ def add_subs(glyphname, connects_as, end_piece):
   glyphs = get_glyphs();
   glyph = glyphs[glyphname];
   
-  for left in ['n', 'e', 's', 'p', 'q', 'g', 'v', 'o', 't', 'A', 'B', 'O', 'F', 'P', 'I', 'N', 'f1', 'f4', 'q1', 'q2']:
+  for left in ['n', 'e', 's', 'p', 'q', 'g', 'v', 'o', 't', 'A', 'B', 'O', 'F', 'P', 'I', 'N', 'f1', 'f4', 'q1', 'q2', 'r2']:
     glyph.addPosSub('after-'+left+'-continued-1', ('cc'+ left + connects_as, glyphname));
     glyph.addPosSub('after-'+left+'-end-1', ('cc'+ left + connects_as, glyphname, end_piece));
 
@@ -44,8 +44,8 @@ def add_subs(glyphname, connects_as, end_piece):
 
 # How to add a new character in
 
-
-add_subs('p2', 'n', 'cep');
+add_subs('r1', 'i', 'cen');
+add_subs('r2', 'n', 'cer2');
 
 #add_subs('s1', 's1', 'ces');
 #add_subs('germandbls', 'i', 'cegermandbls');
