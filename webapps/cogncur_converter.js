@@ -159,8 +159,43 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      NB3 Regardless of which smartquotes option is chosen, the default 'low' apostrophe will be replaced 
      with a 'high' apostrope after tall letters. This 'high' apostrophe happens to be the 'single closing quote' glyph.
      */
-     smartquotes: 0
+     smartquotes: 0,
      
+    /* numerals_tabular
+     0 = no, proportional width
+     1 = yes, tabular width
+     */
+     numerals_tabular: 0,
+     
+     // numeral 1: 0, 1, 2
+     numeral_1_variant: 0,
+     
+     // numeral 2: 0, 1
+     numeral_2_variant: 0,
+     
+     // numeral 3: 0, 1
+     numeral_3_variant: 0,
+     
+     // numeral 4: 0, 1, 2, 3
+     numeral_4_variant: 0,
+     
+     // numeral 7: 0, 1, 2, 3
+     numeral_7_variant: 0,
+     
+     // numeral 8: 0, 1, 2
+     numeral_8_variant: 0,
+     
+     // numeral 9: 0, 1
+     numeral_9_variant: 0,
+     
+     // Use EITHER numeral_x_variant for each numeral, OR use numeral_variants_set1 & numberals_variants_set2 for groups of numerals (analogous to the stylistic sets)
+     /* numerals_variant: 
+        set1:       1 variant 1, 3 variant 1, 4 variant 1, 7 variant 1, 8 variant 1, 9 variant 1
+        set2:       4 variant 2, 2 variant 1, 7 variant 2, 8 variant 2
+        set1 & set2: 1 variant 1, 2 variant 3, 3 variant 1, 4 variant 3, 7 variant 3, 8 variant 2, 9 variant 1
+      */
+     numeral_variants_set1: 0,
+     numeral_variants_set2: 0
      
   }
   var connectors = {
@@ -753,7 +788,60 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     aamacron : '\ue17c',
     aabreve : '\ue17d',
     uumacron : '\ue17e',
-    uubreve : '\ue17f'
+    uubreve : '\ue17f',
+  }
+  var numerals = {
+    '0' : '0',
+    '1' : '1',
+    '2' : '2',
+    '3' : '3',
+    '4' : '4',
+    '5' : '5',
+    '6' : '6',
+    '7' : '7',
+    '8' : '8',
+    '9' : '9',
+    'one.alt1' : '\ue1b7',
+    'one.alt2' : '\ue1b8',
+    'two.alt1' : '\ue1b9',
+    'three.alt1' : '\ue1ba',
+    'four.alt1' : '\ue1bb',
+    'four.alt2' : '\ue1bc',
+    'four.alt3' : '\ue1bd',
+    'seven.alt1' : '\ue1be',
+    'seven.alt2' : '\ue1bf',
+    'seven.alt3' : '\ue1c0',
+    'eight.alt1' : '\ue1c1',
+    'eight.alt2' : '\ue1c2',
+    'nine.alt1' : '\ue1c3',
+    'zero.tab' : '\ue1c7',
+    'one.tab' : '\ue1c8',
+    'one.alt1.tab' : '\ue1c9',
+    'one.alt2.tab' : '\ue1ca',
+    'two.tab' : '\ue1cb',
+    'two.alt1.tab' : '\ue1cc',
+    'three.tab' : '\ue1cd',
+    'three.alt1.tab' : '\ue1ce',
+    'four.tab' : '\ue1cf',
+    'four.alt1.tab' : '\ue1d0',
+    'four.alt2.tab' : '\ue1d1',
+    'four.alt3.tab' : '\ue1d2',
+    'five.tab' : '\ue1d3',
+    'six.tab' : '\ue1d4',
+    'seven.tab' : '\ue1d5',
+    'seven.alt1.tab' : '\ue1d6',
+    'seven.alt2.tab' : '\ue1d7',
+    'seven.alt3.tab' : '\ue1d8',
+    'eight.tab' : '\ue1d9',
+    'eight.alt1.tab' : '\ue1da',
+    'eight.alt2.tab' : '\ue1db',
+    'nine.tab' : '\ue1dc',
+    'nine.alt1.tab' : '\ue1dd',
+    'period.tab' : '\ue1de',
+    'comma.tab' : '\ue1df',
+    'colon.tab' : '\ue1e0',
+    'semicolon.tab' : '\ue1e1',
+    'space.tab' : '\ue1e2',
   }
   
   var fix_whitespace_ligatures = {
@@ -893,7 +981,9 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   var letterglyphs = letterglyphs_lc + letterglyphs_uc;
   var connectorglyphs = Object.values(connectors).join(''); // connections + entry strokes + exit strokes + 'kerning connections' (containing whitespace)
 
-  var numberglyphs = '0-9';  // tabelcijfers
+  var numberglyphs = Object.values(numerals).join('');
+  var spaceglyphs = ' ' + '\u00a0' + numerals['space.tab'];
+
 
   var glyphs = letterglyphs + connectorglyphs + numberglyphs;
 
@@ -948,6 +1038,28 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       settings.q_continuity_variant = settings.fq_continuity_variant;
     }
     
+    if (settings.numeral_variants_set1 == 1 && settings.numeral_variants_set2 == 0) {
+      settings.numeral_1_variant = 1;
+      settings.numeral_3_variant = 1;
+      settings.numeral_4_variant = 1;
+      settings.numeral_7_variant = 1;
+      settings.numeral_8_variant = 1;
+      settings.numeral_9_variant = 1;
+    } else if (settings.numeral_variants_set1 == 0 && settings.numeral_variants_set2 == 1) {
+      settings.numeral_2_variant = 1;
+      settings.numeral_4_variant = 2;
+      settings.numeral_7_variant = 2;
+      settings.numeral_8_variant = 2;
+    } else if (settings.numeral_variants_set1 == 1 && settings.numeral_variants_set2 == 1) {
+      settings.numeral_1_variant = 1;
+      settings.numeral_2_variant = 1;
+      settings.numeral_3_variant = 1;
+      settings.numeral_4_variant = 3;
+      settings.numeral_7_variant = 3;
+      settings.numeral_8_variant = 1;
+      settings.numeral_9_variant = 1;
+    }
+    
     return settings;
   };
      
@@ -966,15 +1078,16 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     result = exitstrokesConversion(result); // again, if you've got the same uppercaes letter twice, the second one will not be converted
     result = joinsConversion(result);
     result = joinsConversion(result);
-    // result = beginnetjesConversion(result);
     result = lettersConversion2(result);
 
     result = dotlessConversion(result);
     
     result = fixwhitespaceligaturesConversion(result);
     
+    result = numeralsConversion(result);
+    
     // ONLY trim off the space we added at the start
-    if (result.substring(0,1) == " ") result = result.substring(1);
+    if (result.substring(0,1) == " " || result.substring(0,1) == numerals['space.tab']) result = result.substring(1);
     if (result.substring(result.length - 1) == " ") result = result.substring(0,result.length - 1);
     return result;
   }
@@ -1517,6 +1630,51 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       var zoek = new RegExp(replacementPairs[i][0], "gu");
       var vervang = "$1" + replacementPairs[i][1] + "$2";
       input = input.replace(zoek, vervang);
+    }
+    
+    return input;
+  }
+  
+  function numeralsConversion(input) {
+    
+    
+    if (settings.numeral_1_variant) input = input.replaceAll('1', numerals['one.alt'+settings.numeral_1_variant]);
+    if (settings.numeral_2_variant) input = input.replaceAll('2', numerals['two.alt'+settings.numeral_2_variant]);
+    if (settings.numeral_3_variant) input = input.replaceAll('3', numerals['three.alt'+settings.numeral_3_variant]);
+    if (settings.numeral_4_variant) input = input.replaceAll('4', numerals['four.alt'+settings.numeral_4_variant]);
+    if (settings.numeral_7_variant) input = input.replaceAll('7', numerals['seven.alt'+settings.numeral_7_variant]);
+    if (settings.numeral_8_variant) input = input.replaceAll('8', numerals['eight.alt'+settings.numeral_8_variant]);
+    if (settings.numeral_9_variant) input = input.replaceAll('9', numerals['nine.alt'+settings.numeral_9_variant]);
+    
+    if (settings.numerals_tabular) {
+      input = input.replaceAll('0', numerals['zero.tab']);
+      input = input.replaceAll('1', numerals['one.tab']);
+      input = input.replaceAll(numerals['one.alt1'], numerals['one.alt1.tab']);
+      input = input.replaceAll('2', numerals['two.tab']);
+      input = input.replaceAll(numerals['two.alt1'], numerals['two.alt1.tab']);
+      input = input.replaceAll('3', numerals['three.tab']);
+      input = input.replaceAll(numerals['three.alt1'], numerals['three.alt1.tab']);
+      input = input.replaceAll('4', numerals['four.tab']);
+      input = input.replaceAll(numerals['four.alt1'], numerals['four.alt1.tab']);
+      input = input.replaceAll(numerals['four.alt2'], numerals['four.alt2.tab']);
+      input = input.replaceAll(numerals['four.alt3'], numerals['four.alt3.tab']);
+      input = input.replaceAll('7', numerals['seven.tab']);
+      input = input.replaceAll(numerals['seven.alt1'], numerals['seven.alt1.tab']);
+      input = input.replaceAll(numerals['seven.alt2'], numerals['seven.alt2.tab']);
+      input = input.replaceAll(numerals['seven.alt3'], numerals['seven.alt3.tab']);
+      input = input.replaceAll('8', numerals['eight.tab']);
+      input = input.replaceAll(numerals['eight.alt1'], numerals['eight.alt1.tab']);
+      input = input.replaceAll(numerals['eight.alt2'], numerals['eight.alt2.tab']);
+      input = input.replaceAll('9', numerals['nine.tab']);
+      input = input.replaceAll(numerals['nine.alt1'], numerals['nine.alt1.tab']);
+
+      input = input.replaceAll(' ', numerals['space.tab']);
+      input = input.replaceAll('\u00a0', numerals['space.tab']); //nbsp
+      input = input.replaceAll('.', numerals['period.tab']);
+      input = input.replaceAll(',', numerals['comma.tab']);
+      input = input.replaceAll(':', numerals['colon.tab']);
+      input = input.replaceAll(';', numerals['semicolon.tab']);
+      
     }
     
     return input;

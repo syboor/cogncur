@@ -8,12 +8,59 @@ COGNCUR USER GUIDE
 
 2. Feature guide / What is possible
 - 'typeface features' aka what it looks like
-- letter variants through stylistic sets
+  - loops: 
+    - b, l, h, k have tall loops. 
+    - d and p do not have loops; the stick length can be changed
+    - g, j, y have low loops
+    - f and q have a forward loop, but variants without a loop are available
+    - z does not have a loop. I don't see the point.
+    - loops have the same length as the middle zone
+  - (no) pencil lifts
+    - t, r, s, f: different from print letters + alternative versions
+    - but x does have a pencil lift
+  - slant: 3 options
+  - arches: branching out, branching in (n, m, r, h, k, b, p / u, w, a, d, g, q ). Also: the 'small' letters are taller than they are wide.
+  - teardrop counters: a, d, g / b, p
+  - ellipses: o, c, e (s)
+  - joins from the baseline
+    - tight curves
+    - straight, diagonal segment
+    - letter spacing trumps parallellism
+    - reasons: 
+      - tight curves can't be confused with the wider arches found within letters (give example of letter/join confusion in Zaner-Bloser)
+      - tight curves help achieve fairly narrow and even spacing (give example of uneven spacing in D'Nealian)
+      - straight, diagonal segments don't occur in letters (except z)
+  - multilingual characters
+  - accented characters for phonics / spelling
+  - uppercase
+    - differences between uppercase and lowercase: lowercase is more consistent, re-uses the same elements, has almost no pencil lifts. uppercase has more unique elements, has pencil lifts both within the letter and at the start of a (therefore fake) join
+    - uppercase has a lot of variation between countries, and it's not possible to accommodate all that
+    - print-like A/M/N, S, ...
+  - numerals
+    - default number are lining (all the same height) and proportional (not all the same width)
+    - select 'tabular numbers' to make them all the same width. 
+      - this will also make the following characters the same width as the numbers: +, -, =, _, currency symbols, <space>, /, \
+      - this will also make the comma, period and colon zero-width
+      - this setting should never be used in normal text as it will result in incorrect spacing around interpunction
+    - select 'old style numbers' to make numbers vary in height ('hanging' numbers):
+      - these numbers are intended for use in lowercase text, therefore they will have proportional width
+      - this makes the following mathematical symbols smaller: division, multiplication
+    - other mathematical symbols: division, multiplication
 - font styles (i.e. different slants, edged versus monoline pen)
-- didactic features (integrated guides, guide characters, overlay fonts, etc)
+  - slants
+  - monoline versus edged pen
+- didactic features
+  - entry strokes from the baseline
+  - exit strokes (s, p, germandbls, print-like r)
+  - fonts with integrated guidelines
+    - do not justify
+    - creating spaces with and without guidelines
+  - creating guidelines with special characters
+  - overlay fonts
 - technical features
-  - OpenType features
+  - OpenType features / requirements
   - workarounds
+- ??? appendix: letter variants (or will this be redundant?)
 
 3. Application guide / How to do it
 - worksheet generator (online)

@@ -40,7 +40,8 @@
     <li><a href="#letterswhitespace">Whitespace</a></li>
     <li><a href="#connections">Connections</a></li>
     <li><a href="#inter">Interpunction</a></li>
-    <li><a href="#digits">Digits</a></li>
+    <li><a href="#numeralvariants">Numeral variants</a></li>
+    <li><a href="#numeralstyles">Numeral styles</a></li>
     <li><a href="#special">Special characters</a></li>
     <li><a href="#lines">Lines</a></li>
     <li><a href="#entry">Entry strokes</a></li>
@@ -51,34 +52,6 @@
     <li><a href="#overlap">Overlapping entry / connecting strokes</a></li>
   </ul>
 
-  
-  <!-- 
-  TODO: verbindingen naar o en a doortrekken... (nuttig voor webtoepassingen, maar geen probleem in het desktop font -> gewoon altijd doen)
-  
-  TODO: (optional) no entry strokes for i/u/w (sharp letters)
-  TODO: ??? uppercase U/W/Y with entry stroke??? But... isn't this confusing, given the wavy, horizontal entry stroke on J?
-    
-  TODO: kerning between uppercase letters
-  - TODO: why does it not work in Chromium (but works in Office)?
-  - TODO: split up ceO into ceO and ceV (right now, everything is kerned for V)
-  - same for ceB vs ceS, ceQ vs ceZ
-
-  TODO: create 'edged' fonts at all slants
-  
-  TODO: 
-  - testing/documentation matrix: per feature: what it should look like, what a 'failure' looks like, questions to ask (does it work automatically?). Features: contextual alternates; kerning; stylistic sets; multilinguage support; 'ij' ligature
-  - how to 'flatten' stylistic sets for MS Word
-  
-  TODO: revisit merging points of N2, M2 and U.
-  
-  TODO: Use symbols for lines??? (at least in the regular fonts...). Pick 3 symbols: fully lined, fully lined without bottom descender, baseline + midline, baseline only (standard | symbol). Broken pipe (|)???
-  
-  TODO: test line dimension (we know the proportions are OK, but does the lineheight match the names on the stylesheet?)
-  
-  TODO: test csa substitution (with required ligatures) in javascript
-  TODO: do oobreve etc conversion
-  
-  -->
   
   <h2>Scripting options</h2>
   cursive: connections creating by javascript, contextual alternates disabled. <i>reason: this gives us access to the individual connecting glyphs for styling</i>
@@ -960,14 +933,121 @@
   ¡Ávida cigüeña floja!, pibonazo quemó whisky extra. 
   </div>
   
-  <h2><a name="digits">Digits</a></h2>
-  <div class="lines rh12">
-    <div class="line">0 1 2 3 4 5 6 7 8 9 10</div>
-    <div class="line">1789 2001 1492</div>
-    <div class="line">8:30 a.m. Ride to the park.</div>
-    <div class="line">10:10 a.m. Meet Al at the park.</div>
-    <div class="line">12:15 p.m. Have a picnic lunch.</div>
+  <h2><a name="numeralvariants">Numeral variants</a></h2>
+  Individual selection of variants
+  <table>
+    <tr>
+      <th>default &nbsp;</th>
+      <th>variant 1 </th>
+      <th>variant 2 </th>
+      <th>variant 3 </th>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">0</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">1</td>
+      <td class="cursive" data-cogncur-numeral-1-variant=1>1</td>
+      <td class="cursive" data-cogncur-numeral-1-variant=2>1</td>
+      <td class="cursive" data-cogncur-numeral-1-variant=3>&nbsp;</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">2</td>
+      <td class="cursive" data-cogncur-numeral-2-variant=1>2</td>
+      <td class="cursive" data-cogncur-numeral-2-variant=2>&nbsp;</td>
+      <td class="cursive" data-cogncur-numeral-2-variant=3>&nbsp;</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">3</td>
+      <td class="cursive" data-cogncur-numeral-3-variant=1>3</td>
+      <td class="cursive" data-cogncur-numeral-3-variant=2>&nbsp;</td>
+      <td class="cursive" data-cogncur-numeral-3-variant=3>&nbsp;</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">4</td>
+      <td class="cursive" data-cogncur-numeral-4-variant=1>4</td>
+      <td class="cursive" data-cogncur-numeral-4-variant=2>4</td>
+      <td class="cursive" data-cogncur-numeral-4-variant=3>4</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">5</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">6</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">7</td>
+      <td class="cursive" data-cogncur-numeral-7-variant=1>7</td>
+      <td class="cursive" data-cogncur-numeral-7-variant=2>7</td>
+      <td class="cursive" data-cogncur-numeral-7-variant=3>7</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">8</td>
+      <td class="cursive" data-cogncur-numeral-8-variant=1>8</td>
+      <td class="cursive" data-cogncur-numeral-8-variant=2>8</td>
+      <td class="cursive" data-cogncur-numeral-8-variant=3>&nbsp;</td>
+    </tr>
+    <tr class="rh8">
+      <td class="cursive">9</td>
+      <td class="cursive" data-cogncur-numeral-9-variant=1>9</td>
+      <td class="cursive" data-cogncur-numeral-9-variant=2>&nbsp;</td>
+      <td class="cursive" data-cogncur-numeral-9-variant=3>&nbsp;</td>
+    </tr>
+  </table>
+  <br/>
+  Group selection (stylistic sets)
+  <div class="lines rh8 nospacebetween">
+    <div class="line">0 1 2 3 4 5 6 7 8 9</div>
+    <div class="line traceable startpunt-overlay-rood">0 1 2 3 4 5 6 7 8 9</div>
+    <div class="line" data-cogncur-numeral-variants-set1=1>0 1 2 3 4 5 6 7 8 9</div>
+    <div class="line traceable startpunt-overlay-rood" data-cogncur-numeral-variants-set1=1>0 1 2 3 4 5 6 7 8 9</div>
+    <div class="line" data-cogncur-numeral-variants-set2=1>0 1 2 3 4 5 6 7 8 9</div>
+    <div class="line traceable startpunt-overlay-rood" data-cogncur-numeral-variants-set2=1>0 1 2 3 4 5 6 7 8 9</div>
+    <div class="line" data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=1>0 1 2 3 4 5 6 7 8 9</div>
+    <div class="line traceable startpunt-overlay-rood" data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=1>0 1 2 3 4 5 6 7 8 9</div>
   </div>
+  
+  <h2><a name="numeralstyles">Numeral styles</a></h2>
+  <table>
+    <tr>
+      <th>proportional width</th>
+      <th>tabular width</th>
+    </tr>
+    <tr>
+      <td class="cursive nolines rh6">
+0 0 0 0 0 0 0 0 0 0<br/>
+1 1 1 1 1 1 1 1 1 1<br/>
+2 3 2 3 2 3 2 3 2 3<br/>
+999,95 1.000.000.000&nbsp;<br/>
+&nbsp;12,50&nbsp;&nbsp;999.999.999<br/>
+Nov 9, 1989 at 17:00.<br/>
+      </td>
+      <td class="cursive nolines rh6" data-cogncur-numerals-tabular=1>
+0 0 0 0 0 0 0 0 0 0<br/>
+1 1 1 1 1 1 1 1 1 1<br/>
+2 3 2 3 2 3 2 3 2 3<br/>
+999,95 1.000.000.000<br/>
+&nbsp;12,50&nbsp;&nbsp;999.999.999<br/>
+Nov 9, 1989 at 17:00.<br/>
+      </td>
+    </tr>
+    <tr data-cogncur-numerals-variant=1>
+      <td class="cursive nolines rh6">
+1 1 1 1 1 1 1 1 1 1<br/>
+2 3 2 3 2 3 2 3 2 3<br/>
+999,95 1.000.000.000&nbsp;<br/>
+&nbsp;12,50&nbsp;&nbsp;999.999.999<br/>
+Nov 9, 1989 at 17:00<br/>
+      </td>
+      <td class="cursive nolines rh6" data-cogncur-numerals-tabular=1>
+1 1 1 1 1 1 1 1 1 1<br/>
+2 3 2 3 2 3 2 3 2 3<br/>
+999,95 1.000.000.000<br/>
+&nbsp;12,50&nbsp;&nbsp;999.999.999<br/>
+Nov 9, 1989 at 17:00<br/>
+      </td>
+    </tr>
+  </table>    
 
   <h2><a name="special">Special characters</a></h2>
   <h3>Footnotes</h3>
