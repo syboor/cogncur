@@ -1,5 +1,7 @@
 # Run each script from within FontForge with 'Execute script'.
 
+# TODO: do not skew the ~, underscore and u+203e (these are used for creating empty lines)
+
 ### Fill derived layers
 ### Note: this will only work on selected glyphs
 import fontforge;
