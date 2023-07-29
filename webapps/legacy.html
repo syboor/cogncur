@@ -166,13 +166,8 @@
 <h1>Cogncur converter for legacy applications</h1>
 <p>Unfortunately, some applications - such as Powerpoint and Canva Pro - do not support advanced OpenType features. If you use my font Cogncur with these applications, it's not possible to type cursive text directly into the application. However, you can use this webpage to generate text that you can copy & paste into Powerpoint.</p>
 
-<b>Requirements: </b>
-<ul>
-  <li>You must have the Cogncur font installed on your computer (for Powerpoint) or uploaded to Canva Pro.
-  <li>You must be able to copy-paste from this webpage into your target application.
-  <li>The application that you copy-paste into must support Unicode characters.
-</ul>
-<br/>
+<i>Do not copy-paste from this webpage into Microsoft Word. Instead, read <a href="#">this section of the manual</a> to learn how to use OpenType Features in Microsoft Word.</i> <br/><Br/>
+
 <b>How to use:</b>
 <ul>
   <li>Type your text into the Input box.
@@ -214,15 +209,17 @@
       <input class="converter-setting" type='checkbox' name='r_variant' value=1> <code>ss07</code> <i>r</i> is more print-like<br/>
       <input class="converter-setting" type='checkbox' name='t_variant' value=1> <code>ss08</code> <i>t</i> is more print-like<br/>
       <input class="converter-setting" type='checkbox' name='t_variant' value=2> <code>ss09</code> <i>t</i> is more print-like and has straight connection<br/>
+      <!--
       N.I. <code>ss10</code> ...reserved...<br/>
+      -->
       <input class="converter-setting" type='checkbox' name='rz_top_variant' value=1> <code>ss11</code> <i>r</i> and <i>z</i> have a pointy top<br/>
       <input class="converter-setting" type='checkbox' name='undercurves' value=1> <code>ss12</code> use undercurves<br/>
       <input class="converter-setting" type='checkbox' name='y_variant' value=1> <code>ss13</code> <i>y</i> starts with an angle, like <i>i</i><br/>
       <input class="converter-setting" type='checkbox' name='w_variant' value=1> <code>ss14</code> <i>w</i> starts with a curve, like <i>n</i><br/>
       <input class="converter-setting" type='checkbox' name='p_curve_variant' value=1> <code>ss15</code> <i>p</i> starts with a curve<br/>
       <input class="converter-setting" type='checkbox' name='p_open_variant' value=1> <code>ss16</code> <i>p</i> doesn't close<br/>
-      N.I. <code>ss17</code> ...reserved...<br/>
-      N.I. <code>ss18</code> ...reserved...<br/>
+      <input class="converter-setting" type='checkbox' name='numeral_variants_set1' value=1> <code>ss17</code> numeral variants set 1<br/>
+      <input class="converter-setting" type='checkbox' name='numeral_variants_set2' value=1> <code>ss18</code> numeral variants set 2<br/>
       <input class="converter-setting" type='checkbox' name='uppercase_cgl_variant' value=1> <code>ss19</code> <i>C</i>, <i>G</i> and <i>L</i> don't start with a loop<br/>
       <input class="converter-setting" type='checkbox' name='uppercase_amn_variant' value=2> <code>ss20</code> <i>A</i>, <i>M</i> and <i>N</i> look like their lowercase counterparts<br/>
       
@@ -231,8 +228,9 @@
     <h2>Other features</h2>
     <div class="settings">
       <input class="converter-setting" type='checkbox' name='smartquotes' value=1 checked=1> Smart quotes<br>
-      <input class="converter-setting" type='checkbox' name='ij_ligature' value=1> Dutch 'ij' ligature
-    </div>
+      <input class="converter-setting" type='checkbox' name='numerals_oldstyle' value=1> Oldstyle (hanging) numerals<br/>
+      <input class="converter-setting" type='checkbox' name='numerals_tabular' value=1> Tabular numerals (NB: messes up word spacing)<br/>
+      <input class="converter-setting" type='checkbox' name='ij_ligature' value=1> Dutch 'ij' ligature<br/>
   </div>
 </div>
 

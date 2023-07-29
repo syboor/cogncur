@@ -219,7 +219,7 @@ var get_cogncur_lines = (function () {
 
     var repetition_specs = input.trim().split(/[ ]+/);
     var word_input = repetition_specs.shift().trim();  // word_input now contains the word, repetitions_specs contains a list of numbers
-    var nglyphs;  // number of glyphs in element word (we will use data-cogncur-beginnetjes to ensure there is always a glyph before letter 1)
+    var nglyphs;  // number of glyphs in element word
     nglyphs = 2 * word_input.replace('ij', 'y').length + 1;
     var repeat;
     var from;
@@ -248,7 +248,7 @@ var get_cogncur_lines = (function () {
       }
     }
     
-    $(line_element).addClass('repeatwords').attr('data-cogncur-beginnetjes', 1).attr('data-nrepeats', nglyphs + 1);
+    $(line_element).addClass('repeatwords').attr('data-nrepeats', nglyphs + 1);
 
     return;
   }
@@ -840,10 +840,8 @@ var get_cogncur_lines = (function () {
     
     // we use the same class here (and because the class 'startpunten' is already in use)
     $(rootnode).find('.startpunten-font').each(function() {
-      $(this).addClass('invisible-except-first');
-    });
-    $(rootnode).find('.invisible-except-one').each(function() {
-      $(this).attr('data-cogncur-beginnetjes', 1);
+      // No, this is not needed. The font has empty space for all letters glyphs.
+      // $(this).addClass('invisible-except-first');
     });
     
     // spatie tussen letters.

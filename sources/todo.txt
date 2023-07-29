@@ -1,0 +1,34 @@
+Extend the joins towards a... (useful for webapps, no problem in desktop font)
+  
+Entrystrokes = 2: extra option to not have entry strokes on i/u/w (web only, no room in stylistic sets)
+
+WONT: uppercase U/W/Y with entry stroke??? This would be confusing, given that J uses a wavy, horizontal entry stroke. I feel that curved entry strokes should ONLY be used when lowercase letters also have a curved entry stroke.
+
+LATER: kerning between uppercase letters
+  - TODO: why does it not work in Chromium (but works in Office)?
+  - TODO: split up ceO into ceO and ceV (right now, everything is kerned for V)
+  - same for ceB vs ceS, ceQ vs ceZ
+  - kerning after (proportional) numbers, before interpunction
+
+TODO: create 'edged' fonts at all slants. Write up some disclaimer that edged fonts do not represent typical calligraphy practice.
+  
+TODO: 
+- testing/documentation matrix: per feature: what it should look like, what a 'failure' looks like, questions to ask (does it work automatically?). Features: contextual alternates; kerning; stylistic sets; multilinguage support; 'ij' ligature
+- how to 'flatten' stylistic sets for MS Word
+  
+TODO: revisit merging points of N2, M2 and U.
+  
+TODO: Use symbols for lines??? (at least in the regular fonts...). Pick 3 symbols: fully lined, fully lined without bottom descender, baseline + midline, baseline only (standard | symbol). Broken pipe (|)???
+  
+TODO: test line dimension 
+- make names in stylesheet match actual lineheight
+- create sizing chart in documentation
+  
+TODO: javascript: do oobreve etc conversion
+  
+TODO: testpage.html
+- make it complete (all letter variants)
+- remove non-working stuff (arrows)
+- rename page and scripts to make clear this is javascript-based, not opentype based
+- create another page testpage-opentype.html to showcase how to use opentype features
+
