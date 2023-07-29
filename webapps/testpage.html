@@ -47,7 +47,6 @@
     <li><a href="#entry">Entry strokes</a></li>
     <li><a href="#exit">Exit strokes</a></li>
     <li><a href="#starts">Starting points</a></li>
-    <li><a href="#arrows">Arrows</a></li>
     <li><a href="#wordfade">Wordfade</a></li>
     <li><a href="#overlap">Overlapping entry / connecting strokes</a></li>
   </ul>
@@ -1010,44 +1009,71 @@
   <h2><a name="numeralstyles">Numeral styles</a></h2>
   <table>
     <tr>
-      <th>proportional width</th>
-      <th>tabular width</th>
+      <th>proportional & lining (default)</th>
+      <th>tabular & lining</th>
+      <th>proportional & oldstyle</th>
+      <th>tabular & oldstyle</th>
     </tr>
     <tr>
-      <td class="cursive nolines rh6">
-0 0 0 0 0 0 0 0 0 0<br/>
-1 1 1 1 1 1 1 1 1 1<br/>
-2 3 2 3 2 3 2 3 2 3<br/>
-999,95 1.000.000.000&nbsp;<br/>
-&nbsp;12,50&nbsp;&nbsp;999.999.999<br/>
-Nov 9, 1989 at 17:00.<br/>
+      <td class="cursive nolines rh4">
+0 0 0 0 0 0<br/>
+1 1 1 1 1 1<br/>
+2 3 4 5 6 7<br/>
+899,95 100.000&nbsp;<br/>
+&nbsp;12,50&nbsp;&nbsp;99.999<br/>
+Nov 9, 1989.
       </td>
-      <td class="cursive nolines rh6" data-cogncur-numerals-tabular=1>
-0 0 0 0 0 0 0 0 0 0<br/>
-1 1 1 1 1 1 1 1 1 1<br/>
-2 3 2 3 2 3 2 3 2 3<br/>
-999,95 1.000.000.000<br/>
-&nbsp;12,50&nbsp;&nbsp;999.999.999<br/>
-Nov 9, 1989 at 17:00.<br/>
+      <td class="cursive nolines rh4" data-cogncur-numerals-tabular=1>
+0 0 0 0 0 0<br/>
+1 1 1 1 1 1<br/>
+2 3 4 5 6 7<br/>
+899,95 100.000&nbsp;<br/>
+&nbsp;12,50&nbsp;&nbsp;99.999<br/>
+Nov 9, 1989.
+      </td>
+      <td class="cursive nolines rh4" data-cogncur-numerals-oldstyle=1>
+0 0 0 0 0 0<br/>
+1 1 1 1 1 1<br/>
+2 3 4 5 6 7<br/>
+899,95 100.000&nbsp;<br/>
+&nbsp;12,50&nbsp;&nbsp;99.999<br/>
+Nov 9, 1989.
+      </td>
+      <td class="cursive nolines rh4" data-cogncur-numerals-tabular=1 data-cogncur-numerals-oldstyle=1>
+0 0 0 0 0 0<br/>
+1 1 1 1 1 1<br/>
+2 3 4 5 6 7<br/>
+899,95 100.000&nbsp;<br/>
+&nbsp;12,50&nbsp;&nbsp;99.999<br/>
+Nov 9, 1989.
       </td>
     </tr>
-    <tr data-cogncur-numerals-variant=1>
-      <td class="cursive nolines rh6">
-1 1 1 1 1 1 1 1 1 1<br/>
-2 3 2 3 2 3 2 3 2 3<br/>
-999,95 1.000.000.000&nbsp;<br/>
-&nbsp;12,50&nbsp;&nbsp;999.999.999<br/>
-Nov 9, 1989 at 17:00<br/>
+    <tr data-cogncur-numeral-variants-set1=1>
+      <td class="cursive nolines rh4">
+1 1 1 1 1 1<br/>
+2 3 4 5 6 7<br/>
+Nov 9, 1989.<br/>
       </td>
-      <td class="cursive nolines rh6" data-cogncur-numerals-tabular=1>
-1 1 1 1 1 1 1 1 1 1<br/>
-2 3 2 3 2 3 2 3 2 3<br/>
-999,95 1.000.000.000<br/>
-&nbsp;12,50&nbsp;&nbsp;999.999.999<br/>
-Nov 9, 1989 at 17:00<br/>
+      <td class="cursive nolines rh4" data-cogncur-numerals-tabular=1>
+1 1 1 1 1 1<br/>
+2 3 4 5 6 7<br/>
+Nov 9, 1989.<br/>
+      </td>
+      <td class="cursive nolines rh4" data-cogncur-numerals-oldstyle=1>
+1 1 1 1 1 1<br/>
+2 3 4 5 6 7<br/>
+Nov 9, 1989.<br/>
+      </td>
+      <td class="cursive nolines rh4" data-cogncur-numerals-tabular=1 data-cogncur-numerals-oldstyle=1>
+1 1 1 1 1 1<br/>
+2 3 4 5 6 7<br/>
+Nov 9, 1989.<br/>
       </td>
     </tr>
   </table>    
+  
+  
+  
 
   <h2><a name="special">Special characters</a></h2>
   <h3>Footnotes</h3>
@@ -1344,261 +1370,7 @@ Nov 9, 1989 at 17:00<br/>
      </tr>
    </table>
   
-  <h2><a name="arrows">Arrows</a></h2>
-  <br/>
-  <div class="lines rh14 traceable">
-    <div class="line nolines arrows-overlay traceable">Big Word</div>
-  </div>
-  <div class="lines rh14">
-    <div class="line nolines arrows-overlay traceable">Big Word</div>
-  </div>
-<!--
-  <div class="lines rh14 traceable">
-    <div class="line nolines arrows-overlay traceable">A B Cow x y zoo</div>
-  </div>
-  <div class="lines rh14">
-    <div class="line nolines arrows-overlay traceable">A B Cow x y zoo</div>
-  </div>
-  -->
   
-  <h3>Sizing</h3>
-  <div class="lines add-overlay rh6" data-overlay-classes="arrows-font red">
-    <div class="line">aap eend inkt</div>
-  </div>
-  <div class="lines add-overlay rh8" data-overlay-classes="arrows-font red">
-    <div class="line">aap eend inkt</div>
-  </div>
-  <div class="lines add-overlay rh10" data-overlay-classes="arrows-font red">
-    <div class="line">aap eend inkt</div>
-  </div>
-  <div class="lines add-overlay rh12" data-overlay-classes="arrows-font red">
-    <div class="line">aap eend inkt</div>
-  </div>
-  <h3>Shortcut classes</h3>
-  Without the need for data attributes...
-  <div class="lines rh8">
-    <div class="line arrows-overlay">a b c d e f g h i j k l</div>
-    <div class="line arrows-overlay-rood">a b c d e f g h i j k l</div>
-    <div class="line arrows-overlay-groen">a b c d e f g h i j k l</div>
-    <div class="line arrows-overlay traceable">a b c d e f g h i j k l</div>
-    <div class="line arrows-overlay-rood traceable">a b c d e f g h i j k l</div>
-    <div class="line arrows-overlay-groen traceable">a b c d e f g h i j k l</div>
-    <div class="line arrows-overlay outline">a b c d e f g h i j k l</div>
-    <div class="line arrows-overlay-rood outline">a b c d e f g h i j k l</div>
-    <div class="line arrows-overlay-groen outline">a b c d e f g h i j k l</div>
-  </div>
-  
-  
-  <h3>All letters (arrows)</h3>
-  <table style="width: 100%">
-    <tr>
-      <th>entry strokes 0</th>
-      <th>entry strokes 2</th>
-    </tr>
-    <tr>
-      <td data-cogncur-entrystrokes-variant=0>
-        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="arrows-font red" data-nlines="1">
-          <div class="line">a b c d e f g h i</div>
-          <div class="line">j k l m n o p q r </div>
-          <div class="line">s t u v w x y z</div>
-          <div class="line">A B C D E F G H I </div>
-          <div class="line">J K L M N O P Q R </div>
-          <div class="line">S T U V W X Y Z</div>
-          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
-          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
-          <div class="line">ant baboon cat dodo</div>
-          <div class="line">Egg Fang Good Hat</div>
-          <div class="line">Tick Flee Tree Fog</div>
-        </div>
-      </td>
-      <td data-cogncur-entrystrokes-variant=2>
-        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="arrows-font red" data-nlines="1">
-          <div class="line">a b c d e f g h i</div>
-          <div class="line">j k l m n o p q r </div>
-          <div class="line">s t u v w x y z</div>
-          <div class="line">A B C D E F G H I </div>
-          <div class="line">J K L M N O P Q R </div>
-          <div class="line">S T U V W X Y Z</div>
-          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
-          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
-          <div class="line">ant baboon cat dodo</div>
-          <div class="line">Egg Fang Good Hat</div>
-          <div class="line">Tick Flee Tree Fog</div>
-        </div>
-      </td>
-     </tr>
-   </table>
-
-  <h3>All letters (more arrows)</h3>
-  <table style="width: 100%">
-    <tr>
-      <th>entry strokes 0</th>
-      <th>entry strokes 2</th>
-    </tr>
-    <tr>
-      <td data-cogncur-entrystrokes-variant=0>
-        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="morearrows-font red" data-nlines="1">
-          <div class="line">a b c d e f g h i</div>
-          <div class="line">j k l m n o p q r </div>
-          <div class="line">s t u v w x y z</div>
-          <div class="line">A B C D E F G H I </div>
-          <div class="line">J K L M N O P Q R </div>
-          <div class="line">S T U V W X Y Z</div>
-          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
-          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
-          <div class="line">ant baboon cat dodo</div>
-          <div class="line">Egg Fang Good Hat</div>
-          <div class="line">Tick Flee Tree Fog</div>
-        </div>
-      </td>
-      <td data-cogncur-entrystrokes-variant=2>
-        <div class="lines rh6 nospacebetween traceable repeatlines" data-line1-classes="add-overlay" data-line1-attr-overlay-classes="morearrows-font red" data-nlines="1">
-          <div class="line">a b c d e f g h i</div>
-          <div class="line">j k l m n o p q r </div>
-          <div class="line">s t u v w x y z</div>
-          <div class="line">A B C D E F G H I </div>
-          <div class="line">J K L M N O P Q R </div>
-          <div class="line">S T U V W X Y Z</div>
-          <div class="line">à è ì ò ù À È Ì Ò Ù</div>
-          <div class="line">0 1 2 3 4 5 6 7 8 9 0</div>
-          <div class="line">ant baboon cat dodo</div>
-          <div class="line">Egg Fang Good Hat</div>
-          <div class="line">Tick Flee Tree Fog</div>
-        </div>
-      </td>
-     </tr>
-   </table>
-
-  <b>Connections (standard arrows)</b>
-  <div class="lines arrows-overlay rh8">
-    <div class="line">a b c d e f g h i j k l m</div>
-    <div class="line">n o p q r s t u v w x y z</div>
-    <div class="line">inn mum nun minimum</div>
-    <div class="line">it unit tint mutt tutu</div>
-    <div class="line">tip up pint put</div>
-    <div class="line">pn uppi</div>
-    <div class="line">sin spit snuit</div>
-    <div class="line">is its piss ups</div>
-    <div class="line">ant ass aim apt</div>
-    <div class="line">tan pat sat naan</div>
-    <div class="line">autism stump sauna stamina</div>
-    
-    <div class="line">add did stand audit</div>
-    <div class="line">dig mug ping msg tg</div> <!-- to g -->
-    <div class="line">gg ga gd gi gu</div> <!-- from g -->
-    <div class="line">gnu gs gp gt</div> <!-- from g -->
-    <div class="line">jug jam djinn juju </div><!-- j -->
-    <div class="line">uw aw nw tw sw gw </div><!-- to w -->
-    <div class="line">wu wa ws wt wn wp </div><!-- from w -->
-    <div class="line">io ao no po so go wo </div> <!-- to o -->
-    <div class="line">oa oi on os oo op ot</div><!-- from o -->
-    <div class="line">va vn vi ov sv nv</div>
-    <div class="line">voodoo owing avium</div>
-    <div class="line">bo bi ba bs bt bp bn</div><!-- from b -->
-    <div class="line">nb pb gb vb ob</div><!-- to b -->
-    <div class="line">wow baobab</div>
-    <div class="line">sh oh vh hh ah nh gh</div><!-- to h -->
-    <div class="line">high ought ohm ship</div>
-    <div class="line">sjjj ojo hjp gjh pju </div><!-- to j again... a bit tight but doable -->
-    <div class="line">yoyo gym hay by pity </div><!-- 'by' is ugly but spot on for reproduction -->
-    <div class="line">hee nee iee ee tee ae</div><!-- ee and to e -->
-    <div class="line">pee see</div><!-- to e -->
-    <div class="line">we ve oe ge je</div><!-- to e -->
-    <div class="line">oc ic sc gc pc tc</div><!-- to c -->
-    <div class="line">science museum </div><!-- from e/c -->
-    <div class="line">ci eei cn een cu eeu</div>
-    <div class="line">ich icb ceh web</div><!-- from e/c -->
-    <div class="line">ca eea cg eeg co eeo</div> <!-- from e/c -->
-    <div class="line">cs ces cp cep ct cet</div> <!-- from e/c -->
-    <div class="line">kick book kk ks ke kn</div> <!-- k -->
-    <div class="line">Kentucky </div>
-    <div class="line">ar ir pr sr gr jr</div><!-- to r -->
-    <div class="line">through here</div><!-- to r -->
-    <div class="line">library for wrist</div> <!-- to/from r -->
-    <div class="line">cru euro bar</div><!-- to/from r -->
-    <div class="line">elf of if pff</div><!-- to f --> 
-    <div class="line">ifa ifn iff ifi ifn ifs ifo ifr ifp ift</div>
-    <div class="line">buffy feel ifjords fifteen</div><!-- from f -->
-    <div class="line">aqua qa qo qr iqs qqt</div><!-- q -->
-    <div class="line">lily ile else lp ill ilk</div><!-- from l -->
-    <div class="line">exe axa oxo gx hx</div> <!-- from/to x -->
-    <div class="line">jazz zed zigzag</div> <!-- from/to z -->
-    <div class="line">pjotr sjib gja gga jji yji zji</div>
-    <div class="line">ppotr spib gpa jpa yjp zpi</div>
-    <div class="line">fjord qja</div><!-- to j -->
-    <div class="line">no do po so go jo vo oo eeo co</div><!-- to n, to v -->
-    <div class="line">na da pa sa ga ja va oa eea ca</div>
-    <div class="line">law dew ow ww </div>
-    <div class="line">we ve be wu vu bu </div>
-  </div>
-  
-
-  <b>Connections (more arrows)</b>
-  <div class="lines morearrows-overlay-rood rh8">
-    <div class="line">a b c d e f g h i j k l m</div>
-    <div class="line">n o p q r s t u v w x y z</div>
-    <div class="line">inn mum nun minimum</div>
-    <div class="line">it unit tint mutt tutu</div>
-    <div class="line">tip up pint put</div>
-    <div class="line">pn uppi</div>
-    <div class="line">sin spit snuit</div>
-    <div class="line">is its piss ups</div>
-    <div class="line">ant ass aim apt</div>
-    <div class="line">tan pat sat naan</div>
-    <div class="line">autism stump sauna stamina</div>
-    
-    <div class="line">add did stand audit</div>
-    <div class="line">dig mug ping msg tg</div> <!-- to g -->
-    <div class="line">gg ga gd gi gu</div> <!-- from g -->
-    <div class="line">gnu gs gp gt</div> <!-- from g -->
-    <div class="line">jug jam djinn juju </div><!-- j -->
-    <div class="line">uw aw nw tw sw gw </div><!-- to w -->
-    <div class="line">wu wa ws wt wn wp </div><!-- from w -->
-    <div class="line">io ao no po so go wo </div> <!-- to o -->
-    <div class="line">oa oi on os oo op ot</div><!-- from o -->
-    <div class="line">va vn vi ov sv nv</div>
-    <div class="line">voodoo owing avium</div>
-    <div class="line">bo bi ba bs bt bp bn</div><!-- from b -->
-    <div class="line">nb pb gb vb ob</div><!-- to b -->
-    <div class="line">wow baobab</div>
-    <div class="line">sh oh vh hh ah nh gh</div><!-- to h -->
-    <div class="line">high ought ohm ship</div>
-    <div class="line">sjjj ojo hjp gjh pju </div><!-- to j again... a bit tight but doable -->
-    <div class="line">yoyo gym hay by pity </div><!-- 'by' is ugly but spot on for reproduction -->
-    <div class="line">hee nee iee ee tee ae</div><!-- ee and to e -->
-    <div class="line">pee see</div><!-- to e -->
-    <div class="line">we ve oe ge je</div><!-- to e -->
-    <div class="line">oc ic sc gc pc tc</div><!-- to c -->
-    <div class="line">science museum </div><!-- from e/c -->
-    <div class="line">ci eei cn een cu eeu</div>
-    <div class="line">ich icb ceh web</div><!-- from e/c -->
-    <div class="line">ca eea cg eeg co eeo</div> <!-- from e/c -->
-    <div class="line">cs ces cp cep ct cet</div> <!-- from e/c -->
-    <div class="line">kick book kk ks ke kn</div> <!-- k -->
-    <div class="line">Kentucky </div>
-    <div class="line">ar ir pr sr gr jr</div><!-- to r -->
-    <div class="line">through here</div><!-- to r -->
-    <div class="line">library for wrist</div> <!-- to/from r -->
-    <div class="line">cru euro bar</div><!-- to/from r -->
-    <div class="line">elf of if pff</div><!-- to f --> 
-    <div class="line">ifa ifn iff ifi ifn ifs ifo ifr ifp ift</div>
-    <div class="line">buffy feel ifjords fifteen</div><!-- from f -->
-    <div class="line">aqua qa qo qr iqs qqt</div><!-- q -->
-    <div class="line">lily ile else lp ill ilk</div><!-- from l -->
-    <div class="line">exe axa oxo gx hx</div> <!-- from/to x -->
-    <div class="line">jazz zed zigzag</div> <!-- from/to z -->
-    <div class="line">pjotr sjib gja gga jji yji zji</div>
-    <div class="line">ppotr spib gpa jpa yjp zpi</div>
-    <div class="line">fjord qja</div><!-- to j -->
-    <div class="line">no do po so go jo vo oo eeo co</div><!-- to n, to v -->
-    <div class="line">na da pa sa ga ja va oa eea ca</div>
-    <div class="line">law dew ow ww </div>
-    <div class="line">we ve be wu vu bu </div>
-  </div>
-  
-
-  
-
   <h2><a name="wordfade">Wordfade</a></h2>
   
   Prerequisite: 'nodots' setting in cogncur_converter.js:

@@ -167,6 +167,13 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      */
      numerals_tabular: 0,
      
+    /* numerals_oldstyle
+     0 = no, lining figures; all numerals have the same height
+     1 = yes, oldstyle figures; numerals can 'hang' below the baseline
+     */
+     numerals_oldstyle: 0,
+
+
      // numeral 1: 0, 1, 2
      numeral_1_variant: 0,
      
@@ -790,17 +797,36 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     uumacron : '\ue17e',
     uubreve : '\ue17f',
   }
+  // numerals: put all glyphs in here that have onum or tnum styles (so also interpunction and math symbols)
   var numerals = {
-    '0' : '0',
-    '1' : '1',
-    '2' : '2',
-    '3' : '3',
-    '4' : '4',
-    '5' : '5',
-    '6' : '6',
-    '7' : '7',
-    '8' : '8',
-    '9' : '9',
+    'space' : '\u0020',
+    'dollar' : '\u0024',
+    'percent' : '\u0025',
+    'plus' : '\u002b',
+    'comma' : '\u002c',
+    'hyphen' : '\u002d',
+    'period' : '\u002e',
+    'slash' : '\u002f',
+    'zero' : '\u0030',
+    'one' : '\u0031',
+    'two' : '\u0032',
+    'three' : '\u0033',
+    'four' : '\u0034',
+    'five' : '\u0035',
+    'six' : '\u0036',
+    'seven' : '\u0037',
+    'eight' : '\u0038',
+    'nine' : '\u0039',
+    'colon' : '\u003a',
+    'semicolon' : '\u003b',
+    'backslash' : '\u005c',
+    'underscore' : '\u005f',
+    'cent' : '\u00a2',
+    'sterling' : '\u00a3',
+    'yen' : '\u00a5',
+    'multiply' : '\u00d7',
+    'divide' : '\u00f7',
+    'Euro' : '\u20ac',
     'one.alt1' : '\ue1b7',
     'one.alt2' : '\ue1b8',
     'two.alt1' : '\ue1b9',
@@ -842,6 +868,74 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     'colon.tab' : '\ue1e0',
     'semicolon.tab' : '\ue1e1',
     'space.tab' : '\ue1e2',
+    'plus.tab' : '\ue1e3',
+    'hyphen.tab' : '\ue1e4',
+    'equal.tab' : '\ue1e5',
+    'underscore.tab' : '\ue1e6',
+    'multiply.tab' : '\ue1e7',
+    'divide.tab' : '\ue1e8',
+    'dollar.tab' : '\ue1e9',
+    'percent.tab' : '\ue1ea',
+    'sterling.tab' : '\ue1eb',
+    'cent.tab' : '\ue1ec',
+    'yen.tab' : '\ue1ed',
+    'Euro.tab' : '\ue1ee',
+    'zero.tab.old' : '\ue1f5',
+    'one.tab.old' : '\ue1f6',
+    'one.alt1.tab.old' : '\ue1f7',
+    'one.alt2.tab.old' : '\ue1f8',
+    'two.tab.old' : '\ue1f9',
+    'two.alt1.tab.old' : '\ue1fa',
+    'three.tab.old' : '\ue1fb',
+    'three.alt1.tab.old' : '\ue1fc',
+    'four.tab.old' : '\ue1fd',
+    'four.alt1.tab.old' : '\ue1fe',
+    'four.alt2.tab.old' : '\ue1ff',
+    'four.alt3.tab.old' : '\ue200',
+    'five.tab.old' : '\ue201',
+    'six.tab.old' : '\ue202',
+    'seven.tab.old' : '\ue203',
+    'seven.alt1.tab.old' : '\ue204',
+    'seven.alt2.tab.old' : '\ue205',
+    'seven.alt3.tab.old' : '\ue206',
+    'eight.tab.old' : '\ue207',
+    'eight.alt1.tab.old' : '\ue208',
+    'eight.alt2.tab.old' : '\ue209',
+    'nine.tab.old' : '\ue20a',
+    'nine.alt1.tab.old' : '\ue20b',
+    'space.tab.old' : '\ue20c',
+    'plus.tab.old' : '\ue20d',
+    'hyphen.tab.old' : '\ue20e',
+    'equal.tab.old' : '\ue20f',
+    'underscore.tab.old' : '\ue210',
+    'multiply.tab.old' : '\ue211',
+    'divide.tab.old' : '\ue212',
+    'percent.tab.old' : '\ue213',
+    'zero.old' : '\ue21a',
+    'one.old' : '\ue21b',
+    'one.alt1.old' : '\ue21c',
+    'one.alt2.old' : '\ue21d',
+    'two.old' : '\ue21e',
+    'two.alt1.old' : '\ue21f',
+    'three.old' : '\ue220',
+    'three.alt1.old' : '\ue221',
+    'four.old' : '\ue222',
+    'four.alt1.old' : '\ue223',
+    'four.alt2.old' : '\ue224',
+    'four.alt3.old' : '\ue225',
+    'five.old' : '\ue226',
+    'six.old' : '\ue227',
+    'seven.old' : '\ue228',
+    'seven.alt1.old' : '\ue229',
+    'seven.alt2.old' : '\ue22a',
+    'seven.alt3.old' : '\ue22b',
+    'eight.old' : '\ue22c',
+    'eight.alt1.old' : '\ue22d',
+    'eight.alt2.old' : '\ue22e',
+    'nine.old' : '\ue22f',
+    'nine.alt1.old' : '\ue230',
+    'multiply.old' : '\ue231',
+    'divide.old' : '\ue232'
   }
   
   var fix_whitespace_ligatures = {
@@ -982,7 +1076,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   var connectorglyphs = Object.values(connectors).join(''); // connections + entry strokes + exit strokes + 'kerning connections' (containing whitespace)
 
   var numberglyphs = Object.values(numerals).join('');
-  var spaceglyphs = ' ' + '\u00a0' + numerals['space.tab'];
 
 
   var glyphs = letterglyphs + connectorglyphs + numberglyphs;
@@ -1086,8 +1179,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     result = numeralsConversion(result);
     
     // ONLY trim off the space we added at the start
-    if (result.substring(0,1) == " " || result.substring(0,1) == numerals['space.tab']) result = result.substring(1);
-    if (result.substring(result.length - 1) == " ") result = result.substring(0,result.length - 1);
+    if (result.substring(0,1) == " " || result.substring(0,1) == numerals['space.tab'] || result.substring(0,1) == numerals['space.tab.old']) result = result.substring(1);
+    if (result.substring(result.length - 1) == " " || result.substring(result.length - 1) == numerals['space.tab'] || result.substring(result.length - 1) == numerals['space.tab.old']) result = result.substring(0,result.length - 1);
     return result;
   }
 
@@ -1645,35 +1738,27 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     if (settings.numeral_8_variant) input = input.replaceAll('8', numerals['eight.alt'+settings.numeral_8_variant]);
     if (settings.numeral_9_variant) input = input.replaceAll('9', numerals['nine.alt'+settings.numeral_9_variant]);
     
-    if (settings.numerals_tabular) {
-      input = input.replaceAll('0', numerals['zero.tab']);
-      input = input.replaceAll('1', numerals['one.tab']);
-      input = input.replaceAll(numerals['one.alt1'], numerals['one.alt1.tab']);
-      input = input.replaceAll('2', numerals['two.tab']);
-      input = input.replaceAll(numerals['two.alt1'], numerals['two.alt1.tab']);
-      input = input.replaceAll('3', numerals['three.tab']);
-      input = input.replaceAll(numerals['three.alt1'], numerals['three.alt1.tab']);
-      input = input.replaceAll('4', numerals['four.tab']);
-      input = input.replaceAll(numerals['four.alt1'], numerals['four.alt1.tab']);
-      input = input.replaceAll(numerals['four.alt2'], numerals['four.alt2.tab']);
-      input = input.replaceAll(numerals['four.alt3'], numerals['four.alt3.tab']);
-      input = input.replaceAll('7', numerals['seven.tab']);
-      input = input.replaceAll(numerals['seven.alt1'], numerals['seven.alt1.tab']);
-      input = input.replaceAll(numerals['seven.alt2'], numerals['seven.alt2.tab']);
-      input = input.replaceAll(numerals['seven.alt3'], numerals['seven.alt3.tab']);
-      input = input.replaceAll('8', numerals['eight.tab']);
-      input = input.replaceAll(numerals['eight.alt1'], numerals['eight.alt1.tab']);
-      input = input.replaceAll(numerals['eight.alt2'], numerals['eight.alt2.tab']);
-      input = input.replaceAll('9', numerals['nine.tab']);
-      input = input.replaceAll(numerals['nine.alt1'], numerals['nine.alt1.tab']);
-
-      input = input.replaceAll(' ', numerals['space.tab']);
-      input = input.replaceAll('\u00a0', numerals['space.tab']); //nbsp
-      input = input.replaceAll('.', numerals['period.tab']);
-      input = input.replaceAll(',', numerals['comma.tab']);
-      input = input.replaceAll(':', numerals['colon.tab']);
-      input = input.replaceAll(';', numerals['semicolon.tab']);
+    // loop over all possible numerals
+    Object.keys(numerals).forEach(function (key) { 
+      if (key.indexOf('.tab') >  -1) return; // ignore if it's a style variant
+      if (key.indexOf('.old') >  -1) return; // ignore if it's a style variant
       
+      // OK, only standard style numerals left now
+      if (settings.numerals_tabular && settings.numerals_oldstyle && (key+'.tab.old') in numerals) {
+        input = input.replaceAll(numerals[key], numerals[key+'.tab.old']);
+      } else if (settings.numerals_tabular && (key+'.tab') in numerals) {
+        input = input.replaceAll(numerals[key], numerals[key+'.tab']);
+      } else if (settings.numerals_oldstyle && (key+'.old') in numerals) {
+        input = input.replaceAll(numerals[key], numerals[key+'.old']);
+      }
+      
+    });
+    
+    // also, if we have tabular numbers, change &nbsp; into space.tab
+    if (settings.numerals_tabular && settings.numerals_oldstyle) {
+      input = input.replaceAll('\u00a0', numerals['space.tab.old']);
+    } else if (settings.numerals_tabular) {
+      input = input.replaceAll('\u00a0', numerals['space.tab']);
     }
     
     return input;
@@ -1682,8 +1767,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   function dotlessConversion(input) {
     // i => dotlessi, j => dotless j, t => custom glyph t without crossbar
     if (settings.nodots >= 1) {
-      input = input.replaceAll('i', 'ı');
-      input = input.replaceAll('j', 'ȷ');
+      input = input.replaceAll('i', letters.dotlessi);
+      input = input.replaceAll('j', letters.dotlessj);
     }
     if (settings.nodots >= 2) {
       input = input.replaceAll(letters.t1, letters.t1dotless);
@@ -1748,8 +1833,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
   // should be present anywhere in the word.
   function remove_dots(visible_input, invisible_input) {
     if (invisible_input) {
-      visible_input = visible_input.replaceAll('i', letters.idotless);
-      visible_input = visible_input.replaceAll('j', letters.jdotless);
+      visible_input = visible_input.replaceAll('i', letters.dotlessi);
+      visible_input = visible_input.replaceAll('j', letters.dotlessj);
       visible_input = visible_input.replaceAll(letters.t1, letters.t1dotless);
       visible_input = visible_input.replaceAll('x', letters.xdotless);
       

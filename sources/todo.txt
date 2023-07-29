@@ -32,19 +32,3 @@ TODO: testpage.html
 - rename page and scripts to make clear this is javascript-based, not opentype based
 - create another page testpage-opentype.html to showcase how to use opentype features
 
-TODO: numerals. Default numerals will be lining figures (vertical height) and proportional (horizontal width)
-- variants: 
-  - 1.var1 (no hook)
-  - 2.var1 (no wave)
-  - 3.var1 (straight top)
-  - 4.var1 (open triangle), 4.var2 (rectangular, both sides equally long), 4.var3 (rectangular, left longer than right side)
-  - 7.var1 (no wave), 7.var2 (no crossbar, wave), 7.var3 (no crossbar, no wave)
-  - 8.var1 (Dutch 'offset' construction)
-  - 9.var1 (teardrop with straight descender)
-- tabular:
-  - 1: copy to 1.tab, 1.var1.tab; then reduce width in the default versions
-  - same for other numerals that might need less bearings?
-  - interpunction: space, +, -, /, currency
-  - ...
-- oldstyle:
-
