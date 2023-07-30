@@ -19,7 +19,7 @@ Cogncur uses OpenType features to form the connections between letters. In Micro
 
 Follow the steps below to enable the required OpenType features in Microsoft Word:
 1. Select some text and change the font to Cogncur. At this point, the letters will not be connected yet.
-2. Open the Font dialogue by clicking on the button in the bottom right of the "Font" section of the ribbon, or by typing Ctrl+D.
+2. Open the Font dialogue by clicking on the button in the bottom right of the "Font" section of the ribbon, or by typing Ctrl+D. In the Font dialogue, open the 'Advanced' tab.
 3. Check the option 'Kerning for fonts'; Microsoft Word will automatically add your current font size.
 4. Check the option 'Use Contextual Alternates'.
 5. After you click OK, the text in your document will update and the letters will be connected to each other.
