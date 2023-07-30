@@ -1,8 +1,17 @@
-Extend the joins towards a... (useful for webapps, no problem in desktop font)
-  
-Entrystrokes = 2: extra option to not have entry strokes on i/u/w (web only, no room in stylistic sets)
+*** IDEAS (nice to have)
+
+entrystrokes = 2: extra option to not have entry strokes on i/u/w (web only, no room in stylistic sets)
+- this would be nice for javascript based applications, but there is no room to accommodate this through stylistic sets anymore
 
 WONT: uppercase U/W/Y with entry stroke??? This would be confusing, given that J uses a wavy, horizontal entry stroke. I feel that curved entry strokes should ONLY be used when lowercase letters also have a curved entry stroke.
+
+
+*** IMPROVEMENTS
+
+TODO: measure/check line dimensions in stylesheet
+- make names in stylesheet match actual lineheight
+- create sizing chart in documentation
+
 
 LATER: kerning between uppercase letters
   - TODO: why does it not work in Chromium (but works in Office)?
@@ -10,25 +19,48 @@ LATER: kerning between uppercase letters
   - same for ceB vs ceS, ceQ vs ceZ
   - kerning after (proportional) numbers, before interpunction
 
-TODO: create 'edged' fonts at all slants. Write up some disclaimer that edged fonts do not represent typical calligraphy practice.
+???: revisit 'branch out' points of N2, M2 and U
+  
+
+*** MAJOR FUNCTIONALITY
+TODO: edged fonts
+- create 'edged' fonts at all slants. Write up some disclaimer that edged fonts do not represent typical calligraphy practice.
+- document edged fonts (download links etc.)
+
+TODO: fonts with integrated guides
+
+TODO: testpage.html
+- make it complete (all letter variants)
+- rename page and scripts to make clear this is javascript-based, not opentype based
+- create another page testpage-opentype.html to showcase how to use opentype features
+  
+
+*** DOCUMENTATION
   
 TODO: 
 - testing/documentation matrix: per feature: what it should look like, what a 'failure' looks like, questions to ask (does it work automatically?). Features: contextual alternates; kerning; stylistic sets; multilinguage support; 'ij' ligature
 - how to 'flatten' stylistic sets for MS Word
   
-TODO: revisit merging points of N2, M2 and U.
   
-TODO: Use symbols for lines??? (at least in the regular fonts...). Pick 3 symbols: fully lined, fully lined without bottom descender, baseline + midline, baseline only (standard | symbol). Broken pipe (|)???
   
-TODO: test line dimension 
-- make names in stylesheet match actual lineheight
-- create sizing chart in documentation
-  
-TODO: javascript: do oobreve etc conversion
-  
-TODO: testpage.html
-- make it complete (all letter variants)
-- remove non-working stuff (arrows)
-- rename page and scripts to make clear this is javascript-based, not opentype based
-- create another page testpage-opentype.html to showcase how to use opentype features
 
+
+--------------------------------------------------
+
+RELEASE STEPS
+- update fontlog with date and changes
+- update the version number
+- check if the derived layers are complete
+- validate glyphs
+- check other metadata in font
+- build fonts and push to dev
+- do a download & install test
+- push to main
+
+
+FIRST RELEASE
+- DONE: complete required glyphs
+- release to Github
+- upload font and legacy app to cogncur.com
+- update homepage on cogncur.com: link to Github for download, link to legacy app for conversion
+- add 'Other applications' section to the README.md on Github ('In some applications, you don't need to do anything to make the letters connect: LibreOffice, ....  Other applications support custom fonts but do not support OpenType. In those "legacy" applications, there is no feasible way to enter or edit cursive text from within the application. However, you can create your connected text in a web application and then copy-paste this text to the legacy application. .... Finally, some applications do not allow you to use custom fonts. 

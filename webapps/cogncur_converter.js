@@ -611,6 +611,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     Ocircumflex : '\u00d4',
     Otilde : '\u00d5',
     Odieresis : '\u00d6',
+    Oslash : '\u00d8',
     Ugrave : '\u00d9',
     Uacute : '\u00da',
     Ucircumflex : '\u00db',
@@ -639,6 +640,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     ocircumflex : '\u00f4',
     otilde : '\u00f5',
     odieresis : '\u00f6',
+    oslash : '\u00f8',
     ugrave : '\u00f9',
     uacute : '\u00fa',
     ucircumflex : '\u00fb',
@@ -1064,11 +1066,12 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     csn_p6 : '\ue87b',
     csn_p7 : '\ue87c',
     csn_r2 : '\ue87d',
+    cso_oslash : '\ue87e'
 
     
   }
   
-  var letterglyphs_lc = 'a-zà-åăāçè-ëĕēì-ïĭīıñò-öøŏōšŧù-üŭūẋýÿžœæß' + letters.t1 + letters.t1dotless + letters.xdotless + letters.jdotless + letters.r1 + letters.z1 + letters.z1caron + letters.d1 + letters.p1 + letters.p2 + letters.p3 + letters.p4 + letters.p5 + letters.p6 + letters.p7 + letters.ij + letters.y1 + letters.ij1 + letters.w1 + letters.f1 + letters.f2 + letters.f3 + letters.f4 + letters.f5 + letters.q1 + letters.q2 + letters.q3 + letters.q4 + letters.s1 + letters.r2 + letters.s1caron; // kleine letters + letters
+  var letterglyphs_lc = 'a-zà-åăāçè-ëĕēì-ïĭīıñò-öøŏōšŧù-üŭūẋýÿžœæß' + letters.t1 + letters.t1dotless + letters.xdotless + letters.jdotless + letters.r1 + letters.z1 + letters.z1caron + letters.d1 + letters.p1 + letters.p2 + letters.p3 + letters.p4 + letters.p5 + letters.p6 + letters.p7 + letters.ij + letters.y1 + letters.ij1 + letters.w1 + letters.f1 + letters.f2 + letters.f3 + letters.f4 + letters.f5 + letters.q1 + letters.q2 + letters.q3 + letters.q4 + letters.s1 + letters.r2 + letters.s1caron + letters.eebreve + letters.eemacron + letters.aabreve + letters.aamacron + letters.oobreve + letters.oomacron + letters.uubreve + letters.uumacron; // kleine letters + letters
   var letterglyphs_uc_connected = 'AÀ-ÅĂĀBDCÇEÈ-ËĔĒFGHIÌ-ÏĪĪJKLMNÑOÒ-ÖØŎŌPQRSŠTUÙ-ÜŬŪVWXYÝŸZŒÆ' + letters.A1 + letters.M1 + letters.N1 + letters.A2 + letters.M2 + letters.N2 + letters.IJ + letters.Y1 + letters.IJ1 + letters.W1 + letters.Z1 + letters.C1 + letters.C1cedilla + letters.G1 + letters.L1;
   var letterglyphs_uc_unconnected = ''; 
   var letterglyphs_uc = letterglyphs_uc_connected + letterglyphs_uc_unconnected;
@@ -1260,6 +1263,19 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       input = input.replaceAll('p', letters.p4);
       input = input.replaceAll(letters.p2, letters.p6);
     }
+    
+    // standard ligatures, do them always...
+    if (true) {
+      input = input.replaceAll(letters.abreve + letters.abreve, letters.aabreve);
+      input = input.replaceAll(letters.ebreve + letters.ebreve, letters.eebreve);
+      input = input.replaceAll(letters.obreve + letters.obreve, letters.oobreve);
+      input = input.replaceAll(letters.ubreve + letters.ubreve, letters.uubreve);
+      input = input.replaceAll(letters.amacron + letters.amacron, letters.aamacron);
+      input = input.replaceAll(letters.emacron + letters.emacron, letters.eemacron);
+      input = input.replaceAll(letters.omacron + letters.omacron, letters.oomacron);
+      input = input.replaceAll(letters.umacron + letters.umacron, letters.uumacron);
+      
+    }
 
     return input;
   }
@@ -1379,41 +1395,41 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     // - letters that can be user input (with a standard unicode mapping < \ue8000
     // - letters that require different connections than the standard letter, produced by lettersConversion1()
     var replacementPairs = [
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccna],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([eè-ëĕē])", connectors.ccne],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccnh],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccni],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccnn],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([sš])", connectors.ccns],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])(["+letters.s1+letters.s1caron+"])", connectors.ccns1],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([cçoò-öøŏōœ])", connectors.ccno],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])(["+letters.t1+"])", connectors.ccnt1],
-      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+"])([tŧ])", connectors.ccnt],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccna],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccne],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccnh],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccni],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccnn],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])([sš])", connectors.ccns],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])(["+letters.s1+letters.s1caron+"])", connectors.ccns1],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccno],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])(["+letters.t1+"])", connectors.ccnt1],
+      ["([à-åăāadhiì-ïĭīıklmnñruù-üŭūxẋHKMRUÙ-ÜŬŪX"+letters.t1+letters.A1+letters.M1+letters.N1+letters.A2+letters.N2+letters.M2+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.uubreve+letters.aamacron+letters.uumacron+"])([tŧ])", connectors.ccnt],
 
-      ["([sš"+letters.s1+letters.s1caron+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccsa],
-      ["([sš"+letters.s1+letters.s1caron+"])([eè-ëĕē])", connectors.ccse],
+      ["([sš"+letters.s1+letters.s1caron+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccsa],
+      ["([sš"+letters.s1+letters.s1caron+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccse],
       ["([sš"+letters.s1+letters.s1caron+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccsh],
-      ["([sš"+letters.s1+letters.s1caron+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccsi],
+      ["([sš"+letters.s1+letters.s1caron+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccsi],
       ["([sš"+letters.s1+letters.s1caron+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccsn],
       ["([sš"+letters.s1+letters.s1caron+"])([sš])", connectors.ccss],
       ["([sš"+letters.s1+letters.s1caron+"])(["+letters.s1+letters.s1caron+"])", connectors.ccss1],
-      ["([sš"+letters.s1+letters.s1caron+"])([cçoò-öøŏōœ])", connectors.ccso],
+      ["([sš"+letters.s1+letters.s1caron+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccso],
       ["([sš"+letters.s1+letters.s1caron+"])(["+letters.t1+"])", connectors.ccst1],
       ["([sš"+letters.s1+letters.s1caron+"])([tŧ])", connectors.ccst],
 
-      ["([pß"+letters.p2+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccpa],
-      ["([pß"+letters.p2+"])([eè-ëĕē])", connectors.ccpe],
+      ["([pß"+letters.p2+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccpa],
+      ["([pß"+letters.p2+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccpe],
       ["([pß"+letters.p2+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccph],
-      ["([pß"+letters.p2+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccpi],
+      ["([pß"+letters.p2+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccpi],
       ["([pß"+letters.p2+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccpn],
       ["([pß"+letters.p2+"])([sš])", connectors.ccps],
       ["([pß"+letters.p2+"])(["+letters.s1+letters.s1caron+"])", connectors.ccps1],
-      ["([pß"+letters.p2+"])([cçoò-öøŏōœ])", connectors.ccpo],
+      ["([pß"+letters.p2+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccpo],
       ["([pß"+letters.p2+"])(["+letters.t1+"])", connectors.ccpt1],
       ["([pß"+letters.p2+"])([tŧ])", connectors.ccpt],
       
-      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccqa],
-      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([eè-ëĕē])", connectors.ccqe],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccqa],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccqe],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccqh],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccqi],
       ["([fq])([jȷ])", connectors.ccqj], // special connector for 'fj' and 'qj'
@@ -1421,201 +1437,201 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccqn],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([sš])", connectors.ccqs],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])(["+letters.s1+letters.s1caron+"])", connectors.ccqs1],
-      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([cçoò-öøŏōœ])", connectors.ccqo],
+      ["([fqzžQZ"+letters.z1+letters.z1caron+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccqo],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])(["+letters.t1+"])", connectors.ccqt1],
       ["([fqzžQZ"+letters.z1+letters.z1caron+"])([tŧ])", connectors.ccqt],
 
-      ["(["+letters.f1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccf1a],
-      ["(["+letters.f1+"])([eè-ëĕē])", connectors.ccf1e],
+      ["(["+letters.f1+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccf1a],
+      ["(["+letters.f1+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccf1e],
       ["(["+letters.f1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccf1h],
       ["(["+letters.f1+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccf1i],
       ["(["+letters.f1+"])([jȷ])", connectors.ccf1j], // special connector for 'fj' and 'qj'
       ["(["+letters.f1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccf1n],
       ["(["+letters.f1+"])([sš])", connectors.ccf1s],
       ["(["+letters.f1+"])(["+letters.s1+letters.s1caron+"])", connectors.ccf1s1],
-      ["(["+letters.f1+"])([cçoò-öøŏōœ])", connectors.ccf1o],
+      ["(["+letters.f1+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccf1o],
       ["(["+letters.f1+"])(["+letters.t1+"])", connectors.ccf1t1],
       ["(["+letters.f1+"])([tŧ])", connectors.ccf1t],
 
-      ["(["+letters.f4+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccf4a],
-      ["(["+letters.f4+"])([eè-ëĕē])", connectors.ccf4e],
+      ["(["+letters.f4+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccf4a],
+      ["(["+letters.f4+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccf4e],
       ["(["+letters.f4+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccf4h],
       ["(["+letters.f4+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccf4i],
       ["(["+letters.f4+"])([jȷ])", connectors.ccf4i], // not special, just use 'ccf4i'
       ["(["+letters.f4+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccf4n],
       ["(["+letters.f4+"])([sš])", connectors.ccf4s],
       ["(["+letters.f4+"])(["+letters.s1+letters.s1caron+"])", connectors.ccf4s1],
-      ["(["+letters.f4+"])([cçoò-öøŏōœ])", connectors.ccf4o],
+      ["(["+letters.f4+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccf4o],
       ["(["+letters.f4+"])(["+letters.t1+"])", connectors.ccf4t1],
       ["(["+letters.f4+"])([tŧ])", connectors.ccf4t],
 
-      ["(["+letters.q1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccq1a],
-      ["(["+letters.q1+"])([eè-ëĕē])", connectors.ccq1e],
+      ["(["+letters.q1+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccq1a],
+      ["(["+letters.q1+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccq1e],
       ["(["+letters.q1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccq1h],
       ["(["+letters.q1+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccq1i],
       ["(["+letters.q1+"])([jȷ])", connectors.ccq1j], // special connector for 'fj' and 'qj'
       ["(["+letters.q1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccq1n],
       ["(["+letters.q1+"])([sš])", connectors.ccq1s],
       ["(["+letters.q1+"])(["+letters.s1+letters.s1caron+"])", connectors.ccq1s1],
-      ["(["+letters.q1+"])([cçoò-öøŏōœ])", connectors.ccq1o],
+      ["(["+letters.q1+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccq1o],
       ["(["+letters.q1+"])(["+letters.t1+"])", connectors.ccq1t1],
       ["(["+letters.q1+"])([tŧ])", connectors.ccq1t],
 
       ["(["+letters.q2+"])([aà-åăādgqæ"+letters.q2+letters.q2+"])", connectors.ccq2a],
-      ["(["+letters.q2+"])([eè-ëĕē])", connectors.ccq2e],
+      ["(["+letters.q2+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccq2e],
       ["(["+letters.q2+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccq2h],
       ["(["+letters.q2+"])([iì-ïĭīıpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+"])", connectors.ccq2i],
       ["(["+letters.q2+"])([jȷ])", connectors.ccq2i], // no special connector needed
       ["(["+letters.q2+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccq2n],
       ["(["+letters.q2+"])([sš])", connectors.ccq2s],
       ["(["+letters.q2+"])(["+letters.s1+letters.s1caron+"])", connectors.ccq2s1],
-      ["(["+letters.q2+"])([cçoò-öøŏōœ])", connectors.ccq2o],
+      ["(["+letters.q2+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccq2o],
       ["(["+letters.q2+"])(["+letters.t1+"])", connectors.ccq2t1],
       ["(["+letters.q2+"])([tŧ])", connectors.ccq2t],
 
 
-      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccga],
-      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([eè-ëĕē])", connectors.ccge],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccga],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccge],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccgh],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.IJ+letters.ij1+"])", connectors.ccgi],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccgn],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([sš])", connectors.ccgs],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])(["+letters.s1+letters.s1caron+"])", connectors.ccgs1],
-      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([cçoò-öøŏōœ])", connectors.ccgo],
+      ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccgo],
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])(["+letters.t1+"])", connectors.ccgt1], 
       ["([gjȷyýÿGJYÝŸ"+letters.ij+letters.ij1+letters.y1+letters.IJ+"])([tŧ])", connectors.ccgt],
 
-      ["([bvw"+letters.w1+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccva],
-      ["([bvw"+letters.w1+"])([eè-ëĕē])", connectors.ccve],
+      ["([bvw"+letters.w1+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccva],
+      ["([bvw"+letters.w1+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccve],
       ["([bvw"+letters.w1+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccvh],
-      ["([bvw"+letters.w1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccvi],
+      ["([bvw"+letters.w1+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccvi],
       ["([bvw"+letters.w1+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccvn],
       ["([bvw"+letters.w1+"])([sš])", connectors.ccvs],
       ["([bvw"+letters.w1+"])(["+letters.s1+letters.s1caron+"])", connectors.ccvs1],
-      ["([bvw"+letters.w1+"])([cçoò-öøŏōœ])", connectors.ccvo],
+      ["([bvw"+letters.w1+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccvo],
       ["([bvw"+letters.w1+"])(["+letters.t1+"])", connectors.ccvt1], 
       ["([bvw"+letters.w1+"])([tŧ])", connectors.ccvt],
 
-      ["([oò-öøŏō])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccoa],
-      ["([oò-öøŏō])([eè-ëĕē])", connectors.ccoe],
-      ["([oò-öøŏō])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccoh],
-      ["([oò-öøŏō])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccoi],
-      ["([oò-öøŏō])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccon],
-      ["([oò-öøŏō])([sš])", connectors.ccos],
-      ["([oò-öøŏō])(["+letters.s1+letters.s1caron+"])", connectors.ccos1],
-      ["([oò-öøŏō])([cçoò-öøŏōœ])", connectors.ccoo],
-      ["([oò-öøŏō])(["+letters.t1+"])", connectors.ccot1], 
-      ["([oò-öøŏō])([tŧ])", connectors.ccot],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccoa],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccoe],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccoh],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccoi],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccon],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])([sš])", connectors.ccos],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])(["+letters.s1+letters.s1caron+"])", connectors.ccos1],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccoo],
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])(["+letters.t1+"])", connectors.ccot1], 
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])([tŧ])", connectors.ccot],
 
 
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccea],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([eè-ëĕē])", connectors.ccee],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([bfhkl"+letters.f1+letters.f4+"])", connectors.cceh],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccei],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccen],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([sš])", connectors.cces],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])(["+letters.s1+letters.s1caron+"])", connectors.cces1],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([cçoò-öøŏōœ])", connectors.cceo],
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])(["+letters.t1+"])", connectors.ccet1], 
-      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL])([tŧ])", connectors.ccet],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccea],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccee],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.cceh],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccei],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccen],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])([sš])", connectors.cces],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])(["+letters.s1+letters.s1caron+"])", connectors.cces1],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.cceo],
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])(["+letters.t1+"])", connectors.ccet1], 
+      ["([ceè-ëĕēçœæCÇEÈ-ËĔĒŒÆL"+letters.eebreve+letters.eemacron+"])([tŧ])", connectors.ccet],
 
-      ["([tŧ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccta],
-      ["([tŧ])([eè-ëĕē])", connectors.ccte],
+      ["([tŧ])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccta],
+      ["([tŧ])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccte],
       ["([tŧ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccth],
-      ["([tŧ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccti],
+      ["([tŧ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccti],
       ["([tŧ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.cctn],
       ["([tŧ])([sš])", connectors.ccts],
       ["([tŧ])(["+letters.s1+letters.s1caron+"])", connectors.ccts1],
-      ["([tŧ])([cçoò-öøŏōœ])", connectors.ccto],
+      ["([tŧ])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccto],
       ["([tŧ])(["+letters.t1+"])", connectors.cctt1],
       ["([tŧ])([tŧ])", connectors.cctt],
 
-      ["(["+letters.r2+"])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccr2a],
-      ["(["+letters.r2+"])([eè-ëĕē])", connectors.ccr2e],
+      ["(["+letters.r2+"])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccr2a],
+      ["(["+letters.r2+"])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccr2e],
       ["(["+letters.r2+"])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccr2h],
-      ["(["+letters.r2+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccr2i],
+      ["(["+letters.r2+"])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccr2i],
       ["(["+letters.r2+"])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccr2n],
       ["(["+letters.r2+"])([sš])", connectors.ccr2s],
       ["(["+letters.r2+"])(["+letters.s1+letters.s1caron+"])", connectors.ccr2s1],
-      ["(["+letters.r2+"])([cçoò-öøŏōœ])", connectors.ccr2o],
+      ["(["+letters.r2+"])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccr2o],
       ["(["+letters.r2+"])(["+letters.t1+"])", connectors.ccr2t1],
       ["(["+letters.r2+"])([tŧ])", connectors.ccr2t],
 
 
-      ["([AÀ-ÅĂĀ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccAa],
-      ["([AÀ-ÅĂĀ])([eè-ëĕē])", connectors.ccAe],
+      ["([AÀ-ÅĂĀ])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccAa],
+      ["([AÀ-ÅĂĀ])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccAe],
       ["([AÀ-ÅĂĀ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccAh],
-      ["([AÀ-ÅĂĀ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccAi],
+      ["([AÀ-ÅĂĀ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccAi],
       ["([AÀ-ÅĂĀ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccAn],
       ["([AÀ-ÅĂĀ])([sš])", connectors.ccAs],
       ["([AÀ-ÅĂĀ])(["+letters.s1+letters.s1caron+"])", connectors.ccAs1],
-      ["([AÀ-ÅĂĀ])([cçoò-öøŏōœ])", connectors.ccAo],
+      ["([AÀ-ÅĂĀ])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccAo],
       ["([AÀ-ÅĂĀ])(["+letters.t1+"])", connectors.ccAt1],
       ["([AÀ-ÅĂĀ])([tŧ])", connectors.ccAt],
 
-      ["([BSŠ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccBa],
-      ["([BSŠ])([eè-ëĕē])", connectors.ccBe],
+      ["([BSŠ])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccBa],
+      ["([BSŠ])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccBe],
       ["([BSŠ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccBh],
-      ["([BSŠ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccBi],
+      ["([BSŠ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccBi],
       ["([BSŠ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccBn],
       ["([BSŠ])([sš])", connectors.ccBs],
       ["([BSŠ])(["+letters.s1+letters.s1caron+"])", connectors.ccBs1],
-      ["([BSŠ])([cçoò-öøŏōœ])", connectors.ccBo],
+      ["([BSŠ])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccBo],
       ["([BSŠ])(["+letters.t1+"])", connectors.ccBt1],
       ["([BSŠ])([tŧ])", connectors.ccBt],
 
-      ["([DOÒ-ÖØŎŌVW])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccOa],
-      ["([DOÒ-ÖØŎŌVW])([eè-ëĕē])", connectors.ccOe],
+      ["([DOÒ-ÖØŎŌVW])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccOa],
+      ["([DOÒ-ÖØŎŌVW])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccOe],
       ["([DOÒ-ÖØŎŌVW])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccOh],
-      ["([DOÒ-ÖØŎŌVW])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccOi],
+      ["([DOÒ-ÖØŎŌVW])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccOi],
       ["([DOÒ-ÖØŎŌVW])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccOn],
       ["([DOÒ-ÖØŎŌVW])([sš])", connectors.ccOs],
       ["([DOÒ-ÖØŎŌVW])(["+letters.s1+letters.s1caron+"])", connectors.ccOs1],
-      ["([DOÒ-ÖØŎŌVW])([cçoò-öøŏōœ])", connectors.ccOo],
+      ["([DOÒ-ÖØŎŌVW])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccOo],
       ["([DOÒ-ÖØŎŌVW])(["+letters.t1+"])", connectors.ccOt1],
       ["([DOÒ-ÖØŎŌVW])([tŧ])", connectors.ccOt],
 
-      ["([P])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccPa],
-      ["([P])([eè-ëĕē])", connectors.ccPe],
+      ["([P])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccPa],
+      ["([P])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccPe],
       ["([P])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccPh],
-      ["([P])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccPi],
+      ["([P])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccPi],
       ["([P])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccPn],
       ["([P])([sš])", connectors.ccPs],
       ["([P])(["+letters.s1+letters.s1caron+"])", connectors.ccPs1],
-      ["([P])([cçoò-öøŏōœ])", connectors.ccPo],
+      ["([P])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccPo],
       ["([P])(["+letters.t1+"])", connectors.ccPt1],
       ["([P])([tŧ])", connectors.ccPt],
 
-      ["([FT])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccFa],
-      ["([FT])([eè-ëĕē])", connectors.ccFe],
+      ["([FT])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccFa],
+      ["([FT])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccFe],
       ["([FT])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccFh],
-      ["([FT])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccFi],
+      ["([FT])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccFi],
       ["([FT])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccFn],
       ["([FT])([sš])", connectors.ccFs],
       ["([FT])(["+letters.s1+letters.s1caron+"])", connectors.ccFs1],
-      ["([FT])([cçoò-öøŏōœ])", connectors.ccFo],
+      ["([FT])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccFo],
       ["([FT])(["+letters.t1+"])", connectors.ccFt1],
       ["([FT])([tŧ])", connectors.ccFt],
 
-      ["([IÌ-ÏĪĪ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccIa],
-      ["([IÌ-ÏĪĪ])([eè-ëĕē])", connectors.ccIe],
+      ["([IÌ-ÏĪĪ])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccIa],
+      ["([IÌ-ÏĪĪ])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccIe],
       ["([IÌ-ÏĪĪ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccIh],
-      ["([IÌ-ÏĪĪ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccIi],
+      ["([IÌ-ÏĪĪ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccIi],
       ["([IÌ-ÏĪĪ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccIn],
       ["([IÌ-ÏĪĪ])([sš])", connectors.ccIs],
       ["([IÌ-ÏĪĪ])(["+letters.s1+letters.s1caron+"])", connectors.ccIs1],
-      ["([IÌ-ÏĪĪ])([cçoò-öøŏōœ])", connectors.ccIo],
+      ["([IÌ-ÏĪĪ])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccIo],
       ["([IÌ-ÏĪĪ])(["+letters.t1+"])", connectors.ccIt1],
       ["([IÌ-ÏĪĪ])([tŧ])", connectors.ccIt],
 
-      ["([NÑ])([aà-åăādgqæ"+letters.q1+letters.q2+"])", connectors.ccNa],
-      ["([NÑ])([eè-ëĕē])", connectors.ccNe],
+      ["([NÑ])([aà-åăādgqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.ccNa],
+      ["([NÑ])([eè-ëĕē"+letters.eebreve+letters.eemacron+"])", connectors.ccNe],
       ["([NÑ])([bfhkl"+letters.f1+letters.f4+"])", connectors.ccNh],
-      ["([NÑ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+"])", connectors.ccNi],
+      ["([NÑ])([iì-ïĭīıjȷpuù-üŭūwß"+letters.r1+letters.z1+letters.z1caron+letters.y1+letters.ij1+letters.p4+letters.uubreve+letters.uumacron+"])", connectors.ccNi],
       ["([NÑ])([mnñrvxẋyýÿzž"+letters.ij+letters.w1+letters.p2+letters.p6+letters.r2+"])", connectors.ccNn],
       ["([NÑ])([sš])", connectors.ccNs],
       ["([NÑ])(["+letters.s1+letters.s1caron+"])", connectors.ccNs1],
-      ["([NÑ])([cçoò-öøŏōœ])", connectors.ccNo],
+      ["([NÑ])([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.ccNo],
       ["([NÑ])(["+letters.t1+"])", connectors.ccNt1],
       ["([NÑ])([tŧ])", connectors.ccNt]
 
@@ -1642,12 +1658,12 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     
     // entrystrokes
     var replacementPairs = [
-      ["("+left+")([aà-åăādqæ"+letters.q1+letters.q2+"])", connectors.cga, connectors.csa, connectors.csa],
+      ["("+left+")([aà-åăādqæ"+letters.q1+letters.q2+letters.aabreve+letters.aamacron+"])", connectors.cga, connectors.csa, connectors.csa],
       ["("+left+")([g])", connectors.cgg, connectors.csg, connectors.csg],
-      ["("+left+")([eè-ëĕē])",connectors.cge, connectors.cse, connectors.cse],
+      ["("+left+")([eè-ëĕē"+letters.eebreve+letters.eemacron+"])",connectors.cge, connectors.cse, connectors.cse],
       ["("+left+")([bhkl])", connectors.cgh, connectors.csh, connectors.csh],
       ["("+left+")([f"+letters.f1+letters.f4+"])", connectors.cgf, connectors.csf, connectors.csf],
-      ["("+left+")([iì-ïĭīıuù-üŭūw"+letters.r1+"])", connectors.cgi, connectors.csi, connectors.csi], 
+      ["("+left+")([iì-ïĭīıuù-üŭūw"+letters.r1+letters.uubreve+letters.uumacron+"])", connectors.cgi, connectors.csi, connectors.csi], 
       ["("+left+")([ß])", connectors.cggermandbls, connectors.csgermandbls, connectors.csgermandbls], 
       ["("+left+")(["+letters.y1+letters.ij1+"])", connectors.cgy1, connectors.csy1, connectors.csy1], 
       ["("+left+")([jȷ])", connectors.cgj, connectors.csj, connectors.csj], 
@@ -1658,7 +1674,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["("+left+")(["+letters.z1+letters.z1caron+"])", connectors.cgz1, connectors.csz1, connectors.csz1], // special case, parallel with internal stroke of 'z'
       ["("+left+")([sš])",connectors.cgs, connectors.css, connectors.css],
       ["("+left+")(["+letters.s1+letters.s1caron+"])",connectors.cgs1, connectors.css1, connectors.css1],
-      ["("+left+")([cçoò-öøŏōœ])", connectors.cgo, connectors.cso, connectors.cso],
+      ["("+left+")([cçoò-öøŏōœ"+letters.oobreve+letters.oomacron+"])", connectors.cgo, connectors.cso, connectors.cso],
       ["("+left+")(["+letters.t1+"])", connectors.cgt1, connectors.cst1, connectors.cst1],
       ["("+left+")([tŧ])", connectors.cgt, connectors.cst, connectors.cst]
     ];
@@ -1684,7 +1700,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     
     // exitstrokes
     var replacementPairs = [
-      ["([à-åăāaımnñruù-üŭūxẋ"+letters.r1+letters.p4+letters.p6+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
+      ["([à-åăāaımnñruù-üŭūxẋ"+letters.r1+letters.p4+letters.p6+letters.aabreve+letters.aamacron+letters.uubreve+letters.uumacron+"])("+right+")", connectors.cen], // except M, X, H and l, h, k, d, i, t1. Note that dotless i stays with the main class.
       ["([M])("+right+")", connectors.ceM],
       ["([lH])("+right+")", connectors.ceH],
       ["([hk])("+right+")", connectors.ceh],
@@ -1703,8 +1719,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       ["([gȷyýÿG"+letters.y1+"])("+right+")", connectors.ceg], // anything without stuff above the midline
       ["([jJYÝŸ"+letters.ij+letters.ij1+letters.IJ+"])("+right+")", connectors.cej], // anything with dots or stuff above the midline
       ["([bvw"+letters.w1+"])("+right+")", connectors.cev],
-      ["([oò-öøŏō])("+right+")", connectors.ceo],
-      ["([ceè-ëĕēçœæ])("+right+")", connectors.cee], // except E, C, L
+      ["([oò-öøŏō"+letters.oobreve+letters.oomacron+"])("+right+")", connectors.ceo],
+      ["([ceè-ëĕēçœæ"+letters.eebreve+letters.eemacron+"])("+right+")", connectors.cee], // except E, C, L
       ["([CÇL])("+right+")", connectors.ceC], // for kerning
       ["([EÈ-ËĔĒŒÆ])("+right+")", connectors.ceE], // for kerning
       ["([tŧ])("+right+")", connectors.cet],
