@@ -49,36 +49,88 @@
   font-weight: normal;
 }
 
-
-.desktop {
-  font-family: "Cogncur";
+:root {
+  --cursive-font-family: "Cogncur";
+  --cursive-start-font-family: "Cogncur-Start";
+s}
+.cogncurvertical {
+  --cursive-font-family: "CogncurVertical";
+  --cursive-start-font-family: "CogncurVertical-Start";
 }
-    
-    
+.cogncuroblique, i, em {
+  --cursive-font-family: "CogncurOblique";
+  --cursive-start-font-family: "CogncurOblique-Start";
+  font-style: normal;
+  font-weight: normal;
+}
+b, strong {
+  --cursive-font-family: "CogncurCall";
+  --cursive-start-font-family: "Cogncur-Start"; /* We don't have starting points for Edged fonts */
+  font-style: normal;
+  font-weight: normal;
+}
+:root,
+  .blacklines .defaultlines,
+  .blueredlines .defaultlines,
+  .filledrompzone .defaultlines {
+  --baseline-color: #667AFF;
+  --otherlines-color: #667AFF;
+  --otherlines-color-fade1: #99a6ff;
+  --otherlines-color-fade2: #c4ccff;
+  --otherlines-color-fade3: #edefff;
+  --romphoogtelijn-color: #667AFE; /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
+  --rompzone-color: transparent;
+}
+.blacklines,
+  .blueredlines .blacklines,
+  .filledrompzone .blacklines {
+  --baseline-color: #000;
+  --otherlines-color: #000;
+  --otherlines-color-fade1: #888888;
+  --otherlines-color-fade2: #cccccc;
+  --otherlines-color-fade3: #f0f0f0;
+  --romphoogtelijn-color: #010101; /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
+  --rompzone-color: transparent;
+}
+.blueredlines,
+  .blacklines .blueredlines,
+  .filledrompzone .blueredlines {
+  --baseline-color: #e01a6f;
+  --otherlines-color: #667AFF;
+  --romphoogtelijn-color: #e01a6e;
+  --rompzone-color: transparent;
+}
+.filledrompzone,
+  .blacklines .filledrompzone,
+  .blueredlines .filledrompzone {
+  --baseline-color: #667AFF;
+  --otherlines-color: #667AFF;
+  --rompzone-color: #e7e9fa; 
+}
+
+
+
 .cursive, .rawcursive {
-  font-family: "Cogncur";
+  font-family: var(--cursive-font-family);
   line-height: normal; /* Overrule setting from masterstyle */
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
+
 .autocursive {
-  font-family: "Cogncur";
+  font-family: var(--cursive-font-family);
   line-height: normal; /* Overrule setting from masterstyle */
   font-feature-settings: "calt" 1;  
 }
+
+
 .cursive i, .cursive em, .rawcursive i, .rawcursive em, .autocursive i, .autocursive em {
   font-family: "CogncurOblique";
   font-style: normal;
   font-weight: normal;
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
-.cursive strong, .rawcursive strong, .autocursive strong {
-  font-family: "CogncurCall";
-  font-style: normal;
-  font-weight: normal;
-  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
-}
 .word {
-  font-family: "Cogncur";
+  font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
 
@@ -90,28 +142,7 @@
 .rawletter.startpunten-font, .rawletter .startpunten-font, .startpunten-font .rawletter,
 .hokjes.startpunten-font, .hokjes .startpunten-font, .startpunten-font .hokjes,
 .word-startpunten-font, .word .startpunten-font, .startpunten-font .word {
-  font-family: "Cogncur-Start";
-  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
-}
-.cursive.startpunten-font i, .cursive .startpunten-font i, .startpunten-font .cursive i,
-.rawcursive.startpunten-font i, .rawcursive .startpunten-font i, .startpunten-font .rawcursive i,
-.line.startpunten-font i, .line .startpunten-font i, .startpunten-font .line i,
-.rawline.startpunten-font i, .rawline .startpunten-font i, .startpunten-font .rawline i,
-.letter.startpunten-font i, .letter .startpunten-font i, .startpunten-font .letter i,
-.rawletter.startpunten-font i, .rawletter .startpunten-font i, .startpunten-font .rawletter i,
-.hokjes.startpunten-font i, .hokjes .startpunten-font i, .startpunten-font .hokjes i,
-.word-startpunten-font i, .word .startpunten-font i, .startpunten-font .word,
-.cursive.startpunten-font em, .cursive .startpunten-font em, .startpunten-font .cursive em,
-.rawcursive.startpunten-font em, .rawcursive .startpunten-font em, .startpunten-font .rawcursive em,
-.line.startpunten-font em, .line .startpunten-font em, .startpunten-font .line em,
-.rawline.startpunten-font em, .rawline .startpunten-font em, .startpunten-font .rawline em,
-.letter.startpunten-font em, .letter .startpunten-font em, .startpunten-font .letter em,
-.rawletter.startpunten-font em, .rawletter .startpunten-font em, .startpunten-font .rawletter em,
-.hokjes.startpunten-font em, .hokjes .startpunten-font em, .startpunten-font .hokjes em,
-.word-startpunten-font em, .word .startpunten-font em, .startpunten-font .word {
-  font-family: "CogncurOblique-Start";
-  font-style: normal;
-  font-weight: normal;
+  font-family: var(--cursive-start-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
 
@@ -138,29 +169,8 @@
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
 
-.cursive.dotted-font, .cursive .dotted-font, .dotted-font .cursive,
-.rawcursive.dotted-font, .rawcursive .dotted-font, .dotted-font .rawcursive,
-.line.dotted-font, .line .dotted-font, .dotted-font .line,
-.rawline.dotted-font, .rawline .dotted-font, .dotted-font .rawline,
-.letter.dotted-font, .letter .dotted-font, .dotted-font .letter,
-.rawletter.dotted-font, .rawletter .dotted-font, .dotted-font .rawletter,
-.hokjes.dotted-font, .hokjes .dotted-font, .dotted-font .hokjes,
-.word-dotted-font, .word .dotted-font, .dotted-font .word {
-  font-family: "Cogncur-Dotted";
-}
-.cursive.dotted-arrows2-font, .cursive .dotted-arrows2-font, .dotted-arrows2-font .cursive,
-.rawcursive.dotted-arrows2-font, .rawcursive .dotted-arrows2-font, .dotted-arrows2-font .rawcursive,
-.line.dotted-arrows2-font, .line .dotted-arrows2-font, .dotted-arrows2-font .line,
-.rawline.dotted-arrows2-font, .rawline .dotted-arrows2-font, .dotted-arrows2-font .rawline,
-.letter.dotted-arrows2-font, .letter .dotted-arrows2-font, .dotted-arrows2-font .letter,
-.rawletter.dotted-arrows2-font, .rawletter .dotted-arrows2-font, .dotted-arrows2-font .rawletter,
-.hokjes.dotted-arrows2-font, .hokjes .dotted-arrows2-font, .dotted-arrows2-font .hokjes,
-.word-dotted-arrows2-font, .word .dotted-arrows2-font, .dotted-arrows2-font .word {
-  font-family: "Cogncur-Dotted-MArrows";
-}
-
 .line, .rawline {
-  font-family: "Cogncur";
+  font-family: var(--cursive-font-family);
   line-height: normal;
   display: block;
   position: relative;
@@ -273,7 +283,7 @@
 
 
 .letter, .rawletter { /* Voor een cursive letter binnen een regel instructietekst */
-  font-family: "Cogncur";
+  font-family: var(--cursive-font-family);
   font-size: 150%;
   line-height: 66%;
   display: inline-block;
@@ -327,10 +337,13 @@
   position: absolute;
   top: .33em;
   height: .325em; /* why??? */
-  border-bottom: 2px solid #667aff;
-  border-top: 2px dashed #667aff;
-  /* border-left: 1px dotted #99999a; */ /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
+  border-bottom: 2px solid var(--baseline-color);
+  border-top: 2px dashed var(--otherlines-color);
+  background-color: var(--rompzone-color);
   z-index: -99;
+}
+.romphoogtelijn .baselines {
+  border-left: 1px dotted var(--romphoogtelijn-color);
 }
 
 .rh2 .baselines, .rh2_67 .baselines, .lhwide .baselines, .rh3 .baselines, .lh2 .baselines, .rh4 .baselines, .lh3 .baselines {
@@ -361,23 +374,6 @@
   border-bottom-width: 1px;
   border-top-width: 1px;
 }
-.blacklines .baselines {
-  border-bottom-color: #000 !important;
-  border-top-color: #000 !important;  
-}
-.blacklines .outerlines {
-  border-bottom-color: #000 !important;
-  border-top-color: #000 !important;  
-}
-.blueredlines .baselines {
-  border-bottom-color: #e01a6f !important;
-}
-/* .defaultlines should overrule blacklines */
-.blacklines .defaultlines .baselines, 
-.blueredlines .defaultlines .baselines {
-  border-bottom-color: #667aff !important;
-  border-top-color: #667aff !important;
-}
 
 .nolines .baselines {
   border-width: 0px !important; 
@@ -393,9 +389,8 @@
   width: 100%;
   position: absolute;
   top: 0em;
-  border-top: 2px solid #667aff;
-  border-bottom: 2px solid #667aff; 
-  /* border-left: 1px dotted #99999a; *//* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
+  border-top: 2px solid var(--otherlines-color);
+  border-bottom: 2px solid var(--otherlines-color); 
   height: 1em;
   box-sizing: border-box;
   z-index: -99;
@@ -435,10 +430,41 @@
   border-top-width: 1px;
 }
 
-
-.nospacebetween.forcebottomline .outerlines, .nospacebetween .forcebottomline .outerlines { /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
-  border-bottom: 2px solid #667aff;
+.nospacebetween .outerlines {
+  border-bottom: 0px;
 }
+.nospacebetween.forcebottomline .outerlines, .nospacebetween .forcebottomline .outerlines { /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
+  border-bottom: 2px solid var(--baseline-color);
+}
+
+.thin .outerlines {
+  border-top-width: .5px;
+  border-bottom-width: .5px;
+}
+.nolines .outerlines {
+  border-width: 0px !important;
+}
+.noouterlines .outerlines {
+  border-width: 0px !important;
+}
+.norompline .baselines, .norompline_fade .baselines {
+  border-top-color: transparent !important;
+  --rompzone-color: transparent;
+}
+.norompline_fade .line:first-child .baselines{
+  border-top-color: var(--otherlines-color) !important;
+}
+.norompline_fade .line:nth-child(2) .baselines{
+  border-top-color: var(--otherlines-color-fade1) !important;
+}
+.norompline_fade .line:nth-child(3) .baselines{
+  border-top-color: var(--otherlines-color-fade2) !important;
+}
+.norompline_fade .line:nth-child(4) .baselines{
+  border-top-color: var(--otherlines-color-fade3) !important;
+}
+
+
 .rh2.nospacebetween.forcebottomline .outerlines, .rh2.nospacebetween .forcebottomline .outerlines, 
 .rh2 .nospacebetween.forcebottomline .outerlines, .rh2 .nospacebetween .forcebottomline .outerlines,
 .rh2_67.nospacebetween.forcebottomline .outerlines, .rh2_67.nospacebetween .forcebottomline .outerlines, 
@@ -465,82 +491,6 @@
 }
 .nolines .outerlines {
   border-width: 0px !important;
-}
-.noouterlines .outerlines, .noouterlines_fade .outerlines {
-  border-width: 0px !important;
-}
-.noouterlines_fade .line:first-child .outerlines{
-  border-top-color: rgba(72,166,221,1) !important; /* #667aff but with transparency added for easier manipulation */;
-  border-top-width: 1px !important;
-}
-.noouterlines_fade .line:nth-child(2) .outerlines{
-  border-image: linear-gradient(to right, rgba(72,166,221,1), rgba(72,166,221,.2)) 1;
-  border-top-width: 1px !important;
-}
-.noouterlines_fade .line:nth-child(3) .outerlines{
-  border-image: linear-gradient(to right, rgba(72,166,221,.7), #fff 75%) 1;
-  border-top-width: 1px !important;
-}
-.noouterlines_fade .line:nth-child(4) .outerlines{
-  border-image: linear-gradient(to right, rgba(72,166,221,.4), #fff 45%) 1;
-  border-top-width: 1px !important;
-}
-.noouterlines_fade .line:nth-child(5) .outerlines{
-  border-image: linear-gradient(to right, rgba(72,166,221,.3), #fff 20%) 1;
-  border-top-width: 1px !important;
-}
-.blacklines .noouterlines_fade .line:first-child .outerlines{
-  border-top-color: #000 !important;
-  border-top-width: 1px !important;
-}
-.blacklines .noouterlines_fade .line:nth-child(2) .outerlines{
-  border-image: linear-gradient(to right, #000, #ddd) 1;
-  border-top-width: 1px !important;
-}
-.blacklines .noouterlines_fade .line:nth-child(3) .outerlines{
-  border-image: linear-gradient(to right, #666, #fff 75%) 1;
-  border-top-width: 1px !important;
-}
-.blacklines .noouterlines_fade .line:nth-child(4) .outerlines{
-  border-image: linear-gradient(to right, #999, #fff 45%) 1;
-  border-top-width: 1px !important;
-}
-.blacklines .noouterlines_fade .line:nth-child(5) .outerlines{
-  border-image: linear-gradient(to right, #ccc, #fff 20%) 1;
-  border-top-width: 1px !important;
-}
-
-
-
-.norompline .baselines, .norompline_fade .baselines {
-  border-top-color: transparent !important;
-}
-.norompline_fade .line:first-child .baselines{
-  border-top-color: rgba(72,166,221,1) !important; /* #667aff but with transparency added for easier manipulation */;
-}
-.norompline_fade .line:nth-child(2) .baselines{
-  border-top-color: rgba(72,166,221,.5) !important;
-}
-.norompline_fade .line:nth-child(3) .baselines{
-  border-top-color: rgba(72,166,221,.25) !important;
-}
-.blacklines .norompline_fade .line:first-child .baselines{
-  border-top-color: #000 !important;
-}
-.blacklines .norompline_fade .line:nth-child(2) .baselines{
-  border-top-color: #b0b0b0 !important;
-}
-.blacklines .norompline_fade .line:nth-child(3) .baselines{
-  border-top-color: #ddd !important;
-}
-.noromphoogtelijn .baselines {
-  border-left: none;
-}
-.romphoogtelijn .baselines {
-  border-left: 1px dotted #48a6de; /* slightly different form horizontal lines */
-}
-.blacklines .romphoogtelijn .baselines {
-  border-left: 1px dotted #010101; /* slighty different from horizontal lines */
 }
 .nobottomline .outerlines {
   border-bottom: 0px !important;
@@ -745,47 +695,6 @@
 #cell_template {
   display: none;
 }
-.rectangled {
-  display: inline-block;
-  position: relative;
-}
-.o_rectangle {
-  background-color: #faf;
-  position: absolute;
-  top: .356em;
-  left: .07em;
-  height: .327em;
-  width: .125em;
-  z-index: -1;
-}
-.o_rectangle::after {
-  position: absolute;
-  z-index: -1;
-  content: "";
-  right: -50%;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: inherit;
-  -webkit-transform: skewX(-15deg);
-  -moz-transform: skewX(-15deg);
-  -ms-transform: skewX(-15deg);
-  transform: skewX(-15deg);      
-}
-.o_rectangle::before {
-  z-index: -1;
-  content: "";
-  position: absolute;
-  left: -50%;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: inherit;
-  -webkit-transform: skewX(-15deg);
-  -moz-transform: skewX(-15deg);
-  -ms-transform: skewX(-15deg);
-  transform: skewX(-15deg);    
-}
 .invisible {
   /* Only the letter should be invisible, not the background elements */
   color: transparent;
@@ -873,27 +782,6 @@ ul {
 .masqued-upper .outerlines, .masqued-lower .outerlines, .masqued-body .outerlines {
   z-index: 11 !important;
 }
-/* Put this class around a letter I that you want to have without a dot */
-.inodot {
-  position: relative;
-}
-.masqued-dot {
-  display: inline-block;
-  position: absolute;
-  top: .1em;
-  width: .1em;
-  right: 0em;
-  height: .2em;
-  background-color: #fff;
-  z-index: 99;
-}
-
-.tag {
-  font-weight: bold;
-  border: 1px solid black;
-  padding: 1px 5px 1px 5px;
-  margin: 0 5px 0 5px;
-}
 
 /* 'hokjes' have a height/width-ratio of 2:1. 
  * These 'hokjes' are 1ex wide and 2ex tall, and the baseline of the font is aligned 
@@ -907,6 +795,16 @@ ul {
   font-family: 'Cogncur';
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
+.cogncurvertical .hokjes {
+  font-family: 'CogncurVertical';
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "calt" 0;
+}
+.cogncuroblique .hokjes {
+  font-family: 'CogncurOblique';
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "calt" 0;
+}
 .hokjes-table {
   font-variant-numeric: tabular-nums;
   table-layout: fixed;
@@ -919,7 +817,7 @@ table.hokjes-table {
   border-collapse: collapse;
 }
 table.hokjes-table td {
-  border: 1px solid #66f;
+  border: 1px solid var(--otherlines-color);
   margin: 0px;
   padding: 0px;
   padding-bottom: 0.03ex;
@@ -969,11 +867,10 @@ table.hokjes-table .hokjes-los, .hokjes-los table.hokjes-table {
   /* Set font so that 1ex is relative to the correct font */
   font-family: "Cogncur";
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
-  
 }
 
 .startpunten-font table.hokjes-table .hokjes-los, .startpunten-font .hokjes-los table.hokjes-table, .startpunten-font.hokjes-los table.hokjes-table {
-  font-family: "Cogncur-Start";
+  font-family: var(--cursive-start-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
 .arrows-font table.hokjes-table .hokjes-los, .arrows-font .hokjes-los table.hokjes-table, .arrows-font.hokjes-los table.hokjes-table {
@@ -998,7 +895,7 @@ table.hokjes-table .hokjes-baseline td, .hokjes-baseline table.hokjes-table td, 
   border-right: 1px solid rgba(255,255,255,0);
 }
 table.hokjes-table .hokjes-met-romphoogtelijn .hokjes-rompzone, .hokjes-met-romphoogtelijn table.hokjes-table .hokjes-rompzone {
-  border-left: 1px dotted #66f; /* TODO: nog niet duidelijk genoeg */
+  border-left: 1px dotted var(--otherlines-color); /* TODO: nog niet duidelijk genoeg */
 }
 table.hokjes-table td.next .hokjes-rompzone, table.hokjes-table td.next .hokjes-rompzone,
 table.hokjes-table td.skip .hokjes-rompzone, table.hokjes-table td.skip .hokjes-rompzone {
@@ -1018,11 +915,11 @@ table.hokjes-table td.skip .hokjes-rompzone, table.hokjes-table td.skip .hokjes-
   z-index: -99;
 }
 .hokjes-met-romplijn .hokjes-rompzone, .hokjes-met-rompzone .hokjes-rompzone {
-  border-top: 1px dashed #66f;
+  border-top: 1px dashed  var(--otherlines-color);
 }
 
 .hokjes-met-rompzone .hokjes-rompzone  {
-  background-color: #eef;
+  background-color: var(--rompzone-color);
 }
 .hokjes-los .skip .hokjes-rompzone {
   background-color: transparent;
