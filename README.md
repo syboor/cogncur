@@ -2,7 +2,7 @@
 
 Cogncur is a high quality, fully connected cursive font for teaching purposes. 
 
-# Installation
+# Download & install
 The Cogncur font family contains multiple fonts:
 ![Cursive text in various styles](documentation/images/fontstyles.png)
 
@@ -26,6 +26,12 @@ Follow the steps below to enable the required OpenType features in Microsoft Wor
    
 These steps are demonstrated in this screenshot:
 ![Screenshot from Microsoft Word](documentation/images/msword_en.png)
+
+# Using Cogncur in other applications
+* Many applications support OpenType and have relevant OpenType features enabled by default, for example: LibreOffice, Scrivener, Pages.
+* In some applications, you'll need to enable OpenType features (especially contextual alternatives) manually, for example: Adobe Photoshop.
+* Some applications support custom fonts but do not support OpenType, for example: Microsoft Powerpoint, Canva Pro. In those "legacy" applications, there is no feasible way to enter or edit cursive text from within the application. However, you can create your connected text in the ["Powerpoint converter" web application](https://cogncur.com/powerpoint) and then copy-paste this text into your legacy application.
+* A lot of cloud applications don't allow you to use custom fonts, for example: Google Docs, Canva Free. It is not possible to use Cogncur in these applications.
 
 # More documentation
 ...coming soon...
