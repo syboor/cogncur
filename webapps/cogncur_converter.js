@@ -172,6 +172,12 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      1 = yes, tabular width
      */
      numerals_tabular: 0,
+
+    /* numerals_tabular
+     0 = yes, replace the space too
+     1 = no, don't replace the space
+     */
+     numerals_tabular_dont_replace_space: 0,
      
     /* numerals_oldstyle
      0 = no, lining figures; all numerals have the same height
@@ -1768,6 +1774,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     Object.keys(numerals).forEach(function (key) { 
       if (key.indexOf('.tab') >  -1) return; // ignore if it's a style variant
       if (key.indexOf('.old') >  -1) return; // ignore if it's a style variant
+      
+      if (key == 'space' && settings.numerals_tabular_dont_replace_space) return;
       
       // OK, only standard style numerals left now
       if (settings.numerals_tabular && settings.numerals_oldstyle && (key+'.tab.old') in numerals) {

@@ -49,6 +49,8 @@
     <li><a href="#starts">Starting points</a></li>
     <li><a href="#wordfade">Wordfade</a></li>
     <li><a href="#overlap">Overlapping entry / connecting strokes</a></li>
+    <li><a href="#hokjes">Numerals on math paper</a></li>
+    
   </ul>
 
   
@@ -1692,6 +1694,264 @@ Nov 9, 1989.<br/>
   
   <br/>
   <hr/>
+  
+  <h2 name="hokjes">Numerals on math paper</h2>
+  <a name="hokjes"><h2>Cijfers in hokjes</h2></a>
+  <p>Cijfers kunnen in hokjes geplaatst worden. Gebruik hiervoor de css-class <code>hokjes</code>. Standaard zijn de hokjes 2 x zo hoog als ze lang zijn. Leading zeroes worden niet verwijderd. Spaties veroorzaken een leeg hokje. Alle regels worden aangevuld tot de lengte van de langste regel.</p>
+
+  <table>
+    <tr class="rh8">
+      <td  class="cogncurvertical" data-cogncur-numerals-oldstyle=0 data-cogncur-numerals-tabular=1>
+        <div class="hokjes">
+123456789
+500,020,010
+ 800000.00
++ - : * /
+03 * 1999
+555-666=x
+   50 / 2</div>
+      </td>
+      <td class="cogncurregular" data-cogncur-numerals-oldstyle=0 data-cogncur-numerals-tabular=1>
+        <div class="hokjes">
+123456789
+500,020,010
+ 800000.00
++ - : * /
+03 * 1999
+555-666=x
+   50 / 2</div>
+      </td>
+      <td class="cogncuroblique" data-cogncur-numerals-oldstyle=0 data-cogncur-numerals-tabular=1>
+        <div class="hokjes">
+123456789
+500,020,010
+ 800000.00
++ - : * /
+03 * 1999
+555-666=x
+   50 / 2</div>
+      </td>
+    </tr>
+  </table>
+  <br/>
+  <br/>
+  Oldtsyle numerals are not very suited to use on math paper. They are too big.<br/>
+  <table>
+    <tr class="rh8">
+      <td  class="cogncurvertical" data-cogncur-numerals-oldstyle=1 data-cogncur-numerals-tabular=1>
+        <div class="hokjes">
+123456789
+500,020,010
+ 800000.00
++ - : * /
+03 * 1999
+555-666=x
+   50 / 2</div>
+      </td>
+      <td class="cogncurregular" data-cogncur-numerals-oldstyle=1 data-cogncur-numerals-tabular=1>
+        <div class="hokjes">
+123456789
+500,020,010
+ 800000.00
++ - : * /
+03 * 1999
+555-666=x
+   50 / 2</div>
+      </td>
+      <td class="cogncuroblique" data-cogncur-numerals-oldstyle=1  data-cogncur-numerals-tabular=1>
+        <div class="hokjes">
+123456789
+500,020,010
+ 800000.00
++ - : * /
+03 * 1999
+555-666=x
+   50 / 2</div>
+      </td>
+    </tr>
+  </table>
+  <br/>
+  Math paper with repeated lines and overlay <br/>
+  <table data-cogncur-numerals-tabular=1>
+    <tr>
+      <td data-cogncur-numerals-oldstyle=0>
+        <div class="hokjes repeatlines rh5" data-line1-classes="hokjes-met-romplijn" data-line2-classes="traceable startpunt-overlay-zwart hokjes-met-romplijn" data-line3-classes="startpunten-font hokjes-met-romplijn" data-line4-classes="empty hokjes-met-romplijn" data-nlines="4">
+12 34 56 78 90</div>
+      </td>  
+      <td data-cogncur-numerals-oldstyle=1>
+        <div class="hokjes repeatlines rh5" data-line1-classes="hokjes-met-romplijn" data-line2-classes="traceable startpunt-overlay-zwart hokjes-met-romplijn" data-line3-classes="startpunten-font hokjes-met-romplijn" data-line4-classes="empty hokjes-met-romplijn" data-nlines="4">
+12 34 56 78 90</div>
+      </td>  
+    </tr>
+  </table>
+  <br/>
+  Math paper styles<br/>
+  <table data-cogncur-numerals-tabular=1>
+    <tr>
+      <td class="hokjes-met-solid-romplijn" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-met-romplijn" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-baseline" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-nolines" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+    </tr>
+  </table>
+  
+  <table class="blueredlines" data-cogncur-numerals-tabular=1>
+    <tr>
+      <td class="hokjes-met-solid-romplijn" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-met-romplijn" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-baseline" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-nolines" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+    </tr>
+  </table>
+
+  <table class="filledrompzone" data-cogncur-numerals-tabular=1>
+    <tr>
+      <td class="hokjes-met-solid-romplijn" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-met-romplijn" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-baseline" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-nolines" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+    </tr>
+  </table>
+
+
+  <table class="blacklines" data-cogncur-numerals-tabular=1>
+    <tr>
+      <td class="hokjes-met-solid-romplijn" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-met-romplijn" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-baseline" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+      <td class="hokjes-nolines" style="padding: 10px">
+        <div class="hokjes repeatlines rh5" data-line1-classes="" data-line2-classes="traceable startpunt-overlay-zwart" data-line3-classes="startpunten-font" data-nlines="3">
+87</div>
+      </td>  
+    </tr>
+  </table>
+
+
+
+<!--  
+  <div data-cogncur-numerals-oldstyle=0 class="hokjes-met-romplijn">
+  <table class="rh20 traceable startpunt-overlay-zwart" data-cogncur-numerals-tabular=1>
+  <tr>
+<td class="hokjes">123456</div>
+</td></tr></table>
+  <table class="cogncuroblique rh20 traceable startpunt-overlay-zwart" data-cogncur-numerals-tabular=1>
+  <tr>
+<td class="hokjes">123456</div>
+</td></tr></table>
+  <table class="cogncurvertical rh20 traceable startpunt-overlay-zwart"  data-cogncur-numerals-tabular=1>
+  <tr>
+<td class="hokjes">123456</div>
+</td></tr></table>
+</div>
+-->
+
+  <br/>
+  Separate boxes<br/>
+  NB: data-cogncur-numerals-tabular-dont-replace-space=1
+  
+  <table data-cogncur-numerals-tabular=1 data-cogncur-numerals-tabular-dont-replace-space=1>
+    <tr>
+      <td data-cogncur-numerals-oldstyle=0>
+        <div class="hokjes hokjes-los repeatlines rh5" data-line1-classes="hokjes-met-romplijn" data-line2-classes="traceable startpunt-overlay-zwart hokjes-met-romplijn" data-line3-classes="startpunten-font hokjes-met-romplijn" data-line4-classes="empty hokjes-met-romplijn" data-nlines="4">
+12 34 56 78 90</div>
+      </td>  
+      <td data-cogncur-numerals-oldstyle=1>
+        <div class="hokjes hokjes-los repeatlines rh5" data-line1-classes="hokjes-met-romplijn" data-line2-classes="traceable startpunt-overlay-zwart hokjes-met-romplijn" data-line3-classes="startpunten-font hokjes-met-romplijn" data-line4-classes="empty hokjes-met-romplijn" data-nlines="4">
+12 34 56 78 90</div>
+      </td>  
+    </tr>
+  </table>
+  
+  <br/>
+  Boxes in 9:5 (instead of 2:1)<br/>
+  <div class="hokjes-minder-hoog cogncuroblique">
+  <table data-cogncur-numerals-tabular=1 data-cogncur-numerals-tabular-dont-replace-space=1>
+    <tr>
+      <td data-cogncur-numerals-oldstyle=0>
+        <div class="hokjes hokjes-los repeatlines rh6" data-line1-classes="hokjes-met-romplijn" data-line2-classes="traceable startpunt-overlay-zwart hokjes-met-romplijn" data-line3-classes="startpunten-font hokjes-met-romplijn" data-line4-classes="empty hokjes-met-romplijn" data-nlines="4">
+12 34 56 78 90</div>
+      </td>  
+      <td data-cogncur-numerals-oldstyle=1>
+        <div class="hokjes hokjes-los repeatlines rh6" data-line1-classes="hokjes-met-romplijn" data-line2-classes="traceable startpunt-overlay-zwart hokjes-met-romplijn" data-line3-classes="startpunten-font hokjes-met-romplijn" data-line4-classes="empty hokjes-met-romplijn" data-nlines="4">
+12 34 56 78 90</div>
+      </td>  
+    </tr>
+  </table>
+  <table data-cogncur-numerals-tabular=1 data-cogncur-numerals-tabular-dont-replace-space=1>
+    <tr>
+      <td data-cogncur-numerals-oldstyle=0>
+        <div class="hokjes hokjes repeatlines rh6" data-line1-classes="hokjes-met-romplijn" data-line2-classes="traceable startpunt-overlay-zwart hokjes-met-romplijn" data-line3-classes="startpunten-font hokjes-met-romplijn" data-line4-classes="empty hokjes-met-romplijn" data-nlines="4">
+12 34 56 78 90</div>
+      </td>  
+      <td data-cogncur-numerals-oldstyle=1>
+        <div class="hokjes hokjes repeatlines rh6" data-line1-classes="hokjes-met-romplijn" data-line2-classes="traceable startpunt-overlay-zwart hokjes-met-romplijn" data-line3-classes="startpunten-font hokjes-met-romplijn" data-line4-classes="empty hokjes-met-romplijn" data-nlines="4">
+12 34 56 78 90</div>
+      </td>  
+    </tr>
+  </table>
+  </div>
+  
   
   <h2>Misc</h2>
   <br/>

@@ -49,10 +49,12 @@
   font-weight: normal;
 }
 
-:root {
+:root,
+.cogncurvertical .cogncurregular,
+.cogncuroblique .cogncurregular {
   --cursive-font-family: "Cogncur";
   --cursive-start-font-family: "Cogncur-Start";
-s}
+}
 .cogncurvertical {
   --cursive-font-family: "CogncurVertical";
   --cursive-start-font-family: "CogncurVertical-Start";
@@ -179,6 +181,9 @@ b, strong {
   line-height: 1em;
   white-space: pre; /* Double whitespaces count as double and do not collapse */
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+}
+.line::before, .rawline::before, .line-original::before, .line-overlay::before {
+  content: '\200a'; /* extra spacing */
 }
 .line-container {
   height: 1em; /* Needed because it only contains absolutely positioned elements */
@@ -791,22 +796,10 @@ ul {
  */
 .hokjes {
   white-space: pre;
-  font-variant-numeric: tabular-nums;
-  font-family: 'Cogncur';
+  font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
-.cogncurvertical .hokjes {
-  font-family: 'CogncurVertical';
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "calt" 0;
-}
-.cogncuroblique .hokjes {
-  font-family: 'CogncurOblique';
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "calt" 0;
-}
 .hokjes-table {
-  font-variant-numeric: tabular-nums;
   table-layout: fixed;
   margin: 0px;
   border-collapse: collapse;
@@ -818,6 +811,7 @@ table.hokjes-table {
 }
 table.hokjes-table td {
   border: 1px solid var(--otherlines-color);
+  border-bottom: 1px solid var(--baseline-color);
   margin: 0px;
   padding: 0px;
   padding-bottom: 0.03ex;
@@ -845,27 +839,98 @@ table.hokjes-table td {
 .rh20 table.hokjes-table td {
   border-width: 2px;
 }
+
+
+/* Numerals in hokjes must always be tabular. Please make sure in your scripting and data-attributes that the numerals are tabuler!
+   Styling will not be correct for propertional numbers.
+ */
 table.hokjes-table td div.hokjes-content {
-  width: 2ex;
-  height: 2ex;
-  padding-top: 2ex;
+  width: 1.5ex;
+  height: 3ex;
+  padding-top: 1ex;
   position: relative;
-  bottom: 0ex;
+  left: -0.05ex; /* compensate for slant */
+  bottom: 0.08ex; /* why not 0? */
 }
-table.hokjes-table td div.hokjes-content.hokjes-overlay {
-  position: absolute;
+.cogncurvertical table.hokjes-table td div.hokjes-content {
+  left: 0px;
 }
-div.hokjes-content .tussen_de_hokjes {
-  position: absolute;
-  left: .85ex;
+.cogncuroblique table.hokjes-table td div.hokjes-content {
+  left: -0.2ex; /* compensate for slant */
 }
 
+[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
+table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content {
+  font-size: 150%; 
+  width: 1ex;
+  height: 2ex;
+  padding-top: 0ex;
+  position: relative;
+  left: -0.05ex; /* compensate for slant */
+  bottom: 0.11ex; 
+}
+.cogncurvertical [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
+.cogncurvertical[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
+.cogncurvertical table.hokjes-table[data-cogncur-numerals-oldstyle="1"] td div.hokjes-content {
+  left: 0px;
+}
+.cogncuroblique [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
+.cogncuroblique[data-cogncur-numerals-oldstyle="1"]  table.hokjes-table td div.hokjes-content,
+.cogncuroblique table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content {
+  left: -0.1ex; /* compensate for slant */
+}
+
+
+table.hokjes-table td div.hokjes-content.hokjes-overlay {
+  position: absolute; /* We need to change the padding-top from the normal hokjes to top in this case */
+  padding-top: 0ex;
+  top: 0.92ex;
+  left: -0.05ex; 
+/* somehow, if we put 'startpunten-font' on this element, it all goes wrong, but if we punt an element with 'startpunten-font' inside it, it's fine */
+}
+.cogncurvertical table.hokjes-table td div.hokjes-content.hokjes-overlay {
+  left: 0ex; 
+}
+.cogncuroblique table.hokjes-table td div.hokjes-content.hokjes-overlay {
+  left: -0.2ex; 
+}
+[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
+table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content.hokjes-overlay {
+  position: absolute; /* We need to change the padding-top from the normal hokjes to top in this case */
+  padding-top: 0ex;
+  top: -0.11ex;
+  left: -0.05ex; 
+/* somehow, if we put 'startpunten-font' on this element, it all goes wrong, but if we punt an element with 'startpunten-font' inside it, it's fine */
+}
+.cogncurvertical [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
+.cogncurvertical[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
+.cogncurvertical table.hokjes-table[data-cogncur-numerals-oldstyle="1"] td div.hokjes-content.hokjes-overlay {
+  left: 0ex; 
+}
+.cogncuroblique [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
+.cogncuroblique[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
+.cogncuroblique table.hokjes-table[data-cogncur-numerals-oldstyle="1"] td div.hokjes-content.hokjes-overlay {
+  left: -0.1ex; 
+}
+
+
+div.hokjes-content .tussen_de_hokjes {
+  position: absolute;
+  left: 1.5ex;
+}
+[data-cogncur-numerals-oldstyle="1"] div.hokjes-content .tussen_de_hokjes {
+  position: absolute;
+  left: 1ex;
+}
+
+
+
 table.hokjes-table .hokjes-los, .hokjes-los table.hokjes-table {
-  border-spacing: 0px 1ex;
+  border-spacing: 0px 1.5ex;
   border-collapse: separate;
-  margin-top: 2ex; /* no border-spacing at the top please */
+  margin-top: -1.5ex; /* no border-spacing at the top please */
   /* Set font so that 1ex is relative to the correct font */
-  font-family: "Cogncur";
+  font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
 }
 
@@ -904,23 +969,28 @@ table.hokjes-table td.skip .hokjes-rompzone, table.hokjes-table td.skip .hokjes-
 
 .hokjes-cell {
   position: relative;
+  height: 3ex;
 }
-
+.hokjes-minder-hoog .hokjes-cell {
+  height: 2.7ex;
+}
 
 .hokjes-rompzone {
   position: absolute;
-  height: 2ex;
+  height: 1.5ex;
   width: 100%;
-  bottom: 0em; /* why??? */
+  bottom: -0.03ex; /* why??? */
   z-index: -99;
 }
-.hokjes-met-romplijn .hokjes-rompzone, .hokjes-met-rompzone .hokjes-rompzone {
-  border-top: 1px dashed  var(--otherlines-color);
-}
-
-.hokjes-met-rompzone .hokjes-rompzone  {
+.hokjes-met-romplijn .hokjes-rompzone {
+  border-top: 1px dashed var(--otherlines-color);
   background-color: var(--rompzone-color);
 }
+.hokjes-met-solid-romplijn .hokjes-rompzone {
+  border-top: 1px solid var(--otherlines-color);
+  background-color: var(--rompzone-color);
+}
+
 .hokjes-los .skip .hokjes-rompzone {
   background-color: transparent;
   border-top: none;
@@ -935,15 +1005,34 @@ table.hokjes-table td.skip .hokjes-rompzone, table.hokjes-table td.skip .hokjes-
 
 table.hokjes-minder-hoog.hokjes-table td .hokjes-content,
 .hokjes-minder-hoog table.hokjes-table td .hokjes-content {
-  line-height: 2.6ex;
-  height: 1.8ex;
+  bottom: .38ex;
 }
 
 /* and for the sake of our settings preview, we need to be able to overrule this :( */
 .hokjes-minder-hoog .hokjes-hoog table.hokjes-table td .hokjes-content {
-  line-height: normal;
-  height: 2ex;
+  bottom: 0.08em;
 }
+.hokjes-minder-hoog .hokjes-hoog .hokjes-cell {
+  height: 3ex;
+}
+
+.hokjes-minder-hoog table.hokjes-table td div.hokjes-content.hokjes-overlay,
+table.hokjes-table.hokjes-minder-hoog  td div.hokjes-content.hokjes-overlay {
+  top: 0.62ex;
+}
+.hokjes-minder-hoog [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
+.hokjes-minder-hoog table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content,
+.hokjes-minder-hoog[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content {
+  bottom: 0.31ex; 
+}
+.hokjes-minder-hoog [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
+.hokjes-minder-hoog table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content.hokjes-overlay,
+.hokjes-minder-hoog[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
+[data-cogncur-numerals-oldstyle="1"] .hokjes-minder-hoog table.hokjes-table td div.hokjes-content.hokjes-overlay {
+  top: -0.32ex;
+}
+
+
 
 /* force printing of background color */
 .line, .rawline, .hokjes-cell {
