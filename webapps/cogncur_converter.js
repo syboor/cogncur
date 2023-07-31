@@ -6,9 +6,15 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     /* entrystrokes_variant:
         0 = entrystrokes from the baseline
         1 = a/c/d/g/o/q have no entry strokes. Other letters have entrystrokes from justb elow the midline. i/u/w have an entry stroke followed by a sharp angle.
-        2 = like 1, but letters i/u/w don't have entry strokes at all, they start down from the midline. NB this also effects uppercase U, W, Y
+        2 = N.I. like 1, but letters i/u/w don't have entry strokes at all, they start down from the midline. NB this also effects uppercase U, W, Y
      */
     entrystrokes: 0,
+    
+    /* initial ligatures: applies ONLY when entrystrokes >= 1
+       0 = short entry strokes are a separate glyph; may cause excessive word spacing and unequal left alignment for some letters; styling the entry stroke is possible
+       1 = short entry strokes are merged into the next letter through ligatures; correct word spacing and alignment, but styling the entry stroke (i.e. 'wordfade' feature) will not be possible
+     */
+    initial_ligatures: 1,
     
     /* exitstrokes:
         0 = many exit strokes
@@ -166,6 +172,12 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      1 = yes, tabular width
      */
      numerals_tabular: 0,
+
+    /* numerals_tabular
+     0 = yes, replace the space too
+     1 = no, don't replace the space
+     */
+     numerals_tabular_dont_replace_space: 0,
      
     /* numerals_oldstyle
      0 = no, lining figures; all numerals have the same height
@@ -423,7 +435,11 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     csy  : '\ue12d', // identical to ... but different for kerning purposes
     csy1 : '\ue12e', // identical to ... but different for kerning purposes
     csgermandbls : '\ue12f', // identical to ... but different for kerning purposes
-
+    cpo  : '\ue130',
+    cpa  : '\ue131',
+    cpt1 : '\ue132',
+    cpg  : '\ue133',
+    
     
     cet1 : '\ue0d3',
 
@@ -1759,6 +1775,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       if (key.indexOf('.tab') >  -1) return; // ignore if it's a style variant
       if (key.indexOf('.old') >  -1) return; // ignore if it's a style variant
       
+      if (key == 'space' && settings.numerals_tabular_dont_replace_space) return;
+      
       // OK, only standard style numerals left now
       if (settings.numerals_tabular && settings.numerals_oldstyle && (key+'.tab.old') in numerals) {
         input = input.replaceAll(numerals[key], numerals[key+'.tab.old']);
@@ -1795,12 +1813,23 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
   function fixwhitespaceligaturesConversion(input) {
     var glyph, parts, glyph1, glyph2;
-    for (const name in fix_whitespace_ligatures) {
-      glyph = fix_whitespace_ligatures[name];
-      parts = name.split('_');
-      if (parts[1]) {
-        input = input.replace(new RegExp(connectors[parts[0]] + letters[parts[1]], 'gu'), glyph);
+    
+    if (settings.initial_ligatures) {
+      for (const name in fix_whitespace_ligatures) {
+        glyph = fix_whitespace_ligatures[name];
+        parts = name.split('_');
+        if (parts[1]) {
+          input = input.replace(new RegExp(connectors[parts[0]] + letters[parts[1]], 'gu'), glyph);
+        }
       }
+    } else {
+      // if we don't want initial_ligatures, it's probably because of wordfade, so assume we want partial strokes
+      // for a/c/d/g/o/q/t1 if not using entry strokes 
+      input = input.replaceAll(connectors.cso, connectors.cpo);
+      input = input.replaceAll(connectors.csa, connectors.cpa);
+      input = input.replaceAll(connectors.cst1, connectors.cpt1);
+      input = input.replaceAll(connectors.csg, connectors.cpg);
+      
     }
 
     return input;

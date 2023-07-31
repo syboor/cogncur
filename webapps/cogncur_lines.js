@@ -258,7 +258,7 @@ var get_cogncur_lines = (function () {
    *       getallen van meerdere cijfers krijgen wel hokjes aan elkaar
    * raw = geen omzetting van de inhoud van de hokjes via cogncur
    */
-  function get_replace_hokjes(cogncur, los, raw) {
+  function get_replace_hokjes(cogncur_converter, los, raw) {
     function replace_hokjes(value) {
       var lines = value.split("\n");
       var line_result; 
@@ -293,18 +293,17 @@ var get_cogncur_lines = (function () {
           next = lines[row][col+1];
 
           col++;
-          if (digit == '.' || digit == ',') continue;
+          if (digit == '.' || digit == ',' || digit == ':' || digit == ';') continue;
 
           //if (digit == '0' && next && next.match(/[0-9]/) && leading_zeros_done == false) digit = ' ';
           //if (digit.match(/[1-9]/)) leading_zeros_done = true;
           //if (!digit.match(/[0-9]/)) leading_zeros_done = false;
-          digit = digit.replace(/\-/g, '\u2013'); // This dash is the same width as the + operator
           digit = digit.replace(/\*/g, '\u00D7'); // multiplication sign
-          digit = digit.replace(/\//g, '\u00F7'); // division (anglosaxon)
+          //digit = digit.replace(/\//g, '\u00F7'); // division (anglosaxon)
 
           if (!raw) digit = cogncur_converter.convert(digit);
           
-          if (next == '.' || next == ',') {
+          if (next == '.' || next == ',' || next == ':' || next == ';') {
             digit = digit + '<span class="tussen_de_hokjes">' + (raw ? next : cogncur_converter.convert(next)) + '</span>';
           }
           
@@ -656,7 +655,7 @@ var get_cogncur_lines = (function () {
         $(this).find('td:last-child').remove();
       }
     });    
-    $(rootnode).find('.empty .hokjes-content').text('');
+    $(rootnode).find('.empty .hokjes-content').text('\u00a0'); // nbsp
     
     $(rootnode).find('.repeatwords').each(function() {
       var line_selector;
@@ -725,7 +724,7 @@ var get_cogncur_lines = (function () {
       
       // copy classes to the wrapper
       var that = this;
-      var copy_to_wrapper_classes = ['norompline', 'noouterlines', 'nolines', 'greylines', 'noromphoogtelijn'];
+      var copy_to_wrapper_classes = ['norompline', 'noouterlines', 'nolines', 'blacklines', 'blueredlines', 'noromphoogtelijn', 'romphoogtelijn'];
       $(copy_to_wrapper_classes).each(function (index, value) {
         if ($(that).hasClass(value)) $(wrapper).addClass(value);
       });
@@ -843,6 +842,24 @@ var get_cogncur_lines = (function () {
       // No, this is not needed. The font has empty space for all letters glyphs.
       // $(this).addClass('invisible-except-first');
     });
+    
+    // Somehow, if we use startpunten-font in a td.hokjes-content, the sizing gets messed up?!? 
+    // But if we wrap it a level deeper, it works fine...
+    $(rootnode).find('.hokjes-content.startpunten-font').each(function() {
+      var text = $(this).text();
+      var nested = $('<div></div>').addClass('startpunten-font').text(text);
+      $(this).text('').removeClass('startpunten-font').append(nested);
+    });
+    
+    // Same, but with startpunten-font higher in the DOM
+    $(rootnode).find('.startpunten-font .hokjes-content').each(function() {
+      var text = $(this).text();
+      var nested = $('<div></div>').addClass('startpunten-font').text(text);
+      $(this).text('').append(nested);
+      $(this).closest('.startpunten-font').removeClass('startpunten-font');
+    });
+
+
     
     // spatie tussen letters.
     // NB deze functies worden uitgevoerd voorafgaand aan conversie. 'ij' is dus ook nog twee letters.

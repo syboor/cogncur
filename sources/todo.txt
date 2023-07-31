@@ -7,12 +7,6 @@ WONT: uppercase U/W/Y with entry stroke??? This would be confusing, given that J
 
 
 *** IMPROVEMENTS
-
-TODO: measure/check line dimensions in stylesheet
-- make names in stylesheet match actual lineheight
-- create sizing chart in documentation
-
-
 LATER: kerning between uppercase letters
   - TODO: why does it not work in Chromium (but works in Office)?
   - TODO: split up ceO into ceO and ceV (right now, everything is kerned for V)
