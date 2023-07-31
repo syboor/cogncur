@@ -1352,8 +1352,8 @@ Nov 9, 1989.<br/>
   <table>
     <tr>
       <th>0: all entry strokes from baseline</th>
-      <th>1: entry strokes not from baseline</th>
-      <th>2: N.I. no entry strokes for i/u/w (sharp letters)</th>
+      <th>1: entry strokes not from baseline, with initial ligatures</th>
+      <th>1: entry strokes not from baseline, without initial ligatures</th>
     </tr>
     <tr>
       <td data-cogncur-entrystrokes=0 style="border-left: 1px solid #999">
@@ -1398,7 +1398,7 @@ Nov 9, 1989.<br/>
           <div class="line" data-cogncur-t-variant=1>time turner</div>
         </div>
       </td>
-      <td data-cogncur-entrystrokes=2  style="border-left: 1px solid #999">
+      <td data-cogncur-entrystrokes=1  data-cogncur-initial-ligatures=0 style="border-left: 1px solid #999">
         <div class="lines rh6 nospacebetween">
           <div class="line">ant dodo</div>
           <div class="line">goat quail</div>
@@ -1426,10 +1426,10 @@ Nov 9, 1989.<br/>
   <table>
     <tr>
       <th>0: all letters have exit strokes</th>
-      <th>1: no exit strokes for p and s</th>
+      <th>1: no exit strokes for p, s, r1</th>
     </tr>
     <tr>
-      <td data-cogncur-exitstrokes=0>
+      <td data-cogncur-exitstrokes=0 data-cogncur-r-variant=1>
         <div class="lines rh6 nospacebetween" style="text-align: right; border-right: 1px solid #999">
           <div class="line">ski gym red</div>
           <div class="line">win far hill</div>
@@ -1446,10 +1446,10 @@ Nov 9, 1989.<br/>
           <div class="line">lev now</div>
           <div class="line">stab</div>
           <div class="line">dodo go</div>
-          <div class="line">shoe flee zinc</div>
+          <div class="line">shoe flee her</div>
         </div>
       </td>
-      <td data-cogncur-exitstrokes=1>
+      <td data-cogncur-exitstrokes=1 data-cogncur-r-variant=1>
         <div class="lines rh6 nospacebetween" style="text-align: right; border-right: 1px solid #999">
           <div class="line">ski gym red</div>
           <div class="line">win far hill</div>
@@ -1466,7 +1466,7 @@ Nov 9, 1989.<br/>
           <div class="line">lev now</div>
           <div class="line">stab</div>
           <div class="line">dodo go</div>
-          <div class="line">shoe flee zinc</div>
+          <div class="line">shoe flee her</div>
         </div>
       </td>
     </tr>
@@ -1544,40 +1544,147 @@ Nov 9, 1989.<br/>
   
 
   <h2><a name="overlap">Overlapping entry / connecting strokes</a></h2>
-  This feature of the font will only become apparent when using 'wordfade'. Connecting strokes towards a and o continue all the way to the 'reversal' point.
+  These features of the font will only become apparent when using 'wordfade'. <br/><br/>
 
-  <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6>
-    <div class="line">aa 1 1 0 1 0 </div>
-    <div class="line">na 1 1 0 1 0 </div>
-    <div class="line">va 1 1 0 1 0 </div>
-    <div class="line">ea 1 1 0 1 0 </div>
-    <div class="line">ga 1 1 0 1 0 </div>
-    <div class="line">pa 1 1 0 1 0 </div>
-    <div class="line">oa 1 1 0 1 0 </div>
-  </div>
-  <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6>
-    <div class="line">cc 1 1 0 1 0 </div>
-    <div class="line">nc 1 1 0 1 0 </div>
-    <div class="line">vc 1 1 0 1 0 </div>
-    <div class="line">ec 1 1 0 1 0 </div>
-    <div class="line">gc 1 1 0 1 0 </div>
-    <div class="line">pc 1 1 0 1 0 </div>
-    <div class="line">oc 1 1 0 1 0 </div>
-  </div>
-  <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6>
-    <div class="line">oo 1 1 0 1 0 </div>
-    <div class="line">no 1 1 0 1 0 </div>
-    <div class="line">vo 1 1 0 1 0 </div>
-    <div class="line">eo 1 1 0 1 0 </div>
-    <div class="line">go 1 1 0 1 0 </div>
-    <div class="line">po 1 1 0 1 0 </div>
-    <div class="line">oo 1 1 0 1 0 </div>
-  </div>
-  Note: t is not supported. Connecting strokes towards t can also be used (optionally) towards i,p,u,w so can not be lengthened to the top of t.
-  <div class="lines repeat  wordfade_spectext lh5 nospacebetween" data-nspaces=6 data-cogncur-t-variant=1>
-    <div class="line">tt 1 1 0 1 0 </div>
-  </div>
-  Connecting strokes from s and p depart from a reversal point:
+  <table>
+    <tr>
+      <td>Connecting strokes and entry strokes towards a and o continue all the way to the 'reversal' point.</td>
+      <td>Using short entry strokes and initial ligatures, the entry stroke can not be styled separately form the first letter.</td>
+      <td>Using short entry strokes without initial ligatures, the entry stroke for a and o shows part of the letter instead.</td>
+    </tr>
+
+    <tr>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3>
+          <div class="line">aa 1 1 0 1 0 </div>
+          <div class="line">na 1 1 0 1 0 </div>
+          <div class="line">va 1 1 0 1 0 </div>
+          <div class="line">ea 1 1 0 1 0 </div>
+          <div class="line">ga 1 1 0 1 0 </div>
+          <div class="line">pa 1 1 0 1 0 </div>
+          <div class="line">oa 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3 data-cogncur-entrystrokes=1>
+          <div class="line">aa 1 1 0 1 0 </div>
+          <div class="line">na 1 1 0 1 0 </div>
+          <div class="line">va 1 1 0 1 0 </div>
+          <div class="line">ea 1 1 0 1 0 </div>
+          <div class="line">ga 1 1 0 1 0 </div>
+          <div class="line">pa 1 1 0 1 0 </div>
+          <div class="line">oa 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3 data-cogncur-entrystrokes=1 data-cogncur-initial-ligatures=0>
+          <div class="line">aa 1 1 0 1 0 </div>
+          <div class="line">na 1 1 0 1 0 </div>
+          <div class="line">va 1 1 0 1 0 </div>
+          <div class="line">ea 1 1 0 1 0 </div>
+          <div class="line">ga 1 1 0 1 0 </div>
+          <div class="line">pa 1 1 0 1 0 </div>
+          <div class="line">oa 1 1 0 1 0 </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3>
+          <div class="line">cc 1 1 0 1 0 </div>
+          <div class="line">nc 1 1 0 1 0 </div>
+          <div class="line">vc 1 1 0 1 0 </div>
+          <div class="line">ec 1 1 0 1 0 </div>
+          <div class="line">gc 1 1 0 1 0 </div>
+          <div class="line">pc 1 1 0 1 0 </div>
+          <div class="line">oc 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3 data-cogncur-entrystrokes=1>
+          <div class="line">cc 1 1 0 1 0 </div>
+          <div class="line">nc 1 1 0 1 0 </div>
+          <div class="line">vc 1 1 0 1 0 </div>
+          <div class="line">ec 1 1 0 1 0 </div>
+          <div class="line">gc 1 1 0 1 0 </div>
+          <div class="line">pc 1 1 0 1 0 </div>
+          <div class="line">oc 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3 data-cogncur-entrystrokes=1 data-cogncur-initial-ligatures=0>
+          <div class="line">cc 1 1 0 1 0 </div>
+          <div class="line">nc 1 1 0 1 0 </div>
+          <div class="line">vc 1 1 0 1 0 </div>
+          <div class="line">ec 1 1 0 1 0 </div>
+          <div class="line">gc 1 1 0 1 0 </div>
+          <div class="line">pc 1 1 0 1 0 </div>
+          <div class="line">oc 1 1 0 1 0 </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3>
+          <div class="line">oo 1 1 0 1 0 </div>
+          <div class="line">no 1 1 0 1 0 </div>
+          <div class="line">vo 1 1 0 1 0 </div>
+          <div class="line">eo 1 1 0 1 0 </div>
+          <div class="line">go 1 1 0 1 0 </div>
+          <div class="line">po 1 1 0 1 0 </div>
+          <div class="line">oo 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3 data-cogncur-entrystrokes=1>
+          <div class="line">oo 1 1 0 1 0 </div>
+          <div class="line">no 1 1 0 1 0 </div>
+          <div class="line">vo 1 1 0 1 0 </div>
+          <div class="line">eo 1 1 0 1 0 </div>
+          <div class="line">go 1 1 0 1 0 </div>
+          <div class="line">po 1 1 0 1 0 </div>
+          <div class="line">oo 1 1 0 1 0 </div>
+        </div>
+      </td>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3 data-cogncur-entrystrokes=1 data-cogncur-initial-ligatures=0>
+          <div class="line">oo 1 1 0 1 0 </div>
+          <div class="line">no 1 1 0 1 0 </div>
+          <div class="line">vo 1 1 0 1 0 </div>
+          <div class="line">eo 1 1 0 1 0 </div>
+          <div class="line">go 1 1 0 1 0 </div>
+          <div class="line">po 1 1 0 1 0 </div>
+          <div class="line">oo 1 1 0 1 0 </div>
+        </div>
+      </td>
+    </tr>
+
+  </table>
+
+  Note: wordfade with the print-like <i>t</i> is not well supported. The connecting strokes towards t terminates at the midline, because it can also be used (optionally) towards i,p,u,w.
+  However, with short entry strokes and no initial ligatures (3rd column), an initial stroke is shown that <i>does</i> start from the correct height.
+  <table data-cogncur-t-variant=1>
+    <tr>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3>
+          <div class="line">tt 1 1 0 1 0 </div>
+        </td>
+      </td>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3 data-cogncur-entrystrokes=1>
+          <div class="line">tt 1 1 0 1 0 </div>
+        </td>
+      </td>
+      <td style="padding: 10px">
+        <div class="lines repeat  wordfade_spectext lh4 nospacebetween" data-nspaces=3 data-cogncur-entrystrokes=1 data-cogncur-initial-ligatures=0>
+          <div class="line">tt 1 1 0 1 0 </div>
+        </td>
+      </td>
+    </tr>
+  </table>    
+
+
+  Connecting strokes <i>from</i> s and p depart from a reversal point:
   <div class="lines rh8 nospacebetween red-connections">
     <div class="line">pp pr pl ps</div>
     <div class="line">ss st si sa</div>

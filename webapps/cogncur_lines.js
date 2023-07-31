@@ -725,7 +725,7 @@ var get_cogncur_lines = (function () {
       
       // copy classes to the wrapper
       var that = this;
-      var copy_to_wrapper_classes = ['norompline', 'noouterlines', 'nolines', 'greylines', 'noromphoogtelijn'];
+      var copy_to_wrapper_classes = ['norompline', 'noouterlines', 'nolines', 'blacklines', 'blueredlines', 'noromphoogtelijn', 'romphoogtelijn'];
       $(copy_to_wrapper_classes).each(function (index, value) {
         if ($(that).hasClass(value)) $(wrapper).addClass(value);
       });
