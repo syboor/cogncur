@@ -1,27 +1,27 @@
 @font-face {
   font-family: "CogncurVertical";
-  src: url("/fonts/cogncur/fonts/cogncurvertical.ttf?") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurvertical.ttf?v=20230806") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "Cogncur";
-  src: url("/fonts/cogncur/fonts/cogncur.ttf?") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncur.ttf?v=20230806") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "CogncurOblique";
-  src: url("/fonts/cogncur/fonts/cogncuroblique.ttf?") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncuroblique.ttf?v=20230806") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "CogncurCall";
-  src: url("/fonts/cogncur/fonts/cogncurcall.ttf?") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurcall.ttf?v=20230806") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
@@ -29,21 +29,21 @@
 
 @font-face {
   font-family: "CogncurVertical-Start";
-  src: url("/fonts/cogncur/fonts/cogncurverticalstartdots.ttf?") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurverticalstartdots.ttf?v=20230806") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "Cogncur-Start";
-  src: url("/fonts/cogncur/fonts/cogncurstartdots.ttf?") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurstartdots.ttf?v=20230806") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "CogncurOblique-Start";
-  src: url("/fonts/cogncur/fonts/cogncurobliquestartdots.ttf?") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurobliquestartdots.ttf?v=20230806") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;

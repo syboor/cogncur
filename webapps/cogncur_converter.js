@@ -1374,8 +1374,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
 
 
     if (settings.q_continuity_variant == 1) {
+      input = input.replaceAll('q'+connectors.ceq, 'q'+connectors.ceq3); // NB ceq is also used after z
       input = input.replaceAll('q', letters.q3);
-      input = input.replaceAll(connectors.ceq, connectors.ceq3);
 
       input = input.replaceAll(connectors.ccqj, connectors.ccqi); // the special 'extra wide' connection is not needed if the q doesn't have a loop but just a stick
     }
