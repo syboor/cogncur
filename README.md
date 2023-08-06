@@ -33,5 +33,8 @@ These steps are demonstrated in this screenshot:
 * Some applications support custom fonts but do not support OpenType, for example: Microsoft Powerpoint, Canva Pro. In those "legacy" applications, there is no feasible way to enter or edit cursive text from within the application. However, you can create your connected text in the ["Powerpoint converter" web application](https://cogncur.com/powerpoint) and then copy-paste this text into your legacy application.
 * A lot of cloud applications don't allow you to use custom fonts, for example: Google Docs, Canva Free. It is not possible to use Cogncur in these applications.
 
+# Create worksheets online
+You can create handwriting worksheets in the online [Worksheet Creator](https://cogncur.com/worksheetcreator/). No font install is needed to use this web application.
+
 # More documentation
 ...coming soon...
