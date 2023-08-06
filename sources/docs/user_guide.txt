@@ -7,6 +7,9 @@ COGNCUR USER GUIDE
 - what's in this guide
 
 2. Feature guide / What is possible
+- font styles (i.e. different slants, edged versus monoline pen)
+  - slants
+  - monoline versus edged pen
 - 'typeface features' aka what it looks like
   - loops: 
     - b, l, h, k have tall loops. 
@@ -31,6 +34,7 @@ COGNCUR USER GUIDE
       - tight curves help achieve fairly narrow and even spacing (give example of uneven spacing in D'Nealian)
       - straight, diagonal segments don't occur in letters (except z)
   - multilingual characters
+    - Dutch 'ij' character
   - accented characters for phonics / spelling
   - uppercase
     - differences between uppercase and lowercase: lowercase is more consistent, re-uses the same elements, has almost no pencil lifts. uppercase has more unique elements, has pencil lifts both within the letter and at the start of a (therefore fake) join
@@ -46,9 +50,9 @@ COGNCUR USER GUIDE
       - these numbers are intended for use in lowercase text, therefore they will have proportional width
       - this makes the following mathematical symbols smaller: division, multiplication
     - other mathematical symbols: division, multiplication
-- font styles (i.e. different slants, edged versus monoline pen)
-  - slants
-  - monoline versus edged pen
+- customization features
+  - letter variants
+  - numeral variants
 - didactic features
   - entry strokes from the baseline
   - exit strokes (s, p, germandbls, print-like r)
