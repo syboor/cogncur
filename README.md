@@ -34,7 +34,7 @@ These steps are demonstrated in this screenshot:
 * A lot of cloud applications don't allow you to use custom fonts, for example: Google Docs, Canva Free. It is not possible to use Cogncur in these applications.
 
 # Create worksheets online
-You can create handwriting worksheets in the online [Worksheet Creator](https://cogncur.com/worksheetcreator/). No font install is needed to use this web application.
+You can create handwriting worksheets in the online [Worksheet Creator](https://cogncur.com/worksheetcreator/). No font install is needed to use the worksheet creator. The worksheet creator is also an excellent way to discover all the - as of yet still undocumented - letter variants available in Cogncur.
 
 # More documentation
 ...coming soon...
