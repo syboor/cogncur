@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<!--
+  Note: in the stylesheets used by this page, many OpenType features are disabled.
+  Their functionality is replaced by javascript.
+  This allows me to style individual glyphs (entry strokes, connecting strokes, etc).
+  
+  For most purposes, I would recommend that you simply use the OpenType features.
+-->
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="../../webapps/cogncur.css" />
+  <script src="/js/jquery-3.7.0.min.js"></script>
+  <script src="../../webapps/cogncur_converter.js"></script><!-- functions for converting text to Cogncur glyphs -->
+  <script src="../../webapps/cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script>
+    cogncur_converter.init({
+    });
+  </script>
+  <style>
+    .imagecell {
+      float: left;
+      text-align: center;
+      vertical-align: middle;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    .imagecell .description {
+      font-size: 85%;
+      font-style: italic;
+      text-
+    }
+    @font-face {
+      font-family: "CogncurThin";
+      src: url("/fonts/cogncur/sources/docs/cogncurthinregular.ttf?") format("truetype");
+      font-display: block;
+      font-style: normal;
+      font-weight: normal;
+    }    
+    .cursive.thin-font, .cursive .thin-font, .thin-font .cursive,
+    .rawcursive.thin-font, .rawcursive .thin-font, .thin-font .rawcursive,
+    .line.thin-font, .line .thin-font, .thin-font .line,
+    .rawline.thin-font, .rawline .thin-font, .thin-font .rawline,
+    .letter.thin-font, .letter .thin-font, .thin-font .letter,
+    .rawletter.thin-font, .rawletter .thin-font, .thin-font .rawletter,
+    .hokjes.thin-font, .hokjes .thin-font, .thin-font .hokjes,
+    .word-thin-font, .word .thin-font, .thin-font .word {
+      font-family: "CogncurThin";
+      font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+    }
+    
+  </style>
+</head>
+<body class="max">
+  <h1>Cogncur Feature Guide</h1>  
+  
+  <ul>
+    <li><a href="#styles">Font styles</a>
+      <ul>
+        <li><a href="#styles_slant">Slant</a>
+      </ul>
+    </li>
+    <li><a href="#typeface">Typeface features - why it looks the way it does</a>
+      <ul>
+        <li><a href="#typeface_loops">Loops and sticks</a></li>
+        <li><a href="#typeface_lifts">(Almost) no pencil lifts for lowercase</a></li>
+        <li><a href="#typeface_lifts">Arches</a></li>
+        <li><a href="#typeface_teardrop">Teardrop counters (a, d, g, p, q)</a></li>
+        <li><a href="#typeface_ellipses">Ellipses (c, e, o)</a></li>
+        <li><a href="#typeface_joins">Joins</a></li>
+        <li><a href="#typeface_joins">Multilingual support</a></li>
+        <li><a href="#typeface_joins">Uppercase</a></li>
+        <li><a href="#typeface_joins">Numerals</a></li>
+      </ul>
+    </li>
+    <li><a href="#custom">Customization features</a>
+      <ul>
+        <li><a href="#custom_letter">Letter variants</a>
+        <li><a href="#custom_letter">Numeral variants</a>
+      </ul>
+    </li>
+    <li><a href="#didactic">Didactic features</a>
+      <ul>
+        <li><a href="#didactic_entry">Entry strokes from the baseline (or not)</a>
+        <li><a href="#didactic_exit">Exit strokes</a>
+        <!-- NI <li><a href="#didactic_integratedguides">Exit strokes</a>-->
+        <li><a href="#didactic_guideglyphs">Guidelines characters</a>
+        <li><a href="#didactic_overlay">Overlay fonts</a>
+      </ul>
+    </li>
+    <li><a href="#technical">Technical features</a>
+      <ul>
+        <li><a href="#technical_opentype">Overview of required and recommended OpenType features</a>
+        <li><a href="#technical_workarounds">How to work around missing OpenType support</a>
+      </ul>
+    </li>
+    
+  </ul>
+
+  
+  <h2 id="styles">Font styles</h2>
+  <h3 id="styles_slant">Slant</h3>
+  The <i>Cogncur</i> fonts are available at three slants.
+  <br/>
+  <br/>
+  <i>Cogncur Vertical</i> is written upright. The slant is 90°.
+  <div class="cogncurvertical cursive rh4">The quick brown fox jumps over the lazy dog.</div>
+  <br/>
+  <i>Cogncur Regular</i> is written at a slant of 82.5°, or 7.5° from the vertical. The word 'Regular' is omitted from the font files.
+  <div class="cogncurregular cursive rh4">The quick brown fox jumps over the lazy dog.</div>
+  <br/>
+  Finally, <i>Cogncur Oblique</i> is written at a slant of 75°, or 15° from the vertical.
+  <div class="cogncuroblique cursive rh4">The quick brown fox jumps over the lazy dog.</div>
+  <br/><br/>
+  
+  <h2 id="typeface">Typeface features</h2>
+  This section explains what the font family looks like, and why it was designed that way.<br/>
+  
+  <h3 id="typeface_loops">Loops and sticks</h3>
+  
+  The letters <span class='letter'>b</span>, <span class='letter'>h</span>, <span class='letter'>l</span>, and <span class='letter'>k</span> have a tall loop. The letters <span class='letter'>g</span>, <span class='letter'>j</span>, and <span class='letter'>y</span> have a low loop.   Tall loops cross themselves exactly on the waist line (sometimes call 'midline'). Low loops 
+  cross themselves on the baseline. Tall and low loops are rotationally symmetrical images of each other. <br/>
+
+  <div class="imagecell">
+    <div class="image">
+      <img src="../../documentation/images/loopcrossings.png" QQQwidth="377">
+    </div>
+    <div class="description">
+      Cogncur: loops cross themselves at the waist line or at the baseline
+    </div>
+  </div>
+  
+  <br class="clear">
+  <br/>
+  All loops have a long, straight downstroke, that is parallel to other downstrokes, such as those in the legs of the letter <span class='letter'>m</span>.
+  <div class="imagecell">
+    <div class="image">
+      <img src="../../documentation/images/loopslant.png" QQQwidth="334">
+    </div>
+    <div class="description">
+      Cogncur: loops have a straight downstroke that is parallel to other downstrokes
+    </div>
+  </div>
+<!--
+ Normally, at the loop crossing both the downstroke and the diagonal segment crossing it are straight. However, if a tall loop follows one of the letters <span class='letter'>b</span>, <span class='letter'>o</span>, <span class='letter'>v</span>, or <span class='letter'>w</span>, the downstroke crosses a curved segment. If a low loop is followed by an <span class='letter'>e</span> or <span class='letter'>s</span>, the join will curve after the loop crossing to achieve adequate spacing between letters.
+  
+  <div class="line rh6">ob oh ol ok ge je ye</div>  
+  <br/><br/>
+-->  
+  <br class="clear"/>
+  <br/>
+  The letters <span class="letter">d</span> and <span class="letter">p</span> do not have a loop but a stick. The length of the sticks can be shortened with stylistic set <code>ss03</code>.<br/>
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12">dip&nbsp;</div>
+    <div class="description">Cogncur: d and p (default)</div>
+  </div>
+  <div class="imagecell">
+    <div class="line rh12" data-cogncur-stick-variant=1>dip&nbsp;</div>
+    <div class="description">Cogncur: d and p (variant)</div>
+  </div>
+  <br class="clear"/>
+  <br/>
+  The letters <span class="letter">f</span> and <span class="letter">q</span> have a low, forward loop. However, the font also provides variants of these letters without a loop. [TODO: see Customization guide]<br/>
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12">quaff&nbsp;</div>
+    <div class="description">Cogncur: f and q (default)</div>
+  </div>
+  <div class="imagecell">
+    <div class="rawline rh12">f     &nbsp;</div>
+    <div class="description">Cogncur: variants of f</div>
+  </div>
+  <div class="imagecell">
+    <div class="rawline rh12">qu u u u u&nbsp;</div>
+    <div class="description">Cogncur: variants of q</div>
+  </div>
+  <br class="clear"/>
+  <br/>
+  The letter <span class="letter">z</span> does not have a loop.
+  
+  
+  <h2 id="typeface_lifts">(Almost) no pencil lifts for lowercase</h2>
+  All lowercase letters except <span class='letter'>i</span>, <span class='letter'>j</span>, and <span class='letter'>x</span> are written without lifting the pen.<br/>
+  <div class="imagecell lines nospacebetween rh8">
+    <div class="line rh8">a b c d e f g h <span class="traceable">i</span> <span class="traceable">j</span> k l m</div>
+    <div class="line rh8">n o p q r s t u v w <span class="traceable">x</span> y z&nbsp;</div>
+  </div>
+  <br class="clear"/><br/>
+  
+  A more print-like <span class='letter' data-cogncur-t-variant=1>t</span> is also available through stylistic set <code>ss08</code>.<br/>
+  
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12">toot&nbsp;</div>
+    <div class="description">Cogncur: t (default)</div>
+  </div>
+  <div class="imagecell">
+    <div class="line rh12" data-cogncur-t-variant=1>toot&nbsp;</div>
+    <div class="description">Cogncur: t (variant)</div>
+  </div>
+  <br class="clear"/>
+  <br/>
+  
+
+  <i>Didactic tip: lowercase cursive is exemplary cursive. It avoids pencil lifts, and to do so, the student must often trace the pen 'back' over a previous stroke. Uppercase cursive contains more pencil lifts, more unique elements, and more 'inconsistencies' than lowercase cursive. Teach lowercase cursive before uppercase. </i>  
+  
+  
+  <h2 id="typeface_arches">Arches</h2>
+  The arch is the shape that occurs in the body of the letters <span class='letter'>n</span> and <span class='letter'>u</span>, and is one of the defining features that characterizes a font. Arches in Cogncur are asymmetrical and their height is 1.618 times the distance between their legs. Arches are written without lifting the pen. In the case of <span class='letter'>n</span>, the pen traces back up over the first leg and then 'branches out' into the arch. Although somewhat obscured by the thickness of the stroke, in Cogncur this 'branching out' point is located exactly halfway between the baseline and the waistline. Likewise, the letter <span class='letter'>u</span> has a 'branching in' point which is also located halfway between the baseline and the waistline.<br/>
+  
+  <div class="imagecell">
+    <div class="image">
+      <img src="../../documentation/images/arches_branching_annotated.png">
+    </div>
+    <div class="description">Cogncur: arches
+    </div>
+  </div>
+  <!--
+  <div class="lines rh40">
+  <div class="line add-overlay traceable" data-overlay-classes="thin-font zwart">n u</div>
+  -->
+  <br class="clear"><br/>
+  
+  Other lowercase letters also contain arches. In Cogncur, the width of the arch is not adjusted for wide letters such as <span class='letter'>m</span> and <span class='letter'>w</span>. The letter <span class='letter'>m</span> is therefore twice as wide as the letter <span class='letter'>n</span>. Note that the letter <span class='letter'>w</span> contains only a single arch; the third 'leg' has no straight segment, but is simply the same curved upstroke that is also found in the letters <span class='letter'>b</span> and <span class='letter'>v</span>.<br/>
+  <div class="imagecell">
+    <div class="line rh12">n m h u w&nbsp;</div>
+    <div class="description">Cogncur: letters with arches
+    </div>
+  </div>
+  
+  <br class="clear">
+  <h2 id="typeface_teardrop">Teardrop counters</h2>
+  In the German and American cursive tradition, the counters of the letters <i>a</i>, <i>d</i>, <i>g</i>, and <i>q</i> have a round shape, just like in print. This is problematic in handwriting, not just because shapes with lots of symmetry can be hard to get exactly right, but also because a circle or oval does not have a defined starting point and can just as easily be written clockwise as anticlockwise.<br/>
+  In italic handwriting, counters typically start from the wais line, resulting in a lopsided 'teardrop' shape. This has clear advantages for learners: the teardrop has a clearly defined starting point - on the waist line - and it's impossible to accidentally continue the clockwise entry stroke (or connecting stroke) through the intended starting point of the counter. The Cogncur fonts use the italic style 'teardrop' counters.
+  <br/>
+  
+  <div class="imagecell">
+    <div class="image">
+      <img src="../../documentation/images/teardrop_counters_angles.png">
+    </div>
+    <div class="description">Cogncur: the (nearly) straight angles in the teardrop counters<br/>remind students to 'turn back' and move the pen counterclockwise<br/></div>
+  </div>  
+
+  <div class="imagecell" style="padding-top: 49px">
+    <div class="image">
+      <img src="../../documentation/images/dnealian_clockwise_counter.png" width=320>
+    </div>
+    <div class="description">D'Nealian: the round shape of the counter<br/> allows an incorrect clockwise construction
+    </div>
+  </div>  
+  <br class="clear"><br/>
+
+  The letter <span class='letter'>p</span> contains a version of the teardrop counter that is rotated by 180°. There is also a variant of <span class='letter'>p</span> that doesn't have a counter but an open arch (stylistic set <code>ss16</code>), and variants that start with a curve (<code>ss15</code>).<br/>
+
+
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12">d p&nbsp;</div>
+    <div class="description">Cogncur: d and p (default)
+    </div>
+  </div>  
+  <div class="imagecell">
+    <div class="rawline rh12" data-cogncur-p-open-variant=1>  &nbsp;</div>
+    <div class="description">Cogncur: p (variants)
+    </div>
+  </div>  
+  
+ 
+  <br class="clear"/><br/>
+  Counters have a 'branching in' point (<span class='letter'>a</span>, <span class='letter'>d</span>, <span class='letter'>g</span>, and <span class='letter'>q</span>) or a 'branching out' point (<span class='letter'>p</span>) just like arches do. These points are located halfway between the baseline and the waist line, just like with the arches.
+  <br/>
+  <div class="imagecell">
+    <div class="image">
+      <img src="../../documentation/images/teardrop_counters_branching_annotated.png">
+    </div>
+    <div class="description">Cogncur: counters branch out and in just like arches
+    </div>
+  </div>
+  <!--
+  <div class="lines rh40">
+  <div class="line add-overlay traceable" data-overlay-classes="thin-font zwart">a p</div>
+  -->
+</body>

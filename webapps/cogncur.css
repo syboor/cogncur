@@ -62,14 +62,10 @@
 .cogncuroblique, i, em {
   --cursive-font-family: "CogncurOblique";
   --cursive-start-font-family: "CogncurOblique-Start";
-  font-style: normal;
-  font-weight: normal;
 }
 b, strong {
   --cursive-font-family: "CogncurCall";
   --cursive-start-font-family: "Cogncur-Start"; /* We don't have starting points for Edged fonts */
-  font-style: normal;
-  font-weight: normal;
 }
 :root,
   .blacklines .defaultlines,
@@ -126,14 +122,14 @@ b, strong {
 
 
 .cursive i, .cursive em, .rawcursive i, .rawcursive em, .autocursive i, .autocursive em {
-  font-family: "CogncurOblique";
-  font-style: normal;
-  font-weight: normal;
-  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  --cursive-font-family: "CogncurOblique";
+  --cursive-start-font-family: "CogncurOblique-Start";
 }
 .word {
   font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-style: normal;
+  font-weight: normal;
 }
 
 .cursive.startpunten-font, .cursive .startpunten-font, .startpunten-font .cursive,
@@ -181,6 +177,8 @@ b, strong {
   line-height: 1em;
   white-space: pre; /* Double whitespaces count as double and do not collapse */
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-style: normal;
+  font-weight: normal;
 }
 .line::before, .rawline::before, .line-original::before, .line-overlay::before {
   content: '\200a'; /* extra spacing */
@@ -295,6 +293,8 @@ b, strong {
   position: relative;
   top: 0em;
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-style: normal;
+  font-weight: normal;
 } 
 .letter, .rawletter { /* bold does not work for all connector glyphs. Single letters are often used within title text, so we want to disable bold */
   font-weight: normal;
@@ -798,6 +798,8 @@ ul {
   white-space: pre;
   font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-style: normal;
+  font-weight: normal;
 }
 .hokjes-table {
   table-layout: fixed;
@@ -932,6 +934,8 @@ table.hokjes-table .hokjes-los, .hokjes-los table.hokjes-table {
   /* Set font so that 1ex is relative to the correct font */
   font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-style: normal;
+  font-weight: normal;
 }
 
 .startpunten-font table.hokjes-table .hokjes-los, .startpunten-font .hokjes-los table.hokjes-table, .startpunten-font.hokjes-los table.hokjes-table {
