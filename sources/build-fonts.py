@@ -20,13 +20,17 @@ font.fontname = 'CogncurOblique';
 font.familyname = font.fullname = 'Cogncur Oblique';
 font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncuroblique.ttf', layer='GSlOutl');
 
-font.fontname = 'CogncurCalligraphic';
-font.familyname = font.fullname = 'Cogncur Calligraphic';
-font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurcall.ttf', layer='GCall');
+font.fontname = 'CogncurEdgedVertical';
+font.familyname = font.fullname = 'Cogncur Edged Vertical';
+font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncuredgedvertical.ttf', layer='GEdged');
 
 font.fontname = 'CogncurVertical';
 font.familyname = font.fullname = 'Cogncur Vertical';
 font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncurvertical.ttf', layer='GOutline');
+
+font.fontname = 'CogncurEdged';
+font.familyname = font.fullname = 'Cogncur Edged';
+font.generate('D:/syboor.eu/httpdocs/fonts/cogncur/fonts/cogncuredged.ttf', layer='GRegEdged');
 
 font.fontname = 'Cogncur';
 font.familyname = font.fullname = 'Cogncur Regular';

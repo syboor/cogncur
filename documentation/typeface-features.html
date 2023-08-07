@@ -1,0 +1,630 @@
+﻿<!DOCTYPE html>
+<!--
+  Note: in the stylesheets used by this page, many OpenType features are disabled.
+  Their functionality is replaced by javascript.
+  This allows me to style individual glyphs (entry strokes, connecting strokes, etc).
+  
+  For most purposes, I would recommend that you simply use the OpenType features.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="../webapps/cogncur.css" />
+  <link rel="stylesheet" type="text/css" href="./guide.css" />
+  <title>Cogncur Documentation - Typeface Features</title>
+  <script src="/js/jquery-3.7.0.min.js"></script>
+  <script src="../webapps/cogncur_converter.js"></script><!-- functions for converting text to Cogncur glyphs -->
+  <script src="../webapps/cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script>
+    cogncur_converter.init({
+    });
+  </script>
+</head>
+<body class="max">
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./font-styles">Font Styles</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label">next</div>
+      <div class="navlink"><a href="./customization">Customization</a></div>
+    </div>
+  </div>
+  <h1>Cogncur Documentation - Typeface Features</h1>  
+
+  This guide explains what the Cogncur font family looks like, and gives you a glimpse into why it was designed that way.
+  <br/><br/>
+  In this guide you'll find the following topics:  
+  <ul>
+    <li><a href="#typeface_loops">Loops and sticks</a></li>
+    <li><a href="#typeface_lifts">(Almost) no pencil lifts for lowercase</a></li>
+    <li><a href="#typeface_lifts">Arches</a></li>
+    <li><a href="#typeface_teardrop">Teardrop counters (a, d, g, p, q)</a></li>
+    <li><a href="#typeface_ellipses">Ellipses (c, e, o)</a></li>
+    <li><a href="#typeface_joins">Joins</a></li>
+    <li><a href="#typeface_uppercase">Uppercase</a></li>
+    <li><a href="#typeface_multilang">Multilingual support</a></li>
+    <li><a href="#typeface_numerals">Numerals</a></li>
+  </ul>
+
+  
+  <h2 id="typeface_loops">Loops and sticks</h2>
+  
+  The letters <span class='letter'>b</span>, <span class='letter'>h</span>, <span class='letter'>l</span>, and <span class='letter'>k</span> have a tall loop. The letters <span class='letter'>g</span>, <span class='letter'>j</span>, and <span class='letter'>y</span> have a low loop.   Tall loops intersect themselves exactly on the waist line (sometimes call 'midline'). Low loops 
+  intersect themselves on the baseline. Tall and low loops are rotationally symmetrical images of each other. <br/>
+
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/loopcrossings.png">
+    </div>
+    <div class="description">
+      Cogncur: loops intersect themselves at the waist line or at the baseline
+    </div>
+  </div>
+  
+  <br class="clear">
+  <br/>
+  All loops have a long, straight downstroke, that is parallel to other downstrokes, such as those in the legs of the letter <span class='letter'>m</span>.
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/loopslant.png">
+    </div>
+    <div class="description">
+      Cogncur: loops have a straight downstroke that is parallel to other downstrokes
+    </div>
+  </div>
+<!--
+ Normally, at the loop crossing both the downstroke and the diagonal segment crossing it are straight. However, if a tall loop follows one of the letters <span class='letter'>b</span>, <span class='letter'>o</span>, <span class='letter'>v</span>, or <span class='letter'>w</span>, the downstroke crosses a curved segment. If a low loop is followed by an <span class='letter'>e</span> or <span class='letter'>s</span>, the join will curve after the loop crossing to achieve adequate spacing between letters.
+  
+  <div class="line rh6">ob oh ol ok ge je ye</div>  
+  <br/><br/>
+-->  
+  <br class="clear"/>
+  <br/>
+  The letters <span class="letter">d</span> and <span class="letter">p</span> do not have a loop but a stick. The length of the sticks can be shortened with stylistic set <code>ss03</code>.<br/>
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12">dip&nbsp;</div>
+    <div class="description">Cogncur: d and p (default)</div>
+  </div>
+  <div class="imagecell">
+    <div class="line rh12" data-cogncur-stick-variant=1>dip&nbsp;</div>
+    <div class="description">Cogncur: d and p (variant)</div>
+  </div>
+  <br class="clear"/>
+  <br/>
+  The letters <span class="letter">f</span> and <span class="letter">q</span> have a low, forward loop. However, the font also provides variants of these letters without a loop. [TODO: see Customization guide]<br/>
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12">quaff&nbsp;</div>
+    <div class="description">Cogncur: f and q (default)</div>
+  </div>
+  <div class="imagecell">
+    <div class="rawline rh12">f     &nbsp;</div>
+    <div class="description">Cogncur: variants of f</div>
+  </div>
+  <div class="imagecell">
+    <div class="rawline rh12">qu u u u u&nbsp;</div>
+    <div class="description">Cogncur: variants of q</div>
+  </div>
+  <br class="clear"/>
+  <br/>
+  The letter <span class="letter">z</span> does not have a loop.
+  
+  
+  <h2 id="typeface_lifts">(Almost) no pencil lifts for lowercase</h2>
+  All lowercase letters except <span class='letter'>i</span>, <span class='letter'>j</span>, and <span class='letter'>x</span> are written without lifting the pen.<br/>
+  <div class="imagecell lines nospacebetween rh8">
+    <div class="line rh8">a b c d e f g h <span class="traceable">i</span> <span class="traceable">j</span> k l m</div>
+    <div class="line rh8">n o p q r s t u v w <span class="traceable">x</span> y z&nbsp;</div>
+  </div>
+  <br class="clear"/><br/>
+  
+  A more print-like <span class='letter' data-cogncur-t-variant=1>t</span> is also available through stylistic set <code>ss08</code>.<br/>
+  
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12">toot&nbsp;</div>
+    <div class="description">Cogncur: t (default)</div>
+  </div>
+  <div class="imagecell">
+    <div class="line rh12" data-cogncur-t-variant=1>toot&nbsp;</div>
+    <div class="description">Cogncur: t (variant)</div>
+  </div>
+  <br class="clear"/>
+  <br/>
+  
+
+  <div class="boxed"><b>Teaching tip:</b> lowercase cursive is exemplary cursive. It avoids pencil lifts, and to do so, the student must often trace the pen 'back' over a previous stroke. Uppercase cursive contains more pencil lifts, more unique elements, and more 'inconsistencies' than lowercase cursive. Teach lowercase cursive before uppercase. </div>  
+  
+  
+  <h2 id="typeface_arches">Arches</h2>
+  The arch is the shape that occurs in the body of the letters <span class='letter'>n</span> and <span class='letter'>u</span>, and is one of the defining features that characterizes a font. Arches in Cogncur are asymmetrical and their height is 1.618 times the distance between their legs. Arches are written without lifting the pen. In the case of <span class='letter'>n</span>, the pen traces back up over the first leg and then 'branches out' into the arch. Although somewhat obscured by the thickness of the stroke, in Cogncur this 'branching out' point is located exactly halfway between the baseline and the waistline. Likewise, the letter <span class='letter'>u</span> has a 'branching in' point which is also located halfway between the baseline and the waistline.<br/>
+  
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/arches_branching_annotated.png">
+    </div>
+    <div class="description">Cogncur: arches
+    </div>
+  </div>
+  <!--
+  <div class="lines rh40">
+  <div class="line add-overlay traceable" data-overlay-classes="thin-font zwart">n u</div>
+  -->
+  <br class="clear"><br/>
+  
+  Other lowercase letters also contain arches. In Cogncur, the width of the arch does not change for wide letters such as <span class='letter'>m</span> and <span class='letter'>w</span>. The letter <span class='letter'>m</span> is therefore twice as wide as the letter <span class='letter'>n</span>. Note that the letter <span class='letter'>w</span> contains only a single arch; the third 'leg' has no straight segment, but is simply the same curved upstroke that is also found in the letters <span class='letter'>b</span> and <span class='letter'>v</span>.<br/>
+  <div class="imagecell">
+    <div class="line rh12">n m h u w&nbsp;</div>
+    <div class="description">Cogncur: letters with arches
+    </div>
+  </div>
+  
+  <br class="clear">
+  <h2 id="typeface_teardrop">Teardrop counters</h2>
+  In the German and American cursive tradition, the counters of the letters <i>a</i>, <i>d</i>, <i>g</i>, and <i>q</i> have a round shape, just like in print. This is problematic in handwriting, not just because shapes with lots of symmetry can be hard to get exactly right, but also because a circle or oval does not have a defined starting point and can just as easily be written clockwise as anticlockwise.<br/>
+  In italic handwriting, counters typically start from the waist line, resulting in a lopsided 'teardrop' shape. This has clear advantages for learners: the teardrop has a clearly defined starting point - on the waist line - and it's impossible to accidentally continue the clockwise entry stroke (or connecting stroke) through the intended starting point of the counter. This is why Cogncur fonts use the italic style 'teardrop' counters.
+  <br/>
+  
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/teardrop_counters_angles.png">
+    </div>
+    <div class="description">Cogncur: the (nearly) straight angles in the teardrop counters<br/>remind students to 'turn back' and move the pen counterclockwise<br/></div>
+  </div>  
+
+  <div class="imagecell" style="padding-top: 49px">
+    <div class="image">
+      <img src="images/dnealian_clockwise_counter.png" width=320>
+    </div>
+    <div class="description">D'Nealian: the round shape of the counter<br/> allows an incorrect clockwise construction
+    </div>
+  </div>  
+  <br class="clear"><br/>
+
+  The letter <span class='letter'>p</span> contains a version of the teardrop counter that is rotated by 180°. There is also a variant of <span data-cogncur-p-open-variant=1 class='letter'>p</span> that doesn't have a counter but an open arch (stylistic set <code>ss16</code>), and variants that start with a curve (<code>ss15</code>).<br/>
+
+
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12">d p&nbsp;</div>
+    <div class="description">Cogncur: d and p (default)
+    </div>
+  </div>  
+  <div class="imagecell">
+    <div class="rawline rh12" data-cogncur-p-open-variant=1>  &nbsp;</div>
+    <div class="description">Cogncur: p (variants)
+    </div>
+  </div>  
+  
+ 
+  <br class="clear"/><br/>
+  Counters have a 'branching in' point (<span class='letter'>a</span>, <span class='letter'>d</span>, <span class='letter'>g</span>, and <span class='letter'>q</span>) or a 'branching out' point (<span class='letter'>p</span>) just like arches do. These points are located halfway between the baseline and the waist line, just like with the arches.
+  <br/>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/teardrop_counters_branching_annotated.png">
+    </div>
+    <div class="description">Cogncur: counters branch out and in just like arches
+    </div>
+  </div>
+  <!--
+  <div class="lines rh40">
+  <div class="line add-overlay traceable" data-overlay-classes="thin-font zwart">a p</div>
+  -->
+  
+  <br class="clear">
+  <h2 id="typeface_ellipses">Ellipses (c, e, o)</h2>
+  In Cogncur, the letters <i>c</i> and <i>e</i> are based on the same ellipse as the letter <i>o</i>. This ellipse has the same height/width ratio - 1.618 - as the arches discussed earlier. A line can be drawn through the highest and lowest point of an ellipse to visualize its slant. Cogncur takes care to ensure that ellipses are parallel to each other and to other letters.  <br/>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/slant_of_ellipses_annotated.png">
+    </div>
+    <div class="description">Cogncur: <i>e</i> and <i>c</i> are derived from the letter <i>o</i>.<br/>The slant of these ellipses can be found by<br/>drawing a line through the highest and lowest points.
+    </div>
+  </div>
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="image">
+      <img src="images/zanerbloser_slant_of_e_truncated.png">
+    </div>
+    <div class="description">Zaner-Bloser: the letter <i>e</i> is not based on<br/>an ellipse, but has a straight back, like <i>l</i>.
+    </div>
+  </div>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/luna_ellipses_annotated.jpg" width=250>
+    </div>
+    <div class="description">Luna: <i>o</i> and <i>e</i> are neither parallel<br/> to each other, nor to other letters</div>.
+    </div>
+  </div>
+  <br class="clear"/><br/>
+  
+  <div class="boxed"><b>Teaching tip:</b> the letter <span class='letter'>c</span> is often used to teach students where to start the counterclockwise stroke of the letters <span class='letter'>a</span>, <span class='letter'>d</span>, <span class='letter'>g</span>, and <span class='letter'>q</span>. Please be mindful of the fact that in Cogncur, the counterclockwise stroke of <span class='letter'>c</span> starts <i>below</i> the waist line, but the counterclockwise stroke of <span class='letter'>a</span> and other 'teardrop' letters starts <i>on</i> the waist line.</div>  
+
+
+  <br class="clear">
+  <h2 id="typeface_joins">Joins</h2>
+  Joins are the strokes that connect letters together. Cogncur follows the German tradition in which joins from the baseline (that is all joins except those coming from the letters <span class='letter'>b</span>, <span class='letter'>o</span>, <span class='letter'>t</span>, <span class='letter'>v</span>, and <span class='letter'>w</span>) contain a long, straight, diagonal segment. These straight segments transition into the letter using tight curves.<br/>
+  
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="image">
+      <img src="images/joins_minimum.png">
+    </div>
+    <div class="description">Cogncur: joins have a straight, diagonal segment. Some letter start with a tight curve <br/>against the waist line, while other letters start with a sharp angle against the waist line.
+    </div>
+  </div>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/dnealian_minimum.png">
+    </div>
+    <div class="description">D'Nealian: in traditional American cursive typefaces, joins are curved throughout. <br/>Joins are divided into <i>undercurves</i> (orange) and <i>overcurves</i> (blue).
+    </div>
+  </div>
+  <br class="clear"/><br/>
+  Tight curves lead to narrower letter spacing in general, but also to less <i>unevenness</i> in letter spacing between letters that start with a curve and letters that start with an angle.<br/>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/cogncur_vs_dnealian_minimum_spacing.png">
+    </div>
+    <div class="description">Cogncur (top) vs D'Nealian (bottom): if we make the joins invisible, we can see the letter spacing.<br/> Cogncur's letter spacing is narrower and more even than D'Nealian's.
+    </div>
+  </div>  
+  
+  <!-- minimum with colored joins
+  <div class="rawcursive rh14"><span style="color: #DB9F30"></span>m<span style="color: #5A5AE7"></span>i<span style="color: #DB9F30"></span>n<span style="color: #5A5AE7"></span>i<span style="color: #DB9F30"></span>m<span style="color: #5A5AE7"></span>u<span style="color: #DB9F30"></span>m</div>  
+  -->
+  <!-- minimum with invisible joins
+  <div class="rawcursive rh14">m<span style="color: transparent"></span>i<span style="color: transparent"></span>n<span style="color: transparent"></span>i<span style="color: transparent"></span>m<span style="color: transparent"></span>u<span style="color: transparent"></span>m</div>  
+  -->
+
+  
+  <br class="clear"><br/>
+  Another reason why the joins in Cogncur have been designed with tight curves, is that these tight curves do not resemble the wide curves of the arches found <i>in</i> the letters, especially in the letter <span class='letter'>u</span>. This helps the letters 'stand out' from the joins and makes it easier for learners to see clearly where a letter begins and ends. <br/>
+  
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/zanerbloser_joins_u_ii_uw.png">
+    </div>
+    <div class="description">Zaner-Bloser: the text <i>u ii uw</i> in cursive. The undercurves inside the letters <i>u</i> and <i>w</i> look similar <br/> to the undercurves used to join the letters.
+    </div>
+  </div>  
+  <br class="clear"><br/>
+  If you use the print-like variant of <span class='letter' data-cogncur-t-variant=1>t</span> (using stylistic set <code>ss08</code>), Cogncur's straight joins would result in an awkward obtuse angle or a pencil lift. Therefore, before the print-like <span class='letter' data-cogncur-t-variant=1>t</span> Cogncur uses a curved join. It is possible but not recommended to also use these curved joins before the letters <span class='letter'>i</span>, <span class='letter'>u</span>, and <span class='letter'>w</span> with stylistic set <code>ss12</code>. <br/>
+  
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12" data-cogncur-t-variant=1>tt</div>
+    <div class="description">Cogncur: a curved join is <br/>used before print-like <span class='letter' data-cogncur-t-variant=1>t</span>.</div>
+  </div>  
+  <div class="imagecell">
+    <div class="line rh12" data-cogncur-t-variant=1 data-cogncur-undercurves=1>quit</div>
+    <div class="description">Cogncur: it is possible to also use curved <br/>joins before the letters <span class='letter'>i</span>, <span class='letter'>u</span>, and <span class='letter'>w</span>.</div>
+  </div>  
+  
+  <br class="clear"><br/>
+  
+  The 'straight' joins in Cogncur are not always parallel, like they were in the word <span class='letter'>minimum</span>. Joins towards the letters <span class='letter'>e</span> and <span class='letter'>s</span> tend to have a smaller slope than other joins. This is necessary to achieve correct and even letter spacing.<br/>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/joins_not_parallel_annotated.png">
+    </div>
+    <div class="description">Cogncur: joins are not parallel. <br/>Joins towards <span class='letter'>e</span> and <span class='letter'>s</span> have a smaller slope.</div>
+  </div>  
+
+  <br class="clear"><br/>
+  The letters  <span class='letter'>b</span>, <span class='letter'>o</span>, <span class='letter'>v</span>, and <span class='letter'>w</span> end on or near the waist line. After these letters, Cogncur uses curved joins that dip a little bit below the waist line. <br/>
+  
+  <div class="imagecell" style="margin-right: 20px; margin-top: 8px">
+    <div class="line rh12">bovine</div>
+    <div class="description">Cogncur: joins from <span class='letter'>b</span>, <span class='letter'>o</span>, <span class='letter'>v</span>, and <span class='letter'>w</span><br/> dip a little bit below the waist line.</div>
+  </div>  
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/learningcurve_bovine.png" width="320">
+    </div>
+    <div class="description">Learning curve: joins from <i>b</i>, <i>o</i>, <i>v</i>, and <i>w</i> dip<br/>far below the waistline, more than halfway<br/> towards the baseline.</div>
+  </div>  
+  <div class="imagecell" style="margin-top: 13px">
+    <div class="image">
+      <img src="images/gettydubay_bovine.png" width="250">
+    </div>
+    <div class="description">Getty-Dubay: joins from <i>o</i>, <i>v</i>, and <i>w</i><br/> are horizontal strokes along the waist line.</div>
+  </div>  
+  <br class="clear">
+  <br/>
+  <div class="boxed"><b>Teaching tip:</b> the counterclockwise stroke of the letter <span class='letter'>o</span> needs to start a little bit beyond the 'top' of the letter and below the waist line, in the same place as the letter <span class='letter'>c</span>. The join also starts from the same point below the waist line. Starting <i>on</i> the waist line would result in a join that can't dip without creating an open loop (as in the Learning Curve sample) or needing to make awkward changes from concave to convex. </div>
+  <br/>
+  The standard version of the letter <span class='letter'>t</span> ends halfway between the baseline and the waist line. After this letter, Cogncur also uses curved joins.<br/>
+  <div class="imagecell" style="margin-right: 20px; margin-top: 8px">
+    <div class="line rh12">tithe&nbsp;</div>
+    <div class="description">Cogncur: joins from <span class='letter'>t</span> are also curved.</div>
+  </div>   
+  
+  <br class="clear">
+  
+  <h2 id="typeface_uppercase">Uppercase</h2>
+  Uppercase letters in Cogncur are intended as initials: to be used only at the beginning of the word. Uppercase letters can not connect to each other. All uppercase letters in Cogncur are visually connected to the next lowercase letter, but for some letters a pencil lift is used to move the pencil to the start of the join.
+  
+  <br/><br/>
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="lines nospacebetween nolines rh6">
+      <div class="line">Aa Cc Ee Gg Hh</div>
+      <div class="line">Jj Kk Ll Mm Qq</div>
+      <div class="line">Rr Uu Xx Yy Zz&nbsp;</div>
+    </div>
+    <div class="description">Cogncur: uppercase letter that join to the next lowercase<br/>letter with a continuous stroke</div>
+  </div>   
+  <div class="imagecell">
+    <div class="lines nospacebetween nolines rh6">
+      <div class="line">Bb Dd Ff Ii</div>
+      <div class="line">Nn Oo Pp Ss</div>
+      <div class="line">Tt Vv Ww&nbsp;</div>
+    </div>
+    <div class="description">Cogncur: uppercase letters that join to the next <br/>lowercase letter with a pencil lift</div>
+  </div>   
+  <br class="clear">
+  <br/>
+  There is a lot of variation in uppercase cursive between countries, to the point that some letters are not legible for an international audience. Cogncur uses uppercase forms that are pretty similar to print capitals. However, some uppercase letters can be customized through stylistic sets <code>ss19</code> and <code>ss20</code>.
+  <br/><br/>
+  
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="lines nospacebetween nolines rh6">
+      <div class="line">A M N</div>
+      <div class="line">C G L</div>
+    </div>
+    <div class="description">Cogncur: uppercase letters (default)</div>
+  </div>   
+  <div class="imagecell" data-cogncur-uppercase-amn-variant=2 data-cogncur-uppercase-cgl-variant=1>
+    <div class="lines nospacebetween nolines rh6">
+      <div class="line">A M N</div>
+      <div class="line">C G L</div>
+    </div>
+    <div class="description">Cogncur: uppercase letters (variants)</div>
+  </div>   
+  <br class="clear">
+  
+  
+  <!--
+  <div class="boxed">
+  <b>Teaching tip:</b>Why I think lowercase letters should be taught before uppercase
+  <ul>
+    <li>Unlike lowercase, uppercase cursive letters require a lot of pencil lifts. Learners should master writing <i>without lifting their pencil</i> before starting uppercase.</li>
+    <li>In lowercase cursive, students are often required to retrace over previous strokes. In uppercase cursive, retracing is rare and often undesirable. <i>Note that some curricula use retracing for the uppercase B, P and R, but Cogncur does not.</i></li>
+    <li>Learners need to encounter letters in all positions of the word in order to master joins between letters. Uppercase letters can only be used at the start of the word.</li>
+    <li>Uppercase letters are too hard for beginners! Uppercase letters start all over the place (whereas lowercase starts from the baseline) and have many more unique shapes between them than lowercase letters do. Teaching and practicing uppercase cursive will either mean it takes longer to get through the alphabet, or (more likely) that practice per letter is less thorough (for example: the letter is only practiced invidiually, or only at the start of the word).
+    <li>Lowercase letters re-use a limited set of shapes (arches, counters) and have very few unique elements between them. <span class='letter'>g</span> can be formed with elements from <span class='letter'>a</span> and <span class='letter'>j</span> Likewise, <span class='letter'>h</span> can be formed with elements from <span class='letter'>n</span> and <span class='letter'>l</span>. This simplicity allows us to start combining letters into words early. The complexity and uniqueness of uppercase letters would require a lot of teaching and practice time at the expense of learning joins.
+    <li>There is an optimal order for teaching lowercase cursive (i.e. <span class='letter'>l</span> before <span class='letter'>h</span> before <span class='letter'>k</span>) which would not at all be suitable for teaching uppercase or for teaching lowercase and uppercase together.</li>
+  </ul>
+  </div>
+  -->
+  
+  <br class="clear">
+  <h2 id="typeface_multilang">Multilingual support</h2>
+  Cogncur contains accented characters with the accents <i>grave</i>, <i>acute</i>, <i>circumflex</i>, <i>tilde</i>, <i>dieresis</i>, <i>macron</i>, <i>breve</i>, and <i>caron</i> over both lower- and uppercase vowels.
+  
+  
+  <table class="cursive rh4 accents" data-cogncur-y-variant=1 data-cogncur-uppercase-amn-variant=0>
+    <tr>
+      <td>à</td>
+      <td>á</td>
+      <td>â</td>
+      <td>ã</td>
+      <td>ä</td>
+      <td>ā</td>
+      <td>ă</td>
+      <td>ǎ</td>
+      <td>å</td>
+      <td>À</td>
+      <td>Á</td>
+      <td>Â</td>
+      <td>Ã</td>
+      <td>Ä</td>
+      <td>Ā</td>
+      <td>Ă</td>
+      <td>Å</td>      
+
+      
+      
+    </tr>
+    <tr>
+      <td>è</td>
+      <td>é</td>
+      <td>ê</td>
+      <td>ẽ</td>
+      <td>ë</td>
+      <td>ē</td>
+      <td>ĕ</td>
+      <td>ě</td>
+      <td> </td>
+      <td>È</td>
+      <td>É</td>
+      <td>Ê</td>
+      <td></td>
+      <td>Ë</td>
+      <td>Ē</td>
+      <td>Ĕ</td>
+      <td></td>     
+    </tr>
+    <tr>
+      <td>ì</td>
+      <td>í</td>
+      <td>î</td>
+      <td>ĩ</td>
+      <td>ï</td>
+      <td>ī</td>
+      <td>ĭ</td>
+      <td>ǐ</td>
+      <td> </td>
+      <td>Ì</td>
+      <td>Í</td>
+      <td>Î</td>
+      <td></td>
+      <td>Ï</td>
+      <td>Ī</td>
+      <td>Ĭ</td>
+      <td></td>     
+    </tr>
+    <tr>
+      <td>ò</td>
+      <td>ó</td>
+      <td>ô</td>
+      <td>õ</td>
+      <td>ö</td>
+      <td>ō</td>
+      <td>ŏ</td>
+      <td>ǒ</td>
+      <td> </td>
+      <td>Ò</td>
+      <td>Ó</td>
+      <td>Ô</td>
+      <td>Õ</td>
+      <td>Ö</td>
+      <td>Ō</td>
+      <td>Ŏ</td>
+      <td></td>     
+    </tr>
+    <tr>
+      <td>ù</td>
+      <td>ú</td>
+      <td>û</td>
+      <td>ũ</td>
+      <td>ü</td>
+      <td>ū</td>
+      <td>ŭ</td>
+      <td>ǔ</td>
+      <td>ů</td>
+      <td>Ù</td>
+      <td>Ú</td>
+      <td>Û</td>
+      <td>Ũ</td>
+      <td>Ü</td>
+      <td>Ū</td>
+      <td>Ŭ</td>
+      <td>Ů</td>     
+    </tr>
+    <tr>
+      <td>ỳ</td>
+      <td>ý</td>
+      <td>ŷ</td>
+      <td>ỹ</td>
+      <td>ÿ</td>
+      <td>ȳ</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Ý</td>
+      <td>Ŷ</td>
+      <td></td>
+      <td>Ÿ</td>
+      <td></td>
+      <td></td>
+      <td></td>     
+    </tr>
+  </table>
+  <br/>
+  Additionally, some accented consonants and digraphs are also available:
+  
+  <table class="cursive rh4 accents" data-cogncur-y-variant=0 data-cogncur-uppercase-amn-variant=0>
+    <tr>
+      <td>æ</td>
+      <td>ç</td>
+      <td>ñ</td>
+      <td>ø</td>
+      <td>œ</td>
+      <td>š</td>
+      <td>ž</td>
+      <td>ß</td>
+      <td>Æ</td>
+      <td>Ç</td>
+      <td>Ñ</td>
+      <td>Ø</td>
+      <td>Œ</td>
+      <td>Š</td>
+      <td>Ž</td>
+    </tr>
+  </table>    
+  <br/>
+  Note that accented uppercase letters stick out above the normal line height. If no extra line height is reserved, these accents may overlap the previous line or be cut off.
+  <br/><br/>  
+  If standard ligatures are enabled, the <i>breve</i> and <i>macron</i> accents combine over the double lowercase vowels <span class='letter'>aa</span>, <span class='letter'>ee</span>, <span class='letter'>oo</span>, and <span class='letter'>uu</span>. <span data-cogncur-standard-ligatures=0 class='letter' style=>ēē</span> becomes <span data-cogncur-standard-ligatures=1 class='letter' style=>ēē</span>, <span data-cogncur-standard-ligatures=0 class='letter' style=>ĕĕ</span> becomes <span data-cogncur-standard-ligatures=1 class='letter' style=>ĕĕ</span>, <span data-cogncur-standard-ligatures=0 class='letter' style=>ōō</span> becomes <span data-cogncur-standard-ligatures=1 class='letter' style=>ōō</span> etc.
+  <br/>
+  <br/>
+  If your document language is set to Dutch, <span class='letter' data-cogncur-ij-ligature=0>ij</span> is replaced with <span class='letter' data-cogncur-ij-ligature=1>ij</span> and <span class='letter' data-cogncur-ij-ligature=0>IJ</span> is replaced with <span class='letter' data-cogncur-ij-ligature=1>IJ</span>.
+  <br/><br/>
+  The 
+  
+  The <i>Insert Symbol</i> dialog in Microsoft Word will show the letters in their raw form without entry or exit strokes. As a result, the letter <span class='letter'>e</span> may look like this: <span class='rawletter'>e</span>. Don't worry, after you insert the letter it will look normal (provided that you've configured Microsoft Word to use contextual alternates). The <i>Insert Symbol</i> dialog will also allow you to scroll down to various partially connected forms of letters in the 'Private Use Area'. Do not insert letters from the 'Private Use Area' as they will not form correct connections to other letters.
+ 
+  <br/><br/>
+  Your word processor or publishing application may compose additional accented characters that are not present (pre-composed) in the font. Unfortunately, application-composed characters will not connect correctly to other characters.<br/>
+  <br/>
+  
+  <h2 id="typeface_numerals">Numerals</h2>
+  By default, numbers in Cogncur all have the same height, but not all the same width. This tends to give good result when numbers are mixed with text. If you prefer, you can change the <i>Number forms</i> to 'Old-style'. Old-style numbers are smaller and do not all have the same height. <br/>
+  
+  <div class='imagecell'>
+    <div class="line nolines rh5" data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=0>March 19, 2016.&nbsp;</div>
+    <div class="description">Cogncur: numbers (default style)</div>
+  </div>  
+  <div class='imagecell'>
+    <div class="line nolines rh5" data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=1>March 19, 2016.&nbsp;</div>
+    <div class="description">Cogncur: numbers (old-style)</div>
+  </div>  
+  <br class="clear">
+  <br/>
+  <div class='imagecell'>
+    <div class='image'>
+      <img src="images/msword_numeralstyles.png">
+    </div>
+    <div class="description">Microsoft Word: changing the number style</div>
+  </div>  
+  <br class="clear">
+  <br/>
+  You can also change the <i>Number spacing</i> to 'Tabular'. Tabular numbers are useful if you want numbers to line up with each other. However, if you enable Tabular numbers in Cogncur, this does not just effect the width of then numbers, but also the width of the <i>space</i> character and the width of the <i>comma</i> and the <i>period</i>. Because of these changes to word space and interpunction, tabular numbers should only be used for specific parts of your document that need it, and should not be used on normal text.
+  <br/><br/>
+  <div class='imagecell'>
+    <div class="line nolines rh5" data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=0>$29.95
+$ 1.50</div>
+    <div class="description">Default numbers do not line up &nbsp;</div>
+  </div>  
+  <div class='imagecell'>
+    <div class="line nolines rh5" data-cogncur-numerals-tabular=1 data-cogncur-numerals-oldstyle=0>$29.95
+$ 1.50</div>
+    <div class="description">Tabular numbers line up</div>
+  </div> 
+  <div class='imagecell' style="margin-top: 10px; margin-left: 20px">
+    <div class="lines nolines rh4" data-cogncur-numerals-tabular=1 data-cogncur-numerals-oldstyle=0>
+      <div class="line">Oops, tabular numbers</div>
+      <div class="line">messed up my text.</div>
+    </div>
+    <div class="description">Tabular numbers should not be enabled for normal text.</div>
+  </div> 
+  
+  <br class='clear'>
+  
+  
+  <br/>
+  [TODO] See the Customization guide for available variants of numerals.
+  
+
+  <br/><br/><br/>
+
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./font-styles">Font Styles</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label">next</div>
+      <div class="navlink"><a href="./customization">Customization</a></div>
+    </div>
+  </div>
+
+</body>

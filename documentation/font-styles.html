@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<!--
+  Note: in the stylesheets used by this page, many OpenType features are disabled.
+  Their functionality is replaced by javascript.
+  This allows me to style individual glyphs (entry strokes, connecting strokes, etc).
+  
+  For most purposes, I would recommend that you simply use the OpenType features.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="../webapps/cogncur.css" />
+  <link rel="stylesheet" type="text/css" href="./guide.css" />
+  <script src="/js/jquery-3.7.0.min.js"></script>
+  <script src="../webapps/cogncur_converter.js"></script><!-- functions for converting text to Cogncur glyphs -->
+  <script src="../webapps/cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script>
+    cogncur_converter.init({
+    });
+  </script>
+  <title>Cogncur Documentation - Font Styles</title>
+</head>
+<body class="max">
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./quick-start">Quick Start</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label">next</div>
+      <div class="navlink"><a href="./typeface-features">Typeface Features</a></div>
+    </div>
+  </div>
+  <h1>Cogncur Documentation - Font Styles</h1>  
+  
+  This guide given an overview of the fonts in the Cogncur font family.
+  <br/>
+  <br/>
+  Topics:
+  <ul>
+    <li><a href="#styles_slant">Slant</a>
+    <li><a href="#styles_edged">Monoline versus edged pen</a>
+    <li><a href="#styles_overlay">Overlay fonts</a>
+  </ul>
+
+  
+  <h2 id="styles_slant">Slant</h2>
+  The <i>Cogncur</i> fonts are available at three slants.
+  <br/>
+  <br/>
+  <i>Cogncur Vertical</i> is written upright. The slant is 90°. (<a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncurvertical.ttf">download cogncurvertical.ttf</a>)
+  <div class="cogncurvertical cursive rh4">The quick brown fox jumps over the lazy dog.</div>
+  <br/>
+  <i>Cogncur Regular</i> is written at a slant of 82.5°, or 7.5° from the vertical. The word 'Regular' is omitted from the font files. (<a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncur.ttf">download cogncur.ttf</a>)
+  <div class="cogncurregular cursive rh4">The quick brown fox jumps over the lazy dog.</div>
+  <br/>
+  Finally, <i>Cogncur Oblique</i> is written at a slant of 75°, or 15° from the vertical. (<a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncuroblique.ttf">download cogncuroblique.ttf</a>)
+  <div class="cogncuroblique cursive rh4">The quick brown fox jumps over the lazy dog.</div>
+  <br/><br/>
+  
+
+  <h2 id="styles_edged">Monoline versus edged pen</h2>
+  The Cogncur fonts aboved mimic the writing that would be produced by a <i>monoline</i> pen: a pen that has a round tip and produces a stroke of constant thickness. Alternatively, a few fonts are available that mimic the writing produced by an <i>edged</i> pen: a pen with a edged that produces a stroke whose thickness varies with the angle of the stroke.
+  <br/><br/>
+  
+  <i>Cogncur Edged Vertical</i> is written upright and with an edged pen. The slant is 90°.  (<a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncuredgedvertical.ttf">download cogncuredgedvertical.ttf</a>)
+  <div class="cogncuredgedvertical cursive rh4">The quick brown fox jumps over the lazy dog.</div>
+  <br/>
+  <i>Cogncur Edged Regular</i> is written at a slant of 82.5° with an edged pen. (<a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncuredged.ttf">download cogncuredged.ttf</a>)
+  <div class="cogncuredged cursive rh4">The quick brown fox jumps over the lazy dog.</div>
+  <br/>
+  Pleaso note that real calligraphy usually does not connect all letters, and also uses different letter formation than 'monoline' cursive. The Cogncur Edged fonts are not calligraphy fonts. 
+  
+  <h2 id="styles_overlay">Overlay fonts</h2>
+  Overlay fonts are used by the <a href="/worksheetcreator/">Worksheet Creator</a>. In most applications, they are too hard to use. Below, the overlay fonts are shown combined with the base fonts that they overlay. The overlay fonts themselves <i>only</i> contain a few black dots, and most letters are blank. I do not recommend that you download these fonts, but if you really must try for yourself, you can find them <a href="https://github.com/syboor/cogncur/tree/main/fonts">on Github in the /fonts directory</a>.<br/><br/>
+  <div class="cogncurvertical lines nolines rh4">
+    <div class="line add-overlay lightgray" data-overlay-classes="startpunten-font zwart">Cogncur Vertical StartDots</div>
+  </div>
+  <div class="lines nolines rh4">
+    <div class="line add-overlay lightgray" data-overlay-classes="startpunten-font zwart">Cogncur Regular StartDots</div>
+  </div>
+  <div class="cogncuroblique lines nolines rh4">
+    <div class="line add-overlay lightgray" data-overlay-classes="startpunten-font zwart">Cogncur Oblique StartDots</div>
+  </div>
+  
+  <br/><br/><br/>
+
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./quick-start">Quick Start</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label">next</div>
+      <div class="navlink"><a href="./typeface-features">Typeface Features</a></div>
+    </div>
+  </div>
+
+
+</body>
+</html>
