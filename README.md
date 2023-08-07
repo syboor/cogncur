@@ -10,6 +10,8 @@ Click on the links below to download these fonts:
 * [Cogncur Regular](https://github.com/syboor/cogncur/raw/main/fonts/cogncur.ttf)
 * [Cogncur Vertical](https://github.com/syboor/cogncur/raw/main/fonts/cogncurvertical.ttf)
 * [Cogncur Oblique](https://github.com/syboor/cogncur/raw/main/fonts/cogncuroblique.ttf)
+* [Cogncur Edged](https://github.com/syboor/cogncur/raw/main/fonts/cogncuredged.ttf)
+* [Cogncur Edged Vertical](https://github.com/syboor/cogncur/raw/main/fonts/cogncuredgedvertical.ttf)
 
 Double-click on the downloaded files and choose 'Install' to install them.
 After installing the font, restart any applications in which you wish to use the font.
@@ -37,4 +39,4 @@ These steps are demonstrated in this screenshot:
 You can create handwriting worksheets in the online [Worksheet Creator](https://cogncur.com/worksheetcreator/). No font install is needed to use the worksheet creator. The worksheet creator is also an excellent way to discover all the - as of yet still undocumented - letter variants available in Cogncur.
 
 # More documentation
-...coming soon...
+Visit <a href="https://cogncur.com/documentation">Cogncur.com/documentation</a> for more documentation on Cogncur.
