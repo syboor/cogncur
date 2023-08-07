@@ -1,0 +1,76 @@
+    .imagecell {
+      float: left;
+      text-align: center;
+      vertical-align: middle;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    .imagecell .description {
+      font-size: 85%;
+      line-height: 1.7;
+    }
+    @font-face {
+      font-family: "CogncurThin";
+      src: url("/fonts/cogncur/sources/docs/cogncurthinregular.ttf?") format("truetype");
+      font-display: block;
+      font-style: normal;
+      font-weight: normal;
+    }    
+    .cursive.thin-font, .cursive .thin-font, .thin-font .cursive,
+    .rawcursive.thin-font, .rawcursive .thin-font, .thin-font .rawcursive,
+    .line.thin-font, .line .thin-font, .thin-font .line,
+    .rawline.thin-font, .rawline .thin-font, .thin-font .rawline,
+    .letter.thin-font, .letter .thin-font, .thin-font .letter,
+    .rawletter.thin-font, .rawletter .thin-font, .thin-font .rawletter,
+    .hokjes.thin-font, .hokjes .thin-font, .thin-font .hokjes,
+    .word-thin-font, .word .thin-font, .thin-font .word {
+      font-family: "CogncurThin";
+      font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+    }
+    table.accents {
+    
+    }
+    .accents td {
+      padding: 8px 8px 0px 8px;
+      border: 1px solid #999;
+      text-align: center;
+      min-width: 28px;
+    }
+    
+    
+    .navrow {
+      display: flex;
+      justify-content: space-between;
+    }
+    .navrow > div {
+      flex-basis: 1;
+    }
+    .prev {
+      text-align: right;
+    }
+    .up {
+      text-align: center;
+    }
+    .next {
+      text-align: left;
+    }
+    .prev .navlink a:before {
+      content: '<<< ';
+    }
+    .next .navlink a:after {
+      content: ' >>>';
+    }
+    .up .navlink a:before {
+      content: '\2191  ';
+    }
+    .navrow .navlink {
+      font-size: 85%;
+    }
+    .navrow .label {
+      color: #999;
+      font-size: 70%;
+    }
+
+    .lightgray {
+      color: #ddd;
+    }

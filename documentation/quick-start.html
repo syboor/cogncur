@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<!--
+  Note: in the stylesheets used by this page, many OpenType features are disabled.
+  Their functionality is replaced by javascript.
+  This allows me to style individual glyphs (entry strokes, connecting strokes, etc).
+  
+  For most purposes, I would recommend that you simply use the OpenType features.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="../webapps/cogncur.css" />
+  <link rel="stylesheet" type="text/css" href="./guide.css" />
+  <script src="/js/jquery-3.7.0.min.js"></script>
+  <script src="../webapps/cogncur_converter.js"></script><!-- functions for converting text to Cogncur glyphs -->
+  <script src="../webapps/cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script>
+    cogncur_converter.init({
+    });
+  </script>
+  <title>Cogncur Documentation - Quick Start Guide</title>
+</head>
+<body class="wide">
+  <div class="navrow">
+    <div class="prev">
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label">next</div>
+      <div class="navlink"><a href="./font-styles">Font Styles</a></div>
+    </div>
+  </div>
+  <h1>Cogncur Documentation - Quick Start Guide</h1>  
+  
+  <div class="centered">
+  <img src="images/intro.png" alt="Text in cursive: Cogncur - a fully-connected, looped cursive font - excellent for education use">
+  </div>
+  
+  Cogncur is a high quality, fully connected cursive font for teaching purposes. 
+
+  <h2>Download & install</h2>
+  The Cogncur font family contains multiple fonts:<br/>
+  <img alt="Cursive text in various styles" src="images/fontstyles.png"><br/>
+  <br/>
+  Click on the links below to download these fonts:
+  <ul>
+    <li><a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncur.ttf">Cogncur Regular</a></li>
+    <li><a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncurvertical.ttf">Cogncur Vertical</a></li>
+    <li><a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncuroblique.ttf">Cogncur Oblique</a></li>
+    <li><a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncuredged.ttf">Cogncur Edged Regular</a></li>
+    <li><a href="https://github.com/syboor/cogncur/raw/main/fonts/cogncuredgedvertical.ttf">Cogncur Edged Vertical</a></li>
+  </ul>
+  <br/>
+  Double-click on the downloaded files and choose 'Install' to install them. After installing the font, restart any applications in which you wish to use the font.
+  <h2>Microsoft Word configuration</h2>
+  Cogncur uses OpenType features to form the connections between letters. In Microsoft Word, these features need to be enabled manually.<br/>
+  <br/>
+  Follow the steps below to enable the required OpenType features in Microsoft Word:
+  <ol>
+    <li>Select some text and change the font to Cogncur. At this point, the letters will not be connected yet.
+    <li>Open the Font dialogue by clicking on the button in the bottom right of the "Font" section of the ribbon, or by typing Ctrl+D. In the Font dialogue, open the 'Advanced' tab.
+    <li>Check the option 'Kerning for fonts'; Microsoft Word will automatically add your current font size.
+    <li>Check the option 'Use Contextual Alternates'.
+    <li>After you click OK, the text in your document will update and the letters will be connected to each other.
+  </ol>
+  <br/>
+  These steps are demonstrated in this screenshot:<br/>
+  <img alt="Screenshot from Microsoft Word" src="images/msword_en.png"><br/>
+
+  <h2>Using Cogncur in other applications</h2>
+  <ul>
+    <li>Many applications support OpenType and have relevant OpenType features enabled by default, for example: LibreOffice, Scrivener, Pages.
+    <li>In some applications, you'll need to enable OpenType features (especially contextual alternatives) manually, for example: Adobe Photoshop.
+    <li>Some applications support custom fonts but do not support OpenType, for example: Microsoft Powerpoint, Canva Pro. In those "legacy" applications, there is no feasible way to enter or edit cursive text from within the application. However, you can create your connected text in the <a href="/powerpoint">Powerpoint converter" web application</a> and then copy-paste this text into your legacy application.
+    <li>A lot of cloud applications don't allow you to use custom fonts, for example: Google Docs, Canva Free. It is not possible to use Cogncur in these applications.
+  </ul>
+  
+  <h2>Create worksheets online</h2>
+  You can create handwriting worksheets in the online <a href="/worksheetcreator/">Worksheet Creator</a>. No font install is needed to use the worksheet creator. The worksheet creator is also an excellent way to discover all the - as of yet still undocumented - letter variants available in Cogncur.
+
+  <h2>More documentation</h2>
+  Read about all available <a href="font-styles">Font Styles</a>, or skip ahead to the <a href="typeface-features">Typeface Features</a> to learn what the font family looks like.
+
+    
+  
+  <br/><br/><br/>
+  <div class="navrow">
+    <div class="prev">
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label">next</div>
+      <div class="navlink"><a href="./font-styles">Font Styles</a></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -20,8 +20,15 @@
   font-weight: normal;
 }
 @font-face {
-  font-family: "CogncurCall";
-  src: url("/fonts/cogncur/fonts/cogncurcall.ttf?v=20230806") format("truetype");
+  font-family: "CogncurEdged";
+  src: url("/fonts/cogncur/fonts/cogncuredged.ttf?v=20230806") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CogncurEdgedVertical";
+  src: url("/fonts/cogncur/fonts/cogncuredgedvertical.ttf?v=20230806") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
@@ -59,12 +66,20 @@
   --cursive-font-family: "CogncurVertical";
   --cursive-start-font-family: "CogncurVertical-Start";
 }
+.cogncuredgedvertical {
+  --cursive-font-family: "CogncurEdgedVertical";
+  /* no suitable starting dots fonts */
+}
+.cogncuredged {
+  --cursive-font-family: "CogncurEdged";
+  /* no suitable starting dots fonts */
+}
 .cogncuroblique, i, em {
   --cursive-font-family: "CogncurOblique";
   --cursive-start-font-family: "CogncurOblique-Start";
 }
 b, strong {
-  --cursive-font-family: "CogncurCall";
+  --cursive-font-family: "CogncurEdged";
   --cursive-start-font-family: "Cogncur-Start"; /* We don't have starting points for Edged fonts */
 }
 :root,
@@ -112,6 +127,7 @@ b, strong {
   font-family: var(--cursive-font-family);
   line-height: normal; /* Overrule setting from masterstyle */
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
 }
 
 .autocursive {
@@ -128,6 +144,7 @@ b, strong {
 .word {
   font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
   font-style: normal;
   font-weight: normal;
 }
@@ -142,6 +159,7 @@ b, strong {
 .word-startpunten-font, .word .startpunten-font, .startpunten-font .word {
   font-family: var(--cursive-start-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
 }
 
 .cursive.arrows-font, .cursive .arrows-font, .arrows-font .cursive,
@@ -154,6 +172,7 @@ b, strong {
 .word-arrows-font, .word .arrows-font, .arrows-font .word {
   font-family: "Cogncur-Arrows";
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
 }
 .cursive.morearrows-font, .cursive .morearrows-font, .morearrows-font .cursive,
 .rawcursive.morearrows-font, .rawcursive .morearrows-font, .morearrows-font .rawcursive,
@@ -165,6 +184,7 @@ b, strong {
 .word-morearrows-font, .word .morearrows-font, .morearrows-font .word {
   font-family: "Cogncur-MArrows";
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
 }
 
 .line, .rawline {
@@ -177,6 +197,7 @@ b, strong {
   line-height: 1em;
   white-space: pre; /* Double whitespaces count as double and do not collapse */
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
   font-style: normal;
   font-weight: normal;
 }
@@ -293,6 +314,7 @@ b, strong {
   position: relative;
   top: 0em;
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
   font-style: normal;
   font-weight: normal;
 } 
@@ -798,6 +820,7 @@ ul {
   white-space: pre;
   font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
   font-style: normal;
   font-weight: normal;
 }
@@ -934,6 +957,7 @@ table.hokjes-table .hokjes-los, .hokjes-los table.hokjes-table {
   /* Set font so that 1ex is relative to the correct font */
   font-family: var(--cursive-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
   font-style: normal;
   font-weight: normal;
 }
@@ -941,14 +965,17 @@ table.hokjes-table .hokjes-los, .hokjes-los table.hokjes-table {
 .startpunten-font table.hokjes-table .hokjes-los, .startpunten-font .hokjes-los table.hokjes-table, .startpunten-font.hokjes-los table.hokjes-table {
   font-family: var(--cursive-start-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
 }
 .arrows-font table.hokjes-table .hokjes-los, .arrows-font .hokjes-los table.hokjes-table, .arrows-font.hokjes-los table.hokjes-table {
   font-family: "Cogncur-Arrows";
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
 }
 .morearrows-font table.hokjes-table .hokjes-los, .morearrows-font .hokjes-los table.hokjes-table, .morearrows-font.hokjes-los table.hokjes-table {
   font-family: "Cogncur-MArrows";
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
+  font-variant-ligatures: none;  
 }
 
 table.hokjes-table .hokjes-los td.skip, .hokjes-los table.hokjes-table td.skip,
