@@ -19,11 +19,136 @@
     cogncur_converter.init({
     });
   </script>
+  <style>
+    table.styleset_table {
+      margin-top: 10px;
+      margin-right: 20px;
+      float: left;
+    }
+    table.styleset_table td, table.styleset_table th {
+      padding: 3px 5px 3px 5px;
+      height: 28px; /* minimum, for the header */
+      border: 1px solid #999;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    table.styleset_table th {
+      font-weight: bold;
+    }
+    
+  </style>
   <title>Cogncur Documentation - Customization</title>
 </head>
 <body class="max">
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./typeface-features">Typeface Features</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+    </div>
+  </div>
+
+
   <h1>Cogncur Documentation - Customization</h1>  
   
-  Coming soon...
+  This guide shows you how you can customize the appearance of text in the Cogncur font family.
+  <br/>
+  <br/>
+  Topics:
+  <ul>
+    <li><a href="#howto">Selecting stylistic sets</a>
+    <li><a href="#entrystrokes">Entry strokes</a>
+    <li><a href="#exitstrokes">Exit strokes</a>
+    <li><a href="#shortersticks">Shorter sticks</a>
+  </ul>
+
+  <h2 id="howto">Selecting stylistic sets</h2>
+  You customize Cogncur mainly by selecting stylistic sets. Stylistic sets are an OpenType feature and can be found together with other OpenType features in your application. In Microsoft Word, you find Stylistic Sets in the 'Advanced' tab of the Font Dialog. <br/>
+  
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/msword_stylisticsets.png">
+    </div>
+    <div class="description">Microsoft Word: stylistic sets</div>
+  </div>
+  <br class="clear"><br/>
+  
+  A font can have up to 20 stylistic sets. By default, all stylistic sets are disabled. In most applications, you can enable each of these stylistic sets individually, so that you can end up with multiple stylistic sets enabled. In Microsoft Word, you can only enable one stylistic set at a time. [TODO: link to workaround]<br/><br/>
+  
+  In Cogncur, stylistic sets are mostly orthogonal to each other. It makes perfect sense to have  multiple stylistic sets enabled simultaneously. Some letter variants will only appear if multiple stylistic sets are enabled. <br/><br/>
+  
+  <h2 id="entrystrokes">Entry strokes (ss01)</h2>
+  By default, Cogncur has entry strokes from the baseline. If you enable stylistic set <code>ss01</code>, you disable entry strokes from the baseline. Instead you'll get short entry strokes for most letters, and none at all for the letters <span class='letter' data-cogncur-entrystrokes=1>a</span>, <span class='letter' data-cogncur-entrystrokes=1>c</span>, <span class='letter' data-cogncur-entrystrokes=1>d</span>, <span class='letter' data-cogncur-entrystrokes=1>g</span>, <span class='letter' data-cogncur-entrystrokes=1>o</span>, <span class='letter' data-cogncur-entrystrokes=1>q</span>, and the variant <span class='letter' data-cogncur-entrystrokes=1 data-cogncur-t-variant=1>t</span>.<br/>
+  
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><i>none</i><td class="cursive rh4">a b c d e f g h i j k l m n<br/>o p q r s t u v w x y z</td></tr>
+    <tr><td><code>ss01</code><td class="cursive rh4" data-cogncur-entrystrokes=1>a b c d e f g h i j k l m n<br/>o p q r s t u v w x y z</td></tr>
+  </table>
+  
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><code>ss08</code><td class="cursive rh4" data-cogncur-t-variant=1>t</td></tr>
+    <tr><td><code>ss01</code>, <code>ss08</code><td class="cursive rh4" data-cogncur-entrystrokes=1 data-cogncur-t-variant=1>t</td></tr>
+  </table>
+  <br class="clear">
+  
+       
+  <h2 id="exitstrokes">Exit strokes (ss02)</h2>
+  By default, Cogncur has exit strokes (‘monkey tails’) on all letters. The exit strokes on the letters <span class='letter'>s</span>, <span class='letter'>p</span>, and <span class='letter'>ß</span> will disappear if you enable stylistic set <code>ss02</code>. If you use the print-like variant <span class='letter' data-cogncur-r-variant=1>r</span> with stylistic set <code>ss02</code>, its upwards exit stroke (towards the waist line) will disappear and the downward curve of the letter will be extended instead.
+<br/>
+
+
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><i>none</i><td class="cursive rh4">kiss rap fuß</td></tr>
+    <tr><td><code>ss02</code><td class="cursive rh4" data-cogncur-exitstrokes=1>kiss rap fuß</td></tr>
+  </table>
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><code>ss07</code><td class="cursive rh4" data-cogncur-r-variant=1>err</td></tr>
+    <tr><td><code>ss01</code>, <code>ss07</code><td class="cursive rh4" data-cogncur-exitstrokes=1 data-cogncur-r-variant=1>err</td></tr>
+  </table>
+  <br class="clear">
+  
+  <h2 id="shortersticks">Shorter sticks (ss03)</h2>
+  By default, sticks below the baseline and above the waist line have the same length as loops. If you enable stylistic set <code>ss03</code>, sticks will be shorter: only 2/3 of the length of loops. This also applies to optional letter variants with sticks instead of loops. Not all combinations are shown in the tables below. <br/>
+  <br/>
+  Exception: the print-like variant of <span class='letter' data-cogncur-t-variant=1>t</span> always has a short stick, and is not effected by stylistic set <code>ss03</code>.<br/>
+
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><i>none</i><td class="rh4"><div class="line">puddle </div></td></tr>
+    <tr><td><code>ss03</code><td class="rh4" data-cogncur-stick-variant=1><div class='line'>puddle </div></td></tr>
+  </table>
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><i>none</i><td class="cursive rh4"><div class="line">quaffle</div></td></tr>
+    <tr><td><code>ss05</code><td class="cursive rh4" data-cogncur-fq-continuity-variant=1 stick-variant=0><div class="line">quaffle</div></td></tr>
+    <tr><td><code>ss03</code>, <code>ss05</code></td><td class="cursive rh4" data-cogncur-fq-continuity-variant=1  data-cogncur-stick-variant=1><div class="line">quaffle</div></td></tr>
+  </table>
+  
+  <br class="clear"/><br/><br/>
+  
+  ... more coming soon ...
+  <br/ class="clear"><br/><br/>
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./typeface-features">Typeface Features</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+    </div>
+  </div>
+
 </body>
 </html>
