@@ -65,6 +65,8 @@
     <li><a href="#entrystrokes">Entry strokes</a>
     <li><a href="#exitstrokes">Exit strokes</a>
     <li><a href="#shortersticks">Shorter sticks</a>
+    <li><a href="#fq"><span class='letter'>f</span> and <span class='letter'>q</span></a>
+    <li><a href="#s"><span class='letter'>s</span></a>
   </ul>
 
   <h2 id="howto">Selecting stylistic sets</h2>
@@ -132,8 +134,64 @@
     <tr><td><code>ss05</code><td class="cursive rh4" data-cogncur-fq-continuity-variant=1 stick-variant=0><div class="line">quaffle</div></td></tr>
     <tr><td><code>ss03</code>, <code>ss05</code></td><td class="cursive rh4" data-cogncur-fq-continuity-variant=1  data-cogncur-stick-variant=1><div class="line">quaffle</div></td></tr>
   </table>
+  <br class="clear">
   
+
+  <h2 id="fq"><span class='letter'>f</span> and <span class='letter'>q</span> (ss04, ss05)</h2>
+  By default, both <span class='letter'>f</span> and <span class='letter'>q</span> use a low loop to return to the baseline, and then join to the next letter from the baseline to the next letter. If you enable stylistic set ss04, <span class='letter'>f</span> will join with a curved join from the point midway between the baseline and the waist line, while <span class='letter'>q</span> will connect from the bottom of the stick. If you enable stylistic set ss05, both letters will use a pencil lift to return to the baseline and join the next letter from there. For <span class='letter'>f</span> these stylistic sets interact: if you enable both of them, <span class='letter'>f</span> will use a pencil lift to return to a point halfway between the baseline and waist line and join from there. <br/><br/>
+  Furthermore, these stylistic sets also interact with stylistic set ss03 for shorter sticks. All possible variants for the letters <span class='letter'>f</span> and <span class='letter'>q</span> are shown in the table below. Variants that are repetitions have been grayed out.<br/>
+  <br/>
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th colspan=2>Example text</th></tr>
+    <tr><td><i>none</i><td class="cursive rh4">ff</td><td class="cursive rh4">qu</td></tr>
+    <tr data-cogncur-fq-connection-variant=1><td><code>ss04</code><td class="cursive rh4">ff</td><td class="cursive rh4">qu</td></tr>
+    <tr data-cogncur-fq-connection-variant=0  data-cogncur-fq-continuity-variant=1><td><code>ss05</code><td class="cursive rh4">ff</td><td class="cursive rh4">qu</td></tr>
+    <tr data-cogncur-fq-connection-variant=1  data-cogncur-fq-continuity-variant=1><td><code>ss04, ss05</code><td class="cursive rh4">ff</td><td class="cursive rh4 traceable">qu</td></tr>
+    <tr data-cogncur-stick-variant=1 data-cogncur-fq-connection-variant=1><td><code>ss03, ss04</code><td class="cursive rh4 traceable">ff</td><td class="cursive rh4">qu</td></tr>
+    <tr data-cogncur-stick-variant=1 data-cogncur-fq-connection-variant=0  data-cogncur-fq-continuity-variant=1><td><code>ss03, ss05</code><td class="cursive rh4">ff</td><td class="cursive rh4">qu</td></tr>
+    <tr data-cogncur-stick-variant=1 data-cogncur-fq-connection-variant=1  data-cogncur-fq-continuity-variant=1><td><code>ss03, ss04, ss05</code><td class="cursive rh4">ff</td><td class="cursive rh4 traceable">qu</td></tr>
+  </table>
+  <br class="clear"><br/>
+  In the <a href="https://cogncur.com/worksheetcreator">Online Worksheetcreator</a>, variants of <span class='letter'>f</span> and <span class='letter'>q</span> can be chosen independently from each other, with only the stick length (if applicable) applied to all letters. In the desktop fonts, settings for <span class='letter'>f</span> and <span class='letter'>f</span> had to have been combined due to the limit of 20 stylistic sets in total. <br/><br/>
+
+  <h2 id="s"><span class='letter'>s</span> (ss06)</h2>
+  By default, <span class='letter'>s</span> has a slim form. From the top of the letter at the waist line, the pen goes ‘straight’ down (with ‘straight’ being defined by the slant of the font). By enabling stylisit set <code>ss06</code> we can get a variant of <span class='letter'>s</span> that has a ‘belly’. In that case, the implied slant of the letter can be found by drawing a straight line through both the top of the letter (where it touches the waist line) and through the lowest point (where it touches the baseline).<br/><br/>
+  
+  <br/>
+  
+  
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><i>none</i><td class="cursive rh4">kiss</td></tr>
+    <tr><td><code>ss06</code><td class="cursive rh4" data-cogncur-entrystrokes=1>kiss</tr>
+  </table>
+  
+ 
+<!--
+  <br/>
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="line rh12" data-cogncur-s-variant=1>kiss&nbsp;</div>
+  </div>
+  <br/>
+-->
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/slant_of_s.png">
+    </div>
+    <div class="description">Slant of the default <span class='letter'>s</span> 
+    </div>
+  </div>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/slant_of_svariant.png">
+    </div>
+    <div class="description">Slant of <span data-cogncur-s-variant=1 class='letter'>s</span> with stylistic set <code>ss06</code>. 
+    </div>
+  </div>
+
+
   <br class="clear"/><br/><br/>
+
   
   ... more coming soon ...
   <br/ class="clear"><br/><br/>
@@ -149,6 +207,7 @@
     <div class="next">
     </div>
   </div>
+
 
 </body>
 </html>
