@@ -47,6 +47,7 @@
     <li><a href="#typeface_lifts">Arches</a></li>
     <li><a href="#typeface_teardrop">Teardrop counters (a, d, g, p, q)</a></li>
     <li><a href="#typeface_ellipses">Ellipses (c, e, o)</a></li>
+    <li><a href="#typeface_impliedslant">Implied slant</a></li>
     <li><a href="#typeface_joins">Joins</a></li>
     <li><a href="#typeface_uppercase">Uppercase</a></li>
     <li><a href="#typeface_multilang">Multilingual support</a></li>
@@ -167,7 +168,7 @@
   <br class="clear">
   <h2 id="typeface_teardrop">Teardrop counters</h2>
   In the German and American cursive tradition, the counters of the letters <i>a</i>, <i>d</i>, <i>g</i>, and <i>q</i> have a round shape, just like in print. This is problematic in handwriting, not just because shapes with lots of symmetry can be hard to get exactly right, but also because a circle or oval does not have a defined starting point and can just as easily be written clockwise as anticlockwise.<br/>
-  In italic handwriting, counters typically start from the waist line, resulting in a lopsided 'teardrop' shape. This has clear advantages for learners: the teardrop has a clearly defined starting point - on the waist line - and it's impossible to accidentally continue the clockwise entry stroke (or connecting stroke) through the intended starting point of the counter. This is why Cogncur fonts use the italic style 'teardrop' counters.
+  In italic handwriting, counters typically start from the waist line, resulting in a lopsided ‘teardrop’ shape. This has clear advantages for learners: the teardrop has a clearly defined starting point - on the waist line - and it's impossible to accidentally continue the clockwise entry stroke (or connecting stroke) through the intended starting point of the counter. This is why Cogncur fonts use the italic style ‘teardrop’ counters.
   <br/>
   
   <div class="imagecell">
@@ -246,6 +247,39 @@
 
 
   <br class="clear">
+  <h2 id="typeface_impliedslant">Implied slant</h2>
+  Letters that do not have a straight downstroke will nevertheless have an implied slant. Many fonts neglect to make the implied slant of letters parallel to each other, however. If implied slants are not parallel, then we can't explain or teach the slant of those letters, which can lead to the implied slants in student writing becoming even further removed from parallel than in the font.<br/>
+  <br/>
+  In the section on ellipses, we saw how Cogncur handles the implied slant of ellipses. The letters <span class='letter'>s</span> and <span class='letter'>z</span> also have an implied slant that lends itself well to analyzing and to explicit teaching, and which of course has been designed in Cogncur to be parallel to other letters.<br/>
+  
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="image">
+      <img src="images/slant_of_s.png">
+    </div>
+    <div class="description">Cogncur: by default, <span class='letter'>s</span> has a straight<br/> downstroke, which establishes its slant.
+    </div>
+  </div>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="image">
+      <img src="images/slant_of_svariant.png">
+    </div>
+    <div class="description">Cogncur: with stylistic set <code>ss06</code>, <span class='letter' data-cogncur-s-variant=1>s</span> has<br/> a ‘belly’. Its implied slant can be found by <br/>drawing a line through the highest and <br/>lowest points of the letter. 
+    </div>
+  </div>
+  <div class="imagecell" style="margin-right: 20px">
+    <div class="image">
+      <img src="images/slant_of_z.png">
+    </div>
+    <div class="description">Cogncur: the letter <span class='letter'>z</span> has two ‘highest’ points<br/> (where it touches the waist line) and two <br/>‘lowest’ points (where it touches the baseline).<br/> The implied slant of <span class='letter'>z</span> can be found by <br/>drawing lines through these points.
+    </div>
+  </div>
+  <br class="clear"><br/>
+
+  The letter <span class='letter'>x</span> is an exception. <span class='letter'>x</span> has one slant implied by bisecting the angles created where the two strokes intersect. It has another slant implied by the position of the two highest and two lowest points (similar to the letter <span class='letter'>z</span>). Unfortunately, these two implied slants don't match each other, mostly because one stroke curves towards the baseline and the waist line, while the other stroke continues straight on. <!-- Another problem is that bisecting an angle is not stable under the mathematical transformation done to derive the different font styles from each other. In the upright font, the angle is actually bisected by the font's global slant. In the two slanted fonts, the angle is no longer bisected by those fonts' global slants. -->
+  So unfortunately, the slant of letter <span class='letter'>x</span> in Cogncur can not be analyzed or taught.
+
+
+  <br class="clear">
   <h2 id="typeface_joins">Joins</h2>
   Joins are the strokes that connect letters together. Cogncur follows the German tradition in which joins from the baseline (that is all joins except those coming from the letters <span class='letter'>b</span>, <span class='letter'>o</span>, <span class='letter'>t</span>, <span class='letter'>v</span>, and <span class='letter'>w</span>) contain a long, straight, diagonal segment. These straight segments transition into the letter using tight curves.<br/>
   
@@ -253,7 +287,7 @@
     <div class="image">
       <img src="images/joins_minimum.png">
     </div>
-    <div class="description">Cogncur: joins have a straight, diagonal segment. Some letter start with a tight curve <br/>against the waist line, while other letters start with a sharp angle against the waist line.
+    <div class="description">Cogncur: joins have a straight, diagonal segment. Some letters start with a tight curve <br/>against the waist line, while other letters start with a sharp angle against the waist line.
     </div>
   </div>
   <div class="imagecell">
@@ -305,7 +339,7 @@
   
   <br class="clear"><br/>
   
-  The 'straight' joins in Cogncur are not always parallel, like they were in the word <span class='letter'>minimum</span>. Joins towards the letters <span class='letter'>e</span> and <span class='letter'>s</span> tend to have a smaller slope than other joins. This is necessary to achieve correct and even letter spacing.<br/>
+  The ‘straight’ joins in Cogncur are not always parallel, like they were in the word <span class='letter'>minimum</span>. Joins towards the letters <span class='letter'>e</span> and <span class='letter'>s</span> tend to have a smaller slope than other joins. This is necessary to achieve correct and even letter spacing.<br/>
   <div class="imagecell">
     <div class="image">
       <img src="images/joins_not_parallel_annotated.png">

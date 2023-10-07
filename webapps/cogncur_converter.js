@@ -145,12 +145,6 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      */
     nodots: 0,
     
-    /* no_tt_ligature:
-     0 = yes, 'tt' forms a ligature with the crossbars connected
-     1 = no
-     */
-    no_tt_ligature: 0,
-    
     /* smartquotes: 0
      0 = leave quotes as is (except that apostrophe will have a low and high position based on previous letter). 
          NB the font does not have 'straight' quotes. All quotes have either on 'opening' or 'closing' look. 
@@ -1389,6 +1383,9 @@ var letterglyphs_lc = 'a-zà-åăāçè-ëĕēì-ïĭīıñò-öøŏōšŧù-ü�
       input = input.replaceAll(connectors.ccti, connectors.cctt1);
       input = input.replaceAll(connectors.ccvi, connectors.ccvt1);
       input = input.replaceAll(connectors.cgi, connectors.cgt1);
+      input = input.replaceAll(connectors.cgp, connectors.cgt1);
+      input = input.replaceAll(connectors.cgy1, connectors.cgt1);
+      input = input.replaceAll(connectors.cgj, connectors.cgt1);
     }
 
     if (settings.f_continuity_variant == 1) {

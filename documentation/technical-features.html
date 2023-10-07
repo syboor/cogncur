@@ -1,0 +1,930 @@
+﻿<!DOCTYPE html>
+<!--
+  Note: in the stylesheets used by this page, many OpenType features are disabled.
+  Their functionality is replaced by javascript.
+  This allows me to style individual glyphs (entry strokes, connecting strokes, etc).
+  
+  For most purposes, I would recommend that you simply use the OpenType features.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="../webapps/cogncur.css" />
+  <link rel="stylesheet" type="text/css" href="./guide.css" />
+  <title>Cogncur Documentation - Technical features &amp; requirements</title>
+  <script src="/js/jquery-3.7.0.min.js"></script>
+  <script src="../webapps/cogncur_converter.js"></script><!-- functions for converting text to Cogncur glyphs -->
+  <script src="../webapps/cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script>
+    cogncur_converter.init({
+    });
+    
+    $(document).ready(function() {
+      $('[data-connector]').each(function() {
+        console.log(this);
+        glyph = cogncur_converter.connectors[$(this).data('connector')];
+        $(this).text(glyph);
+      });
+      $('[data-variant]').each(function() {
+        console.log(this);
+        glyph = cogncur_converter.variants[$(this).data('variant')];
+        $(this).text(glyph);
+      });
+      $('[data-value-from-variant]').each(function() {
+        console.log(this);
+        glyph = cogncur_converter.variants[$(this).data('value-from-variant')];
+        $(this).text(glyph.charCodeAt(0).toString(16).toUpperCase());
+      });
+      $('[data-value-from-connector]').each(function() {
+        console.log(this);
+        glyph = cogncur_converter.connectors[$(this).data('value-from-connector')];
+        $(this).text(glyph.charCodeAt(0).toString(16).toUpperCase());
+      });
+    
+    });
+  </script>
+  <style>
+    .glyph_table {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      border-left: 1px solid #999;
+    }
+    .glyph_table > div {
+      border: 1px solid #999;
+      border-left: 0px;
+      border-bottom: 0px;
+    }
+    .glyph_table > div > div {
+      padding: 0 5px 0 5px;
+      border-bottom: 1px solid #999;
+    }
+    .glyph_table .glyph_glyph {
+      height: 45px;
+      line-height: 45px;
+    }
+    .glyph_table .glyph_name, .glyph_table .glyph_unicode {
+      height: 24px;
+      vertical-align: bottom;
+    }
+    .glyph_table .glyph_header {
+      font-weight: bold
+    }
+    .glyph_table .glyph_cell .glyph_glyph {
+      font-size: 30pt;
+      text-align: center;
+    }
+    .glyph_table .glyph_cell .glyph_name {
+      font-family: monospace;
+    }
+    .glyph_table .glyph_cell .glyph_unicode {
+      font-family: monospace;
+    }
+    
+    .glyph_detail_table {
+    
+    }
+    .glyph_detail_table .glyph_letters {
+      height: 45px;
+      line-height: 45px;
+    }
+    .glyph_detail_table .glyph_name, .glyph_table .glyph_unicode {
+      height: 24px;
+      vertical-align: bottom;
+    }
+    .glyph_detail_table td.glyph_letters {
+    }
+    .glyph_detail_table th {
+      font-weight: bold;
+    }
+    .glyph_detail_table th, .glyph_detail_table td {
+      padding: 0 5px 0 5px;
+      border: 1px solid #999;
+    }
+    .glyph_detail_table td.glyph_name {
+      line-height: 45px;
+      vertical-align: middle;
+      font-family: monospace;
+    }
+    .glyph_letters .letter {
+      font-size: 30px;
+    }
+    
+    .jointable td, .jointable th {
+      border: 1px solid #999;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+  </style>
+
+
+</head>
+<body class="max">
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./didactic">Didactic features</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label">next</div>
+      <div class="navlink"><a href="./application-msword">Application Guide: MS Word</a></div>
+    </div>
+  </div>
+  <h1>Cogncur Documentation - Technical features &amp; requirements</h1>  
+
+  This guide explains how Cogncur works on a technical level. This guide may be useful for people wanting to use Cogncur a not-yet-documented application, people who want to contribute a new Application Guide, for font designers wanting to make modifications to Cogncur.
+  <br/><br/>
+  In this guide you'll find the following topics:  
+  <ul>
+    <li><a href="#opentype">OpenType features &amp; requirements</a>
+      <ul>
+        <li><a href="#opentype_calt">Contextual alternates (<code>calt</code>)</a>
+        <li><a href="#opentype_ss">Stylistic sets (<code>ssXX</code>)</a>
+        <li><a href="#opentype_kern">Kerning (<code>kern</code>)</a>
+        <li><a href="#opentype_liga">Standard ligatures (<code>liga</code>)</a>
+        <li><a href="#opentype_rlig">Required ligatures (<code>rlig</code>)</a>
+      </ul>
+    </li>
+    <li><a href="#other">Other font rendering requirements</a>
+      <ul>
+        <li><a href="#other_linedistance">Line distance</a>
+        <li><a href="#other_em">Letters outside the em-square</a>
+        <li><a href="#other_supportedaccents">Supported accented characters</a>
+        <li><a href="#other_unsupportedaccents">Unsupported accented characters</a>
+      </ul>
+    </li>
+    <li><a href="#workarounds">Workarounds</a>
+      <ul>
+        <li><a href="#workarounds_calt">Online converter for legacy applications</a>
+        <li><a href="#workarounds_flattening">Flattening stylistic sets</a>
+        <li><a href="#workarounds_other">Using another application</a>
+      </ul>
+    </li>
+    <li><a href="#glyphs">Understanding the glyph inventory</a>
+      <ul>
+        <li><a href="#glyphs_letters">Letters</a>
+        <li><a href="#glyphs_entry">Entry strokes from the baseline</a>
+        <li><a href="#glyphs_exit">Exit strokes</a>
+        <li><a href="#glyphs_joins">Joins</a>
+        <li><a href="#glyphs_initialligatures">Initial ligatures</a>
+      </ul>
+    </li>
+  </ul>    
+
+  
+  <h2 id="opentype">OpenType Features &amp; Requirements</h2>
+  
+  <h3 id="opentype_calt">Contextual alternates (<code>calt</code>)</h3>
+  Cogncur uses <i>contextual alternates</i> (<code>calt</code>) to add the joins between letters, as well as the entry strokes and exit strokes. Contextual alternates are absolutely essential.<br/><br/>
+  Most fonts use the '<code>calt</code>'-table to invoke a set of 'single substitution'-tables. Cogncur uses the '<code>calt</code>'-table to invoke a set of 'multiple substitution'-tables. As this combination of features is rare, you should test an application specifically with Cogncur before concluding that it will work with Cogncur.<br/><br/>
+  In applications that support contextual alternates, contextual alternates can usually be enabled and disabled by the end user. <br/><br/>
+  
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8">cursive</div>
+    <div class="description">Contextual alternates ON</div>
+  </div>
+  <div class="imagecell">
+    <div class="rawcursive rh8">cursive</div>
+    <div class="description">Contextual alternates OFF</div>
+  </div>
+
+  <br class="clear">
+
+  <h3 id="opentype_ss">Stylistic sets (<code>ssXX</code>)</h3>
+  OpenType fonts can contain up to 20 stylistic sets. Stylistic sets are never enabled by default; they need to be enabled manually by the end user.<br/><br/>
+  For Cogncur, it is highly desirable that the application allows for multiple stylistic sets to be enabled simultaneously. Cogncur uses stylistic sets to allow you to change the appearance of (groups of) letters. These changes are often orthogonal to each other. Many teachers want Cogncur to <i>match</i> with a typeface that is used in existing curriculum materials, and they will probably require multiple stylistic sets to create the best 'match'.<br/><br/>
+  Although Cogncur contains a set of text strings describing the stylistic sets, many applications only show stylistic sets by their number, not by their description.<br/>
+  
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8">My Arm</div>
+    <div class="description">No stylistic sets</div>
+  </div>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8" data-cogncur-uppercase-amn-variant=2>My Arm</div>
+    <div class="description">One stylistic set: <code>ss20</code></div>
+  </div>  
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8" data-cogncur-uppercase-amn-variant=2 data-cogncur-r-variant=1>My Arm</div>
+    <div class="description">Two stylistic sets: <code>ss07</code>, <code>ss20</code></div>
+  </div>  
+  
+  <br class="clear">
+
+  <h3 id="opentype_kern">Kerning (<code>kern</code>)</h3>
+  Cogncur uses kerning at the boundary between letters and interpunction, as well as between strings of uppercase letters. Kerning in Cogncur has no effect on the distance between lowercase letters. Kerning is therefore highly desirable, but not needed for some limited uses, such as creating posters with individual letters or words.<br/><br/>
+  Kerning is enabled automatically in many applications. 
+  <br/>
+  
+  
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8">o. o! o?&nbsp;</div>
+    <div class="description">Kerning ON</div>
+  </div>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8" style="font-kerning: none">o. o! o?&nbsp;</div>
+    <div class="description">Kerning OFF</div>
+  </div>  
+
+  <br class="clear">
+
+  <h3 id="opentype_liga">Standard ligatures (<code>liga</code>)</h3>
+  Cogncur uses standard ligatures for two purposes:
+  <ul>
+    <li>To create 'shared' breve or macron accents over double vowels. This feature is intended for some English spelling and phonics curricula.
+    <li>To fix excessive whitespace that might otherwise appear at the beginning of a word that starts with a lowercase character <i>if and only if stylistic set <code>ss01</code> (no entry strokes from the baseline) is also active</i>.
+  </ul><br/>
+  Outside of these limited use cases, Cogncur does not use standard ligatures.
+  <br/><br/>
+  Standard ligatures should be under the control of the end user. Applications vary wildly in whether standard ligatures are enabled or disabled by default.
+  <br/>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8">gŏŏd fōōd&nbsp;</div>
+    <div class="description">Ligatures ON</div>
+  </div>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8" data-cogncur-standard-ligatures=0>gŏŏd fōōd</div>
+    <div class="description">Ligatures OFF</div>
+  </div>  
+  <br class="clear"/><br/>
+
+  <div data-cogncur-entrystrokes=1>
+    <div class="imagecell" style="margin-right: 40px">
+      <div class="cursive rh8">“hi there”&nbsp;</div>
+      <div class="description">Ligatures ON</div>
+    </div>
+    <div class="imagecell" style="margin-right: 40px">
+      <div class="cursive rh8" data-cogncur-initial-ligatures=0>“hi there”</div>
+      <div class="description">Ligatures OFF</div>
+    </div>  
+  </div>
+
+  <br class="clear">
+  <h3 id="opentype_rlig">Required ligatures (<code>rlig</code>)</h3>
+  Cogncur uses a required ligature when the document is set to Dutch. In OpenType supporting applications, required ligatures are always enabled and are not under the control of the end user. However, because this ligature is conditional on the document language, the end user can control this ligature by changing the language of (part of) the document.<br/>
+  <div data-cogncur-entrystrokes=1>
+    <div class="imagecell" style="margin-right: 40px">
+      <div class="cursive rh8" data-cogncur-ij-ligature=1>ijsvrij</div>
+      <div class="description">Language: Dutch</div>
+    </div>
+    <div class="imagecell" style="margin-right: 40px">
+      <div class="cursive rh8" data-cogncur-ij-ligature=0>ijsvrij</div>
+      <div class="description">Language: other</div>
+    </div>  
+  </div>
+  
+
+  <br class="clear">
+  <br/>
+  <h2 id="other">Other font rendering requirements</h2>
+  These aspects of font rendering are not directly related to specific OpenType Features.
+  <h3 id="other_linedistance">Line distance</h3>
+  Cogncur was designed to be written with the ascenders and descenders touching each other. Unfortunately, some applications ignore the dimensions declared in the font and instead use the ‘maximum size’ of the letters encountered in the font to determine line spacing. Since this ‘maximum size’ includes accented uppercase letters, this will lead to too much line spacing. It should be possible in your application to set the line distance such that ascenders and descenders are touching each other, and preferable, this line distance should be called ‘1’ or ‘Single’ by the application.<br/>
+
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8" style="line-height: 1">Baffling <br/>glyphs</div>
+    <div class="description">Line distance: Single</div>
+  </div>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8" style="line-height: 1.15">Baffling <br/>glyphs</div>
+    <div class="description">Line distance: 1.15</div>
+  </div>  
+
+  <br class="clear">
+  <h3 id="other_em">Letters outside the em-square</h3>
+  Since letters in Cogncur overlap horizontally and touch vertically, parts of letters fall outside the em-square. Some applications may ‘cut off’ parts of letters. This may be dependent on the specific (print) view used or   the amount of hardware resources available to the application. Testing for ‘cut off’ problems should be done not just ‘on screen’ within the application itself; you should also use the application to produce a PDF and then open the PDF in Acrobat Reader to inspect it.<br/><br/>
+  Some applications may have more than one way to produce a PDF. For most purposes, using the “Print”
+  dialog and then printing to a PDF printer driver produces best results. If you do not have a PDF printer
+  driver, you can install the free “Foxit PhantomPDF printer”.<br/><br/>
+  If you might need to use accented uppercase letters such as ‘Ñ’, you should specifically test with those.
+
+  <br class="clear">
+  <h3 id="other_suppertedaccents">Supported accented characters</h3>
+  Cogncur contains a set of 'pre-composed' accented characters to support a few common languages as well as phonics and spelling curricula. It should be possible to find and insert these accented characters through the ‘Insert Symbol’ dialog or an equivalent. After inserting, these accented characters should form the correct (dynamic) connections to other characters. You can view the set of accented characters present in Cogncur in the <a href="./typeface-features#typeface_multilang">Typeface Features Guide</a>.<br/><br/>
+  
+  <h3 id="other_unsupportedaccents">Unsupported accented characters</h3>
+  It is preferable that <i>only</i> the pre-composed characters present in the font can be found in the ‘Insert Symbol’ dialog, and that if the end user insert non-supported characters, they are rendered with a fall back font. If this is not the case, problems due to non-supported characters can be hard to spot and even harder to understand.<br/><br/>
+  Cogncur uses OpenType positioning tables internally to generate its pre-composed accented characters, and these pre-composed characters have been added to the '<code>calt</code>'-table to join them to other letters. Some renderers such as Chromium will not fall back to a default font to show unsupported characters, but will use the OpenType positioning table to 'compose' these characters on the fly. Unfortunately, characters composed by the application do not connect to other characters and do not receive entry or exit strokes, and this effect is sometimes too subtle to spot. A few (as of yet) unsupported characacters to test with, are: <code>Ǹ ǹ Ń ń</code>. <br/>
+
+  <div class="imagecell" style="margin-right: 20px;">
+    <div class="image">
+      <img src="images/unsupported_accents.png">
+    </div>
+    <div class="description">
+      Unsupported accents rendered with a fallback font
+    </div>
+  </div>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/unsupported_accents_mark.png">
+    </div>
+    <div class="description">
+      Unsupported accents rendered with OpenType posititiong.<br/>
+      There are no entry or exit strokes on the <i>n</i>.
+    </div>
+  </div>
+
+ 
+  <br class="clear"><br/>
+  <h2 id="workarounds">Workarounds</h2>
+  If your application does not support advanced OpenType features, you'll need to use a workaround to use Cogncur.<br/><br/>
+ 
+  All glyphs in Cogncur are mapped to Unicode code points. That means all glyphs can be accessed by the end user through the ‘Insert Symbol’-dialog or through external ‘Font Viewer’-applications. However, due to the high number of joining glyphs and the impossibility of distinguishing these glyphs visually from each other (some glyphs only differ in the amount of left or right bearing they have), manually inserting these joining glyphs is not feasible. Instead, I've created a javascript library and accompanying web app to do these glyph substitutions. 
+  
+  <h3 id="workarounds_calt">Online converter for legacy applications</h3>
+  The <a href="https://cogncur.com/powerpoint">online Cogncur converter for legacy applications</a> will allow you to work around most missing OpenType features. Most notably, it allows you to work around a lack of support for contextual alternates. The text that it produces can be copy-pasted into applications that do not support contextual alternates, such as Powerpoint, Canva Pro or Cricut. The font needs to already have been installed so that the application can use it.<br/>
+  <br/>
+  Once the text has been copied into the legacy application, you can't edit it anymore. There's nothing to stop you from trying, but if you try to make any changes <i>within</i> words, the result will be a mess. You can however copy, move or delete entire words and sentences. You can also copy new text from the converter into your legacy application. 
+  <br/><br/>
+  <h3 id="workarounds_flattening">Flattening stylistic sets</h3>
+  If your applications supports contextual alternates but does not support stylistic sets, or if it only supports one stylistic sets at a time but you need multiple, there are two ways to work around this:
+  <ul>
+    <li>You could <i>disable</i> contextual alternates in your application and use the <a href="https://cogncur.com/powerpoint">Online converter</a> discussed above. This has the rather large  disadvantage of no longer being able to edit text from within your application, so is not recommended.
+    <li>A better solution is to use <a href="https://www.fontsquirrel.com/tools/webfont-generator">FontSquirrel's Webfont Generator</a> to create a new font with a specific set of stylistic alternates 'flattened' into the font.
+  </ul>
+  <br/>
+  FontSquirrel's Webfont Generator was never really intended to create Desktop Fonts, so you'll need some 'expert' settings to get it to do what you need:
+  <ul>
+    <li>First, upload the Cogncur fonts from your computer. 
+    <li>Enable 'Expert' mode.
+    <li>As Font Format, deselect everything and then select 'Truetype'.
+    <li>For Truetype Hinting, choose 'Keep existing'.
+    <li>For Rendering, choose 'Fix GASP Table'.
+    <li>For Vertical Metrics, choose 'No Adjustment'.
+    <li>Deselect everything under 'Fix Missing Glyphs'.
+    <li>For X-height Matching, choose 'None'.
+    <li>For Protection, don't select anytihng.
+    <li>For Subsetting, choose 'No Subsetting'.
+    <li>For OpenType Flattening, select all the stylistic sets that you want to use. You can use the <a href="https://cogncur.com/powerpoint">Online converter</a> to quickly test out the stylistic sets. Optionally, you can also select 'Old Style Numerals' to change the appearance of the numerals. 
+    <li>The CSS settings are irrelevant.
+    <li>For Advanced Opions, change the Font Name Suffix to something to uniquely identify your font. Leave the EM Square Value at 2048 and Adjust Glyph Spacing at 0.
+    <li>Check the Agreement checkbox.
+    <li>Now click the button 'Download your kit'.
+  </ul>
+  <br/>
+  TODO: where are the fonts in the download???<br/>
+  <br/>
+  You can see these settings in the screenshot below:<br/>
+  
+  
+  <div class="imagecell" style="margin-right: 20px;">
+    <div class="image">
+      <div style="height: 550px; overflow-y: scroll">
+        <img src="images/fontsquirrel.png">
+      </div>
+    </div>
+    <div class="description">
+      Settings in FontSquirrel's Webfont Generator
+    </div>
+  </div>
+  
+  <br class="clear">
+  <h3 id="workarounds_other">Using another application</h3>
+  To workaround a lack of OpenType support in an application, you can also use another application. For example:
+  <ul>
+    <li>Instead of Microsoft Powerpoint (no OpenType support) or Google Sheets (no custom font support), you can use <a href="https://www.libreoffice.org/discover/impress/">LibreOffice Impress</a>.
+    <li>If you are creating handwriting worksheets, instead of a word processor, you can use the online <a href="https://cogncur.com/worksheetcreator/">Cogncur Worksheet Creator</a>.
+  </ul>
+
+  
+  <br class="clear">  
+  <h2 id="glyphs">Understanding the glyph inventory</h2>
+  To study the glyph inventory of Cogncur, it can be helpful to install <a href="https://fontforge.org/"> FontForge</a>, download the source file <a href="https://github.com/syboor/cogncur/raw/main/sources/Cogncur.sfd">Cogncur.sfd</a>, and open it in FontForge.
+  <h3 id="glyphs_letters">Letters</h3>
+  Letter glyphs in Congcur only contain the invariant part of the letter. That is the part of the letter that is always the same, regardless of which letter comes before or after it. You get to see the letter glyphs if you use Cogncur in an application that has contextual alternates disabled.<br/>
+  <br/>
+ 
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8">sleeves</div>
+    <div class="description">The word 'sleeves' with contextual alternates on</div>
+  </div>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="rawcursive rh8">sleeves</div>
+    <div class="description">Just the letter glyphs in the word 'sleeves'</div>
+  </div>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="rawcursive rh8"> s  l  e  e  v  e  s </div>
+    <div class="description">All the glyphs in the word 'sleeves', shown with spaces added between the glyphs</div>
+  </div>
+  <br class='clear'><br/>
+  <h3 id="glyphs_entry">Entry strokes from the baseline</h3>
+  Every lowercase word starts with an entry stroke. Or actually, every lowercase letter that is not preceeded by another letter receives an entry stroke. In Fontforge, entry strokes from the baseline have a name that starts with <code>cg</code>.
+
+  <div class="glyph_table">
+    <div class="glyph_header">
+      <div class="glyph_name">name</div>
+      <div class="glyph_glyph">glyph</div>
+      <div class="glyph_glyph">context</div>
+      <div class="glyph_unicode">unicode</div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgi</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgi'></div>
+      <div class="glyph_glyph cursive traceable red-first">i</div>
+      <div class="glyph_unicode" data-value-from-connector="cgi"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgn</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgn'></div>
+      <div class="glyph_glyph cursive traceable red-first">n</div>
+      <div class="glyph_unicode" data-value-from-connector="cgn"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgh</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgh'></div>
+      <div class="glyph_glyph cursive traceable red-first">h</div>
+      <div class="glyph_unicode" data-value-from-connector="cgh"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgo</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgo'></div>
+      <div class="glyph_glyph cursive traceable red-first">o</div>
+      <div class="glyph_unicode" data-value-from-connector="cgo"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cga</div>
+      <div class="glyph_glyph rawcursive" data-connector='cga'></div>
+      <div class="glyph_glyph cursive traceable red-first">a</div>
+      <div class="glyph_unicode" data-value-from-connector="cga"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cge</div>
+      <div class="glyph_glyph rawcursive" data-connector='cge'></div>
+      <div class="glyph_glyph cursive traceable red-first">e</div>
+      <div class="glyph_unicode" data-value-from-connector="cge"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgs</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgs'></div>
+      <div class="glyph_glyph cursive traceable red-first">s</div>
+      <div class="glyph_unicode" data-value-from-connector="cgs"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgt1</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgt1'></div>
+      <div class="glyph_glyph cursive traceable red-first" data-cogncur-t-variant=1>t</div>
+      <div class="glyph_unicode" data-value-from-connector="cgt1"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgt</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgt'></div>
+      <div class="glyph_glyph cursive traceable red-first">t</div>
+      <div class="glyph_unicode" data-value-from-connector="cgt"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgz1</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgz1'></div>
+      <div class="glyph_glyph cursive traceable red-first" data-cogncur-rz-top-variant=1>z</div>
+      <div class="glyph_unicode" data-value-from-connector="cgz1"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgz</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgz'></div>
+      <div class="glyph_glyph cursive traceable red-first">z</div>
+      <div class="glyph_unicode" data-value-from-connector="cgz"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cgs1</div>
+      <div class="glyph_glyph rawcursive" data-connector='cgz'></div>
+      <div class="glyph_glyph cursive traceable red-first" data-cogncur-s-variant=1>s</div>
+      <div class="glyph_unicode" data-value-from-connector="cgs1"></div>
+    </div>
+  </div>      
+  
+  <br/>
+  Most entry strokes are used before more than one letter. See below which entry strokes are used <i>before</i> which letters:
+  <table class="glyph_detail_table">
+    <tr>
+      <th>name</td>
+      <th>before... (standard letters)</td>
+      <th>before... (variant letters)</td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgi</td>
+      <td class="glyph_letters"><span class="letter">i j p u w</span></td>
+      <td class="glyph_letters" data-cogncur-rz-top-variant=1 data-cogncur-y-variant=1 data-cogncur-t-variant=2 data-cogncur-stick-variant=1><span class="letter">p</span> <code>(p1)</code> <span class="letter">r</span> <code>(r1)</code> <span class="letter">y</span> <code>(y1)</code> <span class="letter" data-cogncur-ij-ligature=1>ij</span> <code>(ij1)</code> </td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgn</td>
+      <td class="glyph_letters"><span class="letter" data-cogncur-ij-ligature=1>m n r v x y ij</span></td>
+      <td class="glyph_letters" data-cogncur-w-variant=1 data-cogncur-p-curve-variant=1><span class="letter">w</span> <code>(w1)</code> <span class='letter'>p</span> <code>(p2)</code> <span class='letter'data-cogncur-p-open-variant=1>p</span> <code>(p4)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgh</td>
+      <td class="glyph_letters"><span class="letter">b f h k l</span></td>
+      <td class="glyph_letters"> </td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgo</td>
+      <td class="glyph_letters"><span class="letter">c o</span></td>
+      <td class="glyph_letters"> </td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cga</td>
+      <td class="glyph_letters"><span class="letter">a d g q</span></td>
+      <td class="glyph_letters" data-cogncur-stick-variant=1> </td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cge</td>
+      <td class="glyph_letters"><span class="letter">e</span></td>
+      <td class="glyph_letters"> </td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgs</td>
+      <td class="glyph_letters"><span class="letter">s</span></td>
+      <td class="glyph_letters"> </td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgs1</td>
+      <td class="glyph_letters"> </td>
+      <td class="glyph_letters"><span class="letter" data-cogncur-s-variant=1>s</span> <code>(s1)</code></td>
+    </tr>    
+    <tr>
+      <td class="glyph_name">cgt1</td>
+      <td class="glyph_letters"><span class="letter"></span></td>
+      <td class="glyph_letters" data-cogncur-t-variant=1><span class="letter">t</span> <code>(t1)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgt</td>
+      <td class="glyph_letters"><span class="letter">t</span></td>
+      <td class="glyph_letters"> </td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgz1</td>
+      <td class="glyph_letters"><span class="letter"></span></td>
+      <td class="glyph_letters" data-cogncur-rz-top-variant=1><span class="letter">z</span> <code>(z1)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cgz</td>
+      <td class="glyph_letters"><span class="letter">z</span></td>
+      <td class="glyph_letters"> </td>
+    </tr>    
+  </table>
+  The glyphs <code>cgi</code> and <code>cgt1</code> are interchangeable. If one of these glyphs 'fits' as entry strokes towards a letter, the other glyph will also fit. Some stylistic sets swap these entrys trokes (as well as related joins.<br/>
+  <br/>
+  Note that <code>cgi</code> and <code>cgn</code> are not interchangeable. To use a different entry stroke, a different variant of the letter glyph will be needed. This is why the letters <i>r</i>, <i>w</i>, <i>y</i> and <i>z</i> all have multiple variants. 
+  <br/><br/>
+  The glyphs <code>cgz</code> and <code>cgn</code> are interchangeble, but <code>cgz</code> has a slope that better matches the internal diagonal stroke of the letter <i>z</i>. The same is true for <code>cgz1</code> and <code>cgi</code>.
+  <br/>
+  <br/>
+  <b>Update:</b> since writing this guide, a number of entry strokes have been added to improve the positioning of interpunction (such as ¿) at the beginning of a word. To this purpose, copies of some entry strokes have been created, and these copies are used for a subset of the letters mapped to the original entry stroke, often letters with a low loop or stick. Some copied entry strokes have a different left bearing from the original, and some copies are identical to the original glyph but have a separate entry in the kerning tables.
+  
+  <br class='clear'><br/>
+  <h3 id="glyphs_entry">Exit strokes</h3>
+  Every word ends in an exit stroke. Of actually, every letter that is not succeeded by a lowercase letter receives an entry stroke. Even uppercase letters that have no visible exit stroke, will still receive an exit stroke glyph. It follows that some exit stroke glyphs contain nothing but whitespace. In FontForge, exit strokes have a name that starts with <code>ce</code>. Some exit strokes are not used with any of the default letters, only with variant letters.<br/>
+  <br/>
+  <div class="glyph_table">
+    <div class="glyph_header">
+      <div class="glyph_name">name</div>
+      <div class="glyph_glyph">glyph</div>
+      <div class="glyph_glyph">context</div>
+      <div class="glyph_unicode">unicode</div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cen</div>
+      <div class="glyph_glyph rawcursive" data-connector='cen'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>n</div>
+      <div class="glyph_unicode" data-value-from-connector="cen"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceo</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceo'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>o</div>
+      <div class="glyph_unicode" data-value-from-connector="ceo"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cee</div>
+      <div class="glyph_glyph rawcursive" data-connector='cee'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>e</div>
+      <div class="glyph_unicode" data-value-from-connector="cee"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cev</div>
+      <div class="glyph_glyph rawcursive" data-connector='cev'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>v</div>
+      <div class="glyph_unicode" data-value-from-connector="cev"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceg</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceg'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>g</div>
+      <div class="glyph_unicode" data-value-from-connector="ceg"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ces</div>
+      <div class="glyph_glyph rawcursive" data-connector='ces'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>s</div>
+      <div class="glyph_unicode" data-value-from-connector="ces"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cep</div>
+      <div class="glyph_glyph rawcursive" data-connector='cep'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>p</div>
+      <div class="glyph_unicode" data-value-from-connector="cep"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceq</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceq'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>q</div>
+      <div class="glyph_unicode" data-value-from-connector="ceq"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cet</div>
+      <div class="glyph_glyph rawcursive" data-connector='cet'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>t</div>
+      <div class="glyph_unicode" data-value-from-connector="cet"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceO</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceO'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>O</div>
+      <div class="glyph_unicode" data-value-from-connector="ceO"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceB</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceB'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>B</div>
+      <div class="glyph_unicode" data-value-from-connector="ceB"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceA</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceA'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>A</div>
+      <div class="glyph_unicode" data-value-from-connector="ceA"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceP</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceP'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>P</div>
+      <div class="glyph_unicode" data-value-from-connector="ceP"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceF</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceF'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>F</div>
+      <div class="glyph_unicode" data-value-from-connector="ceF"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceI</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceI'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>I</div>
+      <div class="glyph_unicode" data-value-from-connector="ceI"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceN</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceN'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red'>T</div>
+      <div class="glyph_unicode" data-value-from-connector="ceN"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cef1</div>
+      <div class="glyph_glyph rawcursive" data-connector='cef1'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-cogncur-f-connection-variant=1 data-switch-from=2 data-after-switch-class='red'>f</div>
+      <div class="glyph_unicode" data-value-from-connector="cef1"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cef4</div>
+      <div class="glyph_glyph rawcursive" data-connector='cef4'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red' data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 >f</div>
+      <div class="glyph_unicode" data-value-from-connector="cef4"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceq1</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceq1'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red' data-cogncur-q-connection-variant=1 >q</div>
+      <div class="glyph_unicode" data-value-from-connector="ceq1"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">ceq2</div>
+      <div class="glyph_glyph rawcursive" data-connector='ceq2'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red' data-cogncur-q-connection-variant=1 data-cogncur-stick-variant=1>q</div>
+      <div class="glyph_unicode" data-value-from-connector="ceq2"></div>
+    </div>
+    <div class="glyph_cell">
+      <div class="glyph_name">cer2</div>
+      <div class="glyph_glyph rawcursive" data-connector='cer2'></div>
+      <div class="glyph_glyph line nolines traceable switchclass" data-switch-from=2 data-after-switch-class='red' data-cogncur-r-variant=1 >r</div>
+      <div class="glyph_unicode" data-value-from-connector="cer2"></div>
+    </div>
+  </div>      
+  
+  <br/>
+  Most exit strokes are used after more than one letter. See below which exit strokes are used <i>after</i> which letters:<br/>
+  <table class="glyph_detail_table">
+    <tr>
+      <th>name</td>
+      <th>after... (standard letters)</td>
+      <th>after... (variant letters)</td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cen</td>
+      <td class="glyph_letters"><span class="letter">a d h i k l m n r u x H K M R U X</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1 data-cogncur-uppercase-amn-variant=2><span class="letter">p</span> <code>(p4)</code> <span class="letter">A</span> <code>(A2)</code> <span class="letter">M</span> <code>(M2)</code> <span class="letter">N</span> <code>(N2)</code> </td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceo</td>
+      <td class="glyph_letters"><span class="letter">o</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cee</td>
+      <td class="glyph_letters"><span class="letter">c e C E L</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cev</td>
+      <td class="glyph_letters"><span class="letter">b v w</span></td>
+      <td class="glyph_letters" data-cogncur-w-variant=1><span class="letter">w</span> <code>(w1)</code></td>
+    </tr>
+    <tr data-cogncur-ij-ligature=1>
+      <td class="glyph_name">ceg</td>
+      <td class="glyph_letters"><span class="letter">g j y ij G J Y</span></td>
+      <td class="glyph_letters" data-cogncur-y-variant=1><span class="letter">y</span> <code>(y1)</code> <span class="letter">ij</span> <code>(ij1)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ces</td>
+      <td class="glyph_letters"><span class="letter">s</span></td>
+      <td class="glyph_letters" data-cogncur-s-variant=1><span class="letter">s</span> <code>(s1)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cep</td>
+      <td class="glyph_letters"><span class="letter">p ß</span></td>
+      <td class="glyph_letters" data-cogncur-p-curve-variant=1><span class="letter">p</span> <code>(p2)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceq</td>
+      <td class="glyph_letters"><span class="letter">f q z</span></td>
+      <td class="glyph_letters"><span class="letter" data-cogncur-fq-continuity-variant=1>f</span> <code>(f2)</code> <span class="letter" data-cogncur-fq-continuity-variant=1 data-cogncur-stick-variant=1>f</span> <code>(f3)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cet</td>
+      <td class="glyph_letters"><span class="letter">t</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceO</td>
+      <td class="glyph_letters"><span class="letter">D O V W</span></td>
+      <td class="glyph_letters" data-cogncur-w-variant=1><span class="letter">W</span> <code>(w1)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceB</td>
+      <td class="glyph_letters"><span class="letter">B S</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceA</td>
+      <td class="glyph_letters"><span class="letter">A</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceP</td>
+      <td class="glyph_letters"><span class="letter">P</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceF</td>
+      <td class="glyph_letters"><span class="letter">F T</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceI</td>
+      <td class="glyph_letters"><span class="letter">I</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceN</td>
+      <td class="glyph_letters"><span class="letter">N</span></td>
+      <td class="glyph_letters" data-cogncur-p-open-variant=1><span class="letter"></span> <code></code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cef1</td>
+      <td class="glyph_letters"><span class="letter"></span></td>
+      <td class="glyph_letters" data-cogncur-f-connection-variant=1><span class="letter">f</span> <code>(f1)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cef4</td>
+      <td class="glyph_letters"><span class="letter"></span></td>
+      <td class="glyph_letters" data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1><span class="letter">f</span> <code>(f5)</code> <span class='letter' data-cogncur-stick-variant=1>f</span> <code>(f5)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceq1</td>
+      <td class="glyph_letters"><span class="letter"></span></td>
+      <td class="glyph_letters" data-cogncur-q-connection-variant=1><span class="letter">q</span> <code>(q1)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">ceq2</td>
+      <td class="glyph_letters"><span class="letter"></span></td>
+      <td class="glyph_letters" data-cogncur-q-connection-variant=1 data-cogncur-stick-variant=1><span class="letter">q</span> <code>(q2)</code></td>
+    </tr>
+    <tr>
+      <td class="glyph_name">cer2</td>
+      <td class="glyph_letters"><span class="letter"></span></td>
+      <td class="glyph_letters" data-cogncur-r-variant=1><span class="letter">r</span> <code>(r2)</code></td>
+    </tr>
+  </table>
+  <br class="clear">
+  This grouping of letters based on similar endings can be found in the '<code>calt</code>'-table as 'Back classes'.
+
+  <br>
+  <br/>
+  <b>Update:</b> just as with the entry strokes, exit strokes have also been copied to improve the positioning of interpunction at the end of the word. To this purpose, copies of some exit strokes have been created, and these copies are used for a subset of the letters mapped to the original entry stroke, often letters with a tall loop or stick. Some copied exit strokes have a different right bearing from the original, and some copies are identical to the original glyph but have a separate entry in the kerning tables.
+  
+  <h3 id="glyphs_joins">Joins</h3>
+  When adding entry strokes, letters were grouped together based on similar 'beginnings' of the letter, so <span class='letter'>b f k h k</span> form a group. When adding exit strokes, letters are grouped together based on similar 'endings' of the letter, so <span class='letter'>b v w</span> form a group. Joins connect the end of one letter to te beginning of the next, so they'll need to take into account both groupings.<br/>
+  <br/>
+  That means that to find the correct join, one needs to look at both letters of the pair in a large table. A <i>partial</i>, incomplete version of such a table is given below:<br/>
+
+  <table class="jointable" data-cogncur-ij-ligature=1>
+    <tr>
+      <th>&nbsp;</th>
+      <th colspan=10>second letter in pair 🡓</th>
+    </tr>
+    <tr>
+      <th>first letter in pair 🡓</th>
+      <td><span class='cursive lh2'>i j p u w</span></td>
+      <td><span class='cursive lh2'>m n r v x y</span></td>
+      <td><span class='cursive lh2'>b f h k l</span></td>
+      <td><span class='cursive lh2'>e</span></td>
+      <td><span class='cursive lh2'>a d g q</span></td>
+      <td><span class='cursive lh2'>c o</span></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>a d h i k l m n <br/>r u x H K M R U X</span></td>
+      <td><code>ccni</code><br/><div class='rh4 line nolines red-connections traceable'>aw du</div></td>
+      <td><code>ccnn</code><br/><div class='rh4 line nolines red-connections traceable'>my Un</div></td>
+      <td><code>ccnh</code><br/><div class='rh4 line nolines red-connections traceable'>ll nk</div></td>
+      <td><code>ccne</code><br/><div class='rh4 line nolines red-connections traceable'>he ie</div></td>
+      <td><code>ccna</code><br/><div class='rh4 line nolines red-connections traceable'>dd xa</div></td>
+      <td><code>ccno</code><br/><div class='rh4 line nolines red-connections traceable'>ho Ho</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>b v w</span></td>
+      <td><code>ccvi</code><br/><div class='rh4 line nolines red-connections traceable'>bi vu</div></td>
+      <td><code>ccvn</code><br/><div class='rh4 line nolines red-connections traceable'>wr vy</div></td>
+      <td><code>ccvh</code><br/><div class='rh4 line nolines red-connections traceable'>bl wh</div></td>
+      <td><code>ccve</code><br/><div class='rh4 line nolines red-connections traceable'>ve we</div></td>
+      <td><code>ccva</code><br/><div class='rh4 line nolines red-connections traceable'>ba va</div></td>
+      <td><code>ccvo</code><br/><div class='rh4 line nolines red-connections traceable'>bo wc</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>g j y ij G J Y</span></td>
+      <td><code>ccgi</code><br/><div class='rh4 line nolines red-connections traceable'>gu Yp</div></td>
+      <td><code>ccgn</code><br/><div class='rh4 line nolines red-connections traceable'>gr yx</div></td>
+      <td><code>ccgh</code><br/><div class='rh4 line nolines red-connections traceable'>Gl yk</div></td>
+      <td><code>ccge</code><br/><div class='rh4 line nolines red-connections traceable'>je ye</div></td>
+      <td><code>ccga</code><br/><div class='rh4 line nolines red-connections traceable'>gg yd</div></td>
+      <td><code>ccgo</code><br/><div class='rh4 line nolines red-connections traceable'>Go yc</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>c e C E L</span></td>
+      <td><code>ccei</code><br/><div class='rh4 line nolines red-connections traceable'>ei cw</div></td>
+      <td><code>ccen</code><br/><div class='rh4 line nolines red-connections traceable'>cr Ly</div></td>
+      <td><code>cceh</code><br/><div class='rh4 line nolines red-connections traceable'>Cl ef</div></td>
+      <td><code>ccee</code><br/><div class='rh4 line nolines red-connections traceable'>ce ee</div></td>
+      <td><code>ccea</code><br/><div class='rh4 line nolines red-connections traceable'>Ea cq</div></td>
+      <td><code>cceo</code><br/><div class='rh4 line nolines red-connections traceable'>ec co</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>A</span></td>
+      <td><code>ccAi</code><br/><div class='rh4 line nolines red-connections traceable'>Au Ap</div></td>
+      <td><code>ccAn</code><br/><div class='rh4 line nolines red-connections traceable'>Ar Ax</div></td>
+      <td><code>ccAh</code><br/><div class='rh4 line nolines red-connections traceable'>Af Ak</div></td>
+      <td><code>ccAe</code><br/><div class='rh4 line nolines red-connections traceable'>Ae</div></td>
+      <td><code>ccAa</code><br/><div class='rh4 line nolines red-connections traceable'>Ad Aq</div></td>
+      <td><code>ccAo</code><br/><div class='rh4 line nolines red-connections traceable'>Ac Ao</div></td>
+    </tr>
+
+  </table>
+  
+  
+  <br class="clear">
+  <h3 id="glyphs_initialligatures">Initial ligatures</h3>
+  Because the '<code>calt</code>'-tables in Cogncur invoke <i>multiple</i> substition tables, there is no need for the font to combine letter glyphs and entry/exit/join glyphs into ligatures. <br/><br/>
+  However, if you use stylistic set <code>ss01</code> to get shorter entry strokes (not from the baseline), you will get a ligature at the beginning of each lowercase word, which combines the letter glyph with the glyph for the short entry stroke (whose name starts with <code>cs</code> in FontForge). The reason for this is the need to decrease whitespace, and the impossibility of taking more whitespace from some of the short entry stroke glyphs.<br/>
+  <br/>
+  If you are using entry strokes from the baseline, you can entirely ignore these initial ligatures.
+  
+
+
+  <br/><br/><br/>
+
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./didactic">Didactic features</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label">next</div>
+      <div class="navlink"><a href="./application-msword">Application Guide: MS Word</a></div>
+    </div>
+  </div>
+
+</body>
