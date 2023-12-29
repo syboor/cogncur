@@ -13,6 +13,10 @@ LATER: kerning between uppercase letters
   - same for ceB vs ceS, ceQ vs ceZ
   - kerning after (proportional) numbers, before interpunction
 
+Javascript:
+DONE: optimize javascript using a single loop for contextual alternates (a la schoolcursive_desktopconverter.js)
+
+
 ???: revisit 'branch out' points of N2, M2 and U
   
 
@@ -52,9 +56,9 @@ RELEASE STEPS
 - push to main
 
 
-FIRST RELEASE
-- DONE: complete required glyphs
-- release to Github
-- upload font and legacy app to cogncur.com
-- update homepage on cogncur.com: link to Github for download, link to legacy app for conversion
-- add 'Other applications' section to the README.md on Github ('In some applications, you don't need to do anything to make the letters connect: LibreOffice, ....  Other applications support custom fonts but do not support OpenType. In those "legacy" applications, there is no feasible way to enter or edit cursive text from within the application. However, you can create your connected text in a web application and then copy-paste this text to the legacy application. .... Finally, some applications do not allow you to use custom fonts. 
+
+
+ 
+
+
+

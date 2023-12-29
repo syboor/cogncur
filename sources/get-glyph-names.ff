@@ -2,9 +2,7 @@
 # Invoke with: 
 d:
 cd \syboor.eu\httpdocs\fonts\cogncur\sources
-"C:\Program Files\Fontforge\bin\ffpython.exe" get-glyph-names.ff
-
-New approach to creating the ligature font. This time with stylistic sets.
+"C:\Program Files\Fontforge\bin\ffpython.exe" get-glyph-names.ff > out
 
 '''
 import fontforge;
@@ -38,6 +36,5 @@ def get_glyphs_by_codepoint():
 glyphs = get_glyphs_by_codepoint();
 
 for codepoint in glyphs:
-  print('    ', glyphs[codepoint].glyphname, ' : \'\\u', "{0:#0{1}x}".format(codepoint,6)[2:], '\',', sep='');
-  #print('    ', glyphs[codepoint].glyphname, ' : \'\\u', hex(codepoint).upper()[2:], '\',', sep='');
+  print('    \'', glyphs[codepoint].glyphname, '\' : \'\\u', "{0:#0{1}x}".format(codepoint,6)[2:], '\',', sep='');
 

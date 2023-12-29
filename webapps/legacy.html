@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="/resources/style.css" />
   <link rel="stylesheet" type="text/css" href="/webapps/cogncur.css" />
   <script src="/js/jquery-3.7.0.min.js"></script>
-  <script src="/webapps/cogncur_converter.js?v=20230723"></script><!-- functions for converting text to Schoolschrift glyphs -->
+  <script src="/webapps/cogncur_converter.js?v=20231229"></script><!-- functions for converting text to Cogncur glyphs -->
   
   <script>
     $(document).ready(function () {
@@ -31,6 +31,7 @@
         var text = $('#input').val();
         var html;
         text = converter.convert(text);
+        if (console) console.log(converter.glyphs_to_names(text));
         $('#output').text(text); /* For screen, we use a textarea, as that is best for copy-pasting to a word proecssor */
         $('#output-print').text(text); /* For printing, use a normal div, since a textarea has limited (fixed) height */
 
