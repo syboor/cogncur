@@ -948,30 +948,6 @@ var get_cogncur_lines = (function () {
       });
     });    
     
-    /* Divides a word into a visible and an invisible part.
-     * The invisible part is the continuous part containing only 'known letters' until the end.
-     * The visible part is the part before that, so from the beginning until the last unknown letter.
-     * The connector glyph after the last unknown is also visible.
-     * 
-     * The child can trace the unknown letters, and than continue to finish the part with the known letters.
-     */
-    $(rootnode).find('.invisible_except_known, .invisible-except-known').each(function () {
-      var known_letters = $(this).closest('[data-known-letters]').data('known-letters');
-      known_letters = cogncur_converter.expand_known_letters(known_letters); // Add special versions of t, s, ij (please use 'y' as input), etc.
-      replace_text_nodes_with_html(this, function(input) {
-        var re_str2 = 
-          '\(\^\|\[\^' + cogncur_converter.glyphs + '\]\)' +                       // Start of string OR non-word character (should remain visible)
-          '\(\[' + cogncur_converter.glyphs + '\]\+\?\)' +                         // Any number of glyphs (should remain visible)
-          '\(\[' + known_letters + '\]\)' +                                      // A known letter (should become invisible)
-          '\(\[' + cogncur_converter.connectorglyphs + known_letters + '\]\+\)' +  // Followed by known letters and connectors between / after them (should become invisible)
-          //'\(\$\|\\s)';                                                        // End of string OR whitespace
-          '\(\?\=\(\$|\[\^' + cogncur_converter.glyphs + '\]\)\)';                 // Lookahead match with end of string or non-word character. This is not captured, so that the NEXT match is still able to capture this as the first group.
-        var re = new RegExp(re_str2, "g");
-        var replace = input.replace(re, "$1$2<span class='invisible'>$3$4</span>");
-        return replace;
-      });
-    });
-    
     function mark_letters(input, start_tag, end_tag) {
       if (typeof(start_tag) == 'undefined') start_tag = "<span class='red'>";
       if (typeof(end_tag) == 'undefined') end_tag = "</span>";

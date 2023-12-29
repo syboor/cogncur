@@ -220,17 +220,17 @@ b, strong {
 .ld7 .line, .ld7.line, .ld7 .rawline, .ld7.rawline { margin-bottom: 0.778em; }
 .ld8 .line, .ld8.line, .ld8 .rawline, .ld8.rawline { margin-bottom: 0.889em; }
 .ld9 .line, .ld9.line, .ld9 .rawline, .ld9.rawline { margin-bottom: 1em; }
-.ld10 .line, .ld10.line, .ld10 .rawline, .ld10.rawline { margin-bottom: 0.111em; }
-.ld11 .line, .ld11.line, .ld11 .rawline, .ld11.rawline { margin-bottom: 0.222em; }
-.ld12 .line, .ld12.line, .ld12 .rawline, .ld12.rawline { margin-bottom: 0.333em; }
-.ld13 .line, .ld13.line, .ld13 .rawline, .ld13.rawline { margin-bottom: 0.444em; }
-.ld14 .line, .ld14.line, .ld14 .rawline, .ld14.rawline { margin-bottom: 0.556em; }
-.ld15 .line, .ld15.line, .ld15 .rawline, .ld15.rawline { margin-bottom: 0.667em; }
-.ld16 .line, .ld16.line, .ld16 .rawline, .ld16.rawline { margin-bottom: 0.778em; }
-.ld17 .line, .ld17.line, .ld17 .rawline, .ld17.rawline { margin-bottom: 0.889em; }
-.ld18 .line, .ld18.line, .ld18 .rawline, .ld18.rawline { margin-bottom: 1em; }
-.ld19 .line, .ld19.line, .ld19 .rawline, .ld19.rawline { margin-bottom: 1.111em; }
-.ld20 .line, .ld20.line, .ld20 .rawline, .ld20.rawline { margin-bottom: 1.222em; }
+.ld10 .line, .ld10.line, .ld10 .rawline, .ld10.rawline { margin-bottom: 1.111em; }
+.ld11 .line, .ld11.line, .ld11 .rawline, .ld11.rawline { margin-bottom: 1.222em; }
+.ld12 .line, .ld12.line, .ld12 .rawline, .ld12.rawline { margin-bottom: 1.333em; }
+.ld13 .line, .ld13.line, .ld13 .rawline, .ld13.rawline { margin-bottom: 1.444em; }
+.ld14 .line, .ld14.line, .ld14 .rawline, .ld14.rawline { margin-bottom: 1.556em; }
+.ld15 .line, .ld15.line, .ld15 .rawline, .ld15.rawline { margin-bottom: 1.667em; }
+.ld16 .line, .ld16.line, .ld16 .rawline, .ld16.rawline { margin-bottom: 1.778em; }
+.ld17 .line, .ld17.line, .ld17 .rawline, .ld17.rawline { margin-bottom: 1.889em; }
+.ld18 .line, .ld18.line, .ld18 .rawline, .ld18.rawline { margin-bottom: 2em; }
+.ld19 .line, .ld19.line, .ld19 .rawline, .ld19.rawline { margin-bottom: 2.111em; }
+.ld20 .line, .ld20.line, .ld20 .rawline, .ld20.rawline { margin-bottom: 2.222em; }
 
 .ld1 .line:last-child, .ld1.line:last-child, .ld1 .rawline:last-child, .ld1.rawline:last-child,
 .ld2 .line:last-child, .ld2.line:last-child, .ld2 .rawline:last-child, .ld2.rawline:last-child,
