@@ -1695,7 +1695,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     if (letter == 'r2') end_piece = 'cer2';
     if (letter == 'germandbls') end_piece = 'cegermandbls';
     if (letter == 'f') end_piece = 'cef';
-    if (letter == 't') end_piece = 'cet1';
+    if (letter == 't' && settings.t_variant) end_piece = 'cet1';
     if (['l'].includes(letter)) end_piece = 'ceH';
     if (['h', 'k'].includes(letter)) end_piece = 'ceh';
     if (['d', 'i'].includes(letter)) end_piece = 'ced';
