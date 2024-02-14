@@ -1406,7 +1406,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     glyphs['r2'];
 
   var letterglyphs_lc =
-    'adhiklmnrux' + glyphs['dotlessi'] +  glyphs['t1'] + glyphs['aacute'] +  glyphs['agrave'] +  glyphs['acircumflex'] +  glyphs['iacute'] +  glyphs['igrave'] +  glyphs['icircumflex'] +  glyphs['uacute'] +  glyphs['ugrave'] +  glyphs['ucircumflex'] +  glyphs['acaron'] +  glyphs['icaron'] +  glyphs['ucaron'] +  glyphs['atilde'] +  glyphs['ntilde'] +  glyphs['itilde'] +  glyphs['utilde'] +  glyphs['adieresis'] +  glyphs['aring'] +  glyphs['amacron'] +  glyphs['abreve'] +  glyphs['idieresis'] +  glyphs['imacron'] +  glyphs['ibreve'] +  glyphs['udieresis'] +  glyphs['uring'] +  glyphs['umacron'] +  glyphs['ubreve'] +   glyphs['aabreve'] +  glyphs['aamacron'] +  glyphs['uubreve'] +  glyphs['uumacron'] +  glyphs['p4'] +  glyphs['p6'] +  glyphs['r1'] 
+    'adhiklmnrux' + glyphs['dotlessi'] +  glyphs['t1'] + glyphs['aacute'] +  glyphs['agrave'] +  glyphs['acircumflex'] +  glyphs['iacute'] +  glyphs['igrave'] +  glyphs['icircumflex'] +  glyphs['uacute'] +  glyphs['ugrave'] +  glyphs['ucircumflex'] +  glyphs['acaron'] +  glyphs['icaron'] +  glyphs['ucaron'] +  glyphs['atilde'] +  glyphs['ntilde'] +  glyphs['itilde'] +  glyphs['utilde'] +  glyphs['adieresis'] +  glyphs['aring'] +  glyphs['amacron'] +  glyphs['abreve'] +  glyphs['idieresis'] +  glyphs['imacron'] +  glyphs['ibreve'] +  glyphs['itilde'] + glyphs['udieresis'] +  glyphs['uring'] +  glyphs['umacron'] +  glyphs['ubreve'] +   glyphs['aabreve'] +  glyphs['aamacron'] +  glyphs['uubreve'] +  glyphs['uumacron'] +  glyphs['p4'] +  glyphs['p6'] +  glyphs['r1'] 
     + 'ce' + glyphs['egrave'] +  glyphs['eacute'] +  glyphs['ecircumflex'] +  glyphs['ecaron'] +  glyphs['etilde'] +  glyphs['edieresis'] +  glyphs['emacron'] +  glyphs['ebreve'] +  glyphs['ccedilla'] +  glyphs['eebreve'] +  glyphs['eemacron'] +  glyphs['ae'] +  glyphs['oe']
     + 's' + glyphs['scaron'] +  glyphs['s1'] +  glyphs['s1caron']
     + 'p' + glyphs['germandbls'] +  glyphs['p2']
@@ -1548,6 +1548,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       igrave : 'i',
       iacute : 'i',
       icircumflex : 'i',
+      itilde : 'i',
       idieresis : 'i',
       imacron : 'i',
       ibreve : 'i',
@@ -1568,6 +1569,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       obreve : 'o',
       ocaron : 'o',
       oe : 'o',
+      oslash : 'o',
       p : 'i',
       q : 'a',
       r : 'n',
@@ -1582,6 +1584,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       umacron : 'i',
       ubreve : 'i',
       ucaron : 'i',
+      uring : 'i',
+      utilde : 'i',
       v : 'n',
       w : 'i',
       x : 'n',
@@ -1643,8 +1647,9 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     for (const [letter, as_letter] of Object.entries(to_mapping)) {
       glyph = glyphs[letter];
       start_piece = modify_start_piece(letter, 'cg'+as_letter);
-      // console.log('glyph: ', glyph, ', letter: ', letter, ', start_piece: ', start_piece, ', orig: cg' + as_letter);
+      //console.log('glyph: ', glyph, ', letter: ', letter, ', start_piece: ', start_piece, ', orig: cg' + as_letter);
       if (typeof glyphs[start_piece] == 'undefined' && console) console.log('ERROR: start piece undefined, glyph: ', glyph, 'letter: ', letter)
+      if (typeof glyphs[start_piece] == 'undefined' && console) console.log('glyph: ', glyph, ', letter: ', letter, ', start_piece: ', start_piece, ', orig: cg' + as_letter);
       
       for (const [back_class_name, back_class_string] of Object.entries(back_classes)) {
         if (back_class_string.includes(glyph)) {
@@ -1695,7 +1700,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     if (letter == 'r2') end_piece = 'cer2';
     if (letter == 'germandbls') end_piece = 'cegermandbls';
     if (letter == 'f') end_piece = 'cef';
-    if (letter == 't') end_piece = 'cet1';
+    if (letter == 't' && settings.t_variant) end_piece = 'cet1';
     if (['l'].includes(letter)) end_piece = 'ceH';
     if (['h', 'k'].includes(letter)) end_piece = 'ceh';
     if (['d', 'i'].includes(letter)) end_piece = 'ced';
@@ -1735,82 +1740,83 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     substitutions['alone'][glyphs['AE']] = glyphs['AE'] + glyphs['ceE'];
     substitutions['alone']['B'] = glyphs['B'] + glyphs['ceB'];
     substitutions['alone']['C'] = glyphs['C'] + glyphs['ceC'];
-    substitutions['alone']['Ccedilla'] = glyphs['Ccedilla'] + glyphs['ceC'];
+    substitutions['alone'][glyphs['Ccedilla']] = glyphs['Ccedilla'] + glyphs['ceC'];
     substitutions['alone']['D'] = glyphs['D'] + glyphs['ceD'];
     substitutions['alone']['E'] = glyphs['E'] + glyphs['ceE'];
-    substitutions['alone']['Eacute'] = glyphs['Eacute'] + glyphs['ceE'];
-    substitutions['alone']['Egrave'] = glyphs['Egrave'] + glyphs['ceE'];
-    substitutions['alone']['Etilde'] = glyphs['Etilde'] + glyphs['ceE'];
-    substitutions['alone']['Ecircumflex'] = glyphs['Ecircumfelx'] + glyphs['ceE'];
-    substitutions['alone']['Edieresis'] = glyphs['Edieresis'] + glyphs['ceE'];
-    substitutions['alone']['Ebreve'] = glyphs['Ebreve'] + glyphs['ceE'];
-    substitutions['alone']['Emacron'] = glyphs['Emacron'] + glyphs['ceE'];
+    substitutions['alone'][glyphs['Eacute']] = glyphs['Eacute'] + glyphs['ceE'];
+    substitutions['alone'][glyphs['Egrave']] = glyphs['Egrave'] + glyphs['ceE'];
+    substitutions['alone'][glyphs['Etilde']] = glyphs['Etilde'] + glyphs['ceE'];
+    substitutions['alone'][glyphs['Ecircumflex']] = glyphs['Ecircumflex'] + glyphs['ceE'];
+    substitutions['alone'][glyphs['Edieresis']] = glyphs['Edieresis'] + glyphs['ceE'];
+    substitutions['alone'][glyphs['Ebreve']] = glyphs['Ebreve'] + glyphs['ceE'];
+    substitutions['alone'][glyphs['Emacron']] = glyphs['Emacron'] + glyphs['ceE'];
     substitutions['alone']['F'] = glyphs['F'] + glyphs['ceF'];
     substitutions['alone']['G'] = glyphs['G'] + glyphs['ceg'];
     substitutions['alone']['H'] = glyphs['H'] + glyphs['ceH'];
     substitutions['alone']['I'] = glyphs['I'] + glyphs['ceI'];
-    substitutions['alone']['Iacute'] = glyphs['Iacute'] + glyphs['ceI'];
-    substitutions['alone']['Igrave'] = glyphs['Igrave'] + glyphs['ceI'];
-    substitutions['alone']['Icircumflex'] = glyphs['Icircumflex'] + glyphs['ceI'];
-    substitutions['alone']['Idieresis'] = glyphs['Idieresis'] + glyphs['ceI'];
-    substitutions['alone']['Ibreve'] = glyphs['Ibreve'] + glyphs['ceI'];
-    substitutions['alone']['Imacron'] = glyphs['Imacron'] + glyphs['ceI'];
-    substitutions['alone']['IJ'] = glyphs['IJ'] + glyphs['cej'];
+    substitutions['alone'][glyphs['Iacute']] = glyphs['Iacute'] + glyphs['ceI'];
+    substitutions['alone'][glyphs['Igrave']] = glyphs['Igrave'] + glyphs['ceI'];
+    substitutions['alone'][glyphs['Icircumflex']] = glyphs['Icircumflex'] + glyphs['ceI'];
+    substitutions['alone'][glyphs['Idieresis']] = glyphs['Idieresis'] + glyphs['ceI'];
+    substitutions['alone'][glyphs['Ibreve']] = glyphs['Ibreve'] + glyphs['ceI'];
+    substitutions['alone'][glyphs['Imacron']] = glyphs['Imacron'] + glyphs['ceI'];
+    substitutions['alone'][glyphs['IJ']] = glyphs['IJ'] + glyphs['cej'];
     substitutions['alone']['J'] = glyphs['J'] + glyphs['cej'];
     substitutions['alone']['K'] = glyphs['K'] + glyphs['ced'];
     substitutions['alone']['L'] = glyphs['L'] + glyphs['ceC'];
     substitutions['alone']['M'] = glyphs['M'] + glyphs['ceM'];
     substitutions['alone']['N'] = glyphs['N'] + glyphs['ceN'];
-    substitutions['alone']['Ntilde'] = glyphs['Ntilde'] + glyphs['ceN'];
+    substitutions['alone'][glyphs['Ntilde']] = glyphs['Ntilde'] + glyphs['ceN'];
     substitutions['alone']['O'] = glyphs['O'] + glyphs['ceO'];
-    substitutions['alone']['Oacute'] = glyphs['Oacute'] + glyphs['ceO'];
-    substitutions['alone']['Ograve'] = glyphs['Ograve'] + glyphs['ceO'];
-    substitutions['alone']['Otilde'] = glyphs['Otilde'] + glyphs['ceO'];
-    substitutions['alone']['Ocircumflex'] = glyphs['Ocircumfelx'] + glyphs['ceO'];
-    substitutions['alone']['Odieresis'] = glyphs['Odieresis'] + glyphs['ceO'];
-    substitutions['alone']['Obreve'] = glyphs['Obreve'] + glyphs['ceO'];
-    substitutions['alone']['Omacron'] = glyphs['Omacron'] + glyphs['ceO'];
-    substitutions['alone']['OE'] = glyphs['OE'] + glyphs['ceE'];
+    substitutions['alone'][glyphs['Oacute']] = glyphs['Oacute'] + glyphs['ceO'];
+    substitutions['alone'][glyphs['Ograve']] = glyphs['Ograve'] + glyphs['ceO'];
+    substitutions['alone'][glyphs['Otilde']] = glyphs['Otilde'] + glyphs['ceO'];
+    substitutions['alone'][glyphs['Ocircumflex']] = glyphs['Ocircumflex'] + glyphs['ceO'];
+    substitutions['alone'][glyphs['Odieresis']] = glyphs['Odieresis'] + glyphs['ceO'];
+    substitutions['alone'][glyphs['Obreve']] = glyphs['Obreve'] + glyphs['ceO'];
+    substitutions['alone'][glyphs['Omacron']] = glyphs['Omacron'] + glyphs['ceO'];
+    substitutions['alone'][glyphs['Oslash']] = glyphs['Oslash'] + glyphs['ceO'];
+    substitutions['alone'][glyphs['OE']] = glyphs['OE'] + glyphs['ceE'];
     substitutions['alone']['P'] = glyphs['P'] + glyphs['ceP'];
     substitutions['alone']['Q'] = glyphs['Q'] + glyphs['ceQ'];
     substitutions['alone']['R'] = glyphs['R'] + glyphs['ced'];
     substitutions['alone']['S'] = glyphs['S'] + glyphs['ceB'];
-    substitutions['alone']['Scaron'] = glyphs['Scaron'] + glyphs['ceB'];
+    substitutions['alone'][glyphs['Scaron']] = glyphs['Scaron'] + glyphs['ceB'];
     substitutions['alone']['T'] = glyphs['T'] + glyphs['ceF'];
     substitutions['alone']['U'] = glyphs['U'] + glyphs['ced'];
-    substitutions['alone']['Uacute'] = glyphs['Uacute'] + glyphs['ced'];
-    substitutions['alone']['Ugrave'] = glyphs['Ugrave'] + glyphs['ced'];
-    substitutions['alone']['Ucircumflex'] = glyphs['Ucircumflex'] + glyphs['ced'];
-    substitutions['alone']['Utilde'] = glyphs['Utilde'] + glyphs['ced'];
-    substitutions['alone']['Uring'] = glyphs['Uring'] + glyphs['ced'];
-    substitutions['alone']['Udieresis'] = glyphs['Udieresis'] + glyphs['ced'];
-    substitutions['alone']['Ubreve'] = glyphs['Ubreve'] + glyphs['ced'];
-    substitutions['alone']['Umacron'] = glyphs['Umacron'] + glyphs['ced'];
+    substitutions['alone'][glyphs['Uacute']] = glyphs['Uacute'] + glyphs['ced'];
+    substitutions['alone'][glyphs['Ugrave']] = glyphs['Ugrave'] + glyphs['ced'];
+    substitutions['alone'][glyphs['Ucircumflex']] = glyphs['Ucircumflex'] + glyphs['ced'];
+    substitutions['alone'][glyphs['Utilde']] = glyphs['Utilde'] + glyphs['ced'];
+    substitutions['alone'][glyphs['Uring']] = glyphs['Uring'] + glyphs['ced'];
+    substitutions['alone'][glyphs['Udieresis']] = glyphs['Udieresis'] + glyphs['ced'];
+    substitutions['alone'][glyphs['Ubreve']] = glyphs['Ubreve'] + glyphs['ced'];
+    substitutions['alone'][glyphs['Umacron']] = glyphs['Umacron'] + glyphs['ced'];
     substitutions['alone']['V'] = glyphs['V'] + glyphs['ceO'];
     substitutions['alone']['W'] = glyphs['W'] + glyphs['ceO'];
     substitutions['alone']['X'] = glyphs['X'] + glyphs['ced'];
     substitutions['alone']['Y'] = glyphs['Y'] + glyphs['cej'];
-    substitutions['alone']['Yacute'] = glyphs['Yacute'] + glyphs['cej'];
-    substitutions['alone']['Ycircumflex'] = glyphs['Ycircumflex'] + glyphs['cej'];
-    substitutions['alone']['Ydieresis'] = glyphs['Ydieresis'] + glyphs['cej'];
+    substitutions['alone'][glyphs['Yacute']] = glyphs['Yacute'] + glyphs['cej'];
+    substitutions['alone'][glyphs['Ycircumflex']] = glyphs['Ycircumflex'] + glyphs['cej'];
+    substitutions['alone'][glyphs['Ydieresis']] = glyphs['Ydieresis'] + glyphs['cej'];
     substitutions['alone']['Z'] = glyphs['Z'] + glyphs['ceQ'];
-    substitutions['alone']['Zcaron'] = glyphs['Zcaron'] + glyphs['ceQ'];
+    substitutions['alone'][glyphs['Zcaron']] = glyphs['Zcaron'] + glyphs['ceQ'];
     // variants C, G, L, Z1, Y1, IJ1, W1 not needed here because they are substituted after calt completes
-    substitutions['alone']['A1'] = glyphs['A1'] + glyphs['ced'];
-    substitutions['alone']['A2'] = glyphs['A2'] + glyphs['ced'];
-    substitutions['alone']['A2grave'] = glyphs['A2grave'] + glyphs['ced'];
-    substitutions['alone']['A2acute'] = glyphs['A2acute'] + glyphs['ced'];
-    substitutions['alone']['A2circumflex'] = glyphs['A2circumflex'] + glyphs['ced'];
-    substitutions['alone']['A2dieresis'] = glyphs['A2dieresis'] + glyphs['ced'];
-    substitutions['alone']['A2ring'] = glyphs['A2ring'] + glyphs['ced'];
-    substitutions['alone']['A2tilde'] = glyphs['A2tilde'] + glyphs['ced'];
-    substitutions['alone']['A2breve'] = glyphs['A2breve'] + glyphs['ced'];
-    substitutions['alone']['A2macron'] = glyphs['A2macron'] + glyphs['ced'];
-    substitutions['alone']['M1'] = glyphs['M1'] + glyphs['ced'];
-    substitutions['alone']['M2'] = glyphs['M2'] + glyphs['ced'];
-    substitutions['alone']['N1'] = glyphs['N1'] + glyphs['ced'];
-    substitutions['alone']['N2'] = glyphs['N2'] + glyphs['ced'];
-    substitutions['alone']['N2tilde'] = glyphs['N2tilde'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A1']] = glyphs['A1'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2']] = glyphs['A2'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2grave']] = glyphs['A2grave'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2acute']] = glyphs['A2acute'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2circumflex']] = glyphs['A2circumflex'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2dieresis']] = glyphs['A2dieresis'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2ring']] = glyphs['A2ring'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2tilde']] = glyphs['A2tilde'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2breve']] = glyphs['A2breve'] + glyphs['ced'];
+    substitutions['alone'][glyphs['A2macron']] = glyphs['A2macron'] + glyphs['ced'];
+    substitutions['alone'][glyphs['M1']] = glyphs['M1'] + glyphs['ced'];
+    substitutions['alone'][glyphs['M2']] = glyphs['M2'] + glyphs['ced'];
+    substitutions['alone'][glyphs['N1']] = glyphs['N1'] + glyphs['ced'];
+    substitutions['alone'][glyphs['N2']] = glyphs['N2'] + glyphs['ced'];
+    substitutions['alone'][glyphs['N2tilde']] = glyphs['N2tilde'] + glyphs['ced'];
   }
 
      
@@ -2279,7 +2285,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     settings: settings,
     substitutions: substitutions,
     remove_dots: remove_dots,
-    glyphs_to_names: glyphs_to_names
+    glyphs_to_names: glyphs_to_names,
+    glyphs: glyphs
   }
 });
 
