@@ -86,6 +86,13 @@
         <li><a href="#amn"><i>A</i>, <i>M</i> and <i>N</i> look like their lowercase counterparts</a>
       </ul>
     </li>
+    <li><a href="#numerals">Customizing numerals</a>
+      <ul>
+        <li><a href="#variants">Stylistic sets affecting number variants</a>
+        <li><a href="#oldstyle">Lining versus old-style number forms</a>
+        <li><a href="#tabular">Proportional versus tabular number spacing</a>
+      </ul>
+    </li>
   </ul>
 
   <h2 id="howto">Selecting stylistic sets</h2>
@@ -387,6 +394,76 @@
     <tr><td><code>ss20</code><td class="cursive rh4" data-cogncur-uppercase-amn-variant=2>Aa Mm Nn</tr>
     <tr><td><i>only in the worksheet-creater</i><td class="cursive rh4" data-cogncur-uppercase-amn-variant=1>Aa Mm Nn</tr>
   </table>
+  
+  <br/ class="clear"><br/>
+
+  <h2 id="numerals">Customizing numerals</h2>
+  In Cogncur, two stylistic sets are used to customize numerals: <code>ss17</code> and <code>ss18</code>. Additionally, the OpenType features for 'Number spacing' and 'Number forms' can also be used to customize the style in which numerals appear.<br/>
+  
+  <div class='imagecell clear'>
+    <div class='image'>
+      <img src="images/msword_numeralstyles.png">
+    </div>
+    <div class="description">Microsoft Word: changing the number style</div>
+  </div>  
+  <br class="clear">
+  
+  
+  
+
+
+  <h3 id="variants">Numeral variants</h3>
+  Some numerals have one, two or three variants available. Two stylistic sets - <code>ss17</code> and <code>ss18</code> - can be used to select numeral variants. Note that for the numerals <span class='letter'>4</span> and <span class='letter'>7</span> the combination of both stylistic sets triggers a new variant different from the variants shown by either stylistic set on their own. The table below shows with numeral variants are shown by enabling different stylistic set. Variants that are identical to variants shown by using 'less' stylistic sets are greyed out.
+  
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th colspan=10>Numerals</th></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=0><td><i>none</i><td class="cursive rh4">1</td><td class="cursive rh4">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4">5</td><td class="cursive rh4">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=0><td><code>ss17</code><td class="cursive rh4">1</td><td class="cursive rh4 traceable">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4 traceable">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=1><td><code>ss18</code><td class="cursive rh4 traceable">1</td><td class="cursive rh4">2</td><td class="cursive rh4  traceable">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4 traceable">9</td><td class="cursive rh4 traceable">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=1><td><code>ss17, ss18</code><td class="cursive rh4 traceable">1</td><td class="cursive rh4  traceable">2</td><td class="cursive rh4  traceable">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4 traceable">8</td><td class="cursive rh4 traceable">9</td><td class="cursive rh4 traceable">0</td></tr>
+  </table>
+  
+
+  <br/ class="clear"><br/>
+
+  <h3 id="oldstyle">Lining versus old-style number forms</h3>
+  By default, numbers in Cogncur are <i>lining</i>: this means that they all have the same height. If you prefer, you can change the Number forms to 'Old-style'. Old-style numbers are smaller and do not all have the same height.<br/><br/>
+  If you unable oldy-style numbers, the multiplication sign × and the division sign ÷ are also affected.<br/>
+  
+  <table class="styleset_table">
+    <tr><th>Number forms</th><th colspan=2>Example text</th></tr>
+    <tr data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=0><td><i>default</i><td class="cursive rh4">March 19, 2016.</td><td class='cursive rh4'>× ÷</td></tr>
+    <tr data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=1><td><code>old-style</code><td class="cursive rh4">March 19, 2016.</td><td class='cursive rh4'>× ÷</td></tr>
+  </table>
+  <br class="clear"/><br/>
+  Old-style numerals have the same variants available as the default numerals:<br/>
+  <table class="styleset_table" data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=1>
+    <tr><th>Stylistic sets</th><th colspan=10>Numerals (old-style)</th></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=0><td><i>none</i><td class="cursive rh4">1</td><td class="cursive rh4">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4">5</td><td class="cursive rh4">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=0><td><code>ss17</code><td class="cursive rh4">1</td><td class="cursive rh4 traceable">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4 traceable">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=1><td><code>ss18</code><td class="cursive rh4 traceable">1</td><td class="cursive rh4">2</td><td class="cursive rh4  traceable">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4 traceable">9</td><td class="cursive rh4 traceable">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=1><td><code>ss17, ss18</code><td class="cursive rh4 traceable">1</td><td class="cursive rh4  traceable">2</td><td class="cursive rh4  traceable">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4 traceable">8</td><td class="cursive rh4 traceable">9</td><td class="cursive rh4 traceable">0</td></tr>
+  </table>
+
+
+  <br/ class="clear"><br/>
+
+  <h3 id="tabular">Proportional versus tabular number spacing</h3>
+  By default, numerals in Cogncur have 'proportional' width. The numberal <span class='letter'>1</span> is less wide than the numeral <span class='letter'>6</span>. This gives the best result when numbers are mixed with text. However, this can make it difficult to line up numbers below each other. To line up numbers with each others, you can change the 'Number spacing' setting to 'Tabular'. However, if you enable Tabular numbers in Cogncur, this does not just effect the width of then numbers, but also the width of the <i>space</i> character and the width of the <i>comma</i> and the <i>period</i>. Because of these changes to word space and interpunction, tabular numbers should only be used for specific parts of your document that need it, and should not be used on normal text.<br/>
+  <br/>
+  Because the minus-character is also the hyphen-character, by default the minus (hyphen) character is sized to fit with lowercase text, and the plus and equals characters are sized to match with the minus (hyphen) character. If you enable tabular numbers, these characters increase not just in width but also in height.
+
+  <table class="styleset_table">
+    <tr><th>Number spacing</th><th colspan=3>Example text</th></tr>
+    <tr data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=0><td><i>default</i><td class="cursive rh4">$29.95<br/>$ 1.50</td><td class="cursive rh4">1, 2, buckle my shoe.</td><td class='cursive rh4'>- = +</td></tr>
+    <tr data-cogncur-numerals-tabular=1 data-cogncur-numerals-oldstyle=0><td><code>tabular</code><td class="cursive rh4">$29.95<br/>$ 1.50</td><td class="cursive rh4">1, 2, buckle my shoe.</td><td class='cursive rh4'>- = +</td></tr>
+  </table>
+  
+
+
+  <br/ class="clear"><br/>
+
+
   
   
   

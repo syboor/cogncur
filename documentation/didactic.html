@@ -19,6 +19,34 @@
     cogncur_converter.init({
     });
   </script>
+  <style>
+    table.styleset_table {
+      margin-top: 10px;
+      margin-right: 20px;
+      float: left;
+    }
+    table.styleset_table td, table.styleset_table th {
+      padding: 3px 5px 3px 5px;
+      height: 28px; /* minimum, for the header */
+      border: 1px solid #999;
+      vertical-align: top;
+      line-height: 1;
+    }
+    table.styleset_table th {
+      font-weight: bold;
+    }
+    table.simple {
+      border: 1px solid #bbb;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+    table.simple td, table.simple th {
+      line-height: 1.2;
+      padding: 5px;
+      text-align: left;
+      border: 1px solid #bbb;
+    }
+  </style>
   <title>Cogncur Documentation - Didactic Featuress</title>
 </head>
 <body class="max">
@@ -39,18 +67,122 @@
 
   <h1>Cogncur Documentation - Didactic Features</h1>  
   
-  This page given an overview of features in the Cogncur family that can help you with creating worksheets and other didactic uses.
+  This page gives an overview of features in the Cogncur family that can help you to create handwriting worksheets or instructional materials.
   <br/>
   <br/>
   Topics:
   <ul>
-    <li><a href="#guides_glyph">Special characters for creating guidelines</a>
+    <li><a href="#line_spacing">Ensure correct line spacing</a>
+    <li><a href="#font_size">Font sizing guide</a>
+    <li><a href="#guides_glyph">Creating empty guidelines</a>
+    <li><a href="#outlines">Outline letters</a>
   </ul>
 
+  <h2 id="line_spacing">Ensure correct line spacing</h2>
+  Cogncur is designed so that, at a line height of 1 (‘single’), ascenders and uppercase letters will touch the descenders from the preceeding line. Ascenders and descenders will not overlap. 
+  <br/><br/>
+  Because of the potential overlap between descenders and accented uppercase letters such as Ñ, Microsoft Word will not set the line height to single when the option ‘Single’ is selected. The only way to get single line height is to set the line height to the exact same number of points that the font size is also set to. So if your font size is 24 points, you'll need to also set the line spacing to 24 points. To do this, first open the ‘Line Spacing Options’ dialog. Then set the ‘Line Spacing’ to ‘Exactly’ and in the ‘At’ field, enter the size of your current text. It’s also a good idea to set the ‘Before’ and ‘After’ spacing to 0 so that your setting also works if you go to the next line using Enter (instead of having the text ‘wrap around’).
+  <br/><br/>
+  <div class="imagecell">
+    <div class="image">
+      <img src="images/msword_linespacing1.png">
+    </div>
+    <div class="description">Microsoft Word: Line Spacing Options</div>
+  </div>
+  <div class="imagecell" style="padding-left: 20px">
+    <div class="image">
+      <img src="images/msword_linespacing2.png">
+    </div>
+    <div class="description">Microsoft Word: exact line spacing</div>
+  </div>
+  <br class="clear"><br/>
   
-  <h2 id="guides_glyph">Special characters for creating guidelines</h2>
+  Your line spacing is set correctly if ascenders and descenders just about touch each other.<br/>
+
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8" style="line-height: 1">Baffling <br/>glyphs</div>
+    <div class="description">Correct line spacing</div>
+  </div>
+  <div class="imagecell" style="margin-right: 40px">
+    <div class="cursive rh8" style="line-height: 1.15">Baffling <br/>glyphs</div>
+    <div class="description">Incorrect line spacing</div>
+  </div>  
+  
+  <br class="clear">
+  <h2 id="font_size">Font sizing guide</h2>
+  In US cursive curricula, what is called the 'line height' is usually the distance from the baseline to the top line, or the height of the letter <span class='letter'>l</span>. This <a href="https://cursiveworkshop.com/article/line-height-grade-two-handwriting-curricula">Graphical Guide</a> shows what is meant by line height, and what typical line heights are in common US curricula. To match Cogncur font size to these 'line heights', use the following table:<br/><br/>
+  <table class="simple">
+    <tr>
+      <th>Distance baseline - top line</th>
+      <th>Cogncur font size (points)</th>
+    </tr>
+    <tr><td>1/4"</td><td>27pt</td></tr>
+    <tr><td>3/8"</td><td>41pt</td></tr>
+    <tr><td>1/2"</td><td>55pt</td></tr>
+    <tr><td>5/8"</td><td>68pt</td></tr>
+    <tr><td>3/4"</td><td>82pt</td></tr>
+    <tr><td>1"</td><td>110pt</td></tr>
+  </table>
   <br/>
-  [Coming soon...]
+  For metric countries, use the table below. The waist height is the height from baseline to waist line, or the height of the letter<span class='letter'>n</span>.
+  <table class="simple">
+    <tr>
+      <th>Waist height</th>
+      <th>Cogncur font size (points)</th>
+    </tr>
+    <tr><td>2 mm</td><td>17pt</td></tr>
+    <tr><td>3 mm</td><td>26pt</td></tr>
+    <tr><td>4 mm</td><td>35pt</td></tr>
+    <tr><td>5 mm</td><td>43pt</td></tr>
+    <tr><td>6 mm</td><td>52pt</td></tr>
+  </table>
+  
+  <br/>
+  
+  <h2 id="guides_glyph">Creating empty guidelines</h2>
+  <i style="color: red">For the time being, you should use the Cogncur Vertical font to create empty guidelines. The various characters used to create empty guidelines do not (yet) line up correctly in the Cogncur Regular and Cogncur Oblique fonts </i><br/><br/>
+
+  The tilde character <code>~</code> will create a small section of guideline. Type multiple ~ characters after each other to create a section of empty guidelines, on which students can write:<br/>
+  
+  <table class="styleset_table">
+    <tr><th>You type:</th><td><code>~~~~~</code></td></tr>
+    <tr><th>You get:</th><td class="cursive rh8">~~~~~</td></tr>
+  </table>
+  <br class="clear"><br/>
+
+  The guidelines produced by the <code>~</code> character do not include a line for the low loops of letters like <span class='letter'>j</span>. If your line spacing is set correctly, the <i>next</i> set of guidelines (on the next line) provide guidance to the low loops on the previous line. For the <i>last</i> line in a set of lines, you can use the 'overline' character <code>‾</code> to create (only) a top line that will serve as guidance for the low loops of the previous line. In the 'Insert Symbol' dialog, the overline character can be found after the accented charecters, in the 'General Punctiation' subset. You can also copy it from the table below:<br/>
+  
+  <table class="styleset_table cogncurvertical">
+    <tr>
+      <th>You type:</th>
+      <td><code>~~~~~<br/>~~~~~</code></td>
+      <td><code>~~~~~<br/>~~~~~<br/>‾‾‾‾‾</code></td>
+    </tr>
+    <tr>
+      <th>You get:</th>
+      <td class="cursive rh8"><div class="lines nolines"><div class="line">~~~~~</div><div class="line">~~~~~</div></div></td>
+      <td class="cursive rh8"><div class="lines nolines"><div class="line">~~~~~</div><div class="line">~~~~~</div><div class="line">‾‾‾‾‾</div></div></td>
+    </tr>
+  </table>
+  <br/>
+  
+
+  <br class="clear"><br/>
+  <h2 id="outlines">Outline letters</h2>
+  <div class="imagecell" style="float: right">
+    <div class="cursive outline rh6">
+      outline letters
+    </div>
+  </div>
+  Outline letters are very useful when teaching handwriting. You can let students color them. You can also add (colored) arrows and/or numbers into them to demonstrate correct letter formation. Smaller outline letters can be traced by students, and to challenge your students, you can tell them they should trace exactly through the <i>middle</i> of the outline letter, without touching the sides. <br/><br/>
+  To create (thin) outline letters from the standard Cogncur fonts, read <a href="
+  https://cursiveworkshop.com/article/how-create-letter-outlines-any-font">How to create letter outlines from any font</a> and read all the way until the end for the special notes on (connected) cursive.<br/>
+  <br/>
+  If you are using Cogncur in an HTML-document, use <a href="https://codepen.io/syboor/pen/OJqqgww">this example on Codepen</a> to find out how to create (both thin and thick) outlines using the CSS 'text-shadow' effect.
+  
+
+  <br class="clear"><br/>
+  
 
   
   <br/><br/><br/>

@@ -20,6 +20,24 @@
     cogncur_converter.init({
     });
   </script>
+  <style>
+    table.styleset_table {
+      margin-top: 10px;
+      margin-right: 20px;
+      float: left;
+    }
+    table.styleset_table td, table.styleset_table th {
+      padding: 3px 5px 3px 5px;
+      height: 28px; /* minimum, for the header */
+      border: 1px solid #999;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    table.styleset_table th {
+      font-weight: bold;
+    }
+    
+  </style>
 </head>
 <body class="max">
   <div class="navrow">
@@ -596,52 +614,22 @@
   <br/>
   
   <h2 id="typeface_numerals">Numerals</h2>
-  By default, numbers in Cogncur all have the same height, but not all the same width. This tends to give good result when numbers are mixed with text. If you prefer, you can change the <i>Number forms</i> to 'Old-style'. Old-style numbers are smaller and do not all have the same height. <br/>
-  
-  <div class='imagecell'>
-    <div class="line nolines rh5" data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=0>March 19, 2016.&nbsp;</div>
-    <div class="description">Cogncur: numbers (default style)</div>
-  </div>  
-  <div class='imagecell'>
-    <div class="line nolines rh5" data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=1>March 19, 2016.&nbsp;</div>
-    <div class="description">Cogncur: numbers (old-style)</div>
-  </div>  
-  <br class="clear">
+  Cogncur provides both 'lining' and 'old-style' numerals. For some numberals, there are variants available.
   <br/>
-  <div class='imagecell'>
-    <div class='image'>
-      <img src="images/msword_numeralstyles.png">
-    </div>
-    <div class="description">Microsoft Word: changing the number style</div>
-  </div>  
-  <br class="clear">
-  <br/>
-  You can also change the <i>Number spacing</i> to 'Tabular'. Tabular numbers are useful if you want numbers to line up with each other. However, if you enable Tabular numbers in Cogncur, this does not just effect the width of then numbers, but also the width of the <i>space</i> character and the width of the <i>comma</i> and the <i>period</i>. Because of these changes to word space and interpunction, tabular numbers should only be used for specific parts of your document that need it, and should not be used on normal text.
-  <br/><br/>
-  <div class='imagecell'>
-    <div class="line nolines rh5" data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=0>$29.95
-$ 1.50</div>
-    <div class="description">Default numbers do not line up &nbsp;</div>
-  </div>  
-  <div class='imagecell'>
-    <div class="line nolines rh5" data-cogncur-numerals-tabular=1 data-cogncur-numerals-oldstyle=0>$29.95
-$ 1.50</div>
-    <div class="description">Tabular numbers line up</div>
-  </div> 
-  <div class='imagecell' style="margin-top: 10px; margin-left: 20px">
-    <div class="lines nolines rh4" data-cogncur-numerals-tabular=1 data-cogncur-numerals-oldstyle=0>
-      <div class="line">Oops, tabular numbers</div>
-      <div class="line">messed up my text.</div>
-    </div>
-    <div class="description">Tabular numbers should not be enabled for normal text.</div>
-  </div> 
-  
-  <br class='clear'>
-  
-  
-  <br/>
-  [TODO] See the Customization guide for available variants of numerals.
-  
+  <table class="styleset_table">
+    <tr><th>Variant</th><th colspan=12>Lining numerals</th><th colspan=12>Old-style numerals</th></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=0><td><i>default</i><td class="cursive rh4">1</td><td class="cursive rh4">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4">5</td><td class="cursive rh4">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4">0</td><td class='cursive rh4'>×</td><td class='cursive rh4'>÷</td>
+    <td data-cogncur-numerals-oldstyle=1 class="cursive rh4">1</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">2</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">3</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">4</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">5</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">6</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">7</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">8</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">9</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">0</td><td data-cogncur-numerals-oldstyle=1 class='cursive rh4'>×</td><td data-cogncur-numerals-oldstyle=1 class='cursive rh4'>÷</td>
+    </tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=0><td><i>variant</i><td class="cursive rh4">1</td><td class="cursive rh4 traceable"></td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable"></td><td class="cursive rh4 traceable"></td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4 traceable"></td><td></td><td></td>
+    <td data-cogncur-numerals-oldstyle=1 class="cursive rh4">1</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">3</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">4</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">7</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">8</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">9</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td></td><td></td></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=1><td><i>variant</i><td class="cursive rh4 traceable"></td><td class="cursive rh4">2</td><td class="cursive rh4  traceable"></td><td class="cursive rh4">4</td><td class="cursive rh4 traceable"></td><td class="cursive rh4 traceable"></td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4 traceable"></td><td class="cursive rh4 traceable"></td><td></td><td></td>
+    <td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">2</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">4</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">6</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">7</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">8</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td></td><td></td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=1><td><i>variant</i><td class="cursive rh4 traceable"></td><td class="cursive rh4  traceable"></td><td class="cursive rh4  traceable"></td><td class="cursive rh4">4</td><td class="cursive rh4 traceable"></td><td class="cursive rh4 traceable"></td><td class="cursive rh4">7</td><td class="cursive rh4 traceable"></td><td class="cursive rh4 traceable"></td><td class="cursive rh4 traceable"><td></td><td></td></td>
+    <td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">4</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4">7</td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td data-cogncur-numerals-oldstyle=1 class="cursive rh4"></td><td></td><td></td></tr>
+  </table>
+  <br class="clear"/><br/>
+  See the <a href="./customization#numerals">Customization Guide</a> to learn how to select these numerals.
 
   <br/><br/><br/>
 
