@@ -1,0 +1,22 @@
+RewriteEngine On
+
+RewriteCond "%{REQUEST_FILENAME}.html" -f
+RewriteRule ^([a-zA-Z0-9_\-]+)$ "$1.html" [L]
+
+RewriteCond "%{REQUEST_FILENAME}.php" -f
+RewriteRule ^([a-zA-Z0-9_\-]+)$ "$1.php" [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^$ index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(routeletter.svg)$ routeletter.php?o=svg [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(routeletter.png)$ routeletter.php?o=png [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(routeletter)$ routeletter.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(routeletter.debug)$ routeletter.php?o=debug [QSA,L]
