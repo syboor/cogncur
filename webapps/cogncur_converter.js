@@ -1092,6 +1092,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     'percent' : '\u0025',
     'plus' : '\u002b',
     'comma' : '\u002c',
+    'equal' : '\u003d',
     'hyphen' : '\u002d',
     'period' : '\u002e',
     'slash' : '\u002f',

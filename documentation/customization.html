@@ -64,21 +64,39 @@
   Topics:
   <ul>
     <li><a href="#howto">Selecting stylistic sets</a>
-    <li><a href="#entrystrokes">Entry strokes</a>
-    <li><a href="#exitstrokes">Exit strokes</a>
-    <li><a href="#shortersticks">Shorter sticks</a>
-    <li><a href="#fq"><i>f</i> and <i>q</i></a>
-    <li><a href="#s"><i>s</i></a>
-    <li><a href="#r">Print-like <i>r</i></a>
-    <li><a href="#t">Print-like <i>t</i></a>
-    <li><a href="#rztop">The top of <i>r</i> and <i>z</i></a>
-    <li><a href="#undercurves">Use undercurves</a>
-    <li><a href="#y"><i>y</i> starts with an angle</a>
-    <li><a href="#w"><i>w</i> starts with a curve</a>
+    <li><a href="#lowercase">Stylistic sets affecting lowercase letters</a>
+      <ul>
+        <li><a href="#entrystrokes">Entry strokes</a>
+        <li><a href="#exitstrokes">Exit strokes</a>
+        <li><a href="#shortersticks">Shorter sticks</a>
+        <li><a href="#fq"><i>f</i> and <i>q</i></a>
+        <li><a href="#s"><i>s</i></a>
+        <li><a href="#r">Print-like <i>r</i></a>
+        <li><a href="#t">Print-like <i>t</i></a>
+        <li><a href="#rztop">The top of <i>r</i> and <i>z</i></a>
+        <li><a href="#undercurves">Use undercurves</a>
+        <li><a href="#y"><i>y</i> starts with an angle</a>
+        <li><a href="#w"><i>w</i> starts with a curve</a>
+        <li><a href="#p"><i>p</i> starts with a curve</a>
+      </ul>
+    </li>
+    <li><a href="#uppercase">Stylistic sets affecting uppercase letters</a>
+      <ul>
+        <li><a href="#cgl"><i>C</i>, <i>G</i> and <i>L</i> don't start with a loop</a>
+        <li><a href="#amn"><i>A</i>, <i>M</i> and <i>N</i> look like their lowercase counterparts</a>
+      </ul>
+    </li>
+    <li><a href="#numerals">Customizing numerals</a>
+      <ul>
+        <li><a href="#variants">Stylistic sets affecting number variants</a>
+        <li><a href="#oldstyle">Lining versus old-style number forms</a>
+        <li><a href="#tabular">Proportional versus tabular number spacing</a>
+      </ul>
+    </li>
   </ul>
 
   <h2 id="howto">Selecting stylistic sets</h2>
-  You customize Cogncur mainly by selecting stylistic sets. Stylistic sets are an OpenType feature and can be found together with other OpenType features in your application. In Microsoft Word, you find Stylistic Sets in the 'Advanced' tab of the Font Dialog. <br/>
+  You customize Cogncur mainly by selecting stylistic sets. Stylistic sets are an OpenType feature and can be found together with other OpenType features in your application. In Microsoft Word, you find Stylistic Sets in the 'Advanced' tab of the Font Dialog. In LibreOffice Writer, you use the 'Font' tab in the Character Dialog, and then open the 'Features' popup.<br/>
   
   <div class="imagecell">
     <div class="image">
@@ -86,13 +104,21 @@
     </div>
     <div class="description">Microsoft Word: stylistic sets</div>
   </div>
+  <div class="imagecell" style="padding-left: 20px">
+    <div class="image">
+      <img src="images/libreoffice_stylisticsets.png">
+    </div>
+    <div class="description">LibreOffice Writer: stylistic sets</div>
+  </div>
   <br class="clear"><br/>
   
   A font can have up to 20 stylistic sets. By default, all stylistic sets are disabled. In most applications, you can enable each of these stylistic sets individually, so that you can end up with multiple stylistic sets enabled. In Microsoft Word, you can only enable one stylistic set at a time. [TODO: link to workaround]<br/><br/>
   
   In Cogncur, stylistic sets are mostly orthogonal to each other. It makes perfect sense to have  multiple stylistic sets enabled simultaneously. Some letter variants will only appear if multiple stylistic sets are enabled. <br/><br/>
   
-  <h2 id="entrystrokes">Entry strokes (ss01)</h2>
+  <h2 id="lowercase">Stylistic sets affecting lowercase letters</h2>
+  
+  <h3 id="entrystrokes">Entry strokes (ss01)</h2>
   By default, Cogncur has entry strokes from the baseline. If you enable stylistic set <code>ss01</code>, you disable entry strokes from the baseline. Instead you'll get short entry strokes for most letters, and none at all for the letters <span class='letter' data-cogncur-entrystrokes=1>a</span>, <span class='letter' data-cogncur-entrystrokes=1>c</span>, <span class='letter' data-cogncur-entrystrokes=1>d</span>, <span class='letter' data-cogncur-entrystrokes=1>g</span>, <span class='letter' data-cogncur-entrystrokes=1>o</span>, <span class='letter' data-cogncur-entrystrokes=1>q</span>, and the variant <span class='letter' data-cogncur-entrystrokes=1 data-cogncur-t-variant=1>t</span>.<br/>
   
   <table class="styleset_table">
@@ -109,7 +135,7 @@
   <br class="clear">
   
        
-  <h2 id="exitstrokes">Exit strokes (ss02)</h2>
+  <h3 id="exitstrokes">Exit strokes (ss02)</h2>
   By default, Cogncur has exit strokes (‘monkey tails’) on all letters. The exit strokes on the letters <span class='letter'>s</span>, <span class='letter'>p</span>, and <span class='letter'>ß</span> will disappear if you enable stylistic set <code>ss02</code>. If you use the print-like variant <span class='letter' data-cogncur-r-variant=1>r</span> with stylistic set <code>ss02</code>, its upwards exit stroke (towards the waist line) will disappear and the downward curve of the letter will be extended instead.
 <br/>
 
@@ -126,7 +152,7 @@
   </table>
   <br class="clear">
   
-  <h2 id="shortersticks">Shorter sticks (ss03)</h2>
+  <h3 id="shortersticks">Shorter sticks (ss03)</h2>
   By default, sticks below the baseline and above the waist line have the same length as loops. If you enable stylistic set <code>ss03</code>, sticks will be shorter: only 2/3 of the length of loops. This also applies to optional letter variants with sticks instead of loops. Not all combinations are shown in the tables below. <br/>
   <br/>
   Exception: neither the default <span class='letter'>t</span> nor the print-like variant of <span class='letter' data-cogncur-t-variant=1>t</span> are effected by stylistic set <code>ss03</code>.<br/>
@@ -145,9 +171,9 @@
   <br class="clear">
   
 
-  <h2 id="fq"><i>f</i> and <i>q</i> (ss04, ss05)</h2>
-  By default, both <span class='letter'>f</span> and <span class='letter'>q</span> use a low loop to return to the baseline, and then join to the next letter from the baseline to the next letter. If you enable stylistic set ss04, <span class='letter'>f</span> will join with a curved join from the point midway between the baseline and the waist line, while <span class='letter'>q</span> will connect from the bottom of the stick. If you enable stylistic set ss05, both letters will use a pencil lift to return to the baseline and join the next letter from there. For <span class='letter'>f</span> these stylistic sets interact: if you enable both of them, <span class='letter'>f</span> will use a pencil lift to return to a point halfway between the baseline and waist line and join from there. <br/><br/>
-  Furthermore, these stylistic sets also interact with stylistic set ss03 for shorter sticks. All possible variants for the letters <span class='letter'>f</span> and <span class='letter'>q</span> are shown in the table below. Variants that are repetitions have been grayed out.<br/>
+  <h3 id="fq"><i>f</i> and <i>q</i> (ss04, ss05)</h2>
+  By default, both <span class='letter'>f</span> and <span class='letter'>q</span> use a low loop to return to the baseline, and then join to the next letter from the baseline to the next letter. If you enable stylistic set <code>ss04</code>, <span class='letter'>f</span> will join with a curved join from the point midway between the baseline and the waist line, while <span class='letter'>q</span> will connect from the bottom of the stick. If you enable stylistic set <code>ss05</code>, both letters will use a pencil lift to return to the baseline and join the next letter from there. For <span class='letter'>f</span> these stylistic sets interact: if you enable both of them, <span class='letter'>f</span> will use a pencil lift to return to a point halfway between the baseline and waist line and join from there. <br/><br/>
+  Furthermore, these stylistic sets also interact with stylistic set <code>ss03</code> for shorter sticks. All possible variants for the letters <span class='letter'>f</span> and <span class='letter'>q</span> are shown in the table below. Variants that are repetitions have been grayed out.<br/>
   <br/>
   <table class="styleset_table">
     <tr><th>Stylistic sets</th><th colspan=2>Example text</th></tr>
@@ -162,7 +188,7 @@
   <br class="clear"><br/>
   In the <a href="https://cogncur.com/worksheetcreator">Online Worksheetcreator</a>, variants of <span class='letter'>f</span> and <span class='letter'>q</span> can be chosen independently from each other, with only the stick length (if applicable) applied to all letters. In the desktop fonts, settings for <span class='letter'>f</span> and <span class='letter'>f</span> had to have been combined due to the limit of 20 stylistic sets in total. <br/><br/>
 
-  <h2 id="s"><i>s</i> (ss06)</h2>
+  <h3 id="s"><i>s</i> (ss06)</h2>
   By default, <span class='letter'>s</span> has a slim form. From the top of the letter at the waist line, the pen goes ‘straight’ down (with ‘straight’ being defined by the slant of the font). By enabling stylistic set <code>ss06</code> we can get a variant of <span class='letter'>s</span> that has a ‘belly’. In that case, the implied slant of the letter can be found by drawing a straight line through both the top of the letter (where it touches the waist line) and through the lowest point (where it touches the baseline).<br/><br/>
   
   <br/>
@@ -198,7 +224,7 @@
   </div>
 
   <br class="clear">
-  <h2 id="r">Print-like <i>r</i> (ss07)</h2>
+  <h3 id="r">Print-like <i>r</i> (ss07)</h2>
   <span class="letter">r</span> is one of those letters where traditionally, the cursive version is quite different from the print version. By default, Cogncur uses this traditional form. Since a more print-like form is also pretty common now, this can be enabled with stylistic set <code>ss07</code>. The print-like <span class="letter" data-cogncur-r-variant=1>r</span> interacts with stylistic set <code>ss02</code> (less exit strokes), which will change the appearance of <span class="letter" data-cogncur-r-variant=1>r</span> at the end of the word. <br/>
   
   <table class="styleset_table">
@@ -210,7 +236,7 @@
 
   <br class="clear">
   <br/>
-  <h2 id="t">Print-like <i>t</i> (ss08, ss09)</h2>
+  <h3 id="t">Print-like <i>t</i> (ss08, ss09)</h2>
   By default, the <span class='letter'>t</span> in Cogncur is based on German and Dutch tradition. This form of the letter does not require any pencil lifts. The more common print-like <span class='letter' data-cogncur-t-variant=1>t</span> is also available through stylistic set <code>ss08</code>.<br/>
   <br/>The sensible thing for print-like <span class='letter' data-cogncur-t-variant=1>t</span> would be to have the join <i>curve into</i> the vertical stick, creating an exception to Cogncur's principle that joins from the baseline have straight segments. Many Dutch curricula use a straight connection however. I've never been able to figure out this letter is supposed to be formed. Should the student, upon reaching the waist line with their pen, create an obtuse angle to continue the stroke upwards? I haven't seen obtuse angles in cursive anywhere, and even straight angles tend to become curves (compare the print capital <i>E</i> with the cursive letter <span class='letter'>E</span>). Or should the student, when reaching the waist line, lift their pen and place it down at the top of the stick? That would create yet <i>another</i> pencil lift for the letter <span class='letter' data-cogncur-t-variant=1>t</span>. Neither seems solution seems satisfactory to me, but if you must, you can have print-like <span class='letter' data-cogncur-t-variant=1>t</span> with a straight join by enabling stylistic set <code>ss09</code>.
   
@@ -237,7 +263,7 @@
   <br class="clear"/>
   <br/>
   
-  <h2 id="rztop">The top of <i>r</i> and <i>z</i> (ss11)</h2>
+  <h3 id="rztop">The top of <i>r</i> and <i>z</i> (ss11)</h2>
   The letters <span class='letter'>r</span> and <span class='letter'>z</span> have the same ‘top’. By default, this ‘top’ has a wavy shape that starts with a curve against the waist line. When the stroke returns to the waist line for the second time, a sharp angle is used to transition to the down stroke (which is where <span class='letter'>r</span> and <span class='letter'>z</span>  begin to differ from each other).<br/>
   <br/>
   If you enable stylistic set <code>ss11</code>, the letters <span class='letter'>r</span> and <span class='letter'>z</span> start with an angle instead of a curve against the waist line. The uppercase letter <span class='letter'>Z</span> is changed as well. The uppercase <span class='letter'>R</span> and the print-like variant of <span class='letter' data-cogncur-r-variant=1>r</span> (<code>ss07)</code>) are not affected. 
@@ -264,7 +290,7 @@
   </div>  
   <br class="clear">
   
-  <h2 id="undercurves">Use undercurves (ss12)</h2>
+  <h3 id="undercurves">Use undercurves (ss12)</h2>
   Straight segments in joins and entry strokes are a <a href="./typeface-features#typeface_joins">characteristic feature</a> of Cogncur. So-called ‘undercurve’ joins have been crafted to support a print-like variant of <span class='letter' data-cogncur-t-variant=1>t</span>. These joins and entry strokes are technically capable of connecting to all letters that start with a sharp angle against the waist line, for example: <span class='letter' data-cogncur-undercurves=1>i</span>, <span class='letter' data-cogncur-undercurves=1>u</span>, <span class='letter' data-cogncur-undercurves=1>j</span>, etc. Joins and entry strokes towards a letter that starts with a curve against the waist line are not affected and retain their characteristic straight segment. <br/>
   <br/>
 
@@ -287,7 +313,7 @@
   <br/>
   
 
-  <h2 id="y"><i>y</i> starts with an angle (ss13)</h2>
+  <h3 id="y"><i>y</i> starts with an angle (ss13)</h2>
   By default, the letter <span class="letter">y</span> starts with a curve against the waist line, like <span class='letter'>n</span>. If you want a <span class='letter' data-cogncur-y-variant=1>y</span> that starts with a sharp angle from the waist line (like <span class='letter'>i</span>), enable stylistic set <code>ss13</code>. If you disable entry strokes from the baseline (<code>ss01</code>), both versions of <span class="letter">y</span> will use a short entry stroke at the beginning of the word.
   <br/><br/>
   This setting also applies to the Dutch ligature for <i>ij</i>: <span class='letter' data-cogncur-ij-ligature=1>ij</span> becomes <span class='letter' data-cogncur-ij-ligature=1 data-cogncur-y-variant=1>ij</span>. 
@@ -307,7 +333,7 @@
   <br class="clear">
   <br/>
 
-  <h2 id="w"><i>w</i> starts with a curve (ss14)</h2>
+  <h3 id="w"><i>w</i> starts with a curve (ss14)</h2>
   By default, the letter <span class="letter">w</span> starts with an angle from the waist line, like <span class='letter'>u</span>. If you want a <span class='letter' data-cogncur-w-variant=1>w</span> that starts with a curve against the waist line (like <span class='letter'>v</span>), enable stylistic set <code>ss14</code>. If you disable entry strokes from the baseline (<code>ss01</code>), both versions of <span class="letter">w</span> will use a short entry stroke at the beginning of the word.
   <br/>
 
@@ -322,12 +348,125 @@
     <tr><td><code>ss01, ss14</code><td class="cursive rh4" data-cogncur-w-variant=1>wow</tr>
   </table>
 
+  <br class="clear"/><br/>
+
+  <h3 id="p"><i>p</i> (ss15, ss16)</h2>
+  By default, both <span class='letter'>f</span> and <span class='letter'>p</span> starts with an angle from the waist line, just like <span class='letter'>i</span>. If you enable stylistic set <code>ss15</code>, <span class='letter' data-cogncur-p-curve-variant=1>p</span> will start with a curve instead, just like the letter <span class='letter'>n</span>. The default version of <span class='letter'>p</span> has a closed loop; the join from <span class='letter'>p</span> to the next letter is similar to the join from <span class='letter'>s</span> to the next letter. If you enable stylistic set <code>ss16</code>, you'll get an open <span class='letter' data-cogncur-p-open-variant=1>p</span> instead, which joins to the next letter in the same way as <span class='letter'>n</span>. The stick of all these variants of <span class='letter'>p</span> can be shorted by enabling stylistic set <code>ss03</code> for shorter sticks. The variants created by combining these three stylistic sets are shown in the table below. Although not shown in the table, the closed version of <span class='letter'>p</span> is also affected by stylistic set <code>ss02</code>, which disables exit strokes for <span class='letter' data-cogncur-exitstrokes=1>s</span> and <span class='letter' data-cogncur-exitstrokes=1>p</span>.<br/>
+  <br/>
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th colspan=2>Example text</th></tr>
+    <tr data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=0 data-cogncur-stick-variant=0><td><i>none</i><td class="rh4"><div class="line">pup</div></td></tr>
+    <tr data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=0 data-cogncur-stick-variant=0><td><code>ss15</code><td class="rh4"><div class="line">pup</div></td></tr>
+    <tr data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=1 data-cogncur-stick-variant=0><td><code>ss16</code><td class="rh4"><div class="line">pup</div></td></tr>
+    <tr data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=1 data-cogncur-stick-variant=0><td><code>ss15, ss16</code><td class="rh4"><div class="line">pup</div></td></tr>
+  </table>
+
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th colspan=2>Example text</th></tr>
+    <tr data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=0 data-cogncur-stick-variant=1><td><code>ss03</code><td class="rh4"><div class="line">pup</div></td></tr>
+    <tr data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=0 data-cogncur-stick-variant=1><td><code>ss03, ss15</code><td class="rh4"><div class="line">pup</div></td></tr>
+    <tr data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=1 data-cogncur-stick-variant=1><td><code>ss03, ss16</code><td class="rh4"><div class="line">pup</div></td></tr>
+    <tr data-cogncur-p-curve-variant=0 data-cogncur-p-open-variant=1 data-cogncur-stick-variant=1><td><code>ss03, ss15, ss16</code><td class="rh4"><div class="line">pup</div></td></tr>
+  </table>
+
+  <br class="clear"><br/>
+
+  <h2 id="uppercase">Stylistic sets affecting uppercase letters</h2>
+  
+  <h3 id="cgl"><i>C</i>, <i>G</i> and <i>L</i> don't start with a loop (ss19)</h2>
+  By default, the uppercase letters <span class='letter'>C</span>, <span class='letter'>G</span> and <span class='letter'>L</span> start with a loop. If stylistic set <code>ss19</code> is enabled, these letters will have a simpler shape, without a starting loop: <span class='letter' data-cogncur-uppercase-cgl-variant=1>C</span>, <span class='letter' data-cogncur-uppercase-cgl-variant=1>G</span>, <span class='letter' data-cogncur-uppercase-cgl-variant=1>L</span>. <br/>
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><i>none</i><td class="cursive rh4">Cc Gg Ll</td></tr>
+    <tr><td><code>ss19</code><td class="cursive rh4" data-cogncur-uppercase-cgl-variant=1>Cc Gg Ll</tr>
+  </table>
 
 
-  <br class="clear"/><br/><br/>
+  <br/ class="clear"><br/>
+
+  <h3 id="amn"><i>A</i>, <i>M</i> and <i>N</i> look like their lowercase counterparts (ss20)</h2>
+  By default, the uppercase letters <span class='letter'>A</span>, <span class='letter'>M</span> and <span class='letter'>N</span> look a lot like the print versions of these letters. If you enable stylistic set <code>ss20</code>, the letters will look like enlarged versions of their lowercase cursive counterparts: <span class='letter' data-cogncur-uppercase-amn-variant=1>A</span>, <span class='letter' data-cogncur-uppercase-amn-variant=1>M</span>, <span class='letter' data-cogncur-uppercase-amn-variant=1>N</span>. These enlargements are not exactly to scale; the shape and width have been modified. In the <a href="https://cogncur.com/worksheetcreator">Online Worksheetcreator</a>, there are also variants of these letters available that <i>are</i> enlarged exactly to scale. <br/>
+  <br/>
+  
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th>Example text</th></tr>
+    <tr><td><i>none</i><td class="cursive rh4">Aa Mm Nn</td></tr>
+    <tr><td><code>ss20</code><td class="cursive rh4" data-cogncur-uppercase-amn-variant=2>Aa Mm Nn</tr>
+    <tr><td><i>only in the worksheet-creater</i><td class="cursive rh4" data-cogncur-uppercase-amn-variant=1>Aa Mm Nn</tr>
+  </table>
+  
+  <br/ class="clear"><br/>
+
+  <h2 id="numerals">Customizing numerals</h2>
+  In Cogncur, two stylistic sets are used to customize numerals: <code>ss17</code> and <code>ss18</code>. Additionally, the OpenType features for 'Number spacing' and 'Number forms' can also be used to customize the style in which numerals appear.<br/>
+  
+  <div class='imagecell clear'>
+    <div class='image'>
+      <img src="images/msword_numeralstyles.png">
+    </div>
+    <div class="description">Microsoft Word: changing the number style</div>
+  </div>  
+  <br class="clear">
+  
+  
+  
+
+
+  <h3 id="variants">Numeral variants</h3>
+  Some numerals have one, two or three variants available. Two stylistic sets - <code>ss17</code> and <code>ss18</code> - can be used to select numeral variants. Note that for the numerals <span class='letter'>4</span> and <span class='letter'>7</span> the combination of both stylistic sets triggers a new variant different from the variants shown by either stylistic set on their own. The table below shows with numeral variants are shown by enabling different stylistic set. Variants that are identical to variants shown by using 'less' stylistic sets are greyed out.
+  
+  <table class="styleset_table">
+    <tr><th>Stylistic sets</th><th colspan=10>Numerals</th></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=0><td><i>none</i><td class="cursive rh4">1</td><td class="cursive rh4">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4">5</td><td class="cursive rh4">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=0><td><code>ss17</code><td class="cursive rh4">1</td><td class="cursive rh4 traceable">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4 traceable">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=1><td><code>ss18</code><td class="cursive rh4 traceable">1</td><td class="cursive rh4">2</td><td class="cursive rh4  traceable">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4 traceable">9</td><td class="cursive rh4 traceable">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=1><td><code>ss17, ss18</code><td class="cursive rh4 traceable">1</td><td class="cursive rh4  traceable">2</td><td class="cursive rh4  traceable">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4 traceable">8</td><td class="cursive rh4 traceable">9</td><td class="cursive rh4 traceable">0</td></tr>
+  </table>
+  
+
+  <br/ class="clear"><br/>
+
+  <h3 id="oldstyle">Lining versus old-style number forms</h3>
+  By default, numbers in Cogncur are <i>lining</i>: this means that they all have the same height. If you prefer, you can change the Number forms to 'Old-style'. Old-style numbers are smaller and do not all have the same height.<br/><br/>
+  If you unable oldy-style numbers, the multiplication sign × and the division sign ÷ are also affected.<br/>
+  
+  <table class="styleset_table">
+    <tr><th>Number forms</th><th colspan=2>Example text</th></tr>
+    <tr data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=0><td><i>default</i><td class="cursive rh4">March 19, 2016.</td><td class='cursive rh4'>× ÷</td></tr>
+    <tr data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=1><td><code>old-style</code><td class="cursive rh4">March 19, 2016.</td><td class='cursive rh4'>× ÷</td></tr>
+  </table>
+  <br class="clear"/><br/>
+  Old-style numerals have the same variants available as the default numerals:<br/>
+  <table class="styleset_table" data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=1>
+    <tr><th>Stylistic sets</th><th colspan=10>Numerals (old-style)</th></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=0><td><i>none</i><td class="cursive rh4">1</td><td class="cursive rh4">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4">5</td><td class="cursive rh4">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=0><td><code>ss17</code><td class="cursive rh4">1</td><td class="cursive rh4 traceable">2</td><td class="cursive rh4">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4">9</td><td class="cursive rh4 traceable">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=0 data-cogncur-numeral-variants-set2=1><td><code>ss18</code><td class="cursive rh4 traceable">1</td><td class="cursive rh4">2</td><td class="cursive rh4  traceable">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4">8</td><td class="cursive rh4 traceable">9</td><td class="cursive rh4 traceable">0</td></tr>
+    <tr data-cogncur-numeral-variants-set1=1 data-cogncur-numeral-variants-set2=1><td><code>ss17, ss18</code><td class="cursive rh4 traceable">1</td><td class="cursive rh4  traceable">2</td><td class="cursive rh4  traceable">3</td><td class="cursive rh4">4</td><td class="cursive rh4 traceable">5</td><td class="cursive rh4 traceable">6</td><td class="cursive rh4">7</td><td class="cursive rh4 traceable">8</td><td class="cursive rh4 traceable">9</td><td class="cursive rh4 traceable">0</td></tr>
+  </table>
+
+
+  <br/ class="clear"><br/>
+
+  <h3 id="tabular">Proportional versus tabular number spacing</h3>
+  By default, numerals in Cogncur have 'proportional' width. The numberal <span class='letter'>1</span> is less wide than the numeral <span class='letter'>6</span>. This gives the best result when numbers are mixed with text. However, this can make it difficult to line up numbers below each other. To line up numbers with each others, you can change the 'Number spacing' setting to 'Tabular'. However, if you enable Tabular numbers in Cogncur, this does not just effect the width of then numbers, but also the width of the <i>space</i> character and the width of the <i>comma</i> and the <i>period</i>. Because of these changes to word space and interpunction, tabular numbers should only be used for specific parts of your document that need it, and should not be used on normal text.<br/>
+  <br/>
+  Because the minus-character is also the hyphen-character, by default the minus (hyphen) character is sized to fit with lowercase text, and the plus and equals characters are sized to match with the minus (hyphen) character. If you enable tabular numbers, these characters increase not just in width but also in height.
+
+  <table class="styleset_table">
+    <tr><th>Number spacing</th><th colspan=3>Example text</th></tr>
+    <tr data-cogncur-numerals-tabular=0 data-cogncur-numerals-oldstyle=0><td><i>default</i><td class="cursive rh4">$29.95<br/>$ 1.50</td><td class="cursive rh4">1, 2, buckle my shoe.</td><td class='cursive rh4'>- = +</td></tr>
+    <tr data-cogncur-numerals-tabular=1 data-cogncur-numerals-oldstyle=0><td><code>tabular</code><td class="cursive rh4">$29.95<br/>$ 1.50</td><td class="cursive rh4">1, 2, buckle my shoe.</td><td class='cursive rh4'>- = +</td></tr>
+  </table>
+  
+
+
+  <br/ class="clear"><br/>
+
 
   
-  ... more coming soon ...
+  
+  
   <br/ class="clear"><br/><br/>
   <div class="navrow">
     <div class="prev">

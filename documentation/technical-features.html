@@ -152,7 +152,7 @@
     </li>
     <li><a href="#other">Other font rendering requirements</a>
       <ul>
-        <li><a href="#other_linedistance">Line distance</a>
+        <li><a href="#other_linedistance">Line spacing</a>
         <li><a href="#other_em">Letters outside the em-square</a>
         <li><a href="#other_supportedaccents">Supported accented characters</a>
         <li><a href="#other_unsupportedaccents">Unsupported accented characters</a>
@@ -282,16 +282,16 @@
   <br/>
   <h2 id="other">Other font rendering requirements</h2>
   These aspects of font rendering are not directly related to specific OpenType Features.
-  <h3 id="other_linedistance">Line distance</h3>
+  <h3 id="other_linedistance">Line spacing</h3>
   Cogncur was designed to be written with the ascenders and descenders touching each other. Unfortunately, some applications ignore the dimensions declared in the font and instead use the ‘maximum size’ of the letters encountered in the font to determine line spacing. Since this ‘maximum size’ includes accented uppercase letters, this will lead to too much line spacing. It should be possible in your application to set the line distance such that ascenders and descenders are touching each other, and preferable, this line distance should be called ‘1’ or ‘Single’ by the application.<br/>
 
   <div class="imagecell" style="margin-right: 40px">
     <div class="cursive rh8" style="line-height: 1">Baffling <br/>glyphs</div>
-    <div class="description">Line distance: Single</div>
+    <div class="description">Line spacing: Single</div>
   </div>
   <div class="imagecell" style="margin-right: 40px">
     <div class="cursive rh8" style="line-height: 1.15">Baffling <br/>glyphs</div>
-    <div class="description">Line distance: 1.15</div>
+    <div class="description">Line spacing: 1.15</div>
   </div>  
 
   <br class="clear">
@@ -579,7 +579,7 @@
   
   <br class='clear'><br/>
   <h3 id="glyphs_entry">Exit strokes</h3>
-  Every word ends in an exit stroke. Of actually, every letter that is not succeeded by a lowercase letter receives an entry stroke. Even uppercase letters that have no visible exit stroke, will still receive an exit stroke glyph. It follows that some exit stroke glyphs contain nothing but whitespace. In FontForge, exit strokes have a name that starts with <code>ce</code>. Some exit strokes are not used with any of the default letters, only with variant letters.<br/>
+  Every word ends in an exit stroke. Or actually, every letter that is not succeeded by a lowercase letter receives an entry stroke. Even uppercase letters that have no visible exit stroke, will still receive an exit stroke glyph. It follows that some exit stroke glyphs contain nothing but whitespace. In FontForge, exit strokes have a name that starts with <code>ce</code>. Some exit strokes are not used with any of the default letters, only with variant letters.<br/>
   <br/>
   <div class="glyph_table">
     <div class="glyph_header">
