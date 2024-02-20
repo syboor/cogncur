@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<!--
+  Note: in the stylesheets used by this page, many OpenType features are disabled.
+  Their functionality is replaced by javascript.
+  This allows me to style individual glyphs (entry strokes, connecting strokes, etc).
+  
+  For most purposes, I would recommend that you simply use the OpenType features.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="../webapps/cogncur.css" />
+  <link rel="stylesheet" type="text/css" href="./guide.css" />
+  <script src="/js/jquery-3.7.0.min.js"></script>
+  <script src="../webapps/cogncur_converter.js"></script><!-- functions for converting text to Cogncur glyphs -->
+  <script src="../webapps/cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script>
+    cogncur_converter.init({
+    });
+  </script>
+  <title>Cogncur Documentation - Worksheet Creator</title>
+</head>
+<body class="max">
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./application-msword">Application Guide: Microsoft Word</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label"></div>
+      <div class="navlink"></div>
+    </div>
+  </div>
+
+<h1>About the Cogncur Worksheet Creator</h1>
+
+<p>The Worksheet Creator is a web application that lets you create handwriting worksheets using the cursive font Cogncur.</p>
+
+<p>The application allows you to place text on guidelines. It can also automatically copy text, using different styles such as gray or outline for tracing, or even showing just the starting points of words, aligned exactly underneath the example text.</p>
+
+<p class="centered"><b><a href="https://cogncur.com/worksheetcreator/">
+<img src="images/worksheetcreator.png" class="pdf" alt="worksheet fragment" width="287" height="176"><br/>
+click to open the Worksheet Creator</b></a><br/>
+
+<h2>Creating a new worksheet</h2>
+When you first open the Worksheet Creator, you are shown a gallery of sections. You can click the section you want to add to your worksheet and immediately customize it and add/change text. After you Confirm, the section will appear on your worksheet.
+
+<h2>The Cogncur font</h2>
+
+  <div class="imagecell" style="float: right">
+    <div class="image">
+      <img src="images/worksheetcreator_customize.png">
+    </div>
+    <div class="description">Some of the buttons that allow you to customize the font. 
+    </div>
+  </div>
+  The worksheet creator has a 'Configuration' section that allows you to customize the font. You can switch between font styles as well as enable or disable all OpenType features available within the fonts. Among other options, you can:
+  <ul>
+  <li>Choose the slant of the font.
+  <li>Toggle entry strokes from the baseline on or off.
+  <li>Choose between different letter variants.
+  </ul>
+
+<h2>Paper size</h2>
+The 'Configuration' section above your worksheet allows you to choose your paper size (letter or A4) and paper orientation (landscape or portrait). 
+
+<h2>Line colors</h2>
+The 'Configuration' section allows you to choose a set of line colors that will be used whenever you place guidelines on your paper. You can also choose to give the area between the baseline and the waist line a background color. Only the line <i>colors</i> are set from the global 'Configuration' section above your worksheet. You can also choose to disable guidelines, or to disable specific helper lines, but this is done within each content section that you place on your worksheet. 
+
+<h2>Sections and fields</h2>
+<p>A worksheet can have multiple content sections. This is not required; a single section can be interesting and powerful enough to fill an entire worksheet. Every section has a <i>type</i>. The section type determines what happens with the text you input. </p>
+
+
+<h2>Saving and printing</h2>
+<p><b>Warning: when you leave the web page, you lose the contents of your worksheet. You also lose the contents if you refresh the page with F5.</b></p>
+<p>You can print your worksheet or download it as a PDF (through functionality provided by your web browser or operating system). <br/><a href="https://cogncur.com/worksheetcreator/how_to_print">More information on downloading and printing.</a></p>
+
+
+
+
+  
+  <br/><br/><br/>
+
+  <div class="navrow">
+    <div class="prev">
+      <div class="label">previous</div>
+      <div class="navlink"><a href="./application-msword">Application Guide: Microsoft Word</a></div>
+    </div>
+    <div class="up">
+      <div class="label">up</div>
+      <div class="navlink"><a href="./">Documentation</a></div>
+    </div>
+    <div class="next">
+      <div class="label"></div>
+      <div class="navlink"></div>
+    </div>
+  </div>
+
+
+</body>
+</html>

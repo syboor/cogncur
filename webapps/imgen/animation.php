@@ -8,7 +8,7 @@
   
   $letter = @$_GET['l'] ?: 'a'; 
   $lines = @$_GET['lines'] ?: 0;
-  $minimal = @$_GET['m'] ?: false; // no entry strokes from baseline
+  $noentry = @$_GET['e'] ?: false; // no entry strokes from baseline
   $alt = @$_GET['alt'] ?: false; // alternative stroke order
   $thinness = @$_GET['th'] ?: 0;
   
@@ -34,8 +34,7 @@
   }
   unset($elements_by_id['shapedefs']);
   
-  if ($minimal && $elements_by_id['letter-min'.$letter]) $letter = 'min'.$letter;
-  if ($alt && $elements_by_id['letter-alt'.$letter]) $letter = 'alt'.$letter;
+  if ($noentry && $elements_by_id['letter-'.$letter.'-noentry']) $letter = $letter.'-noentry';
  
   $nstrokes = @$elements_by_id['letter-'.$letter]['data-nstrokes'];
   if (is_null($nstrokes)) exit('letter not supported: ' . htmlspecialchars($letter)); // NB nstrokes == 0 is allowed, it generated empty lines
@@ -53,7 +52,7 @@
   // Goal: set the $svgheight, $svgwidth, $frameoffset (used for strips) and $margin_left
   $svgheight = 2080; // fixed
   $margin_left = 0; // default if $center is false
-  $letterwidth = $elements_by_id['letter-'.$letter]['data-width'] ?: 1000;
+  $letterwidth = $elements_by_id['letter-'.$letter]['data-width'] ?: 2000;
   if ($width) {
 
     $svgwidth = $width;
@@ -72,7 +71,7 @@
      viewBox="-10 -20 {$svgwidth} {$svgheight}">
 END;
     
-  if ($lines) $svg .= add_lines($lines, $svgwidth, $thinness);
+  if ($lines) $svg .= add_lines($lines, $svgwidth, 300, $thinness);
   
   $svg .= '<g id="letter" transform="matrix(1 0 0 -1 ' . $margin_left . ' 1365)">';
   $svg .= $letter_xml;
@@ -82,13 +81,11 @@ END;
 
   $debugoutput = ob_get_clean();
 
-
-function add_lines($type, $svgwidth, $thinness) {
-
+function add_lines($type, $svgwidth, $height, $thinness) {
   // Kleuren
-  if ($type % 2) {
+  if ($type == 1 or $type == 2 or $type == 4 or $type == 5 or $type == 7 or $type == 8 or $type == 10 or $type == 11 or $type == 13 or $type == 14) {
     $outerk = $romplijnk = '#667AFF';
-    if ($type == 1) { // red
+    if ($type == 1 or $type == 4 or $type == 7 or $type == 10 or $type == 13) { // red
       $baselinek = '#e01a6f';
     } else { // blue
       $baselinek = '#667AFF';
@@ -98,46 +95,46 @@ function add_lines($type, $svgwidth, $thinness) {
   }
 
   // Lijndiktes. 14 is the minimum needed for the lines to come out clearly visible and consistent on the full page PDF with 3 cm tall strips.
-  $baselinew = 14;
-  $romplijnw = 14;
-  $outerw = 14;
-  $romplijndash = '40,40';
+  $baselinew = 28;
+  $romplijnw = 28;
+  $outerw = 28;
+  $romplijndash = '80,80';
   
   // For really small resolutions, we can increase the lines even further. This is used for the small 'choose your liniature' images.
-  if ($thinness < 0) {
-    $baselinew = 20;
-    $romplijnw = 20;
-    $outerw = 20;
-    $romplijndash = '40,40';
+  if ($height <= 80 || $thinness < 0) {
+    $baselinew = 40;
+    $romplijnw = 40;
+    $outerw = 40;
+    $romplijndash = '80,80';
   }
   if ($thinness == 1) {
-    $baselinew = 7;
-    $romplijnw = 7;
-    $outerw = 7;
-    $romplijndash = '20,20';
+    $baselinew = 14;
+    $romplijnw = 14;
+    $outerw = 14;
+    $romplijndash = '40,40';
   }
   if ($thinness == 2) {
-    $baselinew = 4;
-    $romplijnw = 4;
-    $outerw = 4;
-    $romplijndash = '12,12';
+    $baselinew = 8;
+    $romplijnw = 8;
+    $outerw = 8;
+    $romplijndash = '24,24';
   }
   
   $width = $svgwidth + 20; // some margin
   $svg = '<g transform="matrix(1 0 0 -1 0 1365)">';
 
   // bottomline (descender)
-  if ($type <= 2) {
-    $svg .= '<path d="M-10,-683 h'. $width .'" stroke-width="'. $outerw .'" stroke="'. $outerk .'" fill="none" shape-rendering="crispEdges"/>';
+  if ($type <= 3) {
+    $svg .= '<path d="M-10,-683h'. $width .'" stroke-width="'. $outerw .'" stroke="'. $outerk .'" fill="none" shape-rendering="crispEdges"/>';
   }
 
   // headline (ascender)  
-  if ($type <= 4 || $type == 7 || $type == 8) {
+  if ($type <= 6 || $type == 10 || $type == 11 || $type == 12) {
     $svg .= '<path d="M-10,1365 h'. $width .'" stroke-width="'. $outerw .'" stroke="'. $outerk .'" fill="none" shape-rendering="crispEdges"/>';
   }
 
   // midline
-  if ($type <= 6) {
+  if ($type <= 9) {
     $svg .= '<path d="M-10,683 h' .$width .'" stroke-width="'. $romplijnw .'" stroke="'. $romplijnk .'" fill="none" stroke-dasharray="' . $romplijndash . '" shape-rendering="crispEdges"/>';
   }
 
@@ -150,6 +147,8 @@ function add_lines($type, $svgwidth, $thinness) {
   
   return $svg;
 }
+
+
 
   
   
@@ -198,7 +197,7 @@ function add_lines($type, $svgwidth, $thinness) {
         if ($(this).attr('id').substring(0,6) !== 'stroke') return;
         
         var len = Math.ceil(this.getTotalLength());
-        var duration = (Math.ceil(len/30.0)) / 10.0 +.3;
+        var duration = (Math.ceil(len/60.0)) / 10.0 +.3;
         var dasharray_len = len + 1;
         var lift = $(this).data('lift');
         var dot = $(this).data('dot');
@@ -314,6 +313,16 @@ function add_lines($type, $svgwidth, $thinness) {
       $('select#lines').change(function () {
         this.form.submit();
       });
+      
+      if (window.location == window.parent.location) {
+        $('button#fullscreen').hide();
+      } else {
+        $('button#fullscreen').click(function() { 
+          window.open(location.href, '_blank'); 
+        
+        });
+      }
+      
     });
   </script>
 </head>
@@ -321,24 +330,10 @@ function add_lines($type, $svgwidth, $thinness) {
 
 <body>
 <?php if ($_GET['o'] == 'debug') echo $debugoutput; ?>
-<?php echo $svg ?>
   <div class="buttons">
-    <button id="restart"><span class="emoji">↺</span> Re-play</button>   <br/><br/>
-    <form id="settings">
-      <label>Guides<label>
-      <select name="lines" id="lines">
-        <option value='' <?= @$_GET['lines'] == '' ? 'selected' : '' ?>>None</option>
-        <option value='1' <?= @$_GET['lines'] == 1 ? 'selected' : '' ?>>Full</option>
-        <option value='3' <?= @$_GET['lines'] == 3 ? 'selected' : '' ?>>No bottom line</option>
-        <option value='9' <?= @$_GET['lines'] == 9 ? 'selected' : '' ?>>Baseline</option>
-      </select>
-      <?php if ($_GET['w']) { ?>
-        <input type="hidden" name="w" value="<?= htmlspecialchars($_GET['w'])?>">
-      <?php } ?>
-      <?php if ($_GET['c']) { ?>
-        <input type="hidden" name="c" value="<?= htmlspecialchars($_GET['c'])?>">
-      <?php } ?>
-    <form>
+    <button id="restart"><span class="emoji">&#x21ba;</span> Re-play</button>
+    <button id="fullscreen"><span class="emoji">&#x2197;</span> Full screen</button>   <br/><br/>
   </div>
+<?php echo $svg ?>
 </body>
 </html>

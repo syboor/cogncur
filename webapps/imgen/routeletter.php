@@ -4,9 +4,9 @@
    * - don't use any <style> whatsoever
    * - stroke-dasharray values must be separated by comma's, not spaces
    * - stroke-dashoffset can not have negative values. instead of
-        stroke-dasharray="4,4000" stroke-dashoffset="-37"
+        stroke-dasharray="4,8000" stroke-dashoffset="-37"
       do
-        stroke-dasharray="4,4000" stroke-dashoffset="1967" 
+        stroke-dasharray="4,8000" stroke-dashoffset="1967" 
       where 1967 = 2000 + 3 - 37
       
    */
@@ -21,7 +21,7 @@
   $templatefile = 'template_' . $type . '.php';
   $lines = @$_GET['lines'] ?: 0;
   $skew = @$_GET['s'] ?: false;    // slant the letters 7.5 (skew = 1) or 15 (skew = 2) degrees clockwise
-  $minimal = @$_GET['m'] ?: false; // no entry strokes from baseline
+  $noentry = @$_GET['e'] ?: false; // no entry strokes from baseline
   $alt = @$_GET['alt'] ?: false; // alternative stroke order
   $thinness = @$_GET['th'] ?: 0;
   
@@ -110,8 +110,7 @@
   }
   unset($elements_by_id['shapedefs']);
   
-  if ($minimal && $elements_by_id['letter-min'.$letter]) $letter = 'min'.$letter;
-  if ($alt && $elements_by_id['letter-alt'.$letter]) $letter = 'alt'.$letter;
+  if ($noentry && $elements_by_id['letter-'.$letter.'-noentry']) $letter = $letter.'-noentry';
  
   $nstrokes = @$elements_by_id['letter-'.$letter]['data-nstrokes'];
   if (is_null($nstrokes)) exit('letter not supported: ' . htmlspecialchars($letter)); // NB nstrokes == 0 is allowed, it generated empty lines

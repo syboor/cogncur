@@ -15,7 +15,7 @@ END;
 END;
 
   $svg .= <<<END
-      <path d="{$paths[$nstrokes]}" fill="none" stroke="{$kleuren[$nstrokes]}" stroke-width="63" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1,4000"/>
+      <path d="{$paths[$nstrokes]}" fill="none" stroke="{$kleuren[$nstrokes]}" stroke-width="63" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1,8000"/>
 END;
 
   $svg .= <<<END
