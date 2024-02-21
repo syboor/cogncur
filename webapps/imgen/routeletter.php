@@ -227,7 +227,7 @@ END;
     $svg .= inc($templatefile, get_defined_vars());
    
     if (@$skew) $svg .= '</g>';
-     $svg .= '</svg>';
+    $svg .= '</svg>';
   }
  
   if ($output == 'svg') {

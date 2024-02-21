@@ -118,9 +118,9 @@
 
     function init_from_hash() { // This can be redone at will, and should be everytime the hash changes
       hash = URIHash.dump();
-      skew = (hash.s && hash.s == '1' || hash.s == '2' ? hash.s : 0);
+      skew = (hash.s && hash.s == '0' || hash.s == '2' ? hash.s : 1);
       letter = (hash.l && hash.l.length <= 5) ? hash.l : 'a';
-      liniatuur = (hash.lines ? hash.lines : 4);
+      liniatuur = (hash.lines ? hash.lines : 1);
       variant = (hash.v && hash.v.length <= 8) ? hash.v : '';
       noentrystrokes = (hash.e == '1' ? 1 : 0);
       if (variant.substr(0,3) == 'alt') {
@@ -455,6 +455,8 @@
     <div class="clickable_letter" data-letter='a'></div>
     <div class="clickable_letter" data-letter='b'></div>
     <div class="clickable_letter" data-letter='c'></div>
+    <div class="clickable_letter" data-letter='d'></div>
+    <div class="clickable_letter" data-letter='e'></div>
     <div class="clickable_letter" data-letter='f'>
       <div class="clickable_variant" data-variantname='f-alt1' data-cogncur-f-connection-variant=1></div>
       <div class="clickable_variant" data-variantname='f-alt2' data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1></div>
@@ -462,10 +464,18 @@
       <div class="clickable_variant" data-variantname='f-alt4' data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-stick-variant=1></div>
       <div class="clickable_variant" data-variantname='f-alt5' data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-stick-variant=1></div>
     </div>
+    <div class="clickable_letter" data-letter='g'></div>
     <div class="clickable_letter" data-letter='h'></div>
-    <div class="clickable_letter" data-letter='l'></div>
+    <div class="clickable_letter" data-letter='i'></div>
     <div class="clickable_letter" data-letter='k'></div>
+    <div class="clickable_letter" data-letter='l'></div>
     <div class="clickable_letter" data-letter='o'></div>
+    <div class="clickable_letter" data-letter='q'>
+      <div class="clickable_variant" data-variantname='q-alt1' data-cogncur-q-connection-variant=1></div>
+      <div class="clickable_variant" data-variantname='q-alt2' data-cogncur-q-continuity-variant=1></div>
+      <div class="clickable_variant" data-variantname='q-alt3' data-cogncur-q-connection-variant=1 data-cogncur-stick-variant=1></div>
+      <div class="clickable_variant" data-variantname='q-alt4' data-cogncur-q-continuity-variant=1 data-cogncur-stick-variant=1></div>
+    </div>
 
   </div>
   

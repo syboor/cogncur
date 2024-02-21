@@ -8,6 +8,7 @@
   
   $letter = @$_GET['l'] ?: 'a'; 
   $lines = @$_GET['lines'] ?: 0;
+  $skew = @$_GET['s'] ?: false;    // slant the letters 7.5 (skew = 1) or 15 (skew = 2) degrees clockwise
   $noentry = @$_GET['e'] ?: false; // no entry strokes from baseline
   $alt = @$_GET['alt'] ?: false; // alternative stroke order
   $thinness = @$_GET['th'] ?: 0;
@@ -73,9 +74,18 @@ END;
     
   if ($lines) $svg .= add_lines($lines, $svgwidth, 300, $thinness);
   
+  if (@$skew) {
+    if ($skew == 2) {
+      $svg .= '<g transform="translate(360 0) skewX(-15)">';
+    } else {
+      $svg .= '<g transform="translate(180 0) skewX(-7.5)">';
+    }
+  }  
+  
   $svg .= '<g id="letter" transform="matrix(1 0 0 -1 ' . $margin_left . ' 1365)">';
   $svg .= $letter_xml;
   $svg .= '</g>';
+  if (@$skew) $svg .= '</g>';
   
   $svg .= '</svg>';
 
