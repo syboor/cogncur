@@ -13,6 +13,9 @@ END;
   if ($nstrokes >= 4) $svg .= <<<END
       <path d="{$outlinepaths[4]}" />
 END;
+  if ($nstrokes >= 5) $svg .= <<<END
+      <path d="{$outlinepaths[5]}" />
+END;
 
   $svg .= <<<END
     </g>

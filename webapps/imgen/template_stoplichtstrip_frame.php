@@ -13,6 +13,9 @@ END;
   if ($nstrokes >= 4) $svg .= <<<END
       <path d="{$outlinepaths[4]}" stroke="black" stroke-width="7" fill="{$kleuroutline}" />
 END;
+  if ($nstrokes >= 5) $svg .= <<<END
+      <path d="{$outlinepaths[5]}" stroke="black" stroke-width="7" fill="{$kleuroutline}" />
+END;
 
   $svg .= <<<END
       <path d="{$paths[$nstrokes]}" fill="none" stroke="{$kleuren[$nstrokes]}" stroke-width="63" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1,8000"/>

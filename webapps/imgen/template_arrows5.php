@@ -13,6 +13,7 @@ END;
   if ($nstrokes >= 2) $svg .= inc('template_arrowhelper.php', ['path' => $paths[2], 'kleur' => $kleuren[2]]);
   if ($nstrokes >= 3) $svg .= inc('template_arrowhelper.php', ['path' => $paths[3], 'kleur' => $kleuren[3]]);
   if ($nstrokes >= 4) $svg .= inc('template_arrowhelper.php', ['path' => $paths[4], 'kleur' => $kleuren[4]]);
+  if ($nstrokes >= 5) $svg .= inc('template_arrowhelper.php', ['path' => $paths[5], 'kleur' => $kleuren[5]]);
 
 
   $svg .= <<<END

@@ -96,6 +96,7 @@
     'zwartstoplicht3' => ['black', '#00e238', '#0099ff', '#f300f3', '#ff0000'],
   ];
   $kleuren = @$kleurschemas[$k] ?: reset($kleurschemas);
+  $kleuren[5] = $kleuren[4]; // stupid Dutch 'ij'...
   $kleuroutline = $kleuren[0];
   
   $xml = simplexml_load_string($shapedefs,  "SimpleXMLElement", LIBXML_NOCDATA);
@@ -109,8 +110,8 @@
     }
   }
   unset($elements_by_id['shapedefs']);
-  
-  if ($noentry && $elements_by_id['letter-'.$letter.'-noentry']) $letter = $letter.'-noentry';
+
+  if ($noentry && @$elements_by_id['letter-'.$letter.'-noentry']) $letter = $letter.'-noentry';
  
   $nstrokes = @$elements_by_id['letter-'.$letter]['data-nstrokes'];
   if (is_null($nstrokes)) exit('letter not supported: ' . htmlspecialchars($letter)); // NB nstrokes == 0 is allowed, it generated empty lines
@@ -142,6 +143,7 @@
     $emwidth2 = @$elements_by_id['letter-'.$letter]['data-width2'] ?: $emwidth;
     $emwidth3 = @$elements_by_id['letter-'.$letter]['data-width3'] ?: $emwidth;
     $emwidth4 = @$elements_by_id['letter-'.$letter]['data-width4'] ?: $emwidth;
+    $emwidth5 = @$elements_by_id['letter-'.$letter]['data-width5'] ?: $emwidth;
 
     if ($width && $height) {
       $svgwidth = $width * $svgheight / $height;
@@ -157,12 +159,14 @@
           $frameoffset[2] = $frameoffset[1] + $emwidth1 + 330 + $extra;
           $frameoffset[3] = $frameoffset[2] + $emwidth2 + 330 + $extra;
           $frameoffset[4] = $frameoffset[3] + $emwidth3 + 330 + $extra;
+          $frameoffset[5] = $frameoffset[4] + $emwidth4 + 330 + $extra;
         } else { // justify
           $extra = ($available_svgwidth - $autowidth) / ($nstrokes - 1);
           $frameoffset[1] = 0 + $margin;
           $frameoffset[2] = $frameoffset[1] + $emwidth1 + 330 + $extra;
           $frameoffset[3] = $frameoffset[2] + $emwidth2 + 330 + $extra;
           $frameoffset[4] = $frameoffset[3] + $emwidth3 + 330 + $extra;
+          $frameoffset[5] = $frameoffset[4] + $emwidth4 + 330 + $extra;
 
         }
       } else {
@@ -180,6 +184,7 @@
         $frameoffset[3] = $frameoffset[2] + $emwidth2 + 330;
         $frameoffset[4] = $frameoffset[3] + $emwidth3 + 330;
         $frameoffset[5] = $frameoffset[4] + $emwidth4 + 330;
+        $frameoffset[6] = $frameoffset[5] + $emwidth5 + 330;
         $svgwidth = $frameoffset[$nstrokes+1] - 300 + $margin;
       } else {
         $svgwidth = $emwidth + 30 + 2 * $margin;
@@ -198,7 +203,6 @@
     $covered_arrow_lengths[$i] = @$elements_by_id['stroke-'.$letter.$i]['data-covered-arrow-length'];
     $overlaps[$i] = @$elements_by_id['overlap-'.$letter.$i]['d'];
   }
-  
   
   $debugoutput = ob_get_clean();
   

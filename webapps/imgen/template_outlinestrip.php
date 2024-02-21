@@ -23,6 +23,11 @@
     $vars['x'] = $frameoffset[4];
     $svg .= inc('template_outlinestrip_frame.php', $vars);
   }
+  if ($nstrokes >= 5) {
+    $vars['nstrokes'] = 5;
+    $vars['x'] = $frameoffset[5];
+    $svg .= inc('template_outlinestrip_frame.php', $vars);
+  }
   
   echo $svg;
 ?>

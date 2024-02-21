@@ -13,6 +13,9 @@ END;
   if ($nstrokes >= 4) $g .= <<<END
       <path d="{$outlinepaths[4]}" stroke="black" stroke-width="7" fill="{$kleuroutline}" />
 END;
+  if ($nstrokes >= 5) $g .= <<<END
+      <path d="{$outlinepaths[5]}" stroke="black" stroke-width="7" fill="{$kleuroutline}" />
+END;
 
   $g .= <<<END
       <path d="{$paths[1]}" fill="none" stroke="{$kleuroutline}" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
@@ -25,6 +28,9 @@ END;
 END;
   if ($nstrokes >= 4) $g .= <<<END
       <path d="{$paths[4]}" fill="none" stroke="{$kleuroutline}" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
+END;  
+  if ($nstrokes >= 5) $g .= <<<END
+      <path d="{$paths[5]}" fill="none" stroke="{$kleuroutline}" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
 END;  
 
   $g .= <<<END

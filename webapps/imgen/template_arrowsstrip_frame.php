@@ -12,6 +12,9 @@ END;
   if ($nstrokes >= 4) $g .= <<<END
       <path d="{$outlinepaths[4]}" stroke="black" stroke-width="7" fill="{$kleuroutline}"  x="{$x}" y="0"/>
 END;
+  if ($nstrokes >= 5) $g .= <<<END
+      <path d="{$outlinepaths[5]}" stroke="black" stroke-width="7" fill="{$kleuroutline}"  x="{$x}" y="0"/>
+END;
 
   $g .= inc('template_arrowhelper.php', ['path' => $paths[$nstrokes], 'kleur' => $kleuren[$nstrokes], 'length' => $covered_arrow_lengths[$nstrokes]]);
 

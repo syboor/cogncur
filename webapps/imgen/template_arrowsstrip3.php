@@ -20,9 +20,15 @@
 
   if ($nstrokes >= 4) {
     $vars['nstrokes'] = 4;
-    $vars['x'] = $frameoffset[3];
+    $vars['x'] = $frameoffset[4];
     $svg .= inc('template_arrowsstrip3_frame.php', $vars);
   }
   
+  if ($nstrokes >= 5) {
+    $vars['nstrokes'] = 5;
+    $vars['x'] = $frameoffset[5];
+    $svg .= inc('template_arrowsstrip3_frame.php', $vars);
+  }
+
   echo $svg;
 ?>

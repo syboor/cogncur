@@ -24,5 +24,11 @@
     $svg .= inc('template_arrowsstrip_frame.php', $vars);
   }
   
+  if ($nstrokes >= 5) {
+    $vars['nstrokes'] = 5;
+    $vars['x'] = $frameoffset[5];
+    $svg .= inc('template_arrowsstrip_frame.php', $vars);
+  }
+
   echo $svg;
 ?>

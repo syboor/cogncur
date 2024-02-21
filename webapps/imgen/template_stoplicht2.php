@@ -13,6 +13,9 @@ END;
   if ($nstrokes >= 4) $svg .= <<<END
       <path d="{$outlinepaths[4]}" stroke="black" stroke-width="7" fill="{$kleuroutline}" />
 END;
+  if ($nstrokes >= 5) $svg .= <<<END
+      <path d="{$outlinepaths[5]}" stroke="black" stroke-width="7" fill="{$kleuroutline}" />
+END;
 
   $svg .= <<<END
       <path d="{$paths[1]}" fill="none" stroke="{$kleuroutline}" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,6 +29,9 @@ END;
   if ($nstrokes >= 4) $svg .= <<<END
       <path d="{$paths[4]}" fill="none" stroke="{$kleuroutline}" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
 END;  
+  if ($nstrokes >= 5) $svg .= <<<END
+      <path d="{$paths[5]}" fill="none" stroke="{$kleuroutline}" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
+END;  
 
   $svg .= <<<END
       <path d="{$paths[1]}" fill="none" stroke="{$kleuren[1]}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10,33"/>
@@ -38,6 +44,9 @@ END;
 END;
   if ($nstrokes >= 4) $svg .= <<<END
       <path d="{$paths[4]}" fill="none" stroke="{$kleuren[4]}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="12,45"/>
+END;  
+  if ($nstrokes >= 5) $svg .= <<<END
+      <path d="{$paths[5]}" fill="none" stroke="{$kleuren[5]}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="12,45"/>
 END;  
 
 
@@ -55,6 +64,9 @@ END;
 
   if ($nstrokes >= 4) $svg .= <<<END
       <path d="{$paths[4]}" fill="none" stroke="{$kleuren[4]}" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1,8000"/>
+END;
+  if ($nstrokes >= 5) $svg .= <<<END
+      <path d="{$paths[5]}" fill="none" stroke="{$kleuren[5]}" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1,8000"/>
 END;
 
 

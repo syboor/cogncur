@@ -35,6 +35,13 @@ END;
 END;
     $svg .= inc('template_arrowhelper.php', ['path' => $paths[4], 'kleur' => $kleuren[4]]);
   }
+  if ($nstrokes >= 5) {
+    $svg .= <<<END
+      <path d="{$outlinepaths[5]}" stroke="black" stroke-width="7" fill="{$kleuroutline}" />
+      <path d="{$paths[5]}" fill="none" stroke="{$kleuren[5]}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="12,45"/>
+END;
+    $svg .= inc('template_arrowhelper.php', ['path' => $paths[5], 'kleur' => $kleuren[5]]);
+  }
 
   
 

@@ -45,8 +45,19 @@ END;
   if ($nstrokes >= 4) $svg .= inc('template_arrowhelper.php', ['path' => $paths[4], 'kleur' => $kleuren[4]]);
   if ($overlaps[4]) {
     $svg .= <<<END
-      <path d="{$overlaps[3]}" fill="none" stroke="{$kleuroutline}" stroke-opacity=".6" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="{$overlaps[4]}" fill="none" stroke="{$kleuroutline}" stroke-opacity=".6" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="{$outlinepaths[4]}" stroke="black" stroke-width="7" fill="none"/>
+END;
+  }
+
+  if ($nstrokes >= 5) $svg .= <<<END
+      <path d="{$outlinepaths[5]}" stroke="black" stroke-width="7" fill="{$kleuroutline}" />
+END;
+  if ($nstrokes >= 5) $svg .= inc('template_arrowhelper.php', ['path' => $paths[5], 'kleur' => $kleuren[5]]);
+  if ($overlaps[5]) {
+    $svg .= <<<END
+      <path d="{$overlaps[5]}" fill="none" stroke="{$kleuroutline}" stroke-opacity=".6" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="{$outlinepaths[5]}" stroke="black" stroke-width="7" fill="none"/>
 END;
   }
 
