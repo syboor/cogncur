@@ -11,7 +11,7 @@
       
    */
 
-  $shapedefs = file_get_contents('../../sources/cogncur_shapes.svg');
+  $shapedefs = file_get_contents('cogncur_shapes.svg');
 
   $shapedefs = substr($shapedefs, strpos($shapedefs, '<defs'));
   $shapedefs = substr($shapedefs, 0, strpos($shapedefs, '</defs>') +7);
@@ -19,7 +19,7 @@
   $letter = @$_GET['l'] ?: 'a'; 
   $type = preg_replace('/[^a-z0-9_\-]/', '', strtolower(@$_GET['t'])) ?: 'arrows'; 
   $templatefile = 'template_' . $type . '.php';
-  $lines = @$_GET['lines'] ?: 0;
+  $lines = @$_GET['lines'] == '0' ? '0' : (@$_GET['lines'] ?: 1); // default 1, but 0 is possible through parameter
   $skew = @$_GET['s'] ?: false;    // slant the letters 7.5 (skew = 1) or 15 (skew = 2) degrees clockwise
   $noentry = @$_GET['e'] ?: false; // no entry strokes from baseline
   $alt = @$_GET['alt'] ?: false; // alternative stroke order
@@ -74,7 +74,7 @@
   if (!file_exists($templatefile)) exit_404('Template not found');
     
   // Cache control headers
-  //header('Cache-control: public, max-age=2592000'); // 30 days
+  header('Cache-control: public, max-age=2592000'); // 30 days
     
   $output = @$_GET['o'] ?: 'png';
   if ($output == 'debug') {
@@ -144,6 +144,25 @@
     $emwidth3 = @$elements_by_id['letter-'.$letter]['data-width3'] ?: $emwidth;
     $emwidth4 = @$elements_by_id['letter-'.$letter]['data-width4'] ?: $emwidth;
     $emwidth5 = @$elements_by_id['letter-'.$letter]['data-width5'] ?: $emwidth;
+    
+    if ($skew) {
+      // If the letter is skewed, add some entry width so the entry stroke doesn't run out of frame
+      $emwidth +=  ($skew * 40);
+      $emwidth1 += ($skew * 40);
+      $emwidth2 += ($skew * 40);
+      $emwidth3 += ($skew * 40);
+      $emwidth4 += ($skew * 40);
+      $emwidth5 += ($skew * 40);
+      
+      // Letters with overhanging loops (like f and l), may need over more extra width when skewed   
+      $extra_width_for_skew = @$elements_by_id['letter-'.$letter]['data-extra-width-for-skew'] ?: 0;
+      $emwidth += ($skew * $extra_width_for_skew);
+      $emwidth1 += ($skew * $extra_width_for_skew);
+      $emwidth2 += ($skew * $extra_width_for_skew);
+      $emwidth3 += ($skew * $extra_width_for_skew);
+      $emwidth4 += ($skew * $extra_width_for_skew);
+      $emwidth5 += ($skew * $extra_width_for_skew);
+    }
 
     if ($width && $height) {
       $svgwidth = $width * $svgheight / $height;
@@ -152,25 +171,25 @@
       
       if (is_strip($type, $nstrokes)) {
         $emwidths = $emwidth1 + ($nstrokes >= 2 ? $emwidth2 : 0) + ($nstrokes >= 3 ? $emwidth3 : 0) + ($nstrokes >= 4 ? $emwidth4 : 0);
-        $autowidth = $emwidths + ($nstrokes - 1) * 300 + $nstrokes * 30; // width if automatic
+        $autowidth = $emwidths + ($nstrokes - 1) * 500 + $nstrokes * 50; // width if automatic
         if ($center && $available_svgwidth > $autowidth) {
           $extra = ($available_svgwidth - $autowidth) / ($nstrokes + 1);
           $frameoffset[1] = $extra + $margin;
-          $frameoffset[2] = $frameoffset[1] + $emwidth1 + 330 + $extra;
-          $frameoffset[3] = $frameoffset[2] + $emwidth2 + 330 + $extra;
-          $frameoffset[4] = $frameoffset[3] + $emwidth3 + 330 + $extra;
-          $frameoffset[5] = $frameoffset[4] + $emwidth4 + 330 + $extra;
+          $frameoffset[2] = $frameoffset[1] + $emwidth1 + 550 + $extra;
+          $frameoffset[3] = $frameoffset[2] + $emwidth2 + 550 + $extra;
+          $frameoffset[4] = $frameoffset[3] + $emwidth3 + 550 + $extra;
+          $frameoffset[5] = $frameoffset[4] + $emwidth4 + 550 + $extra;
         } else { // justify
           $extra = ($available_svgwidth - $autowidth) / ($nstrokes - 1);
           $frameoffset[1] = 0 + $margin;
-          $frameoffset[2] = $frameoffset[1] + $emwidth1 + 330 + $extra;
-          $frameoffset[3] = $frameoffset[2] + $emwidth2 + 330 + $extra;
-          $frameoffset[4] = $frameoffset[3] + $emwidth3 + 330 + $extra;
-          $frameoffset[5] = $frameoffset[4] + $emwidth4 + 330 + $extra;
+          $frameoffset[2] = $frameoffset[1] + $emwidth1 + 550 + $extra;
+          $frameoffset[3] = $frameoffset[2] + $emwidth2 + 550 + $extra;
+          $frameoffset[4] = $frameoffset[3] + $emwidth3 + 550 + $extra;
+          $frameoffset[5] = $frameoffset[4] + $emwidth4 + 550 + $extra;
 
         }
       } else {
-        $framewidth = $emwidth + 30;
+        $framewidth = $emwidth + 50;
         if ($center) {
           $margin_left = $frameoffset[1] = ($svgwidth - $framewidth) / 2;
         } else {
@@ -180,14 +199,14 @@
     } else {  /* total image width automatic */
       if (is_strip($type, $nstrokes)) {
         $frameoffset[1] = 0 + $margin;
-        $frameoffset[2] = $frameoffset[1] + $emwidth1 + 330;
-        $frameoffset[3] = $frameoffset[2] + $emwidth2 + 330;
-        $frameoffset[4] = $frameoffset[3] + $emwidth3 + 330;
-        $frameoffset[5] = $frameoffset[4] + $emwidth4 + 330;
-        $frameoffset[6] = $frameoffset[5] + $emwidth5 + 330;
-        $svgwidth = $frameoffset[$nstrokes+1] - 300 + $margin;
+        $frameoffset[2] = $frameoffset[1] + $emwidth1 + 550;
+        $frameoffset[3] = $frameoffset[2] + $emwidth2 + 550;
+        $frameoffset[4] = $frameoffset[3] + $emwidth3 + 550;
+        $frameoffset[5] = $frameoffset[4] + $emwidth4 + 550;
+        $frameoffset[6] = $frameoffset[5] + $emwidth5 + 550;
+        $svgwidth = $frameoffset[$nstrokes+1] - 500 + $margin;
       } else {
-        $svgwidth = $emwidth + 30 + 2 * $margin;
+        $svgwidth = $emwidth + 50 + 2 * $margin;
         $margin_left = $frameoffset[1] = $margin;
 
       }
@@ -219,7 +238,7 @@
      viewBox="-10 -20 {$svgwidth} {$svgheight}">
 END;
     
-    if ($lines) $svg .= add_lines($lines, $svgwidth, $height, $thinness);
+    if ($lines) $svg .= add_lines($lines, $svgwidth, $height, $thinness, $type);
     
     if (@$skew) {
       if ($skew == 2) {
@@ -286,7 +305,7 @@ function is_strip($type, $nstrokes) {
   return strpos($type, 'strip') && !strpos($type, 'frame') && ($nstrokes > 1);   
 }
     
-function add_lines($type, $svgwidth, $height, $thinness) {
+function add_lines($type, $svgwidth, $height, $thinness, $templatetype) {
   // Kleuren
   if ($type == 1 or $type == 2 or $type == 4 or $type == 5 or $type == 7 or $type == 8 or $type == 10 or $type == 11 or $type == 13 or $type == 14) {
     $outerk = $romplijnk = '#667AFF';
@@ -331,21 +350,33 @@ function add_lines($type, $svgwidth, $height, $thinness) {
   // bottomline (descender)
   if ($type <= 3) {
     $svg .= '<path d="M-10,-683h'. $width .'" stroke-width="'. $outerw .'" stroke="'. $outerk .'" fill="none" shape-rendering="crispEdges"/>';
+    if ($templatetype == 'heartline') {
+      $svg .= '<path d="M-10,-649h'. $width .'" stroke-width="'. $outerw .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+    }
   }
 
   // headline (ascender)  
   if ($type <= 6 || $type == 10 || $type == 11 || $type == 12) {
     $svg .= '<path d="M-10,1365 h'. $width .'" stroke-width="'. $outerw .'" stroke="'. $outerk .'" fill="none" shape-rendering="crispEdges"/>';
+    if ($templatetype == 'heartline') {
+      $svg .= '<path d="M-10,1331h'. $width .'" stroke-width="'. $outerw .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+    }
   }
 
   // midline
   if ($type <= 9) {
     $svg .= '<path d="M-10,683 h' .$width .'" stroke-width="'. $romplijnw .'" stroke="'. $romplijnk .'" fill="none" stroke-dasharray="' . $romplijndash . '" shape-rendering="crispEdges"/>';
+    if ($templatetype == 'heartline') {
+      $svg .= '<path d="M-10,649h'. $width .'" stroke-width="'. $outerw .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+    }
   }
 
   // baseline
   if ($type >= 1) {
     $svg .= '<path d="M-10,0 h'. $width .'" stroke-width="'. $baselinew .'" stroke="'. $baselinek .'" fill="none" shape-rendering="crispEdges"/>';
+    if ($templatetype == 'heartline') {
+      $svg .= '<path d="M-10,34h'. $width .'" stroke-width="'. $outerw .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+    }
   }
     
   $svg .= '</g>';

@@ -33,10 +33,10 @@ TODO: testpage.html
 - create another page testpage-opentype.html to showcase how to use opentype features
   
 SVG shapes
-- letter formation images
-- step-by-step letter formation
-- animations
-- localize stylesheet for page size; use css variables
+- add extra 'skew' distance on the right end
+- accommodate Letter page size
+- add app for step-by-step letter formation
+- 
 
 
 Stripes at beginning and end of word

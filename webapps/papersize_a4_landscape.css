@@ -1,0 +1,102 @@
+.page {
+  height: 190mm;
+  width: 277mm;
+  overflow: hidden;
+  padding: 0mm;
+  /* border: 1px solid red; */
+}
+.pagewidth {
+  width: 277mm;
+}
+@media print {
+  body {
+    margin: 0px;
+    padding: 0px;
+  }
+}
+
+.ui {
+  display: none;
+}
+/* .overlay can display something next to and partially over an a5 page, 
+ * but will wrap under it if the screen is too small 
+ * Not printed
+ */
+.overlay_container {
+  position: relative;
+}
+.overlay {
+  display: none;
+}
+body footer {
+  display: none;
+}
+
+
+@media screen {
+  .page_container {
+    border: 1px solid black; 
+    padding: 10mm;
+    margin: 10mm;
+    height: 210mm;
+    width: 297mm;
+    box-sizing: border-box;
+    -webkit-box-shadow: 5px 5px 3px 0px rgba(74,74,74,1);
+    -moz-box-shadow: 5px 5px 3px 0px rgba(74,74,74,1);
+    box-shadow: 5px 5px 3px 0px rgba(74,74,74,1);
+    float: left;
+  }
+  .page_container.padding_top_min5 {
+    padding-top: 5mm;
+  }
+  .ui {
+    display: block;
+    clear: left;
+  }
+  body footer {
+    display: flex;
+  }
+  
+  .overlay {
+    display: block;
+    position: absolute; 
+    right: 0;
+    top: 0;
+    opacity: 0.85;
+    z-index: 100;
+  }  
+}
+@media only screen and (min-width: 1511px) {
+  .uitgelicht-raw {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 1510px) and (min-width: 1431px) {
+  .uitgelicht-raw {
+    width: 220px;
+  }
+}
+@media only screen and (max-width: 1430px) {
+  .overlay {
+    position: static;
+    opacity: 1;
+  }
+  .uitgelicht-raw {
+    clear: both;
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+
+.page {
+  page-break-after: always;
+  page-break-inside: avoid;
+  page-break-before: always;
+}
+
+@page  
+{ 
+  margin: 10mm;
+  size: a4 landscape;   /* auto is the initial value */ 
+} 

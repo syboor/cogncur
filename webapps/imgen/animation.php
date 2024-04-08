@@ -1,13 +1,13 @@
 <?php
   ob_start();
   
-  $shapedefs = file_get_contents('../../sources/cogncur_shapes.svg');
+  $shapedefs = file_get_contents('cogncur_shapes.svg');
 
   $shapedefs = substr($shapedefs, strpos($shapedefs, '<defs'));
   $shapedefs = substr($shapedefs, 0, strpos($shapedefs, '</defs>') +7);
   
   $letter = @$_GET['l'] ?: 'a'; 
-  $lines = @$_GET['lines'] ?: 0;
+  $lines = @$_GET['lines'] == '0' ? '0' : (@$_GET['lines'] ?: 1); // default 1, but 0 is possible through parameter
   $skew = @$_GET['s'] ?: false;    // slant the letters 7.5 (skew = 1) or 15 (skew = 2) degrees clockwise
   $noentry = @$_GET['e'] ?: false; // no entry strokes from baseline
   $alt = @$_GET['alt'] ?: false; // alternative stroke order
@@ -64,6 +64,16 @@
     $svgwidth = $letterwidth + 30;
     
   }
+  if ($skew) {
+    // If the letter is skewed, add some entry width so the entry stroke doesn't run out of frame
+    $svgwidth +=  ($skew * 40);
+    
+    // Letters with overhanging loops (like f and l), may need over more extra width when skewed   
+    $extra_width_for_skew = @$elements_by_id['letter-'.$letter]['data-extra-width-for-skew'] ?: 0;
+    $svgwidth += ($skew * $extra_width_for_skew);
+  }
+  
+  
   //echo "svgwidth: $svgwidth, letterwidth: $letterwidth, margin_left: $margin_left <br/>";
   
   $svg = <<<END

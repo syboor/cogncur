@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cogncur Letter Formation</title>
   <link rel="stylesheet" type="text/css" href="/resources/style.css" />
-  <link rel="stylesheet" type="text/css" href="./cogncur.css" />
-  <link id="stylesheet_pagesize" rel="stylesheet" type="text/css" href="/fonts/schoolschrift03/schoolschrijver_a4.css" />
+  <link rel="stylesheet" type="text/css" href="../webapps/cogncur.css" />
+  <link id="stylesheet_pagesize" rel="stylesheet" type="text/css" href="../webapps/papersize_a4.css" />
   <script src="/js/jquery-3.7.0.min.js"></script>
-  <script src="./cogncur_converter.js?v=20231229"></script><!-- functions for converting text to Cogncur glyphs -->
-  <script src="./cogncur_lines.js?v=20220222"></script>
+  <script src="../webapps/cogncur_converter.js?v=20231229"></script><!-- functions for converting text to Cogncur glyphs -->
+  <script src="../webapps/cogncur_lines.js?v=20220222"></script>
   <script>
   var URIHash =
   {
@@ -264,7 +264,7 @@
         if (wide) scaledw = 200; 
         
         var thinness = $(this).data('th');
-        $(this).attr('src', './imgen/routeletter/' + t + '/' + l + '.svg?c=1&k=' + kleurschema + '&h=' + Math.round(scaledh) + '&lines=' + liniatuur + '&w=' + Math.round(scaledw) + (skew ? '&s='+skew : '') + (noentrystrokes ? '&e=1' : '') + (thinness ? '&th='+thinness : ''));
+        $(this).attr('src', '../webapps/imgen/routeletter/' + t + '/' + l + '.svg?c=1&k=' + kleurschema + '&h=' + Math.round(scaledh) + '&lines=' + liniatuur + '&w=' + Math.round(scaledw) + (skew ? '&s='+skew : '') + (noentrystrokes ? '&e=1' : '') + (thinness ? '&th='+thinness : ''));
         
         
       });
@@ -272,7 +272,7 @@
       // set page visibility
       $('.page').each(function() {
         if ($(this).data('ncols') == (wide ? ncols + 'w' : ncols)) {
-          $('#stylesheet_pagesize').attr('href', '/fonts/schoolschrift03/schoolschrijver_' + $(this).data('stylesheet') + '.css');
+          $('#stylesheet_pagesize').attr('href', '../webapps/papersize_' + $(this).data('stylesheet') + '.css');
           $(this).parent().css('display', 'block');
         } else {
           $(this).parent().css('display', 'none');
@@ -500,41 +500,41 @@
   <h3>Analysis type</h3>
 
   <div class="routetype switch_routetype" data-routetype="arrowstart" title="Pijlen: het startpunt is aangegeven"/>
-    <img src="./imgen/routeletter/arrowstart/h.svg" />
+    <img src="../webapps/imgen/routeletter/arrowstart/h.svg?lines=0" />
   </div>
   <div class="routetype switch_routetype" data-routetype="arrows" title="Pijlen en gestapelde contouren"/>
-    <img src="./imgen/routeletter/arrows/h.svg" />
+    <img src="../webapps/imgen/routeletter/arrows/h.svg?lines=0" />
   </div>
   <div class="routetype switch_routetype" data-routetype="arrows2" title="Pijlen en overlappende sporen"/>
-    <img src="./imgen/routeletter/arrows2/h.svg" />
+    <img src="../webapps/imgen/routeletter/arrows2/h.svg?lines=0" />
   </div>
   <div class="routetype switch_routetype" data-routetype="arrows3" title="Pijlen en 'gestapelde' contouren met hartlijnen"/>
-    <img src="./imgen/routeletter/arrows3/h.svg" />
+    <img src="../webapps/imgen/routeletter/arrows3/h.svg?lines=0" />
   </div>
   <div class="routetype switch_routetype" data-routetype="stoplicht" title="Stippen en gestapelde contouren"/>
-    <img src="./imgen/routeletter/stoplicht/h.svg" />
+    <img src="../webapps/imgen/routeletter/stoplicht/h.svg?lines=0" />
   </div>
   <div class="routetype switch_routetype" data-routetype="stoplicht2" title="Stippen en overlappende sporen"/>
-    <img src="./imgen/routeletter/stoplicht2/h.svg" />
+    <img src="../webapps/imgen/routeletter/stoplicht2/h.svg?lines=0" />
   </div>
   <div class="routetype switch_routetype" data-routetype="outline" title="Lege letter: maak je eigen analyse"/>
-    <img src="./imgen/routeletter/outline/h.svg" />
+    <img src="../webapps/imgen/routeletter/outline/h.svg?lines=0" />
   </div>
 
 
 
   <h3 class="clear">Guidelines & slant</h3>
 
-  <div class="liniatuur switch_liniatuur" data-liniatuur="0"><img src="./imgen/routeletter/stroke/h.svg?lines=0&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="1"><img src="./imgen/routeletter/stroke/h.svg?lines=1&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="2"><img src="./imgen/routeletter/stroke/h.svg?lines=2&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="3"><img src="./imgen/routeletter/stroke/h.svg?lines=3&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="7"><img src="./imgen/routeletter/stroke/h.svg?lines=7&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="8"><img src="./imgen/routeletter/stroke/h.svg?lines=8&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="9"><img src="./imgen/routeletter/stroke/h.svg?lines=9&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="13"><img src="./imgen/routeletter/stroke/h.svg?lines=13&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="14"><img src="./imgen/routeletter/stroke/h.svg?lines=14&h=60&w=30" /></div>
-  <div class="liniatuur switch_liniatuur" data-liniatuur="15"><img src="./imgen/routeletter/stroke/h.svg?lines=15&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="0"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=0&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="1"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=1&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="2"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=2&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="3"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=3&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="7"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=7&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="8"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=8&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="9"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=9&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="13"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=13&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="14"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=14&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="15"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=15&h=60&w=30" /></div>
 
   <table class="rh4 settings-table">
     <tr>
@@ -547,15 +547,15 @@
           
   <h3 class="clear">Color scheme</h3>
 
-  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="zwartwit" title="Zwart op wit, of gradiënt van zwart naar wit"><img src="/fonts/loblosch/routeletter/a/kleurschema?k=zwartwit&h=30" /></div>
-  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="witzwart" title="Wit op zwart, of gradiënt van wit naar zwart"><img src="/fonts/loblosch/routeletter/a/kleurschema?k=witzwart&h=30" /></div>
-  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="grijswit" title="Grijs op wit. Grijze stippen/pijlen kunnen na het printen overgetrokken worden met gekleurde pen. Niet geschikt voor gradiënten."><img src="/fonts/loblosch/routeletter/a/kleurschema?k=grijswit&h=30" /></div>
-  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht" title="Groen - oranje - rood - grijs: elke haal een nieuwe kleur."><img src="/fonts/loblosch/routeletter/a/kleurschema?k=stoplicht&h=30" /></div>
-  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht2" title="Groen - geel - oranje - rood: elke haal een nieuwe kleur."><img src="/fonts/loblosch/routeletter/a/kleurschema?k=stoplicht2&h=30" /></div>
-  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht3" title="Groen - blauw - paars - rood: elke haal een nieuwe kleur."><img src="/fonts/loblosch/routeletter/a/kleurschema?k=stoplicht3&h=30" /></div>
-  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht" title="Groen - oranje - rood - grijs, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="/fonts/loblosch/routeletter/a/kleurschema?k=zwartstoplicht&h=30" /></div>
-  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht2" title="Groen - geel - oranje - rood, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="/fonts/loblosch/routeletter/a/kleurschema?k=zwartstoplicht2&h=30" /></div>
-  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht3" title="Groen - blauw - paars - rood, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="/fonts/loblosch/routeletter/a/kleurschema?k=zwartstoplicht3&h=30" /></div>
+  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="zwartwit" title="Zwart op wit, of gradiënt van zwart naar wit"><img src="../webapps/imgen/routeletter/kleurschema/a?k=zwartwit&h=30" /></div>
+  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="witzwart" title="Wit op zwart, of gradiënt van wit naar zwart"><img src="../webapps/imgen/routeletter/kleurschema/a?k=witzwart&h=30" /></div>
+  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="grijswit" title="Grijs op wit. Grijze stippen/pijlen kunnen na het printen overgetrokken worden met gekleurde pen. Niet geschikt voor gradiënten."><img src="../webapps/imgen/routeletter/kleurschema/a?k=grijswit&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht" title="Groen - oranje - rood - grijs: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=stoplicht&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht2" title="Groen - geel - oranje - rood: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=stoplicht2&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht3" title="Groen - blauw - paars - rood: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=stoplicht3&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht" title="Groen - oranje - rood - grijs, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=zwartstoplicht&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht2" title="Groen - geel - oranje - rood, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=zwartstoplicht2&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht3" title="Groen - blauw - paars - rood, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=zwartstoplicht3&h=30" /></div>
   
   <h3 class="clear">Entry strokes</h3>
   <table class="rh4 settings-table">
@@ -572,7 +572,9 @@
     <div class="clickable_letter" data-letter='a'></div>
     <div class="clickable_letter" data-letter='b'></div>
     <div class="clickable_letter" data-letter='c'></div>
-    <div class="clickable_letter" data-letter='d'></div>
+    <div class="clickable_letter" data-letter='d'>
+      <div class="clickable_variant" data-variantname='d-alt1' data-cogncur-stick-variant=1></div>
+    </div>
     <div class="clickable_letter" data-letter='e'></div>
     <div class="clickable_letter" data-letter='f'>
       <div class="clickable_variant" data-variantname='f-alt1' data-cogncur-f-connection-variant=1></div>
