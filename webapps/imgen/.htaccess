@@ -1,0 +1,41 @@
+RewriteEngine On
+
+RewriteCond "%{REQUEST_FILENAME}.html" -f
+RewriteRule ^([a-zA-Z0-9_\-]+)$ "$1.html" [L]
+
+RewriteCond "%{REQUEST_FILENAME}.php" -f
+RewriteRule ^([a-zA-Z0-9_\-]+)$ "$1.php" [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^$ index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(routeletter)$ routeletter.php [QSA,L]
+
+# extension = output format (o=)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^routeletter\.([a-zA-Z]+)$ routeletter.php?o=$1 [QSA,L]
+
+# One path argument: letter
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^routeletter/([^/.]+)$ routeletter.php?l=$1 [QSA,L]
+# routeletter.png/a
+RewriteRule ^routeletter\.([a-zA-Z]+)/([^/.]+)$ routeletter.php?o=$1&l=$2 [QSA,L]
+# routeletter/a.png
+RewriteRule ^routeletter/([^/.]+)\.([a-zA-Z]+)$ routeletter.php?l=$1&o=$2 [QSA,L]
+
+# Two path arguments: template and letter
+# routeletter/arrows2/a
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^routeletter/([^/.]+)/([^/.]+)$ routeletter.php?t=$1&l=$2 [QSA,L]
+# routeletter.png/arrows2/a
+RewriteRule ^routeletter\.([a-zA-Z]+)/([^/.]+)/([^/.]+)$ routeletter.php?o=$1&t=$2&l=$3 [QSA,L]
+# routeletter/arrows2/a.png
+RewriteRule ^routeletter/([^/.]+)/([^/.]+)\.([a-zA-Z]+)$ routeletter.php?t=$1&l=$2&o=$3 [QSA,L]
+
+# animation/a
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^animation/([^/.]+)$ animation.php?l=$1 [QSA,L]
+# animation/a/3 (lines=3)
+RewriteRule ^animation/([^/.]+)/([0-9]+)$ animation.php?l=$1&lines=$2 [QSA,L]
+

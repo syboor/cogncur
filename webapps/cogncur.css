@@ -82,6 +82,11 @@ b, strong {
   --cursive-font-family: "CogncurEdged";
   --cursive-start-font-family: "Cogncur-Start"; /* We don't have starting points for Edged fonts */
 }
+:root {
+  --baseline-width: 2px;
+  --rompline-width: 2px;
+  --otherlines-width: 2px;
+}
 :root,
   .blacklines .defaultlines,
   .blueredlines .defaultlines,
@@ -364,8 +369,8 @@ b, strong {
   position: absolute;
   top: .33em;
   height: .325em; /* why??? */
-  border-bottom: 2px solid var(--baseline-color);
-  border-top: 2px dashed var(--otherlines-color);
+  border-bottom: var(--baseline-width) solid var(--baseline-color);
+  border-top: var(--rompline-width) dashed var(--otherlines-color);
   background-color: var(--rompzone-color);
   z-index: -99;
 }
@@ -373,9 +378,13 @@ b, strong {
   border-left: 1px dotted var(--romphoogtelijn-color);
 }
 
+.rh2, .rh2_67, .rh3, .rh4, .rh5, .rh6, .rh7, .thin {
+  --baseline-width: 1px;
+  --rompline-width: 1px;
+  --otherlines-width: 1px;
+}
+
 .rh2 .baselines, .rh2_67 .baselines, .lhwide .baselines, .rh3 .baselines, .lh2 .baselines, .rh4 .baselines, .lh3 .baselines {
-  border-bottom-width: 1px;
-  border-top-width: 1px;
   height: .3em;
 }
 .lh3 .baselines {
@@ -416,8 +425,8 @@ b, strong {
   width: 100%;
   position: absolute;
   top: 0em;
-  border-top: 2px solid var(--otherlines-color);
-  border-bottom: 2px solid var(--otherlines-color); 
+  border-top: var(--otherlines-width) solid var(--otherlines-color);
+  border-bottom: var(--otherlines-width) solid var(--otherlines-color); 
   height: 1em;
   box-sizing: border-box;
   z-index: -99;

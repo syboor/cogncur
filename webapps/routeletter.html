@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cogncur Letter Formation</title>
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="../webapps/cogncur.css" />
+  <link id="stylesheet_pagesize" rel="stylesheet" type="text/css" href="../webapps/papersize_a4.css" />
+  <script src="/js/jquery-3.7.0.min.js"></script>
+  <script src="../webapps/cogncur_converter.js?v=20231229"></script><!-- functions for converting text to Cogncur glyphs -->
+  <script src="../webapps/cogncur_lines.js?v=20220222"></script>
+  <script>
+  var URIHash =
+  {
+    /**
+     * Copyright 2009 by David Kerkeslager
+     * Released under the BSD License (http://davidkerkeslager.com/license.txt).
+     *
+     * This library defines an object-literal which allows one to store key/value pairs after the hash (#) in the URI.
+     * The syntax of the storage is modeled after the way that GET variables are stored after the question mark (?) in
+     * the URI.
+     *
+     * Example URI: "http://www.foo.com/index.html#foo=bar&baz=quux"
+     *
+     * Note: it should be obvious that this should not be used for storing private data of any kind.
+     */
+
+   /**
+     * Dump the contents of the URI hash into an associative array. If the hash is invalid, the method returns
+     * undefined.
+     */
+    dump : function()
+    {
+        var hash = document.location.hash;
+        var dump = new Array();
+
+        if(hash.length == 0) return dump;
+
+        hash = hash.substring(1).split('&');
+
+        for(var key in hash)
+        {
+            var pair = hash[key].split('=');
+
+            if(pair.length != 2 || pair[0] in dump)
+                return undefined;
+
+            // escape for storage
+            dump[unescape(pair[0])] = unescape(pair[1]);
+        }
+
+        return dump;
+    },
+
+    /**
+     * Takes an associative array and stores it in the URI as a hash after the # prefix, replacing any pre-
+     * existing hash.
+     */
+    load : function(array)
+    {
+        var first = true;
+        var hash = '';
+
+        for(var key in array)
+        {
+            if(!first) hash += '&';
+            hash += escape(key) + '=' + escape(array[key]);
+        }
+
+        document.location.hash = hash;
+    },
+
+    /**
+     * Get the value of a key from the hash.  If the hash does not contain the key or the hash is invalid,
+     * the function returns undefined.
+     */
+    get : function(key)
+    {
+        return this.dump()[key];
+    },
+
+    /**
+     * Set the value of a key in the hash.  If the key does not exist, the key/value pair is added.
+     */
+    set : function(key,value)
+    {
+        var dump = this.dump();
+        dump[key] = value;
+
+        var hash = new Array();
+        
+        for(var key in dump)
+            hash.push(escape(key) + '=' + escape(dump[key]));
+
+        document.location.hash = hash.join('&');
+    }
+  }   
+  
+  /* https://stackoverflow.com/questions/4106809/how-can-i-change-an-elements-text-without-changing-its-child-elements/4106957#4106957 */
+  jQuery.fn.textNodes = function() {
+    return this.contents().filter(function() {
+    return (this.nodeType === Node.TEXT_NODE && this.nodeValue.trim() !== "");
+    });
+  }
+
+  var hash;
+  var kleurschema;
+  var liniatuur;
+  var letter;
+  var variant;
+  var minimal;
+  var alternative; // alternative stroke order 0 = emphasize direction 1 = emphasize no pencil lifts
+  var skew;
+  var ncols;
+  var routetype;
+  var wide; // whether this in an extra wide letter (not fitting in standard template
+  var noentrystrokes; 
+ 
+  jQuery(document).ready(function ($) {
+
+    function init_from_hash() { // This can be redone at will, and should be everytime the hash changes
+      hash = URIHash.dump();
+      kleurschema = (hash.k ? hash.k : 'stoplicht');
+      routetype = (hash.t ? hash.t : 'arrowstart');
+      skew = (hash.s && hash.s == '0' || hash.s == '2' ? hash.s : 1);
+      letter = (hash.l && hash.l.length <= 5) ? hash.l : 'a';
+      liniatuur = (hash.lines ? hash.lines : 1);
+      variant = (hash.v && hash.v.length <= 8) ? hash.v : '';
+      noentrystrokes = (hash.e == '1' ? 1 : 0);
+      ncols = (hash.x && (hash.x == '1' || hash.x == '2' || hash.x == '3') ? hash.x : 1);
+      
+      wide = false;      
+
+      update_letters(); // do this before cloning the variants of the currently selected letter
+
+      /* Find which letter or variant was selected and select it, show the variants, select the variant */
+      $('.clickable_letter').removeClass('selected');
+      $('.clickable_letter').each(function () {
+          // console.log(letter, $(this).find('span').text());
+          if ($(this).find('.clickable_variant').first().data('variantname') == letter) {
+            $(this).addClass('selected');
+
+            // Show the available variants for this letter
+            var variants = $(this).find('.clickable_variant');
+            $('#variants').empty();
+            $('#variants').append(variants.clone(true));
+            $('#variants .clickable_variant').click(select_variant); // set event handler
+            
+            // Select the correct variant (iff the user selected one)
+            var found = false;
+            $('#variants .clickable_variant').removeClass('selected');
+            if (variant) {
+              $('#variants .clickable_variant').each(function () {
+                if ($(this).data('variantname') == variant) {
+                  $(this).addClass('selected');
+                  if ($(this).data('wide')) wide = true;
+                  found=true;
+                }
+              });
+            }
+            if (!found) {
+              $('#variants .clickable_variant').first().addClass('selected');
+              if ($('#variants .clickable_variant').first().data('wide')) wide = true;
+            }
+            $('#variants_cont').show();
+          } else if ($(this).data('letter') == letter) {
+            $(this).addClass('selected');
+            if ($(this).data('wide')) wide = true;
+            $('#variants').empty();
+            $('#variants_cont').hide();
+            variant = null;
+          }
+          
+      });
+      show_letter();
+      show_settings(); 
+    }
+    $(window ).on( 'hashchange', function( e ) {
+      init_from_hash();
+    });    
+    init_letters(); // should be done only once
+    init_from_hash();
+    
+    $('.clickable_letter').click(function () {
+      letter = $(this).find('.clickable_variant').first().data('variantname'); 
+      if (!letter) letter = $(this).data('letter');
+
+      URIHash.set('l', letter);
+      URIHash.set('v', '');
+      return false;
+    });
+    $('.aantal').click(function () {
+      ncols = $(this).data('x');
+      URIHash.set('x', ncols);
+      return false;
+    });
+    function select_variant() {
+      variant = $(this).data('variantname');
+      
+      $('.clickable_variant').removeClass('selected');
+      $(this).addClass('selected');
+
+      show_letter();
+      URIHash.set('l', letter);
+      URIHash.set('v', variant);
+      return false;
+    };
+    // Initialize the DOM structure for letters and variants
+    function init_letters() {
+      $('#letters .clickable_letter').each(function(index, el) {
+        if ($(el).find('.clickable_variant').length) {
+          // add the letter as a clickable variant
+          var variantdiv = $('<div class="clickable_variant"></div>').data('variantname', $(el).data('letter')).data('wide', $(el).data('wide'));
+          variantdiv.prependTo(el);
+        }
+        $(el).find('.clickable_variant').each(function( index, elv) {
+          $(elv).data('letter', $(el).data('letter'));
+        });
+
+        var letterspan = $('<span class="generated_letter"></span>');
+        letterspan.prependTo(el);
+        
+        update_letters();
+      });
+      
+    }
+    // Re-convert the letters based on current settings (entry strokes)
+    function update_letters() {
+      converter = get_cogncur_converter({entrystrokes: noentrystrokes});
+      $('#letters .generated_letter').each(function(index, el) {
+        var letter = $(el).closest('.clickable_letter').data('letter');
+        $(el).text(converter.convert(letter));
+      });
+      $('#letters .clickable_variant').each(function(index, el) {
+        converter = get_cogncur_converter({entrystrokes: noentrystrokes}, el);
+        var letter = $(el).closest('.clickable_letter').data('letter');
+        $(el).text(converter.convert(letter));
+      });
+    }
+    
+    // Toon de gekozen letter (plaats deze in alle cells)
+    function show_letter() {
+      set_image_urls();
+    }
+    function set_image_urls() {
+      var h = $('.letterstrips').width() / 6;
+      var emw = 750; // This is the width per letterframe in em, not in pixel
+      $('.img_letterstrip').each(function() {
+        var l = variant || letter;
+        var t = routetype;
+        if (minimal) l = 'min' + l;
+        if (alternative) l = 'alt' + l;
+
+        // Create the url for the img. Should be PNG to allow drag and drop.
+        if ($(this).data('frame')) t = t + '_frame' + $(this).data('frame');
+
+        // SVG: high quality printing
+        // disadvantage: no drag and drop
+        // Since the exact heigh and width don't matter, only the aspect ratio, scale the requested dimensions to a 
+        // consistent height to increase opportunities for caching.
+        var scaledh = 200;
+        var scaledw = 140;
+        if (wide) scaledw = 200; 
+        
+        var thinness = $(this).data('th');
+        $(this).attr('src', '../webapps/imgen/routeletter/' + t + '/' + l + '.svg?c=1&k=' + kleurschema + '&h=' + Math.round(scaledh) + '&lines=' + liniatuur + '&w=' + Math.round(scaledw) + (skew ? '&s='+skew : '') + (noentrystrokes ? '&e=1' : '') + (thinness ? '&th='+thinness : ''));
+        
+        
+      });
+      
+      // set page visibility
+      $('.page').each(function() {
+        if ($(this).data('ncols') == (wide ? ncols + 'w' : ncols)) {
+          $('#stylesheet_pagesize').attr('href', '../webapps/papersize_' + $(this).data('stylesheet') + '.css');
+          $(this).parent().css('display', 'block');
+        } else {
+          $(this).parent().css('display', 'none');
+        }
+      });
+      
+    }
+    
+    function show_settings() {
+      $('.kleurschema').removeClass('active');
+      $('.kleurschema[data-kleurschema='+kleurschema+']').addClass('active');
+      $('.routetype').removeClass('active');
+      $('.routetype[data-routetype='+routetype+']').addClass('active');
+      $('.liniatuur').removeClass('active');
+      $('.liniatuur[data-liniatuur='+liniatuur+']').addClass('active');
+      $('.aantal').removeClass('selected');
+      $('.aantal[data-x='+ncols+']').addClass('selected');
+      $('.noentry-setting').removeClass('selected');
+      $('.noentry-setting[data-cogncur-entrystrokes='+noentrystrokes+']').addClass('selected');
+      $('.skew-setting').removeClass('selected');
+      $('.skew-setting[data-cogncur-skew='+skew+']').addClass('selected');
+      $('#letters, #variants, .noentry-setting').removeClass('cogncuroblique').removeClass('cogncurvertical');
+      if (skew == 2) {
+        $('#letters, #variants, .noentry-setting').addClass('cogncuroblique');
+      } else if (skew == 0) {
+        $('#letters, #variants, .noentry-setting').addClass('cogncurvertical');
+      }     
+      if (wide) {
+        $('.aantal').hide();
+        $('.aantal[data-wide]').show();
+      } else {
+        $('.aantal').show();
+        $('.aantal[data-wide]').hide();
+      }      
+    }
+    
+    $('.switch_kleurschema').click(function () {
+      kleurschema = $(this).data('kleurschema');
+      URIHash.set('k', kleurschema);
+    });
+    
+    $('.switch_routetype').click(function () {
+      routetype = $(this).data('routetype');
+      URIHash.set('t', routetype);
+    });
+    
+    $('.switch_liniatuur').click(function () {
+      liniatuur = $(this).data('liniatuur');
+      URIHash.set('lines', liniatuur);
+    });
+
+    $('.skew-setting').click(function () {
+      if ($(this).data('cogncur-skew')) {
+        skew = $(this).data('cogncur-skew');
+      } else {
+        skew = 0;
+      }
+      URIHash.set('s', skew);
+    });
+    $('.noentry-setting').click(function () {
+      if ($(this).data('cogncur-entrystrokes')) {
+        noentrystrokes = 1;
+      } else {
+        noentrystrokes = 0;
+      }
+      URIHash.set('e', noentrystrokes);
+      update_letters();
+    });
+
+
+    set_image_urls();
+    
+
+    $('[name=print]').click(function() { window.print(); });
+    
+    $(window).resize(set_image_urls);
+  });
+  </script>
+  <style>
+    .kleurschema {
+      border: 2px solid #999;
+      width: 105px;
+      height: 30px;
+      float: left;
+      margin-right: 20px;
+      margin-bottom: 20px;
+    }
+    .kleurschema_single {
+      width: 30px;
+      overflow: hidden;
+    }
+    .kleurschema:hover {
+      border: 2px solid #00701838;
+    }
+    .kleurschema.active {
+      border: 2px solid rgba(0, 253, 55, .5);
+    }
+    .routetype {
+      border: 2px solid #999;
+      width: 80px;
+      height: 112px;
+      overflow: hidden;
+      float: left;
+      margin-right: 20px;
+      margin-bottom: 20px;
+    }
+    .routetype:hover {
+      border: 2px solid #00701838;
+    }
+    .routetype.active {
+      border: 2px solid rgba(0, 253, 55, .5);
+      background-color: rgba(0, 254, 55, .05); 
+    }
+    .liniatuur {
+      border: 2px solid #999;
+      width: 30px;
+      height: 65px;
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      padding-top: 5px;
+    }
+    .liniatuur:hover {
+      border: 2px solid #00701838;
+    }
+    .liniatuur.active {
+      border: 2px solid rgba(0, 253, 55, .5);
+      background-color: rgba(0, 254, 55, .05); 
+    }
+    
+    .clickable_letter, .clickable_variant, .aantal {
+      float: left;
+      border: 1px solid #999;
+      margin: 0px;
+      padding: 2px 0px 2px 0px;
+      box-sizing: border-box;
+      min-width: 1.2em;
+      text-align: center;
+    }
+    .clickable_letter:hover, .clickable_variant:hover, .aantal:hover {
+      background-color: rgba(0,0,0,.08);
+      border: 1px solid #555;
+    } 
+    .clickable_letter.selected, .clickable_variant.selected, .aantal.selected {
+        background-color: #9bf7af;
+        border: 1px solid #555;
+      } 
+    .clickable_letter .clickable_variant {
+      display: none;
+    }
+
+    .setting {
+      float: left;
+      margin: 0 10px 0 10px;
+    }
+    .setting h3 {
+      margin: .5em 0 0 0;
+    }
+    table.settings-table {
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    table.settings-table > tbody > tr > td {
+      border: 1px solid #999;
+      margin: 0px;
+      padding: 2px 10px 2px 10px;
+      box-sizing: border-box;
+    }
+    table.settings-table > tbody > tr > td:hover, .button:hover {
+      background-color: rgba(0,0,0,.08);
+      border: 1px solid #555;
+    } 
+    table.settings-table > tbody > tr > td.selected, button.selected {
+      background-color: rgba(0, 253, 55, 0.22);
+      border: 1px solid #555;
+    } 
+    .icon-continuous {
+      background-image: url("pen_with_stroke_icon_40.png");
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      background-size: 40%;
+    }
+    .icon-direction {
+      background-image: url("arrows_icon_40.png");
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      background-size: 40%;
+    }
+    
+    .ni { color: darkred}; 
+    
+    
+    @media print {
+      table.letterstrips img {
+        width: 100%;
+        object-fit: contain;
+      }
+      .ui {
+        display: none;
+      }
+      body {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+      }
+      table.letterstrips td img {
+        height: 2.78cm;
+      }
+      table.letterstrips {
+        width: 92%; /* The height of the A4 paper sheet is the limiting factor. Set the width too high, and wide image strips won't line up horizontally with other image strips anymore. Set this too low and the height of the small image strips will shrink. We err on the side of slightly too wide. */
+        margin: 0 auto 0 auto;
+      }
+      
+    }
+
+    
+  </style>
+</head>
+<body class="wide">
+<div class="ui">
+  <div class="crumbs"><a href="/">Cogncur.com</a> &gt; <a href="/letterformation/">Letter formation</a> &gt; Per letter</div>
+
+  <h1>Cogncur Letter Formation, per letter</h2>
+
+  <h3>Analysis type</h3>
+
+  <div class="routetype switch_routetype" data-routetype="arrowstart" title="Pijlen: het startpunt is aangegeven"/>
+    <img src="../webapps/imgen/routeletter/arrowstart/h.svg?lines=0" />
+  </div>
+  <div class="routetype switch_routetype" data-routetype="arrows" title="Pijlen en gestapelde contouren"/>
+    <img src="../webapps/imgen/routeletter/arrows/h.svg?lines=0" />
+  </div>
+  <div class="routetype switch_routetype" data-routetype="arrows2" title="Pijlen en overlappende sporen"/>
+    <img src="../webapps/imgen/routeletter/arrows2/h.svg?lines=0" />
+  </div>
+  <div class="routetype switch_routetype" data-routetype="arrows3" title="Pijlen en 'gestapelde' contouren met hartlijnen"/>
+    <img src="../webapps/imgen/routeletter/arrows3/h.svg?lines=0" />
+  </div>
+  <div class="routetype switch_routetype" data-routetype="stoplicht" title="Stippen en gestapelde contouren"/>
+    <img src="../webapps/imgen/routeletter/stoplicht/h.svg?lines=0" />
+  </div>
+  <div class="routetype switch_routetype" data-routetype="stoplicht2" title="Stippen en overlappende sporen"/>
+    <img src="../webapps/imgen/routeletter/stoplicht2/h.svg?lines=0" />
+  </div>
+  <div class="routetype switch_routetype" data-routetype="outline" title="Lege letter: maak je eigen analyse"/>
+    <img src="../webapps/imgen/routeletter/outline/h.svg?lines=0" />
+  </div>
+
+
+
+  <h3 class="clear">Guidelines & slant</h3>
+
+  <div class="liniatuur switch_liniatuur" data-liniatuur="0"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=0&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="1"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=1&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="2"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=2&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="3"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=3&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="7"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=7&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="8"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=8&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="9"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=9&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="13"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=13&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="14"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=14&h=60&w=30" /></div>
+  <div class="liniatuur switch_liniatuur" data-liniatuur="15"><img src="../webapps/imgen/routeletter/stroke/h.svg?lines=15&h=60&w=30" /></div>
+
+  <table class="rh4 settings-table">
+    <tr>
+      <td class="cogncurvertical skew-setting cursive rh4 selected" data-cogncur-skew=0 title="vertical">Vertical</td>      
+      <td class="skew-setting cursive rh4" data-cogncur-skew=1 title="regular">Regular</td>      
+      <td class="cogncuroblique skew-setting cursive rh4" data-cogncur-skew=2 title="oblique">Oblique</td>      
+    </tr>
+  </table>
+
+          
+  <h3 class="clear">Color scheme</h3>
+
+  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="zwartwit" title="Zwart op wit, of gradiënt van zwart naar wit"><img src="../webapps/imgen/routeletter/kleurschema/a?k=zwartwit&h=30" /></div>
+  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="witzwart" title="Wit op zwart, of gradiënt van wit naar zwart"><img src="../webapps/imgen/routeletter/kleurschema/a?k=witzwart&h=30" /></div>
+  <div class="kleurschema switch_kleurschema kleurschema_single" data-kleurschema="grijswit" title="Grijs op wit. Grijze stippen/pijlen kunnen na het printen overgetrokken worden met gekleurde pen. Niet geschikt voor gradiënten."><img src="../webapps/imgen/routeletter/kleurschema/a?k=grijswit&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht" title="Groen - oranje - rood - grijs: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=stoplicht&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht2" title="Groen - geel - oranje - rood: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=stoplicht2&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="stoplicht3" title="Groen - blauw - paars - rood: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=stoplicht3&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht" title="Groen - oranje - rood - grijs, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=zwartstoplicht&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht2" title="Groen - geel - oranje - rood, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=zwartstoplicht2&h=30" /></div>
+  <div class="kleurschema switch_kleurschema" data-kleurschema="zwartstoplicht3" title="Groen - blauw - paars - rood, op zwarte achtergrond: elke haal een nieuwe kleur."><img src="../webapps/imgen/routeletter/kleurschema/a?k=zwartstoplicht3&h=30" /></div>
+  
+  <h3 class="clear">Entry strokes</h3>
+  <table class="rh4 settings-table">
+    <tr>
+      <td class="noentry-setting cursive rh4 selected" data-cogncur-entrystrokes=0 title="From the baseline">a i m</td>      
+      <td class="noentry-setting cursive rh4" data-cogncur-entrystrokes=1 title="Short entry strokes">a i m</td>      
+    </tr>
+  </table>
+  
+
+  <h3 class="clear">Letter</h3>
+  <div id="letters" class="rh4 rawcursive">    
+
+    <div class="clickable_letter" data-letter='a'></div>
+    <div class="clickable_letter" data-letter='b'></div>
+    <div class="clickable_letter" data-letter='c'></div>
+    <div class="clickable_letter" data-letter='d'>
+      <div class="clickable_variant" data-variantname='d-alt1' data-cogncur-stick-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='e'></div>
+    <div class="clickable_letter" data-letter='f'>
+      <div class="clickable_variant" data-variantname='f-alt1' data-cogncur-f-connection-variant=1></div>
+      <div class="clickable_variant" data-variantname='f-alt2' data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1></div>
+      <div class="clickable_variant" data-variantname='f-alt3' data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1></div>
+      <div class="clickable_variant" data-variantname='f-alt4' data-cogncur-f-connection-variant=0 data-cogncur-f-continuity-variant=1 data-cogncur-stick-variant=1></div>
+      <div class="clickable_variant" data-variantname='f-alt5' data-cogncur-f-connection-variant=1 data-cogncur-f-continuity-variant=1 data-cogncur-stick-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='g'></div>
+    <div class="clickable_letter" data-letter='h'></div>
+    <div class="clickable_letter" data-letter='i'></div>
+    <div class="clickable_letter" data-letter='j'></div>
+    <div class="clickable_letter" data-letter='k'></div>
+    <div class="clickable_letter" data-letter='l'></div>
+    <div class="clickable_letter" data-letter='m' data-wide=1></div>
+    <div class="clickable_letter" data-letter='n'></div>
+    <div class="clickable_letter" data-letter='o'></div>
+    <div class="clickable_letter" data-letter='p'>
+      <div class="clickable_variant" data-variantname='p-alt1' data-cogncur-exitstrokes=1></div>
+      <div class="clickable_variant" data-variantname='p-alt2' data-cogncur-p-open-variant=1></div>
+      <div class="clickable_variant" data-variantname='p-alt3' data-cogncur-p-curve-variant=1></div>
+      <div class="clickable_variant" data-variantname='p-alt4' data-cogncur-p-curve-variant=1 data-cogncur-exitstrokes=1></div>
+      <div class="clickable_variant" data-variantname='p-alt5' data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=1></div>
+      <div class="clickable_variant" data-variantname='p-alt6' data-cogncur-stick-variant=1></div>
+      <div class="clickable_variant" data-variantname='p-alt7' data-cogncur-exitstrokes=1 data-cogncur-stick-variant=1></div>
+      <div class="clickable_variant" data-variantname='p-alt8' data-cogncur-p-open-variant=1 data-cogncur-exitstrokes=1 data-cogncur-stick-variant=1></div>
+      <div class="clickable_variant" data-variantname='p-alt9' data-cogncur-p-curve-variant=1 data-cogncur-exitstrokes=1 data-cogncur-stick-variant=1></div>
+      <div class="clickable_variant" data-variantname='p-alt10' data-cogncur-p-curve-variant=1 data-cogncur-exitstrokes=1 data-cogncur-exitstrokes=1 data-cogncur-stick-variant=1></div>
+      <div class="clickable_variant" data-variantname='p-alt11' data-cogncur-p-curve-variant=1 data-cogncur-p-open-variant=1 data-cogncur-exitstrokes=1 data-cogncur-stick-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='q'>
+      <div class="clickable_variant" data-variantname='q-alt1' data-cogncur-q-connection-variant=1></div>
+      <div class="clickable_variant" data-variantname='q-alt2' data-cogncur-q-continuity-variant=1></div>
+      <div class="clickable_variant" data-variantname='q-alt3' data-cogncur-q-connection-variant=1 data-cogncur-stick-variant=1></div>
+      <div class="clickable_variant" data-variantname='q-alt4' data-cogncur-q-continuity-variant=1 data-cogncur-stick-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='r'>
+      <div class="clickable_variant" data-variantname='r-alt1' data-cogncur-rz-top-variant=1 ></div>
+      <div class="clickable_variant" data-variantname='r-alt2' data-cogncur-r-variant=1></div>
+      <div class="clickable_variant" data-variantname='r-alt3' data-cogncur-r-variant=1 data-cogncur-exitstrokes=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='s'>
+      <div class="clickable_variant" data-variantname='s-alt1' data-cogncur-exitstrokes=1></div>
+      <div class="clickable_variant" data-variantname='s-alt2' data-cogncur-s-variant=1></div>
+      <div class="clickable_variant" data-variantname='s-alt3' data-cogncur-s-variant=1 data-cogncur-exitstrokes=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='t'>
+      <div class="clickable_variant" data-variantname='t-alt1' data-cogncur-t-variant=1></div>
+      <div class="clickable_variant" data-variantname='t-alt2' data-cogncur-t-variant=2></div>
+    </div>
+
+    <div class="clickable_letter" data-letter='u'></div>
+    <div class="clickable_letter" data-letter='v'></div>
+    <div class="clickable_letter" data-letter='w' data-wide=1>
+      <div class="clickable_variant" data-variantname='w-alt1' data-cogncur-w-variant=1 data-wide=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='x'></div>
+    <div class="clickable_letter" data-letter='y'>
+      <div class="clickable_variant" data-variantname='y-alt1' data-cogncur-y-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='z'>
+      <div class="clickable_variant" data-variantname='z-alt1' data-cogncur-rz-top-variant=1></div>
+    </div>
+
+
+  </div>
+  
+  <div id="variants_cont">
+    <br class="clear">
+    <h3 class="clear">Variant</h3>
+    <div id="variants" class="rh5 rawcursive"></div>
+  </div>
+  
+  <br class="clear">
+  <h3 class="clear">How many per page?</h3>
+  <div class="aantal cursive rh4" data-x="1">1</div>
+  <div class="aantal cursive rh4" data-x="1" data-wide="1">1</div>
+  <div class="aantal cursive rh4" data-x="2">4</div>
+  <div class="aantal cursive rh4" data-x="2" data-wide="1">2</div>
+  <div class="aantal cursive rh4" data-x="3">9</div>
+  <div class="aantal cursive rh4" data-x="3" data-wide="1">6</div>
+  
+
+
+  <br class="clear"/><br/>
+  <input type="button" name="print" value="Print / Download">
+</div>
+
+<div class="page a4" data-ncols="1" data-stylesheet="a4">
+  <img class="img_letterstrip" data-th="2" style="height: 26.5cm; object-fit: cover; margin-top: 5mm">
+</div>
+
+<!-- NB this 'wide' format is not suitable for letters with descenders -->
+<div class="page a4" data-ncols="1w" data-stylesheet="a4_landscape">
+  <img class="img_letterstrip" data-th="2" style="height: 26.5cm; object-fit: cover; margin-left: 5mm">
+</div>
+
+<div class="page a4" data-ncols="2" data-stylesheet="a4">
+  <div class="flexrow" style="justify-content: space-between; row-gap: 2.2cm">
+    <img class="img_letterstrip" data-th="1" style="height: 12.5cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 12.5cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 12.5cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 12.5cm; object-fit: cover;">
+  </div>
+</div>
+<div class="page a4" data-ncols="2w" data-stylesheet="a4">
+  <div class="flexrow" style="justify-content:center; row-gap: 2.2cm">
+    <img class="img_letterstrip" data-th="1" data-wide="1" style="height: 12.5cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" data-wide="1" style="height: 12.5cm; object-fit: cover;">
+  </div>
+</div>
+
+<div class="page a4" data-ncols="3" data-stylesheet="a4">
+  <div class="flexrow" style="justify-content: space-between; row-gap: 1.9cm">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" style="height: 7.8cm; object-fit: cover;">
+  </div>
+</div>
+<div class="page a4" data-ncols="3w" data-stylesheet="a4">
+  <div class="flexrow" style="justify-content: space-between; row-gap: 1.9cm">
+    <img class="img_letterstrip" data-th="1" data-wide="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" data-wide="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" data-wide="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" data-wide="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" data-wide="1" style="height: 7.8cm; object-fit: cover;">
+    <img class="img_letterstrip" data-th="1" data-wide="1" style="height: 7.8cm; object-fit: cover;">
+  </div>
+</div>
+
+
+</body>
+</html>
