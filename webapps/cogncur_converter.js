@@ -1725,6 +1725,10 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     // then, modify the connection from q to j (but only for the real after-q subtable, not for the copied after-z subtables)
     substitutions['after-q-continued']['j'] = glyphs['ccqj'] + 'j';
     substitutions['after-q-end']['j'] = glyphs['ccqj'] + 'j' + glyphs['ceg'];
+
+
+    substitutions['after-f1-continued']['j'] = glyphs['ccf1j'] + 'j';
+    substitutions['after-f1-end']['j'] = glyphs['ccf1j'] + 'j' + glyphs['ceg'];
   }
   
   function add_uppercase_alone() {

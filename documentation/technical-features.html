@@ -840,7 +840,7 @@
   <h3 id="glyphs_joins">Joins</h3>
   When adding entry strokes, letters were grouped together based on similar 'beginnings' of the letter, so <span class='letter'>b f k h k</span> form a group. When adding exit strokes, letters are grouped together based on similar 'endings' of the letter, so <span class='letter'>b v w</span> form a group. Joins connect the end of one letter to te beginning of the next, so they'll need to take into account both groupings.<br/>
   <br/>
-  That means that to find the correct join, one needs to look at both letters of the pair in a large table. A <i>partial</i>, incomplete version of such a table is given below:<br/>
+  That means that to find the correct join, one needs to look at both letters of the pair in a large table. All possible combinations, with up to two examples for each join, are shown in the table below:<br/>
 
   <table class="jointable" data-cogncur-ij-ligature=1>
     <tr>
@@ -849,21 +849,29 @@
     </tr>
     <tr>
       <th>first letter in pair 🡓</th>
-      <td><span class='cursive lh2'>i j p u w</span></td>
-      <td><span class='cursive lh2'>m n r v x y</span></td>
+      <td><span class='cursive lh2' data-cogncur-y-variant=1 data-cogncur-rz-top-variant=1>i j p r u<br/>w y z ß</span></td>
+      <td><span class='cursive lh2' data-cogncur-w-variant=1 data-cogncur-p-curve-variant=1>m n p r v<br/>w x y z</span></td>
       <td><span class='cursive lh2'>b f h k l</span></td>
       <td><span class='cursive lh2'>e</span></td>
       <td><span class='cursive lh2'>a d g q</span></td>
       <td><span class='cursive lh2'>c o</span></td>
+      <td><span class='cursive lh2'>s</span></td>
+      <td><span class='cursive lh2' data-cogncur-s-variant=1>s</span></td>
+      <td><span class='cursive lh2'>t</span></td>
+      <td><span class='cursive lh2' data-cogncur-t-variant=1>t</span></td>
     </tr>
     <tr>
-      <td><span class='cursive lh2'>a d h i k l m n <br/>r u x H K M R U X</span></td>
+      <td><span class='cursive lh2' data-cogncur-uppercase-amn-variant=2 data-cogncur-p-open-variant=1 data-cogncur-t-variant=1>a d h i k l m n p r t<br/>u x A H K</span> <span class='cursive lh2'>M</span> <span class='cursive lh2' data-cogncur-uppercase-amn-variant=2>M N R U</span></td>
       <td><code>ccni</code><br/><div class='rh4 line nolines red-connections traceable'>aw du</div></td>
       <td><code>ccnn</code><br/><div class='rh4 line nolines red-connections traceable'>my Un</div></td>
       <td><code>ccnh</code><br/><div class='rh4 line nolines red-connections traceable'>ll nk</div></td>
       <td><code>ccne</code><br/><div class='rh4 line nolines red-connections traceable'>he ie</div></td>
       <td><code>ccna</code><br/><div class='rh4 line nolines red-connections traceable'>dd xa</div></td>
       <td><code>ccno</code><br/><div class='rh4 line nolines red-connections traceable'>ho Ho</div></td>
+      <td><code>ccns</code><br/><div class='rh4 line nolines red-connections traceable'>is us</div></td>
+      <td><code>ccns1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>is us</div></td>
+      <td><code>ccnt</code><br/><div class='rh4 line nolines red-connections traceable'>it ut</div></td>
+      <td><code>ccnt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>it tt</div></td>
     </tr>
     <tr>
       <td><span class='cursive lh2'>b v w</span></td>
@@ -873,25 +881,167 @@
       <td><code>ccve</code><br/><div class='rh4 line nolines red-connections traceable'>ve we</div></td>
       <td><code>ccva</code><br/><div class='rh4 line nolines red-connections traceable'>ba va</div></td>
       <td><code>ccvo</code><br/><div class='rh4 line nolines red-connections traceable'>bo wc</div></td>
+      <td><code>ccvs</code><br/><div class='rh4 line nolines red-connections traceable'>bs vs</div></td>
+      <td><code>ccvs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>bs vs</div></td>
+      <td><code>ccvt</code><br/><div class='rh4 line nolines red-connections traceable'>bt wt</div></td>
+      <td><code>ccvt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>bt wt</div></td>
     </tr>
     <tr>
-      <td><span class='cursive lh2'>g j y ij G J Y</span></td>
+      <td><span class='cursive lh2'>o</span></td>
+      <td><code>ccoi</code><br/><div class='rh4 line nolines red-connections traceable'>oi ou</div></td>
+      <td><code>ccon</code><br/><div class='rh4 line nolines red-connections traceable'>on ox</div></td>
+      <td><code>ccoh</code><br/><div class='rh4 line nolines red-connections traceable'>of ob</div></td>
+      <td><code>ccoe</code><br/><div class='rh4 line nolines red-connections traceable'>oe</div></td>
+      <td><code>ccoa</code><br/><div class='rh4 line nolines red-connections traceable'>oa od</div></td>
+      <td><code>ccoo</code><br/><div class='rh4 line nolines red-connections traceable'>oc oo</div></td>
+      <td><code>ccos</code><br/><div class='rh4 line nolines red-connections traceable'>os</div></td>
+      <td><code>ccos1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>os</div></td>
+      <td><code>ccot</code><br/><div class='rh4 line nolines red-connections traceable'>ot</div></td>
+      <td><code>ccot1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>ot</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>g j y ij G J Y</span><br/><span class='cursive lh2' data-cogncur-y-variant=1 data-cogncur-uppercase-cgl-variant=1>y ij G J</span></td>
       <td><code>ccgi</code><br/><div class='rh4 line nolines red-connections traceable'>gu Yp</div></td>
       <td><code>ccgn</code><br/><div class='rh4 line nolines red-connections traceable'>gr yx</div></td>
       <td><code>ccgh</code><br/><div class='rh4 line nolines red-connections traceable'>Gl yk</div></td>
       <td><code>ccge</code><br/><div class='rh4 line nolines red-connections traceable'>je ye</div></td>
       <td><code>ccga</code><br/><div class='rh4 line nolines red-connections traceable'>gg yd</div></td>
       <td><code>ccgo</code><br/><div class='rh4 line nolines red-connections traceable'>Go yc</div></td>
+      <td><code>ccgs</code><br/><div class='rh4 line nolines red-connections traceable'>Ys gs</div></td>
+      <td><code>ccgs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>Ys gs</div></td>
+      <td><code>ccgt</code><br/><div class='rh4 line nolines red-connections traceable'>Gt yt</div></td>
+      <td><code>ccgt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>Gt yt</div></td>
     </tr>
     <tr>
-      <td><span class='cursive lh2'>c e C E L</span></td>
+      <td><span class='cursive lh2'>c e C E L</span><br/><span class='cursive lh2' data-cogncur-uppercase-cgl-variant=1>C L</span></td>
       <td><code>ccei</code><br/><div class='rh4 line nolines red-connections traceable'>ei cw</div></td>
       <td><code>ccen</code><br/><div class='rh4 line nolines red-connections traceable'>cr Ly</div></td>
       <td><code>cceh</code><br/><div class='rh4 line nolines red-connections traceable'>Cl ef</div></td>
       <td><code>ccee</code><br/><div class='rh4 line nolines red-connections traceable'>ce ee</div></td>
       <td><code>ccea</code><br/><div class='rh4 line nolines red-connections traceable'>Ea cq</div></td>
       <td><code>cceo</code><br/><div class='rh4 line nolines red-connections traceable'>ec co</div></td>
+      <td><code>cces</code><br/><div class='rh4 line nolines red-connections traceable'>es Es</div></td>
+      <td><code>cces1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>es Es</div></td>
+      <td><code>ccet</code><br/><div class='rh4 line nolines red-connections traceable'>et ct</div></td>
+      <td><code>ccet1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>et ct</div></td>
     </tr>
+    <tr>
+      <td><span class='cursive lh2'>t</span></td>
+      <td><code>ccti</code><br/><div class='rh4 line nolines red-connections traceable'>ti tu</div></td>
+      <td><code>cctn</code><br/><div class='rh4 line nolines red-connections traceable'>tr tx</div></td>
+      <td><code>ccth</code><br/><div class='rh4 line nolines red-connections traceable'>th tl</div></td>
+      <td><code>ccte</code><br/><div class='rh4 line nolines red-connections traceable'>te</div></td>
+      <td><code>ccta</code><br/><div class='rh4 line nolines red-connections traceable'>ta tg</div></td>
+      <td><code>ccto</code><br/><div class='rh4 line nolines red-connections traceable'>to tc</div></td>
+      <td><code>ccts</code><br/><div class='rh4 line nolines red-connections traceable'>ts</div></td>
+      <td><code>ccts1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>ts</div></td>
+      <td><code>cctt</code><br/><div class='rh4 line nolines red-connections traceable'>tt</div></td>
+      <td><i>N/A</i></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>s</span> <span class='cursive lh2' data-cogncur-s-variant=1>s</span></td>
+      <td><code>ccsi</code><br/><div class='rh4 line nolines red-connections traceable'>sp si</div></td>
+      <td><code>ccsn</code><br/><div class='rh4 line nolines red-connections traceable'>sn sr</div></td>
+      <td><code>ccsh</code><br/><div class='rh4 line nolines red-connections traceable'>sh sl</div></td>
+      <td><code>ccse</code><br/><div class='rh4 line nolines red-connections traceable'>se</div></td>
+      <td><code>ccsa</code><br/><div class='rh4 line nolines red-connections traceable'>sa sq</div></td>
+      <td><code>ccso</code><br/><div class='rh4 line nolines red-connections traceable'>sc so</div></td>
+      <td><code>ccss</code><br/><div class='rh4 line nolines red-connections traceable'>ss</div></td>
+      <td><i>N/A</i></td>
+      <td><code>ccst</code><br/><div class='rh4 line nolines red-connections traceable'>st</div></td>
+      <td><code>ccst1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>st</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>p ß</span></td>
+      <td><code>ccpi</code><br/><div class='rh4 line nolines red-connections traceable'>pi pp</div></td>
+      <td><code>ccpn</code><br/><div class='rh4 line nolines red-connections traceable'>pr pn</div></td>
+      <td><code>ccph</code><br/><div class='rh4 line nolines red-connections traceable'>ph pl</div></td>
+      <td><code>ccpe</code><br/><div class='rh4 line nolines red-connections traceable'>pe ße</div></td>
+      <td><code>ccpa</code><br/><div class='rh4 line nolines red-connections traceable'>pa pg</div></td>
+      <td><code>ccpo</code><br/><div class='rh4 line nolines red-connections traceable'>pc po</div></td>
+      <td><code>ccps</code><br/><div class='rh4 line nolines red-connections traceable'>ps ßs</div></td>
+      <td><code>ccps1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>ps ßs</div></td>
+      <td><code>ccpt</code><br/><div class='rh4 line nolines red-connections traceable'>pt ßt</div></td>
+      <td><code>ccpt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>pt ßt</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>f q</span></td>
+      <td><code>ccqi, ccqj<sup>1</sup></code><br/><div class='rh4 line nolines red-connections traceable'>qu fi fj</div></td>
+      <td><code>ccqn</code><br/><div class='rh4 line nolines red-connections traceable'>fr fy</div></td>
+      <td><code>ccqh</code><br/><div class='rh4 line nolines red-connections traceable'>ff fl</div></td>
+      <td><code>ccqe</code><br/><div class='rh4 line nolines red-connections traceable'>fe qe</div></td>
+      <td><code>ccqa</code><br/><div class='rh4 line nolines red-connections traceable'>qa fa</div></td>
+      <td><code>ccqo</code><br/><div class='rh4 line nolines red-connections traceable'>fo fc</div></td>
+      <td><code>ccqs</code><br/><div class='rh4 line nolines red-connections traceable'>fs qs</div></td>
+      <td><code>ccqs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>fs qs</div></td>
+      <td><code>ccqt</code><br/><div class='rh4 line nolines red-connections traceable'>ft qt</div></td>
+      <td><code>ccqt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>ft qt</div></td>
+    </tr>
+    <tr data-cogncur-fq-continuity-variant=1>
+      <td><span class='cursive lh2'>z f q Q Z</span></td>
+      <td><code>cczi</code><br/><div class='rh4 line nolines red-connections traceable'>zi qu</div></td>
+      <td><code>cczn</code><br/><div class='rh4 line nolines red-connections traceable'>Zx fr</div></td>
+      <td><code>cczh</code><br/><div class='rh4 line nolines red-connections traceable'>Zh fl</div></td>
+      <td><code>ccze</code><br/><div class='rh4 line nolines red-connections traceable'>ze fe</div></td>
+      <td><code>ccza</code><br/><div class='rh4 line nolines red-connections traceable'>za qq</div></td>
+      <td><code>cczo</code><br/><div class='rh4 line nolines red-connections traceable'>zo Qo</div></td>
+      <td><code>cczs</code><br/><div class='rh4 line nolines red-connections traceable'>zs fs</div></td>
+      <td><code>cczs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>zs fs</div></td>
+      <td><code>cczt</code><br/><div class='rh4 line nolines red-connections traceable'>zt ft</div></td>
+      <td><code>cczt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>zt ft</div></td>
+    </tr>
+    <tr data-cogncur-fq-connection-variant=1>
+      <td><span class='cursive lh2'>f</span></td>
+      <td><code>ccf1i, ccf1j<sup>1</sup></code><br/><div class='rh4 line nolines red-connections traceable'>fu fi fj</div></td>
+      <td><code>ccf1n</code><br/><div class='rh4 line nolines red-connections traceable'>fr fy</div></td>
+      <td><code>ccf1h</code><br/><div class='rh4 line nolines red-connections traceable'>ff fl</div></td>
+      <td><code>ccf1e</code><br/><div class='rh4 line nolines red-connections traceable'>fe </div></td>
+      <td><code>ccf1a</code><br/><div class='rh4 line nolines red-connections traceable'>fa fq</div></td>
+      <td><code>ccf1o</code><br/><div class='rh4 line nolines red-connections traceable'>fo qc</div></td>
+      <td><code>ccf1s</code><br/><div class='rh4 line nolines red-connections traceable'>fs</div></td>
+      <td><code>ccf1s1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>fs</div></td>
+      <td><code>ccf1t</code><br/><div class='rh4 line nolines red-connections traceable'>ft</div></td>
+      <td><code>ccf1t1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>ft</div></td>
+    </tr>
+    <tr data-cogncur-fq-connection-variant=1>
+      <td><span class='cursive lh2'>q</span></td>
+      <td><code>ccq1i</code><br/><div class='rh4 line nolines red-connections traceable'>qu qi</div></td>
+      <td><code>ccq1n</code><br/><div class='rh4 line nolines red-connections traceable'>qr qy</div></td>
+      <td><code>ccq1h</code><br/><div class='rh4 line nolines red-connections traceable'>ql qh</div></td>
+      <td><code>ccq1e</code><br/><div class='rh4 line nolines red-connections traceable'>qe </div></td>
+      <td><code>ccq1a</code><br/><div class='rh4 line nolines red-connections traceable'>qq qa</div></td>
+      <td><code>ccq1o</code><br/><div class='rh4 line nolines red-connections traceable'>qo qc</div></td>
+      <td><code>ccq1s</code><br/><div class='rh4 line nolines red-connections traceable'>qs</div></td>
+      <td><code>ccq1s1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>qs</div></td>
+      <td><code>ccq1t</code><br/><div class='rh4 line nolines red-connections traceable'>qs</div></td>
+      <td><code>ccq1t1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>qs</div></td>
+    </tr>
+    <tr data-cogncur-fq-connection-variant=1 data-cogncur-stick-variant=1>
+      <td><span class='cursive lh2'>q</span></td>
+      <td><code>ccq2i</code><br/><div class='rh4 line nolines red-connections traceable'>qu qi</div></td>
+      <td><code>ccq2n</code><br/><div class='rh4 line nolines red-connections traceable'>qr qy</div></td>
+      <td><code>ccq2h</code><br/><div class='rh4 line nolines red-connections traceable'>ql qh</div></td>
+      <td><code>ccq2e</code><br/><div class='rh4 line nolines red-connections traceable'>qe </div></td>
+      <td><code>ccq2a</code><br/><div class='rh4 line nolines red-connections traceable'>qq qa</div></td>
+      <td><code>ccq2o</code><br/><div class='rh4 line nolines red-connections traceable'>qo qc</div></td>
+      <td><code>ccq2s</code><br/><div class='rh4 line nolines red-connections traceable'>qs</div></td>
+      <td><code>ccq2s1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>qs</div></td>
+      <td><code>ccq2t</code><br/><div class='rh4 line nolines red-connections traceable'>qs</div></td>
+      <td><code>ccq2t1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>qs</div></td>
+    </tr>
+    <tr data-cogncur-r-variant=1>
+      <td><span class='cursive lh2'>r</span></td>
+      <td><code>ccr2i</code><br/><div class='rh4 line nolines red-connections traceable'>ru rp</div></td>
+      <td><code>ccr2n</code><br/><div class='rh4 line nolines red-connections traceable'>rr rx</div></td>
+      <td><code>ccr2h</code><br/><div class='rh4 line nolines red-connections traceable'>rf rk</div></td>
+      <td><code>ccr2e</code><br/><div class='rh4 line nolines red-connections traceable'>re</div></td>
+      <td><code>ccr2a</code><br/><div class='rh4 line nolines red-connections traceable'>ra rg</div></td>
+      <td><code>ccr2o</code><br/><div class='rh4 line nolines red-connections traceable'>rc ro</div></td>
+      <td><code>ccr2s</code><br/><div class='rh4 line nolines red-connections traceable'>rs</div></td>
+      <td><code>ccr2s1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>rs</div></td>
+      <td><code>ccr2t</code><br/><div class='rh4 line nolines red-connections traceable'>rt</div></td>
+      <td><code>ccr2t1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>rt</div></td>
+    </tr>    
     <tr>
       <td><span class='cursive lh2'>A</span></td>
       <td><code>ccAi</code><br/><div class='rh4 line nolines red-connections traceable'>Au Ap</div></td>
@@ -900,10 +1050,96 @@
       <td><code>ccAe</code><br/><div class='rh4 line nolines red-connections traceable'>Ae</div></td>
       <td><code>ccAa</code><br/><div class='rh4 line nolines red-connections traceable'>Ad Aq</div></td>
       <td><code>ccAo</code><br/><div class='rh4 line nolines red-connections traceable'>Ac Ao</div></td>
+      <td><code>ccAs</code><br/><div class='rh4 line nolines red-connections traceable'>As</div></td>
+      <td><code>ccAs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>As</div></td>
+      <td><code>ccAt</code><br/><div class='rh4 line nolines red-connections traceable'>At</div></td>
+      <td><code>ccAt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>At</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>B S</span></td>
+      <td><code>ccBi</code><br/><div class='rh4 line nolines red-connections traceable'>Bu Si</div></td>
+      <td><code>ccBn</code><br/><div class='rh4 line nolines red-connections traceable'>Br Sy</div></td>
+      <td><code>ccBh</code><br/><div class='rh4 line nolines red-connections traceable'>Bb Sh</div></td>
+      <td><code>ccBe</code><br/><div class='rh4 line nolines red-connections traceable'>Be Se</div></td>
+      <td><code>ccBa</code><br/><div class='rh4 line nolines red-connections traceable'>Ba Sq</div></td>
+      <td><code>ccBo</code><br/><div class='rh4 line nolines red-connections traceable'>Bo Sc</div></td>
+      <td><code>ccBs</code><br/><div class='rh4 line nolines red-connections traceable'>Bs Ss</div></td>
+      <td><code>ccBs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>Bs Ss</div></td>
+      <td><code>ccBt</code><br/><div class='rh4 line nolines red-connections traceable'>Bt St</div></td>
+      <td><code>ccBt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>Bt St</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>D O V W</span></td>
+      <td><code>ccOi</code><br/><div class='rh4 line nolines red-connections traceable'>Ow Vi</div></td>
+      <td><code>ccOn</code><br/><div class='rh4 line nolines red-connections traceable'>On Dr</div></td>
+      <td><code>ccOh</code><br/><div class='rh4 line nolines red-connections traceable'>Wh Ol</div></td>
+      <td><code>ccOe</code><br/><div class='rh4 line nolines red-connections traceable'>De Oe</div></td>
+      <td><code>ccOa</code><br/><div class='rh4 line nolines red-connections traceable'>Va Od</div></td>
+      <td><code>ccOo</code><br/><div class='rh4 line nolines red-connections traceable'>Oo Do</div></td>
+      <td><code>ccOs</code><br/><div class='rh4 line nolines red-connections traceable'>Os Vs</div></td>
+      <td><code>ccOs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>Os Vs</div></td>
+      <td><code>ccOt</code><br/><div class='rh4 line nolines red-connections traceable'>Ot Vt</div></td>
+      <td><code>ccOt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>Ot Vt</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>F T</span></td>
+      <td><code>ccFi</code><br/><div class='rh4 line nolines red-connections traceable'>Fj Ti</div></td>
+      <td><code>ccFn</code><br/><div class='rh4 line nolines red-connections traceable'>Fr Ty</div></td>
+      <td><code>ccFh</code><br/><div class='rh4 line nolines red-connections traceable'>Th Fl</div></td>
+      <td><code>ccFe</code><br/><div class='rh4 line nolines red-connections traceable'>Te Fe</div></td>
+      <td><code>ccFa</code><br/><div class='rh4 line nolines red-connections traceable'>Ta Fa</div></td>
+      <td><code>ccFo</code><br/><div class='rh4 line nolines red-connections traceable'>To Fo</div></td>
+      <td><code>ccFs</code><br/><div class='rh4 line nolines red-connections traceable'>is us</div></td>
+      <td><code>ccFs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>is us</div></td>
+      <td><code>ccFt</code><br/><div class='rh4 line nolines red-connections traceable'>it ut</div></td>
+      <td><code>ccFt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>it tt</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>P</span></td>
+      <td><code>ccPi</code><br/><div class='rh4 line nolines red-connections traceable'>Pi Pp</div></td>
+      <td><code>ccPn</code><br/><div class='rh4 line nolines red-connections traceable'>Pr Py</div></td>
+      <td><code>ccPh</code><br/><div class='rh4 line nolines red-connections traceable'>Ph Pf</div></td>
+      <td><code>ccPe</code><br/><div class='rh4 line nolines red-connections traceable'>Pe</div></td>
+      <td><code>ccPa</code><br/><div class='rh4 line nolines red-connections traceable'>Pa Pd</div></td>
+      <td><code>ccPo</code><br/><div class='rh4 line nolines red-connections traceable'>Po Pc</div></td>
+      <td><code>ccPs</code><br/><div class='rh4 line nolines red-connections traceable'>Ps</div></td>
+      <td><code>ccPs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>Ps</div></td>
+      <td><code>ccPt</code><br/><div class='rh4 line nolines red-connections traceable'>Pt</div></td>
+      <td><code>ccPt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>Pt</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>I</span></td>
+      <td><code>ccIi</code><br/><div class='rh4 line nolines red-connections traceable'>Ii Ip</div></td>
+      <td><code>ccIn</code><br/><div class='rh4 line nolines red-connections traceable'>In Ir</div></td>
+      <td><code>ccIh</code><br/><div class='rh4 line nolines red-connections traceable'>If Ib</div></td>
+      <td><code>ccIe</code><br/><div class='rh4 line nolines red-connections traceable'>Ie</div></td>
+      <td><code>ccIa</code><br/><div class='rh4 line nolines red-connections traceable'>Id Ig</div></td>
+      <td><code>ccIo</code><br/><div class='rh4 line nolines red-connections traceable'>Io Ic</div></td>
+      <td><code>ccIs</code><br/><div class='rh4 line nolines red-connections traceable'>Is</div></td>
+      <td><code>ccIs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>Is</div></td>
+      <td><code>ccIt</code><br/><div class='rh4 line nolines red-connections traceable'>It</div></td>
+      <td><code>ccIt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>It</div></td>
+    </tr>
+    <tr>
+      <td><span class='cursive lh2'>N</span></td>
+      <td><code>ccNi</code><br/><div class='rh4 line nolines red-connections traceable'>Ni Nu</div></td>
+      <td><code>ccNn</code><br/><div class='rh4 line nolines red-connections traceable'>Nn Ny</div></td>
+      <td><code>ccNh</code><br/><div class='rh4 line nolines red-connections traceable'>Nk Nb</div></td>
+      <td><code>ccNe</code><br/><div class='rh4 line nolines red-connections traceable'>Ne</div></td>
+      <td><code>ccNa</code><br/><div class='rh4 line nolines red-connections traceable'>Na Ng</div></td>
+      <td><code>ccNo</code><br/><div class='rh4 line nolines red-connections traceable'>No Nc</div></td>
+      <td><code>ccNs</code><br/><div class='rh4 line nolines red-connections traceable'>Ns</div></td>
+      <td><code>ccNs1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-s-variant=1>Ns</div></td>
+      <td><code>ccNt</code><br/><div class='rh4 line nolines red-connections traceable'>Nt</div></td>
+      <td><code>ccNt1</code><br/><div class='rh4 line nolines red-connections traceable' data-cogncur-t-variant=1>Nt</div></td>
     </tr>
 
+    
+
   </table>
-  
+  <ol>
+    <li><code>ccqj</code> and <code>ccf1q</code> are only used to join from (some variants of) <i>f</i> and <i>q</i> towards <i>j</i>. All other joins towards <i>j</i> are identical to the correspondings joins towards <i>i</i>.
+  </ol>
   
   <br class="clear">
   <h3 id="glyphs_initialligatures">Initial ligatures</h3>
