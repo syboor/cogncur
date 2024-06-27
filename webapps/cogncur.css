@@ -86,6 +86,8 @@ b, strong {
   --baseline-width: 2px;
   --rompline-width: 2px;
   --otherlines-width: 2px;
+  --otherlines-style: dotted;
+  --rompline-style: dashed;
 }
 :root,
   .blacklines .defaultlines,
@@ -117,6 +119,7 @@ b, strong {
   --otherlines-color: #667AFF;
   --romphoogtelijn-color: #e01a6e;
   --rompzone-color: transparent;
+  --otherlines-style: solid;
 }
 .filledrompzone,
   .blacklines .filledrompzone,
@@ -124,6 +127,8 @@ b, strong {
   --baseline-color: #667AFF;
   --otherlines-color: #667AFF;
   --rompzone-color: #e7e9fa; 
+  --otherlines-style: solid;
+  --romphoogtelijn-color: #667AFE; /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
 }
 
 
@@ -370,13 +375,27 @@ b, strong {
   top: .33em;
   height: .325em; /* why??? */
   border-bottom: var(--baseline-width) solid var(--baseline-color);
-  border-top: var(--rompline-width) dashed var(--otherlines-color);
+  border-top: var(--rompline-width) var(--rompline-style) var(--otherlines-color);
   background-color: var(--rompzone-color);
   z-index: -99;
 }
-.romphoogtelijn .baselines {
+.baselines, .romphoogtelijn .baselines, .norompline.romphoogtelijn .baselines {
   border-left: 1px dotted var(--romphoogtelijn-color);
 }
+.norompline .baselines, .nolines .baselines {
+  border-left: none;
+}
+/* A possible approach to adding a romphoogtelijn left of the liniature would be this.
+   If we do this, we should mark the glyph so that it will *not* be skewed for skewed fonts.
+ */
+ /*
+.line:before {
+  content: 'i';
+  font-family: 'Cogncur Vertical';
+  position: relative;
+  left: -.3em;
+}
+*/
 
 .rh2, .rh2_67, .rh3, .rh4, .rh5, .rh6, .rh7, .thin {
   --baseline-width: 1px;
@@ -425,8 +444,8 @@ b, strong {
   width: 100%;
   position: absolute;
   top: 0em;
-  border-top: var(--otherlines-width) solid var(--otherlines-color);
-  border-bottom: var(--otherlines-width) solid var(--otherlines-color); 
+  border-top: var(--otherlines-width) var(--otherlines-style) var(--otherlines-color);
+  border-bottom: var(--otherlines-width) var(--otherlines-style) var(--otherlines-color); 
   height: 1em;
   box-sizing: border-box;
   z-index: -99;
@@ -470,7 +489,7 @@ b, strong {
   border-bottom: 0px;
 }
 .nospacebetween.forcebottomline .outerlines, .nospacebetween .forcebottomline .outerlines { /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
-  border-bottom: 2px solid var(--baseline-color);
+  border-bottom: 2px var(--otherlines-style) var(--baseline-color);
 }
 
 .thin .outerlines {
@@ -532,10 +551,21 @@ b, strong {
   border-bottom: 0px !important;
 }
 
+/* Outline: text-stroke doesn't work for overlapping glyphs, so we use text-shadow instead. */
 .outline {
   color: white;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;  
 }
+.thickoutline {
+  color: white;
+  text-shadow: -1px -3px 0 #000, 1px -3px 0 #000, 2px -2px 0 #000, 3px -1px 0 #000, 3px 1px 0 #000, 2px 2px 0 #000, 1px 3px 0 #000, -1px 3px 0 #000, -2px 2px 0 #000, -3px 1px 0 #000, -3px -1px 0 #000, -2px -2px 0 #000;  
+}
+.thickestoutline {
+  color: white;
+  text-shadow: -2px -5px 0 #000, 0px -5px 0 #000, 2px -5px 0 #000, 3px -4px 0 #000, 4px -3px 0 #000, 5px -2px 0 #000, 5px 0px 0 #000, 5px 2px 0 #000, 4px 3px 0 #000, 3px 4px 0 #000, 2px 5px 0 #000, 0px 5px 0 #000, -2px 5px 0 #000, -3px 4px 0 #000, -4px 3px 0 #000, -5px 2px 0 #000, -5px 0px 0 #000, -5px -2px 0 #000, -4px -3px 0 #000, -3px -4px 0 #000 ;  
+}
+
+
 /* Outline text is slightly thicker than normal text. This makes black text with the same thickness as outline text */
 .black_with_outline_thickness {
   color: black;
