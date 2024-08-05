@@ -182,6 +182,12 @@
     init_letters(); // should be done only once
     init_from_hash();
     
+    // If the analysis type is 'heartline' (which is a secret option, not selectable), don't show the 
+    // selectable analysis types
+    if (routetype == 'heartline') $('#select_analysis').empty().text('Heartline');
+      
+    
+    
     $('.clickable_letter').click(function () {
       letter = $(this).find('.clickable_variant').first().data('variantname'); 
       if (!letter) letter = $(this).data('letter');
@@ -223,7 +229,6 @@
         
         update_letters();
       });
-      
     }
     // Re-convert the letters based on current settings (entry strokes)
     function update_letters() {
@@ -410,7 +415,7 @@
       margin: 0px;
       padding: 2px 0px 2px 0px;
       box-sizing: border-box;
-      min-width: 1.2em;
+      min-width: 1.1em;
       text-align: center;
     }
     .clickable_letter:hover, .clickable_variant:hover, .aantal:hover {
@@ -499,26 +504,28 @@
 
   <h3>Analysis type</h3>
 
-  <div class="routetype switch_routetype" data-routetype="arrowstart" title="Pijlen: het startpunt is aangegeven"/>
-    <img src="../webapps/imgen/routeletter/arrowstart/h.svg?lines=0" />
-  </div>
-  <div class="routetype switch_routetype" data-routetype="arrows" title="Pijlen en gestapelde contouren"/>
-    <img src="../webapps/imgen/routeletter/arrows/h.svg?lines=0" />
-  </div>
-  <div class="routetype switch_routetype" data-routetype="arrows2" title="Pijlen en overlappende sporen"/>
-    <img src="../webapps/imgen/routeletter/arrows2/h.svg?lines=0" />
-  </div>
-  <div class="routetype switch_routetype" data-routetype="arrows3" title="Pijlen en 'gestapelde' contouren met hartlijnen"/>
-    <img src="../webapps/imgen/routeletter/arrows3/h.svg?lines=0" />
-  </div>
-  <div class="routetype switch_routetype" data-routetype="stoplicht" title="Stippen en gestapelde contouren"/>
-    <img src="../webapps/imgen/routeletter/stoplicht/h.svg?lines=0" />
-  </div>
-  <div class="routetype switch_routetype" data-routetype="stoplicht2" title="Stippen en overlappende sporen"/>
-    <img src="../webapps/imgen/routeletter/stoplicht2/h.svg?lines=0" />
-  </div>
-  <div class="routetype switch_routetype" data-routetype="outline" title="Lege letter: maak je eigen analyse"/>
-    <img src="../webapps/imgen/routeletter/outline/h.svg?lines=0" />
+  <div id="select_analysis">
+    <div class="routetype switch_routetype" data-routetype="arrowstart" title="Pijlen: het startpunt is aangegeven"/>
+      <img src="../webapps/imgen/routeletter/arrowstart/h.svg?lines=0" />
+    </div>
+    <div class="routetype switch_routetype" data-routetype="arrows" title="Pijlen en gestapelde contouren"/>
+      <img src="../webapps/imgen/routeletter/arrows/h.svg?lines=0" />
+    </div>
+    <div class="routetype switch_routetype" data-routetype="arrows2" title="Pijlen en overlappende sporen"/>
+      <img src="../webapps/imgen/routeletter/arrows2/h.svg?lines=0" />
+    </div>
+    <div class="routetype switch_routetype" data-routetype="arrows3" title="Pijlen en 'gestapelde' contouren met hartlijnen"/>
+      <img src="../webapps/imgen/routeletter/arrows3/h.svg?lines=0" />
+    </div>
+    <div class="routetype switch_routetype" data-routetype="stoplicht" title="Stippen en gestapelde contouren"/>
+      <img src="../webapps/imgen/routeletter/stoplicht/h.svg?lines=0" />
+    </div>
+    <div class="routetype switch_routetype" data-routetype="stoplicht2" title="Stippen en overlappende sporen"/>
+      <img src="../webapps/imgen/routeletter/stoplicht2/h.svg?lines=0" />
+    </div>
+    <div class="routetype switch_routetype" data-routetype="outline" title="Lege letter: maak je eigen analyse"/>
+      <img src="../webapps/imgen/routeletter/outline/h.svg?lines=0" />
+    </div>
   </div>
 
 
@@ -638,6 +645,24 @@
     <div class="clickable_letter" data-letter='z'>
       <div class="clickable_variant" data-variantname='z-alt1' data-cogncur-rz-top-variant=1></div>
     </div>
+    <br class="clear" />
+    <div class="clickable_letter" data-letter='A'>
+      <div class="clickable_variant" data-variantname='A-alt1' data-cogncur-uppercase-amn-variant=1></div>
+      <div class="clickable_variant" data-variantname='A-alt2' data-cogncur-uppercase-amn-variant=2></div>
+    </div>
+    <div class="clickable_letter" data-letter='B'></div>
+    <div class="clickable_letter" data-letter='C'>
+      <div class="clickable_variant" data-variantname='C-alt1' data-cogncur-uppercase-cgl-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='D'></div>
+    <div class="clickable_letter" data-letter='E'></div>
+    <div class="clickable_letter" data-letter='F'></div>
+    <div class="clickable_letter" data-letter='G'>
+      <div class="clickable_variant" data-variantname='G-alt1' data-cogncur-uppercase-cgl-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='H'></div>
+    <div class="clickable_letter" data-letter='I'></div>
+    <div class="clickable_letter" data-letter='J'></div>
 
 
   </div>

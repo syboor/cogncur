@@ -67,7 +67,7 @@
     </g>
     
     <!-- b -->
-    <g id="letter-b" data-nstrokes="2" data-width="1077" data-width1="788">
+    <g id="letter-b" data-nstrokes="2" data-width="1077" data-width1="788" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-b">
         <path 
            d="  M35.3867 35l526 1070c15.9902 32.4951 24 72.8164 24 109c0 57.0312 -33 116 -110 116c-111.047 0 -142.387 -102 -142.387 -225v-934c0 -76 52 -137 134 -137c142 0 287 183.005 287 405c0 101.045 -27 178 -50 209"
@@ -95,7 +95,7 @@ c15.5728 -27.2525 32.3839 -41.3799 65.2299 -58.554c24.5599 -12.8417 49.2024 -15.
     </g>
 
     <!-- b-noentry (no entry strokes) -->
-    <g id="letter-b-noentry" data-nstrokes="2" data-width="877" data-width1="588">
+    <g id="letter-b-noentry" data-nstrokes="2" data-width="877" data-width1="588" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-b-noentry">
         <path 
            d=" M34.5137 436l328.873 669q23.6135 48.0351 24 109q-0.386719 48 -27.606 81.8799q-27.7808 34.1201 -82.394 34.1201q-142.387 0 -142.387 -225v-934q0 -58 37 -97.5t97 -39.5q109 0 198 121t89 284q0 70 -15 126t-35 83"
@@ -153,7 +153,7 @@ c-134.492 0 -244.992 149.273 -244.992 339.993z" />
     </g>
     
     <!-- d -->
-    <g id="letter-d" data-nstrokes="3" data-width="930" data-width1="740" data-width2="740">
+    <g id="letter-d" data-nstrokes="3" data-width="930" data-width1="740" data-width2="740" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-d">
         <path data-entry="1"
            d="M35.387 35C35.387 35 371.387 512 371.427 512.429C433.157 592.29 527.789 648 652 648L705 648" 
@@ -184,7 +184,7 @@ q-17.131 -17.1302 -44.0665 -24.2522q-12.0013 -3.17327 -23.7285 -3.17327q-47.9376
     </g>
 
     <!-- d-noentry -->
-    <g id="letter-d-noentry" data-nstrokes="2" data-width="720" data-width1="530">
+    <g id="letter-d-noentry" data-nstrokes="2" data-width="720" data-width1="530" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-d-noentry">
         <path 
            d="M495 648h-53c-242.074 0 -368 -204 -368 -408c0 -132 58 -206 134 -206c142 0 287 200 287 307c0 1.414 -1 990 0 989"
@@ -207,6 +207,63 @@ q-17.131 -17.1302 -44.0665 -24.2522q-12.0013 -3.17327 -23.7285 -3.17327q-47.9376
 
 
     
+    <!-- d-alt1 cogncur-stick-variant==1 -->
+    <g id="letter-d-alt1" data-nstrokes="3" data-width="930" data-width1="740" data-width2="740" data-extra-width-for-skew="30">
+      <g class="strokes" id="strokes-d-alt1">
+        <path data-entry="1"
+           d="M35.387 35C35.387 35 371.387 512 371.427 512.429C433.157 592.29 527.789 648 652 648L705 648" 
+           id="stroke-d-alt11" />
+        <path 
+           d="M705 648h-53c-242.074 0 -368 -204 -368 -408c0 -132 58 -206 134 -206c142 0 287 200 287 307c0 1.01284 -0.512695 508.476 -0.436523 796"
+           id="stroke-d-alt12" />
+        <path 
+           d="M705 1137c-0.644531 0.644531 -0.645508 -202.726 -0.00292969 -996.111c0.00195313 -2.56185 0.00292969 -3.85807 0.00292969 -3.88867c0 -68.6667 25.0013 -103 75.0039 -103c8.66406 0 17.7881 2.16602 27.3721 6.49805
+c8.41602 3.66797 15.8086 9.4401 22.1777 17.3164c6.29753 8.1237 11.4362 15.1849 15.416 21.1836c3.60296 5.63841 7.94768 13.6391 13.0342 24.002l33.377 68"
+           id="stroke-d-alt13" />
+        <path 
+           d="M705 648 h1"
+           id="overlap-d-alt12" /><!-- 1. use overlap only if as troke overlaps ITSELF, not if two strokes overlap each other. 2. must be a path, not a dot-->
+      </g>
+      <g class="outline" id="outlines-d-alt1">
+        <path id="outline-d-alt11"
+      d="M35.387 1.007c-18.786 0 -33.993 15.208 -33.993 33.993c0 6.852 2.056 13.705 6.169 19.547c336.476 478.049 336.476 478.049 336.94 478.649c44.861 58.037 141.552 148.797 307.498 148.797h53c18.786 0 33.993 -15.208 33.993 -33.993c0 -18.786 -15.208 -33.993 -33.993 -33.993h-53c-69.873 0 -179.055 -16.426 -253.195 -121.76l-335.593 -476.794c-2.623 -3.727 -11.579 -14.446 -27.825 -14.446z" />
+        <path id="outline-d-alt12"
+    d="M671 682c0 0 -19 0 -19 -0.00666704c-257 0.00666704 -401.993 -213.571 -401.993 -441.993c0 -85.7546 22.3966 -154.006 65.1313 -196.741c27.807 -27.807 63.917 -43.2527 102.862 -43.2527c126.866 0 242.535 127.193 292.017 231.54
+c17.7269 37.383 28.9768 74.589 28.9768 109.453c0 989 -0.000168895 795 -0.000168895 795c0 18.7852 -15.208 33.9932 -33.9932 33.9932s-33.9932 -15.208 -33.9932 -33.9932l-0.000168895 -795c0 -47.5391 -40.1774 -131.522 -104.767 -196.112
+c-46.8756 -46.8756 -101.29 -76.8949 -148.24 -76.8949c-64.0728 0 -100.007 74.4964 -100.007 172.007c0 178.683 106.007 374 334.007 374.007c0 -0.00666704 19 -0.00666704 19 -0.00666704v68z" />
+        <path id="outline-d-alt13"
+    d="M671.007 1137c0 18.7855 15.2079 33.9932 33.9933 33.9932c18.7857 0 33.9933 -15.2079 33.9933 -33.9934v-1000c0 -35.7626 8.24841 -53.7583 15.1613 -60.6712c4.76727 -4.76727 11.4114 -8.33544 25.8492 -8.33544c0.253788 0 13.9574 0.0606136 22.8989 10.9419
+c12.8297 16.5754 16.4003 22.3968 24.5782 39.058l33.377 68c5.54055 11.288 17.1656 19.0002 30.5229 19.0002c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -5.13976 -1.15682 -10.2795 -3.47045 -14.9932c-41.1659 -83.8688 -42.5579 -86.7047 -48.5838 -95.7874
+c-20.7508 -31.2773 -34.2121 -42.9271 -52.1183 -50.7904c-12.9646 -5.83308 -26.8361 -9.42232 -41.1977 -9.42232c-37.4974 -7.09068e-15 -108.997 15.8798 -108.997 136.993v1000z" />
+       
+      </g>
+    </g>
+
+    <!-- d-alt1-noentry -->
+    <g id="letter-d-alt1-noentry" data-nstrokes="2" data-width="720" data-width1="530" data-extra-width-for-skew="30">
+      <g class="strokes" id="strokes-d-alt1-noentry">
+        <path 
+           d="M495 648h-53c-242.074 0 -368 -204 -368 -408c0 -132 58 -206 134 -206c142 0 287 200 287 307c0 1.013 -0.513 508.476 -0.437 796"
+           id="stroke-d-alt1-noentry1" />
+        <path 
+           d="M495 1137c-0.645 0.645 -0.646 -202.726 -0.003 -996.111c0.002 -2.562 0.003 -3.858 0.003 -3.889c0 -68.667 25.001 -103 75.004 -103c8.664 0 17.788 2.166 27.372 6.498c8.416 3.668 15.809 9.44 22.178 17.316c6.298 8.124 11.436 15.185 15.416 21.184c3.603 5.638 7.948 13.639 13.034 24.002l33.377 68"
+           id="stroke-d-alt1-noentry2" />
+        <path 
+           d="M495 648 h1"
+           id="overlap-d-alt1-noentry1" /><!-- 1. use overlap only if as troke overlaps ITSELF, not if two strokes overlap each other. 2. must be a path, not a dot-->
+      </g>
+      <g class="outline" id="outlines-d-alt1-noentry">
+        <path id="outline-d-alt1-noentry1"
+    d="M461 682c0 0 -19 0 -19 -0.007c-257 0.007 -401.993 -213.571 -401.993 -441.993c0 -85.755 22.397 -154.006 65.131 -196.741c27.807 -27.807 63.917 -43.253 102.862 -43.253c126.866 0 242.535 127.193 292.017 231.54c17.727 37.383 28.977 74.589 28.977 109.453c0 989 0 795 0 795c0 18.785 -15.208 33.993 -33.993 33.993s-33.993 -15.208 -33.993 -33.993l0 -795c0 -47.539 -40.177 -131.522 -104.767 -196.112c-46.876 -46.876 -101.29 -76.895 -148.24 -76.895c-64.073 0 -100.007 74.496 -100.007 172.007c0 178.683 106.007 374 334.007 374.007c0 -0.007 19 -0.007 19 -0.007v68z" />
+        <path id="outline-d-alt1-noentry2"
+    d="M461.007 1137c0 18.785 15.208 33.993 33.993 33.993c18.786 0 33.993 -15.208 33.993 -33.993v-1000c0 -35.763 8.248 -53.758 15.161 -60.671c4.767 -4.767 11.411 -8.335 25.849 -8.335c0.254 0 13.957 0.061 22.899 10.942c12.83 16.575 16.4 22.397 24.578 39.058l33.377 68c5.541 11.288 17.166 19 30.523 19c18.786 0 33.993 -15.208 33.993 -33.993c0 -5.14 -1.157 -10.28 -3.47 -14.993c-41.166 -83.869 -42.558 -86.705 -48.584 -95.787c-20.751 -31.277 -34.212 -42.927 -52.118 -50.79c-12.965 -5.833 -26.836 -9.422 -41.198 -9.422c-37.497 0 -108.997 15.88 -108.997 136.993v1000z" />
+       
+      </g>
+    </g>
+
+
+    
+
 
     <!-- e -->
     <g id="letter-e" data-nstrokes="1" data-width="733">
@@ -243,7 +300,7 @@ c0 -18.7856 15.2079 -33.9933 33.9933 -33.9933c7.06251 0 14.125 2.18423 20.082 6.
     </g>
 
     <!-- e-noentry -->
-    <g id="letter-e-noentry" data-nstrokes="1" data-width="415">
+    <g id="letter-e-noentry" data-nstrokes="1" data-width="455">
       <g class="strokes" id="strokes-e-noentry">
         <path 
            d="M49 226l278.386 204q52.6143 39 53 110q-0.385742 48 -41.4707 78.1738q-41.915 29.8262 -93.915 29.8262q-87 0 -149 -90.5t-62 -217.5t61.9541 -216.309q62.0459 -89.6914 149.045 -89.6914q42.001 0 76.9453 12.1113q35.0557 11.8887 73.0547 39.9482
@@ -260,7 +317,7 @@ q68.6582 0 119.019 -40.2598t50.3604 -101.733q0 -88.374 -66.9121 -137.441l-258.46
     </g>    
 
     <!-- f -->
-    <g id="letter-f" data-nstrokes="2" data-width="619">
+    <g id="letter-f" data-nstrokes="2" data-width="619" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f">
         <path 
            d="M35.3867 35l526 1070c15.9902 32.4951 24 72.8164 24 109c0 57.0312 -31 116 -111 116c-111.047 0 -141.387 -102 -141.387 -225v-1527c0 -123 41 -225 119 -225s119 102 119 225c0 186.682 -106 455.944 -235.332 455.944" 
@@ -284,7 +341,7 @@ c22.059 0 66.3121 5.17238 128.1 119.206c5.76126 10.6329 17.0302 17.7938 29.9003 
     </g>
     
     <!-- f noentry -->
-    <g id="letter-f-noentry" data-nstrokes="2" data-width="420">
+    <g id="letter-f-noentry" data-nstrokes="2" data-width="420" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-noentry">
         <path 
            d="M34.5137 436l328.873 669c15.6133 32 24 72.8164 24 109c0 57.0312 -31 116 -108 116  c-111.047 0 -141.387 -102 -141.387 -225v-1527c0 -123 41 -225 119 -225s119 102 119 225c0 186.682 -106 455.944 -235.332 455.944" 
@@ -307,7 +364,7 @@ c0 46.6191 3.99902 91.416 15.7627 131.321c31.4844 106.802 106.101 127.672 159.61
     </g>    
     
     <!-- f-alt1 -->
-    <g id="letter-f-alt1" data-nstrokes="2" data-width="619">
+    <g id="letter-f-alt1" data-nstrokes="2" data-width="619" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt1">
         <path 
            d="M35.3867 35l526 1070c15.9902 32.4951 24 72.8164 24 109c0 57.0312 -33 116 -110 116c-111.047 0 -142.387 -102 -142.387 -225v-1527c0 -123 41 -225 119 -225s119 102 119 225c0 47.9844 -12.5625 98.1445 -28 144c-63.709 189.242 -163.735 485.962 -210 620" 
@@ -335,7 +392,7 @@ c52.5401 0 96.3598 11.3144 132.425 52.4117c3.30052 3.76106 11.8219 11.5883 25.57
     </g>    
 
     <!-- f-alt1-noentry -->
-    <g id="letter-f-alt1-noentry" data-nstrokes="2" data-width="420">
+    <g id="letter-f-alt1-noentry" data-nstrokes="2" data-width="420" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt1-noentry">
         <path 
            d="M34.5137 436q328.394 666.826 328.873 669q23.6133 48 24 109q-0.386719 47 -28.0244 81.7109q-28.3623 34.2891 -81.9756 34.2891q-142.387 0 -142.387 -225v-1527q0 -97 31.5 -161t87.5 -64t87.5 64t31.5 161q0 61 -28 144q-158 470 -210 620" 
@@ -359,7 +416,7 @@ q0.00292969 16.0537 11.0508 25.0234t22.9424 8.96973q23.8223 0 33.9932 -27.9932v7
     </g>    
 
     <!-- f-alt2 -->
-    <g id="letter-f-alt2" data-nstrokes="2" data-width="619">
+    <g id="letter-f-alt2" data-nstrokes="2" data-width="619" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt2">
         <path 
            d="M35.3867 35l526 1070c15.9902 32.4951 24 72.8164 24 109c0 57.0312 -33.3867 116 -110.387 116c-110.66 0 -142 -102.005 -142 -225v-1752" 
@@ -385,7 +442,7 @@ q0 13.4505 9.9543 23.4048z" />
     </g>   
     
     <!-- f-alt2-noentry -->
-    <g id="letter-f-alt2-noentry" data-nstrokes="2" data-width="420">
+    <g id="letter-f-alt2-noentry" data-nstrokes="2" data-width="420" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt2-noentry">
         <path 
            d="M34.5137 436l328.873 669q23.6133 49 24 109q0 47.3584 -28.2021 81.6787q-28.2021 34.3213 -82.1846 34.3213q-142 0 -142 -225v-1752" 
@@ -409,7 +466,7 @@ q0.00488281 -14.2119 -9.93066 -24.1025q-9.93457 -9.89062 -24.0625 -9.89062t-24.0
     
 
     <!-- f-alt3 -->
-    <g id="letter-f-alt3" data-nstrokes="2" data-width="619">
+    <g id="letter-f-alt3" data-nstrokes="2" data-width="619" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt3">
         <path 
            d="M35.3867 35l526 1070c15.9902 32.4951 24 72.8164 24 109c0 57.0312 -33.3867 116 -110.387 116c-110.66 0 -142 -102.005 -142 -225v-1752" 
@@ -434,7 +491,7 @@ c0 18.7856 15.2079 33.9933 33.9933 33.9933c7.78801 0 15.576 -2.65603 21.8816 -7.
     </g>   
     
     <!-- f-alt3-noentry -->
-    <g id="letter-f-alt3-noentry" data-nstrokes="2" data-width="420">
+    <g id="letter-f-alt3-noentry" data-nstrokes="2" data-width="420" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt3-noentry">
         <path 
            d="M34.5137 436l328.873 669q23.6133 49 24 109q0 47.3584 -28.2021 81.6787q-28.2021 34.3213 -82.1846 34.3213q-142 0 -142 -225v-1752" 
@@ -457,7 +514,7 @@ q0.00488281 -14.2119 -9.93066 -24.1025q-9.93457 -9.89062 -24.0625 -9.89062t-24.0
     
 
     <!-- f-alt4 -->
-    <g id="letter-f-alt4" data-nstrokes="2" data-width="619">
+    <g id="letter-f-alt4" data-nstrokes="2" data-width="619" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt4">
         <path 
            d="M35.3867 35l526 1070c15.9902 32.4951 24 72.8164 24 109c0 57.0312 -33.3867 116 -110.387 116c-110.66 0 -142 -102 -142 -225v-1559" 
@@ -485,7 +542,7 @@ q0 13.4505 9.9543 23.4048z" />
 
 
     <!-- f-alt4-noentry -->
-    <g id="letter-f-alt4-noentry" data-nstrokes="2" data-width="420">
+    <g id="letter-f-alt4-noentry" data-nstrokes="2" data-width="420" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt4-noentry">
         <path 
            d="M34.5137 436q328.394 666.826 328.873 669q23.6133 48 24 109q-0.386719 47 -28.2021 81.6787q-28.1846 34.3213 -82.1846 34.3213q-142 0 -142 -225v-1559" 
@@ -508,7 +565,7 @@ q0.00683594 -13.9932 -9.93066 -24.1025q-10.0625 -9.89062 -24.0625 -9.89062t-24.0
     
 
     <!-- f-alt5 -->
-    <g id="letter-f-alt5" data-nstrokes="2" data-width="619">
+    <g id="letter-f-alt5" data-nstrokes="2" data-width="619" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt5">
         <path 
            d="M35.3867 35l526 1070c15.9902 32.4951 24 72.8164 24 109c0 57.0312 -33.3867 116 -110.387 116c-110.66 0 -142 -102 -142 -225v-1559" 
@@ -535,7 +592,7 @@ c0 18.7856 15.2079 33.9933 33.9933 33.9933c7.78801 0 15.576 -2.65603 21.8816 -7.
 
 
     <!-- f-alt5-noentry -->
-    <g id="letter-f-alt5-noentry" data-nstrokes="2" data-width="420">
+    <g id="letter-f-alt5-noentry" data-nstrokes="2" data-width="420" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-f-alt5-noentry">
         <path 
            d="M34.5137 436q328.394 666.826 328.873 669q23.6133 48 24 109q-0.386719 47 -28.2021 81.6787q-28.1846 34.3213 -82.1846 34.3213q-142 0 -142 -225v-1559" 
@@ -711,7 +768,7 @@ c0 5.13436 1.15439 10.2687 3.46318 14.9783l104.419 213c5.53691 11.2945 17.1654 1
     
 
     <!-- j -->
-    <g id="letter-j" data-nstrokes="3" data-width="500" data-width1="370">
+    <g id="letter-j" data-nstrokes="3" data-width="500" data-width1="370" data-extra-width-for-skew="30">
       <g class="strokes" id="strokes-j">
         <path data-entry="1"
            d="M35.3867 35l301 614" 
@@ -741,7 +798,7 @@ c28.7637 29.0186 43.1475 84.5283 43.1514 166.528c-0.00390625 85.333 -0.00585938 
     </g>
     
     <!-- j-nonetry -->
-    <g id="letter-j-noentry" data-nstrokes="3" data-width="430" data-width1="300">
+    <g id="letter-j-noentry" data-nstrokes="3" data-width="430" data-width1="300" data-extra-width-for-skew="30">
       <g class="strokes" id="strokes-j-noentry">
         <path data-entry="1"
            d="M166.104 436l104.419 213" 
@@ -825,7 +882,7 @@ c0 -31.2852 -7.375 -67.2471 -20.5146 -93.9766l-163.879 -334.023v-154z" />
     </g>
 
     <!-- l -->
-    <g id="letter-l" data-nstrokes="1" data-width="619">
+    <g id="letter-l" data-nstrokes="1" data-width="619" data-extra-width-for-skew="130">
       <g class="strokes" id="strokes-l">
         <path 
            d="M35.3867 35l526 1070c15.9902 32.4951 24 72.8164 24 109c0 57.0312 -33 116 -110 116c-111.047 0 -142.387 -102 -142.387 -225v-968c0 -54 17 -103 75 -103c42 0 63 39 78 69l33.377 68" 
@@ -969,7 +1026,7 @@ q7.89599 10.243 12.9146 15.2617q26.1319 26.1319 65.5938 26.1319z" />
     
 
     <!-- o -->
-    <g id="letter-o" data-nstrokes="3" data-width="966" data-width1="665" data-width2="749">
+    <g id="letter-o" data-nstrokes="3" data-width="966" data-width1="665" data-width2="749" data-extra-width-for-skew="70">
       <g class="strokes" id="strokes-o">
         <path 
            d="M35.3867 34l311.999 512c38.6719 62.333 94.6465 102 156.614 102c46.7266 0 90.0459 -23.3916 124.549 -59.9873"
@@ -1002,7 +1059,7 @@ c33.9244 0 88.7032 17.1214 123.972 52.3898c18.9944 18.9944 22.7923 32.464 29.986
 
 
     <!-- o-noentry -->
-    <g id="letter-o-noentry" data-nstrokes="2" data-width="707" data-width1="490">
+    <g id="letter-o-noentry" data-nstrokes="2" data-width="707" data-width1="490" data-extra-width-for-skew="70">
       <g class="strokes" id="strokes-o-noentry">
         <path 
            d="M369.701 588.268c-35.001 37.518 -78.161 59.731 -124.701 59.731c-116 0 -211 -139 -211 -308s95 -306 211 -306c27.602 0 54.017 7.813 78.244 22c77.588 45.431 132.756 156.214 132.756 285c0 101.195 -34.062 191.275 -86.299 247.268"
@@ -1024,7 +1081,7 @@ c33.9244 0 88.7032 17.1214 123.972 52.3898c18.9944 18.9944 22.7923 32.464 29.986
     </g>
     
     <!-- p -->
-    <g id="letter-p" data-nstrokes="4" data-width="850" data-width3="790" data-width2="370" data-width1="370">
+    <g id="letter-p" data-nstrokes="4" data-width="850" data-width3="790" data-width2="370" data-width1="370" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-p">
         <path data-entry="1"
            d="M35.3867 35l301 614" 
@@ -1059,7 +1116,7 @@ q14.3376 0 24.2981 -9.96057q9.9517 -9.9517 9.9517 -24.0416q0 -16.8083 -13.3619 -
     </g>
     
     <!-- p-noentry -->
-    <g id="letter-p-noentry" data-nstrokes="4" data-width="650" data-width3="590" data-width2="170" data-width1="170">
+    <g id="letter-p-noentry" data-nstrokes="4" data-width="650" data-width3="590" data-width2="170" data-width1="170" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-p-noentry">
         <path data-entry="1"
            d="M34.1045 436l104.419 213z" 
@@ -1089,7 +1146,7 @@ c0 5.13436 1.15439 10.2687 3.46318 14.9783l104.419 213c5.53691 11.2945 17.1654 1
     </g>    
     
     <!-- p-alt1 : data-cogncur-exitstrokes=1 -->
-    <g id="letter-p-alt1" data-nstrokes="3" data-width="790" data-width2="370" data-width1="370">
+    <g id="letter-p-alt1" data-nstrokes="3" data-width="790" data-width2="370" data-width1="370" data-extra-width-for-skew="40">
       <g class="strokes" id="strokes-p-alt1">
         <path data-entry="1"
            d="M35.3867 35l301 614" 
@@ -1116,7 +1173,7 @@ q-0.00666704 -14 9.9517 -24.0416q10.0416 -9.95837 24.0416 -9.9517q14 -0.00666704
     </g>
     
     <!-- p-alt1-noentry -->
-    <g id="letter-p-alt1-noentry" data-nstrokes="3" data-width="590" data-width2="170" data-width1="170">
+    <g id="letter-p-alt1-noentry" data-nstrokes="3" data-width="590" data-width2="170" data-width1="170" data-extra-width-for-skew="40">
       <g class="strokes" id="strokes-p-alt1-noentry">
         <path data-entry="1"
            d="M34.1045 436l104.419 213z" 
@@ -1193,7 +1250,7 @@ c0 5.13436 1.15439 10.2687 3.46318 14.9783l104.419 213c5.53691 11.2945 17.1654 1
 
     
     <!-- p-alt3 :  data-cogncur-p-curve-variant=1 -->
-    <g id="letter-p-alt3" data-nstrokes="3" data-width="970" data-width2="910" data-width1="490">
+    <g id="letter-p-alt3" data-nstrokes="3" data-width="970" data-width2="910" data-width1="490" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-p-alt3">
         <path data-entry="1"
            d="M35.3867 34l268.003 546c15.3594 30 33 68 75 68c57.6094 0 74.6094 -48 74.6104 -102c0 -1.06836 -0.429688 -831.729 0.418945 -1193" 
@@ -1220,7 +1277,7 @@ c8.00668 15.7111 17.84 36.4486 35.9023 54.5109c15.7227 15.7227 38.7228 28.3369 6
     
 
     <!-- p-alt3-noentry :  data-cogncur-p-curve-variant=1 -->
-    <g id="letter-p-alt3-noentry" data-nstrokes="3" data-width="740" data-width2="690" data-width1="260">
+    <g id="letter-p-alt3-noentry" data-nstrokes="3" data-width="740" data-width2="690" data-width1="260" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-p-alt3-noentry">
         <path data-entry="1"
            d="M34.1045 511l33.8682 69q6.306 12.8473 13.2002 23.8643q5.82715 9.13574 15.3701 20.8027q9.45703 11.333 21.6226 17.5098q11.8345 5.82324 24.8071 5.82324q74.0254 0 74.0273 -102q0 -1014.65 0.418945 -1193" 
@@ -1246,7 +1303,7 @@ q-11.0336 0.00783654 -19.6989 -10.4753q-14.4482 -17.4791 -24.7783 -38.5247l-33.8
     </g>
     
     <!-- p-alt4 :  data-cogncur-p-curve-variant=1 data-cogncur-exitstrokes=1-->
-    <g id="letter-p-alt4" data-nstrokes="2" data-width="910" data-width1="490">
+    <g id="letter-p-alt4" data-nstrokes="2" data-width="910" data-width1="490" data-extra-width-for-skew="40">
       <g class="strokes" id="strokes-p-alt4">
         <path data-entry="1"
            d="M35.3867 34l268.003 546c15.3594 30 33 68 75 68c57.6094 0 74.6094 -48 74.6104 -102c0 -1.06836 -0.429688 -831.729 0.418945 -1193" 
@@ -1269,7 +1326,7 @@ c8.00668 15.7111 17.84 36.4486 35.9023 54.5109c15.7227 15.7227 38.7228 28.3369 6
     
 
     <!-- p-alt4-noentry :  data-cogncur-p-curve-variant=1 data-cogncur-exitstrokes=1 -->
-    <g id="letter-p-alt4-noentry" data-nstrokes="2" data-width="690" data-width1="260">
+    <g id="letter-p-alt4-noentry" data-nstrokes="2" data-width="690" data-width1="260" data-extra-width-for-skew="40">
       <g class="strokes" id="strokes-p-alt4-noentry">
         <path data-entry="1"
            d="M34.1045 511l33.8682 69q6.306 12.8473 13.2002 23.8643q5.82715 9.13574 15.3701 20.8027q9.45703 11.333 21.6226 17.5098q11.8345 5.82324 24.8071 5.82324q74.0254 0 74.0273 -102q0 -1014.65 0.418945 -1193" 
@@ -1337,7 +1394,7 @@ q-11.0336 0.00783654 -19.6989 -10.4753q-14.4482 -17.4791 -24.7783 -38.5247l-33.8
     
 
     <!-- p-alt6 data-cogncur-stick-variant=1 -->
-    <g id="letter-p-alt6" data-nstrokes="4" data-width="850" data-width3="790" data-width2="370" data-width1="370">
+    <g id="letter-p-alt6" data-nstrokes="4" data-width="850" data-width3="790" data-width2="370" data-width1="370" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-p-alt6">
         <path data-entry="1"
            d="M35.3867 35l301 614" 
@@ -1375,7 +1432,7 @@ q14.3376 0 24.2981 -9.96057q9.9517 -9.9517 9.9517 -24.0416q0 -16.8083 -13.3619 -
     </g>
     
     <!-- p-alt6-noentry -->
-    <g id="letter-p-alt6-noentry" data-nstrokes="4" data-width="650" data-width3="590" data-width2="170" data-width1="170">
+    <g id="letter-p-alt6-noentry" data-nstrokes="4" data-width="650" data-width3="590" data-width2="170" data-width1="170" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-p-alt6-noentry">
         <path data-entry="1"
            d="M34.1045 436l104.419 213z" 
@@ -1405,7 +1462,7 @@ c0 5.13436 1.15439 10.2687 3.46318 14.9783l104.419 213c5.53691 11.2945 17.1654 1
     </g>    
     
     <!-- p-alt7 : data-cogncur-exitstrokes=1 data-cogncur-stick-variant=1 -->
-    <g id="letter-p-alt7" data-nstrokes="3" data-width="790" data-width2="370" data-width1="370">
+    <g id="letter-p-alt7" data-nstrokes="3" data-width="790" data-width2="370" data-width1="370" data-extra-width-for-skew="40">
       <g class="strokes" id="strokes-p-alt7">
         <path data-entry="1"
            d="M35.3867 35l301 614" 
@@ -1435,7 +1492,7 @@ c9.33301 -0.00488281 17.3477 3.3125 24.042 9.95215c6.63867 6.69434 9.95605 14.70
     </g>
     
     <!-- p-alt7-noentry -->
-    <g id="letter-p-alt7-noentry" data-nstrokes="3" data-width="590" data-width2="170" data-width1="170">
+    <g id="letter-p-alt7-noentry" data-nstrokes="3" data-width="590" data-width2="170" data-width1="170" data-extra-width-for-skew="40">
       <g class="strokes" id="strokes-p-alt7-noentry">
         <path data-entry="1"
            d="M34.1045 436l104.419 213z" 
@@ -1513,7 +1570,7 @@ c0 5.13436 1.15439 10.2687 3.46318 14.9783l104.419 213c5.53691 11.2945 17.1654 1
 
     
     <!-- p-alt9 :  data-cogncur-p-curve-variant=1 data-cogncur-stick-variant=1 -->
-    <g id="letter-p-alt9" data-nstrokes="3" data-width="970" data-width2="910" data-width1="490">
+    <g id="letter-p-alt9" data-nstrokes="3" data-width="970" data-width2="910" data-width1="490" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-p-alt9">
         <path data-entry="1"
            d="M35.3867 34l268.003 546c15.3594 30 33 68 75 68c57.6094 0 74.6094 -48 74.6104 -102c0 -0.905753 -0.308594 -598.09 0.114258 -1000" 
@@ -1540,7 +1597,7 @@ c8.00668 15.7111 17.84 36.4486 35.9023 54.5109c15.7946 15.7946 38.9333 28.4514 6
     
 
     <!-- p-alt9-noentry  -->
-    <g id="letter-p-alt9-noentry" data-nstrokes="3" data-width="740" data-width2="690" data-width1="260">
+    <g id="letter-p-alt9-noentry" data-nstrokes="3" data-width="740" data-width2="690" data-width1="260" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-p-alt9-noentry">
         <path data-entry="1"
            d="M34.1045 511l33.8682 69c4.204 8.56486 8.60407 16.5196 13.2002 23.8643c3.88477 6.09049 9.00814 13.0247 15.3701 20.8027c6.30469 7.55534 13.5122 13.3919 21.6226 17.5098c7.88965 3.88216 16.1587 5.82324 24.8071 5.82324c49.3503 0 74.026 -34 74.0273 -102
@@ -1567,7 +1624,7 @@ c40.216 81.9324 41.447 84.4404 48.9096 96.1403c13.4041 21.0149 40.6914 59.8597 9
     </g>
     
     <!-- p-alt10 :  data-cogncur-p-curve-variant=1 data-cogncur-exitstrokes=1 data-cogncur-stick-variant=1 -->
-    <g id="letter-p-alt10" data-nstrokes="2" data-width="910" data-width1="490">
+    <g id="letter-p-alt10" data-nstrokes="2" data-width="910" data-width1="490" data-extra-width-for-skew="40">
       <g class="strokes" id="strokes-p-alt9">
         <path data-entry="1"
            d="M35.3867 34l268.003 546c15.3594 30 33 68 75 68c57.6094 0 74.6094 -48 74.6104 -102c0 -0.905753 -0.308594 -598.09 0.114258 -1000" 
@@ -1589,7 +1646,7 @@ c8.00668 15.7111 17.84 36.4486 35.9023 54.5109c15.7946 15.7946 38.9333 28.4514 6
     
 
     <!-- p-alt10-noentry  -->
-    <g id="letter-p-alt10-noentry" data-nstrokes="2" data-width="690" data-width1="260">
+    <g id="letter-p-alt10-noentry" data-nstrokes="2" data-width="690" data-width1="260" data-extra-width-for-skew="40">
       <g class="strokes" id="strokes-p-alt10-noentry">
         <path data-entry="1"
            d="M34.1045 511l33.8682 69c4.204 8.56486 8.60407 16.5196 13.2002 23.8643c3.88477 6.09049 9.00814 13.0247 15.3701 20.8027c6.30469 7.55534 13.5122 13.3919 21.6226 17.5098c7.88965 3.88216 16.1587 5.82324 24.8071 5.82324c49.3503 0 74.026 -34 74.0273 -102
@@ -1721,7 +1778,7 @@ q10.5758 -10.659 10.3343 -22.6142q0.24143 -8.04485 -4.8373 -17.2056q-83.9213 -15
     </g>
 
     <!-- q-alt1 -->
-    <g id="letter-q-alt1" data-nstrokes="4" data-width="837" data-width1="740" data-width2="740" data-width3="740">
+    <g id="letter-q-alt1" data-nstrokes="4" data-width="837" data-width1="740" data-width2="740" data-width3="740" data-extra-width-for-skew="20">
       <g class="strokes" id="strokes-q-alt1">
         <path data-entry="1"
            d="M35.387 35C35.387 35 371.387 512 371.427 512.429C433.157 592.29 527.789 648 652 648L705 648" 
@@ -1754,7 +1811,7 @@ c0 3.56144 0.555432 7.12288 1.6663 10.5425l98.3896 302.882c4.46028 13.7305 17.33
     </g>
 
     <!-- q-alt1-noentry -->
-    <g id="letter-q-alt1-noentry" data-nstrokes="3" data-width="627" data-width1="530" data-width2="530">
+    <g id="letter-q-alt1-noentry" data-nstrokes="3" data-width="627" data-width1="530" data-width2="530" data-extra-width-for-skew="20">
       <g class="strokes" id="strokes-q-alt1-noentry">
         <path 
            d="M495 648h-53c-242.074 0 -368 -204 -368 -408c0 -132 58 -206 134 -206c142 0 287 200 287 307v305"
@@ -1780,7 +1837,7 @@ c0 3.56144 0.555432 7.12288 1.6663 10.5425l98.3896 302.882c4.46028 13.7305 17.33
     </g>
 
     <!-- q-alt2 -->
-    <g id="letter-q-alt2" data-nstrokes="3" data-width="740">
+    <g id="letter-q-alt2" data-nstrokes="3" data-width="740" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-q-alt2">
         <path data-entry="1"
            d="M35.387 35C35.387 35 371.387 512 371.427 512.429C433.157 592.29 527.789 648 652 648L705 648" 
@@ -1807,7 +1864,7 @@ c0 3.56144 0.555432 7.12288 1.6663 10.5425l98.3896 302.882c4.46028 13.7305 17.33
     </g>
 
     <!-- q-alt2-noentry -->
-    <g id="letter-q-alt2-noentry" data-nstrokes="2" data-width="530">
+    <g id="letter-q-alt2-noentry" data-nstrokes="2" data-width="530" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-q-alt2-noentry">
         <path 
            d="M495 648h-53c-242.074 0 -368 -204 -368 -408c0 -132 58 -206 134 -206c142 0 287 200 287 307v305"
@@ -1828,7 +1885,7 @@ c0 3.56144 0.555432 7.12288 1.6663 10.5425l98.3896 302.882c4.46028 13.7305 17.33
     </g>
     
     <!-- q-alt3 -->
-    <g id="letter-q-alt3" data-nstrokes="4" data-width="837" data-width1="740" data-width2="740" data-width3="740">
+    <g id="letter-q-alt3" data-nstrokes="4" data-width="837" data-width1="740" data-width2="740" data-width3="740" data-extra-width-for-skew="20">
       <g class="strokes" id="strokes-q-alt3">
         <path data-entry="1"
            d="M35.387 35C35.387 35 371.387 512 371.427 512.429C433.157 592.29 527.789 648 652 648L705 648" 
@@ -1861,7 +1918,7 @@ c0 4.12535 0.745249 8.2507 2.23575 12.1557l98.1475 257.141c4.90654 12.8549 17.34
     </g>
 
     <!-- q-alt3-noentry -->
-    <g id="letter-q-alt3-noentry" data-nstrokes="3" data-width="627" data-width1="530" data-width2="530">
+    <g id="letter-q-alt3-noentry" data-nstrokes="3" data-width="627" data-width1="530" data-width2="530" data-extra-width-for-skew="20">
       <g class="strokes" id="strokes-q-alt3-noentry">
         <path 
            d="M495 648h-53c-242.074 0 -368 -204 -368 -408c0 -132 58 -206 134 -206c142 0 287 200 287 307v305"
@@ -1887,7 +1944,7 @@ c0 4.12535 0.745249 8.2507 2.23575 12.1557l98.1475 257.141c4.90654 12.8549 17.34
     </g>    
     
     <!-- q-alt4 -->
-    <g id="letter-q-alt4" data-nstrokes="3" data-width="740">
+    <g id="letter-q-alt4" data-nstrokes="3" data-width="740" data-extra-width-for-skew="70">
       <g class="strokes" id="strokes-q-alt4">
         <path data-entry="1"
            d="M35.387 35C35.387 35 371.387 512 371.427 512.429C433.157 592.29 527.789 648 652 648L705 648" 
@@ -1914,7 +1971,7 @@ c0 4.12535 0.745249 8.2507 2.23575 12.1557l98.1475 257.141c4.90654 12.8549 17.34
     </g>
 
     <!-- q-alt4-noentry -->
-    <g id="letter-q-alt4-noentry" data-nstrokes="2" data-width="530">
+    <g id="letter-q-alt4-noentry" data-nstrokes="2" data-width="530" data-extra-width-for-skew="70">
       <g class="strokes" id="strokes-q-alt4-noentry">
         <path 
            d="M495 648h-53c-242.074 0 -368 -204 -368 -408c0 -132 58 -206 134 -206c142 0 287 200 287 307v305"
@@ -2009,7 +2066,7 @@ q-7.64715 -9.89205 -12.4269 -14.6718q-26.8814 -26.8814 -68.5388 -26.8814q-41.657
     </g>
     
     <!-- r-alt1-noentry data-cogncur-rz-top-variant -->
-    <g id="letter-r-alt1-noentry" data-nstrokes="3" data-width="610" data-width2="424" data-width1="150">
+    <g id="letter-r-alt1-noentry" data-nstrokes="3" data-width="610" data-width2="424" data-width1="150" >
       <g class="strokes" id="strokes-r-alt1-noentry">
         <path data-entry="1"
            d="M34.1045 436l104.419 213" 
@@ -2034,7 +2091,7 @@ c0 5.13436 1.15439 10.2687 3.46318 14.9783l104.419 213c5.53691 11.2945 17.1654 1
     </g>
     
     <!-- r-alt2 data-cogncur-r-variant=1 -->
-    <g id="letter-r-alt2" data-nstrokes="3" data-width="1044" data-width2="774" data-width1="490">
+    <g id="letter-r-alt2" data-nstrokes="3" data-width="1044" data-width2="774" data-width1="490" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-r-alt2">
         <path data-entry="1"
            d="M35.3867 34l268.003 546c15.3594 30 33 68 75 68c57.6104 0 74.6104 -48 74.6104 -102c1 0 0 -512 0 -512" 
@@ -2065,7 +2122,7 @@ q-42.5908 -22.2689 -101.101 -22.2689q-58.5107 0 -96.7512 29.4184q-41.7251 32.099
     
 
     <!-- r-alt2-noentry -->
-    <g id="letter-r-alt2-noentry" data-nstrokes="3" data-width="804" data-width2="534" data-width1="250">
+    <g id="letter-r-alt2-noentry" data-nstrokes="3" data-width="804" data-width2="534" data-width1="250" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-r-alt2-noentry">
         <path data-entry="1"
            d="M33.5215 511q0.640235 6.68981 33.8682 69q6.61035 14 12.9541 24.292q3.65625 6.70801 13.8936 19.9473q9.7627 12.7607 21.5371 18.3652q12.2256 5.39551 26.6152 5.39551q74.6104 0 74.6104 -102v-512" 
@@ -2095,7 +2152,7 @@ q7.89599 10.243 12.9146 15.2617q26.1319 26.1319 65.5938 26.1319z" />
 
     
     <!-- r-alt3 data-cogncur-r-variant=1 data-cogncur-exitstrokes=1 -->
-    <g id="letter-r-alt3" data-nstrokes="2" data-width="900" data-width1="490">
+    <g id="letter-r-alt3" data-nstrokes="2" data-width="900" data-width1="490" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-r-alt3">
         <path data-entry="1"
            d="M35.3867 34l268.003 546c15.3594 30 33 68 75 68c57.6104 0 74.6104 -48 74.6104 -102c1 0 0 -512 0 -512" 
@@ -2119,7 +2176,7 @@ q-48.848 -29.9909 -84.8955 -73.619q-36.0475 -43.6281 -58.8107 -91.4189q-22.7632 
     
 
     <!-- r-alt3-noentry -->
-    <g id="letter-r-alt3-noentry" data-nstrokes="2" data-width="664" data-width1="250">
+    <g id="letter-r-alt3-noentry" data-nstrokes="2" data-width="664" data-width1="250" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-r-alt3-noentry">
         <path data-entry="1"
            d="M33.5215 511q0.640235 6.68981 33.8682 69q6.61035 14 12.9541 24.292q3.65625 6.70801 13.8936 19.9473q9.7627 12.7607 21.5371 18.3652q12.2256 5.39551 26.6152 5.39551q74.6104 0 74.6104 -102v-512" 
@@ -2196,7 +2253,7 @@ q-9.86375 -9.5818 -23.8097 -9.5818q-13.946 0 -23.8978 9.95184z" />
     </g>
     
     <!-- s-alt1 : data-cogncur-exitstrokes=1 -->
-    <g id="letter-s-alt1" data-nstrokes="2" data-width="702">
+    <g id="letter-s-alt1" data-nstrokes="2" data-width="702" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-s-alt1">
         <path data-entry="1"
            d="M33.9736 34l633 614" 
@@ -2217,7 +2274,7 @@ c-74.3604 0 -150.501 28.0629 -195.612 86.4507c-4.70939 6.09549 -7.06408 13.4284 
     </g>
     
     <!-- s-alt1-noentry -->
-    <g id="letter-s-alt1-noentry" data-nstrokes="2" data-width="439">
+    <g id="letter-s-alt1-noentry" data-nstrokes="2" data-width="439" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-s-alt1-noentry">
         <path data-entry="1"
            d="M185.413 436l218.561 212" 
@@ -2292,7 +2349,7 @@ c-18.7852 0 -33.9932 15.208 -33.9932 33.9932c0 6.9209 2.09766 13.8418 6.29297 19
     </g>  
 
     <!-- s-alt3 data-cogncur-s-variant=1 data-cogncur-exitstrokes=1 -->
-    <g id="letter-s-alt3" data-nstrokes="2" data-width="702" data-width1="506">
+    <g id="letter-s-alt3" data-nstrokes="2" data-width="702" data-width1="506" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-s-alt3">
         <path data-entry="1"
            d="M32.9736 34l438.026 614" 
@@ -2314,7 +2371,7 @@ c-4.70939 6.09549 -7.06408 13.4284 -7.06408 20.7613z" />
     </g>    
     
     <!-- s-alt3-noentry -->
-    <g id="letter-s-alt3-noentry" data-nstrokes="2" data-width="449" data-width1="253">
+    <g id="letter-s-alt3-noentry" data-nstrokes="2" data-width="449" data-width1="253" data-extra-width-for-skew="10">
       <g class="strokes" id="strokes-s-alt3-noentry">
         <path data-entry="1"
            d="M66.76 436l151.24 212" 
@@ -2334,7 +2391,7 @@ c-18.7852 0 -33.9932 15.208 -33.9932 33.9932c0 6.9209 2.09766 13.8418 6.29297 19
 
     
     <!-- t -->
-    <g id="letter-t" data-nstrokes="3" data-width="790" data-width2="610" data-width1="610">
+    <g id="letter-t" data-nstrokes="3" data-width="790" data-width2="610" data-width1="610" data-extra-width-for-skew="30">
       <g class="strokes" id="strokes-t">
         <path data-entry="1"
            d="M33.1045 35l541 1100" 
@@ -2364,7 +2421,7 @@ q66.8436 -66.3825 72.4608 -170.383l-35.6172 -1z" />
     
     
     <!-- t-noentry -->
-    <g id="letter-t-noentry" data-nstrokes="3" data-width="640" data-width2="460" data-width1="460">
+    <g id="letter-t-noentry" data-nstrokes="3" data-width="640" data-width2="460" data-width1="460"  data-extra-width-for-skew="30">
       <g class="strokes" id="strokes-t-noentry">
         <path data-entry="1"
            d="M34.3018 340.392l390.803 794.608" 
@@ -2389,7 +2446,7 @@ c0 5.14845 1.16073 10.2969 3.4822 15.0171l390.803 794.608c5.54642 11.2774 17.166
     </g>
     
     <!-- t-alt1 : data-cogncur-t-variant=1 -->
-    <g id="letter-t-alt1" data-nstrokes="3" data-width="580" data-width2="555" data-width1="370">
+    <g id="letter-t-alt1" data-nstrokes="3" data-width="580" data-width2="555" data-width1="370" data-extra-width-for-skew="80">
       <g class="strokes" id="strokes-t-alt1">
         <path data-entry="1"
            d="M33 34c100 74 303 385.297 303 615l-0.432617 260" 
@@ -2416,7 +2473,7 @@ c-15.6934 -31.3868 -44.0001 -88.0002 -107.523 -88.0002c-39.1219 0 -105.997 17.47
     </g>
     
     <!-- t-alt1-noentry : data-cogncur-t-variant=1 -->
-    <g id="letter-t-alt1-noentry" data-nstrokes="2" data-width="490" data-width1="465">
+    <g id="letter-t-alt1-noentry" data-nstrokes="2" data-width="490" data-width1="465" data-extra-width-for-skew="80">
       <g class="strokes" id="strokes-t-alt1-noentry">
         <path 
            d="M243.567 909c0.071 -343.066 0.429 -771.153 0.429 -772c0 -54 14 -103 72.004 -103c42 0 62 39 77 69l33.377 68"
@@ -2436,7 +2493,7 @@ c-15.6934 -31.3868 -44.0001 -88.0002 -107.523 -88.0002c-39.1219 0 -105.997 17.47
     
 
     <!-- t-alt2 : data-cogncur-t-variant=2 -->
-    <g id="letter-t-alt2" data-nstrokes="3" data-width="580" data-width2="555" data-width1="370">
+    <g id="letter-t-alt2" data-nstrokes="3" data-width="580" data-width2="555" data-width1="370" data-extra-width-for-skew="80">
       <g class="strokes" id="strokes-t-alt2">
         <path data-entry="1"
            d="M35.3867 35l301 614" 
@@ -2462,7 +2519,7 @@ c-15.6934 -31.3868 -44.0001 -88.0002 -107.523 -88.0002c-39.1219 0 -105.997 17.47
     </g>
        
     <!-- t-alt2-noentry : data-cogncur-t-variant=1 -->
-    <g id="letter-t-alt2-noentry" data-nstrokes="2" data-width="490" data-width1="465">
+    <g id="letter-t-alt2-noentry" data-nstrokes="2" data-width="490" data-width1="465" data-extra-width-for-skew="80">
       <g class="strokes" id="strokes-t-alt2-noentry">
         <path 
            d="M243.567 909c0.071 -343.066 0.429 -771.153 0.429 -772c0 -54 14 -103 72.004 -103c42 0 62 39 77 69l33.377 68"
@@ -2483,7 +2540,7 @@ c-15.6934 -31.3868 -44.0001 -88.0002 -107.523 -88.0002c-39.1219 0 -105.997 17.47
     
 
     <!-- u -->
-    <g id="letter-u" data-nstrokes="3" data-width="960" data-width1="680">
+    <g id="letter-u" data-nstrokes="3" data-width="960" data-width1="680" >
       <g class="strokes" id="strokes-u">
         <path data-entry="1"
            d="M35.3867 35l301 614" 
@@ -2533,7 +2590,7 @@ c0 5.13436 1.15439 10.2687 3.46318 14.9783l104.419 213c5.53691 11.2945 17.1654 1
     </g>    
     
     <!-- v -->
-    <g id="letter-v" data-nstrokes="2" data-width="1200" data-width1="900">
+    <g id="letter-v" data-nstrokes="2" data-width="1200" data-width1="900" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-v">
         <path 
            d="M35.3867 34l268.003 546c15.3594 30 33 68 75 68c57.6104 0 74.6104 -48 74.6104 -102c1 0 0 -375 0 -375c0 -76 52 -137 134 -137c142 0 287 183.005 287 405c0 101.045 -27 178 -50 209"
@@ -2557,7 +2614,7 @@ c249.327 507.953 267.277 544.578 270.059 550.038c8.00668 15.7111 17.84 36.4486 3
     </g>    
 
     <!-- v-noentry -->
-    <g id="letter-v-noentry" data-nstrokes="2" data-width="965" data-width1="665">
+    <g id="letter-v-noentry" data-nstrokes="2" data-width="965" data-width1="665" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-v-noentry">
         <path 
            d="M33.5215 511q0.640625 6.68945 33.8682 69q6.61035 14 12.9541 24.292q3.65625 6.70801 13.8936 19.9473q9.7627 12.7607 21.5371 18.3652q12.2256 5.39551 26.6152 5.39551q74.6104 0 74.6104 -102v-375q0 -58 37 -97.5t97 -39.5q109 0 198 121t89 284q0 70 -15 126 t-35 83"
@@ -2581,7 +2638,7 @@ q-16.1501 16.1501 -5.99158 41.5213q6.32266 15.791 33.516 66.8115q7.01882 14.7817
     
     
     <!-- w -->
-    <g id="letter-w" data-nstrokes="4" data-width="1502" data-width3="1210" data-width2="790" data-width1="354">
+    <g id="letter-w" data-nstrokes="4" data-width="1502" data-width3="1210" data-width2="790" data-width1="354" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-w">
         <path data-entry="1"
            d="M35.3867 35l301 614" 
@@ -2615,7 +2672,7 @@ c15.5728 -27.2525 32.3839 -41.3799 65.2299 -58.554c24.5599 -12.8417 49.2024 -15.
     </g>
     
     <!-- w-noentry -->
-    <g id="letter-w-noentry" data-nstrokes="4" data-width="1302" data-width3="1010" data-width2="590" data-width1="154">
+    <g id="letter-w-noentry" data-nstrokes="4" data-width="1302" data-width3="1010" data-width2="590" data-width1="154" data-extra-width-for-skew="60">
       <g class="strokes" id="strokes-w-noentry">
         <path data-entry="1"
            d="M34.1045 436l104.419 213" 
@@ -3116,8 +3173,391 @@ c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 6.78408 2.0154 13.5682 6.04621 1
       </g>
     </g>    
 
+    <!-- A -->
+    <g id="letter-A" data-nstrokes="3" data-width="1260" data-width1="680" data-width2="1120" data-extra-width-for-skew="10">
+      <g class="strokes" id="strokes-A">
+        <path
+           d="M34.3867 69.0449c17.8223 -23.5137 42.7139 -35.0449 75.6934 -35.0449c81.002 0 96.124 71.8271 118.731 136.796c155.269 446.204 404.251 1159.2 404.251 1159.2" 
+           id="stroke-A1" />
+        <path 
+           d="M633.062 1330l440.153 -1296"
+           id="stroke-A2" />
+        <path 
+           d="M1073.06 34c-58 164 -99 298 -124 348c-74.2783 148.557 -176.064 164 -320 164c-140 0 -282.089 -34.2666 -304 -100c-1.72754 -5.18262 -2.55859 -10.2324 -2.63867 -15.1455c0 -69.0215 165.12 -110.854 313.559 -110.854c373.358 0 524.018 111 586.018 168"
+           id="stroke-A3" />
+        <path 
+           d="M961.704 353.247 h1"
+           id="overlap-A3" /><!-- 1. use overlap only if as troke overlaps ITSELF, not if two strokes overlap each other. 2. must be a path, not a dot-->
+      </g>
+      <g class="outline" id="outlines-A">
+        <path id="outline-A1"
+      d="M633.062 1363.99c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -3.80125 -0.632752 -7.60251 -1.89826 -11.2314c-406.288 -1165.04 -406.288 -1165.04 -410.607 -1178.01c-12.7029 -38.1219 -25.7033 -77.1366 -53.9245 -105.358
+c-21.8304 -21.8304 -52.7021 -35.3988 -90.5465 -35.3988c-30.7486 0 -72.6121 8.68043 -102.813 48.526c-4.5823 6.04562 -6.87345 13.2789 -6.87345 20.5122c0 18.7856 15.2079 33.9933 33.9933 33.9933c10.7942 0 20.7357 -5.05815 27.1199 -13.4811
+c12.8737 -16.9848 28.7457 -21.5638 48.5735 -21.5638c44.8769 0 57.7757 27.7145 79.977 94.3415c4.46752 13.4072 4.46752 13.4072 410.91 1178.9c4.65869 13.359 17.3527 22.7619 32.0951 22.7619z" />
+        <path id="outline-A2"
+    d="M1107.21 34c0 -18.7856 -15.2079 -33.9933 -33.9933 -33.9933c-14.8356 0 -27.5999 9.52268 -32.1848 23.0227l-440.153 1296c-1.20567 3.55001 -1.8085 7.2603 -1.8085 10.9706c0 18.7856 15.2079 33.9933 33.9933 33.9933c14.8356 0 27.5999 -9.52268 32.1848 -23.0227
+l440.153 -1296c1.20567 -3.55001 1.8085 -7.2603 1.8085 -10.9706z" />
+        <path id="outline-A3"
+    d="M939.584 315.753c12.6094 -33.9941 28.1913 -79.5514 46.0366 -132.207c16.3165 -48.1442 34.772 -102.602 55.396 -160.918c4.6968 -13.2806 17.3513 -22.6218 32.0459 -22.6218c18.7856 0 33.9933 15.2079 33.9933 33.9933
+c0 3.85021 -0.649156 7.70042 -1.94747 11.3715c-20.4407 57.7977 -38.789 111.935 -55.1041 160.075c-16.9431 49.993 -31.43 93.1121 -44.1546 127.791c-29.8496 -8.2373 -30.8496 -9.2373 -66.2656 -17.4844zM1005.85 333.237zM1005.81 333.166
+c-22.4658 -6.50327 -43.5527 -12.2666 -66.1973 -17.3301c-93.2021 -20.8398 -195.864 -29.8293 -303.63 -29.8293c-145.319 0 -347.552 39.4252 -347.552 144.848c0 31.9356 19.6007 56.0905 30.785 67.2748c76.81 76.81 262.344 81.864 309.847 81.864
+c146.193 0 266.807 -15.5655 350.413 -182.778c0.073379 -0.146758 0.146833 -0.294585 0.220075 -0.442046c-18.6953 -5.77344 -33.6953 -9.77344 -67.4961 -17.5752c-64.1641 118.735 -146.723 132.808 -283.137 132.808c-63.1916 0 -126.959 -7.43071 -177.073 -21.2078
+c-59.4674 -16.3482 -95.2675 -41.5373 -95.5766 -60.5026c0.767252 -13.5624 31.9262 -29.7771 35.6923 -31.6888c54.9412 -27.8881 152.696 -44.6142 243.878 -44.6142c111.671 0 202.493 10.1024 276.356 25.577c24.0898 5.04688 46.375 10.666 66.9912 16.6914
+c123.339 36.0515 186.939 86.6872 219.674 116.783c6.48898 5.96567 14.7422 8.94851 22.9955 8.94851c18.7855 0 33.9933 -15.2077 33.9933 -33.9933c0 -9.28078 -3.7643 -18.3946 -10.9979 -25.0448c-64.6442 -59.4309 -146.073 -101.577 -239.186 -129.789z" />
+       
+      </g>
+    </g>
+    
+    <!-- A-alt1 -->
+    <g id="letter-A-alt1" data-nstrokes="2" data-width="1140" data-width1="960" data-extra-width-for-skew="20">
+      <g class="strokes" id="strokes-A-alt1">
+        <path
+           d="M922.304 1329.88h-111.83c-510.776 0 -776.48 -430.439 -776.48 -860.88c0 -278.52 122.38 -434.659 282.74 -434.659c77.3057 0 155.033 28.0928 227.817 73.6592c209.313 131.04 377.753 406.592 377.753 574.11c-0.303711 188.89 0.696289 452.89 -0.303711 646.89" 
+           id="stroke-A-alt11" />
+        <path 
+           d="M922.304 1329.88c-2.11035 2.11035 0 -1190.23 0 -1193.21c-0.310547 -53.6699 15.6895 -102.67 73.6895 -102.67c42 0 61.2322 38.8913 76.0107 69c-0.00390625 0 33.377 68 33.377 68"
+           id="stroke-A-alt12" />
+        <path 
+           d="M922.304 1329.88 h1"
+           id="overlap-A-alt11" /><!-- 1. use overlap only if as troke overlaps ITSELF, not if two strokes overlap each other. 2. must be a path, not a dot-->
+      </g>
+      <g class="outline" id="outlines-A-alt1">
+        <path id="outline-A-alt11"
+      d="M956.297 1329.88c-0.296875 9.12012 -6.29688 34.1201 -33.9932 33.9933c-0.329108 -0.00150655 -111.83 0 -111.83 0c-525.371 0 -810.474 -439.817 -810.474 -894.873c0 -174.705 46.1244 -308.179 126.38 -388.436c52.0908 -52.0908 118.262 -80.217 190.353 -80.217
+c320.446 0 639.564 438.48 639.564 681.818c-0.043098 26.8043 -0.0599202 55.2106 -0.0599202 84.7647c0 105.175 0.213007 224.853 0.213007 338.508c0 79.4197 -0.481178 157.973 -0.456923 224.743c0.00683594 18.8184 -13.9932 33.8184 -33.9932 33.8115
+c-18.7852 -0.00642071 -33.9932 -15.208 -33.9932 -33.9932c0 -2.22656 0.45641 -68.5053 0.45641 -224.63c0 -11.9679 -0.212856 -335.041 -0.212856 -338.425c0 -29.5856 0.0168498 -58.0327 0.0600323 -84.8896c0 -208.322 -292.943 -613.721 -571.577 -613.721
+c-149.297 0 -248.747 156.296 -248.747 400.666c0 405.406 246.014 827 742.487 826.887c0.526367 0.11345 77.5264 0.000168898 77.5264 0.000168898v33.1133c0 18.8164 13.5986 35 34 35c33 0 34.1455 -34.0586 34.2969 -34.1201z" />
+        <path id="outline-A-alt12"
+    d="M887.31 1329.88c0 18.7856 15.2079 33.9933 33.9933 33.9933c18.7749 0 33.9776 -15.1909 33.9933 -33.9646l1.00019 -1193.44c-0.00237332 -0.410166 -0.00430967 -0.819391 -0.00430967 -1.22764c0 -15.401 1.79529 -45.8096 15.1379 -59.1522
+c4.43854 -4.43854 10.3813 -8.09859 24.5624 -8.09859c15.3111 0 25.562 9.40419 45.4879 49.9998l33.377 68c5.54055 11.288 17.1656 19.0002 30.5229 19.0002c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -5.13976 -1.15682 -10.2795 -3.47045 -14.9932l-33.377 -68
+c-8.16171 -16.6281 -18.6192 -39.4313 -38.1089 -58.9211c-16.0038 -16.0038 -39.3711 -29.0791 -68.4247 -29.0791c-30.5934 0 -107.688 12.1872 -107.688 135.036c0 0.533205 0.00204286 1.06621 0.00474756 1.59898z" />
+      </g>
+    </g>
+
+    <!-- A-alt2 -->
+    <g id="letter-A-alt2" data-nstrokes="2" data-width="1140" data-width1="960" data-extra-width-for-skew="20">
+      <g class="strokes" id="strokes-A-alt2">
+        <path
+           d="M922.304 1329.88c-24.3029 -0.229925 18.5454 0 -111.83 0c-533.474 0 -776.48 -478.591 -776.48 -771.88c0 -278.52 191.815 -523 453.007 -523c298.002 0 435 199 435 306v989" 
+           id="stroke-A-alt21" />
+        <path 
+           d="M922.304 1329.88c-2.11035 2.11035 0 -1190.23 0 -1193.21c-0.310547 -53.6699 15.6895 -102.67 73.6895 -102.67c42 0 61.2322 38.8913 76.0107 69c-0.00390625 0 33.377 68 33.377 68"
+           id="stroke-A-alt22" />
+        <path 
+           d="M922.304 1329.88 h1"
+           id="overlap-A-alt21" /><!-- 1. use overlap only if as troke overlaps ITSELF, not if two strokes overlap each other. 2. must be a path, not a dot-->
+      </g>
+      <g class="outline" id="outlines-A-alt2">
+        <path id="outline-A-alt21"
+      d="M955.993 1330.18c0.00683594 18.8184 -13.9932 33.8184 -33.9932 33.8115c-18.7852 -0.00642071 -33.9932 -15.208 -33.9932 -33.9932l-0.000168896 -989c-0.00666704 -86 -119.768 -272.007 -401.007 -272.007c-243.396 0 -419.014 231.072 -419.014 489.007
+c0 269.403 224.014 738 742.487 737.887c0.526367 0.113281 77.5264 0 77.5264 0v33.1133c0 18.8164 13.5986 35 34 35c33 0 34.1455 -34.0586 34.2969 -34.1201c-0.296875 9.12012 -6.29688 34.1201 -33.9932 33.9933
+c-0.329108 -0.00150655 -112.304 0.126784 -111.83 -0.000168893c-548.474 0.126953 -810.474 -488.745 -810.474 -805.873c0 -299.092 208.101 -556.993 487 -556.993c314.875 0 469 211.993 468.993 339.993z" />
+        <path id="outline-A-alt22"
+    d="M887.31 1329.88c0 18.7856 15.2079 33.9933 33.9933 33.9933c18.7749 0 33.9776 -15.1909 33.9933 -33.9646l1.00019 -1193.44c-0.00237332 -0.410166 -0.00430967 -0.819391 -0.00430967 -1.22764c0 -15.401 1.79529 -45.8096 15.1379 -59.1522
+c4.43854 -4.43854 10.3813 -8.09859 24.5624 -8.09859c15.3111 0 25.562 9.40419 45.4879 49.9998l33.377 68c5.54055 11.288 17.1656 19.0002 30.5229 19.0002c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -5.13976 -1.15682 -10.2795 -3.47045 -14.9932l-33.377 -68
+c-8.16171 -16.6281 -18.6192 -39.4313 -38.1089 -58.9211c-16.0038 -16.0038 -39.3711 -29.0791 -68.4247 -29.0791c-30.5934 0 -107.688 12.1872 -107.688 135.036c0 0.533205 0.00204286 1.06621 0.00474756 1.59898z" />
+      </g>
+    </g>
+    
+    <!-- B -->
+    <g id="letter-B" data-nstrokes="3" data-width="760" data-width1="260" data-width2="670" data-extra-width-for-skew="30">
+      <g class="strokes" id="strokes-B">
+        <path
+           d="M222.062 1316c0 0 -0.43457 -1000.13 -0.43457 -1100.67c0 -109.335 -31.5469 -181.668 -112.548 -181.334c-32.9795 0 -57.8711 11.5312 -75.6934 35.0449" 
+           id="stroke-B1" />
+        <path data-lift="1"
+           d="M95.0801 1279c109 40 168.118 51.4775 249.702 51.4775c163.68 0 287.024 -129.67 287.024 -288.666c0 -163.816 -110.727 -220.812 -166.017 -248.545c-73.5127 -36.874 -243.71 -29.2666 -243.71 -29.2666"
+           id="stroke-B2" />
+        <path 
+           d="M222.08 764c0 0 181.574 6.55957 276.747 -21.5479c69.2529 -20.4521 225.718 -122.437 225.718 -319.924c0 -217.574 -159.465 -387.528 -375.693 -388.664c-63.7705 -0.334961 -102.771 10.1357 -159.771 40.1357"
+           id="stroke-B3" />
+      </g>
+      <g class="outline" id="outlines-B">
+        <path id="outline-B1"
+      d="M-0.606614 69.0449c0 18.7856 15.2079 33.9933 33.9933 33.9933c10.7942 0 20.7357 -5.05815 27.1199 -13.4811c12.8737 -16.9848 28.7457 -21.5638 48.5735 -21.5638c0.156174 -0.000643938 0.311905 -0.000965574 0.467196 -0.000965574
+c21.6751 0 50.7516 5.08525 66.9461 56.7806c7.25922 23.1726 11.1268 54.094 11.1412 90.561l0.434573 1100.68c0.0074147 18.7797 15.2125 33.9798 33.9933 33.9798c18.7673 0 33.9933 -15.184 33.9933 -34.0069l-0.434568 -1100.65
+c0 -64.9659 -10.2477 -135.985 -53.1669 -178.904c-23.7582 -23.7582 -56.0286 -36.4242 -92.7159 -36.4242c-0.219309 0 -0.438776 0.00045261 -0.658399 0.00135816c-30.7486 0 -72.6121 8.68043 -102.813 48.526c-4.5823 6.04562 -6.87345 13.2789 -6.87345 20.5122z" />
+        <path id="outline-B2"
+    d="M597.813 1041.81c0 139.867 -107.768 254.673 -253.031 254.673c-77.8924 0 -130.356 -9.9089 -237.955 -49.3949c-3.78353 -1.38845 -7.76515 -2.08268 -11.7468 -2.08268c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 14.5597 9.16993 27.1119 22.2466 31.9107
+c110.401 40.514 176.173 53.5602 261.449 53.5602c182.111 0 321.018 -144.553 321.018 -322.659c0 -97.2995 -36.6159 -164.155 -80.569 -208.108c-37.2047 -37.2047 -78.3895 -57.8902 -104.187 -70.8301c-55.7018 -27.9401 -153.198 -33.5289 -222.056 -33.5289
+c-23.0558 0 -38.0277 0.67823 -38.4373 0.69654c-18.1523 0.811368 -32.4639 15.7498 -32.4639 33.9592c0 18.7856 15.2079 33.9933 33.9933 33.9933c0.509941 0 1.01988 -0.0113873 1.52941 -0.0341619c0 0 13.885 -0.63022 35.4264 -0.63022
+c37.6734 0 143.474 2.2413 191.5 26.3311c62.866 31.5335 147.277 80.6586 147.277 218.152z" />
+        <path id="outline-B3"
+    d="M345.887 67.8497c202.621 0 344.665 158.127 344.665 354.679c0 185.035 -150.69 272.352 -201.395 287.326c-39.5871 11.6913 -114.782 20.8253 -220.61 20.8253c-27.4224 0 -45.2303 -0.650954 -45.2303 -0.650954
+c-0.412048 -0.0148857 -0.824316 -0.0223285 -1.23658 -0.0223285c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 18.3184 14.4798 33.3107 32.7567 33.971c0.326734 0.0118036 19.0553 0.692212 47.7054 0.692212c75.2656 0 174.504 -4.28592 239.948 -23.6135
+c87.5361 -25.8516 250.041 -142.687 250.041 -352.521c0 -235.426 -173.81 -422.665 -412.581 -422.665c-67.7658 0 -111.89 12.0302 -172.717 44.0446c-3.15283 1.65938 -18.1529 10.5794 -18.1529 30.0921c0 18.7856 15.2079 33.9933 33.9933 33.9933
+c5.44942 0 10.8988 -1.30041 15.8404 -3.90123c51.3205 -27.0108 84.5599 -36.2424 140.966 -36.2424z" />
+       
+      </g>
+    </g>
+    
+    <!-- C -->
+    <g id="letter-C" data-nstrokes="1" data-width="900" data-extra-width-for-skew="60">
+      <g class="strokes" id="strokes-C">
+        <path
+           d="M33.3857 939c46 -47 119.976 -79 201 -79c259.008 0 553 149.997 553 311c0 78.0576 -36 159.006 -127 159.006c-244.981 0 -445.613 -293.555 -445.613 -650.467c0 -356.913 201.246 -645.539 446.228 -645.539c57.001 0 96.126 15.2734 146.999 52.0596
+c23.8108 17.2175 42.4209 34.4971 57.3242 50.9404" 
+           id="stroke-C1" />
+      </g>
+      <g class="outline" id="outlines-C">
+        <path id="outline-C1"
+      d="M261 826.398c264.826 8.71777 560.379 161.766 560.379 344.602c0 53.0541 -14.0324 110.668 -53.9712 150.607c-26.1777 26.1777 -62.8984 42.4668 -107.022 42.3923c-263.945 -0.446201 -478.577 -300.328 -479.607 -684.46
+c-1.01435 -378.442 216.513 -679.532 480.221 -679.532c66.6604 0 112.636 19.2421 166.898 58.4788c23.6153 17.0761 44.4144 35.596 62.6347 55.6991c5.85607 6.46121 8.7841 14.6383 8.7841 22.8154c0 18.7856 -15.2079 33.9933 -33.9933 33.9933
+c-5.02649 0 -16.2037 -1.24189 -25.2092 -11.178c-15.1708 -16.7385 -32.4267 -32.0184 -52.0138 -46.1817c-47.2035 -34.1327 -79.5127 -45.6403 -127.1 -45.6403c-225.731 0 -412.234 275.795 -412.234 611.546c0 335.825 186.098 616.473 411.62 616.473
+c27.4289 0 45.2589 -8.8089 58.9389 -22.4889c21.5847 -21.5847 34.0678 -60.8388 34.0678 -102.524c0 -126.051 -251.392 -265 -477.392 -274.937c-9 -34.0635 -9 -38.0635 -15 -69.665zM205 895.288c-65 7.71191 -111.826 31.9892 -145.955 66.1183
+c-3.81528 3.81528 -11.5869 11.5869 -25.6594 11.5869c-18.7856 0 -33.9933 -15.2079 -33.9933 -33.9933c0 -4.44782 1.11022e-16 -14.1074 11.5695 -25.6768c45.0277 -45.0277 108.222 -76.3739 181.038 -84.9511c6 35.6279 8 41.916 13 66.916z" />
+      </g>
+    </g>
+    
+    
+    <!-- C-alt1 -->
+    <g id="letter-C-alt1" data-nstrokes="1" data-width="730" data-extra-width-for-skew="100">
+      <g class="strokes" id="strokes-C-alt1">
+        <path
+           d="M692 1227c-14.9033 16.4434 -33.5137 33.7227 -57.3242 50.9404c-50.873 36.7861 -95.6748 52.0596 -152.676 52.0596c-208.676 0 -439.52 -231.438 -445.228 -650.461c-4.86148 -356.88 200.632 -645.244 445.613 -645.244c57.001 0 96.7402 14.9785 147.613 51.7646
+c23.8108 17.2175 42.4209 34.4971 57.3242 50.9404" 
+           id="stroke-C-alt11" />
+      </g>
+      <g class="outline" id="outlines-C-alt1">
+        <path id="outline-C-alt11"
+      d="M2.69409 667.063c0 433.894 241.452 696.93 479.306 696.93c65.1011 0 116.803 -18.1509 172.575 -58.4788c23.616 -17.0771 44.4154 -35.5972 62.6347 -55.6991c5.85607 -6.46121 8.7841 -14.6383 8.7841 -22.8154c0 -18.7856 -15.2079 -33.9933 -33.9933 -33.9933
+c-5.02649 0 -16.2037 1.24189 -25.2092 11.178c-9.58256 10.5728 -61.0744 64.8692 -124.152 83.639c-18.6589 5.55228 -38.0143 8.18298 -60.639 8.18298c-199.462 0 -411.318 -235.292 -411.318 -628.797c0 -330.576 188.904 -598.921 411.704 -598.921
+c47.9021 0 80.8276 11.4416 127.714 45.3454c21.1909 15.3231 38.1135 30.8451 52.0138 46.1817c3.37852 3.72764 11.8075 11.178 25.2092 11.178c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -14.4433 -7.14613 -21.8159 -21.5212 -36.1909
+c-17.6626 -17.6626 -74.2644 -69.4094 -139.031 -89.5018c-24.6649 -7.65167 -50.4 -11.0057 -78.3784 -11.0057c-261.015 -1.44884e-14 -479.692 294.75 -479.692 666.761z" />
+      </g>
+    </g>
+    
+    <!-- D -->
+    <g id="letter-D" data-nstrokes="1" data-width="1300" data-extra-width-for-skew="60">
+      <g class="strokes" id="strokes-D">
+        <path
+           d="M431.772 1288.54c0 -356.913 0.613281 -904.539 0.613281 -1102.54c0 -127 -142 -152 -229 -152c-74 0 -160 40 -160 94c0 54.2314 71 95 197 95c184.003 0 351.614 -189 559 -189c308.614 0 463.614 347.993 463.614 647c0 363.001 -193 649 -476 649
+c-278 0 -425 -55 -583 -121" 
+           id="stroke-D1" />
+        <path 
+           d="M431.772 1285.54 h1"
+           id="overlap-D1" /><!-- 1. use overlap only if as troke overlaps ITSELF, not if two strokes overlap each other. 2. must be a path, not a dot-->
+      </g>
+      <g class="outline" id="outlines-D">
+        <path id="outline-D1"
+      d="M392.17 150c-7.16992 -23 -28.1699 -52 -86.473 -68.4115c-33.7973 -9.51346 -71.7257 -13.5952 -102.311 -13.5952c-63.5677 0 -126.007 34.1538 -126.007 60.0067c0 30.7846 58.9505 61.0067 163.007 61.0067c172.472 0 340.137 -189 559 -189
+c326.857 0 497.608 358.638 497.608 680.993c0 388.166 -211.402 682.993 -509.993 682.993c-282.617 0 -437.267 -57.2647 -596.131 -123.625c-12.3165 -5.14486 -20.8625 -17.31 -20.8625 -31.3679c0 -18.7856 15.2079 -33.9933 33.9933 -33.9933
+c4.47041 0 8.94082 0.875135 13.1309 2.6254c157.136 65.6393 296.486 118.375 569.869 118.375c267.12 0 442.007 -277.317 442.007 -615.007c0 -275.836 -139.793 -613.007 -429.621 -613.007c-195.367 0 -364.065 189 -559 189
+c-35.9239 0 -144.344 -2.501 -200.482 -58.6388c-18.8013 -18.8013 -30.5116 -43.3911 -30.5116 -70.3545c0 -78.1142 104.081 -127.993 193.993 -127.993c53.399 0 155.718 7.67986 216.617 68.5802c13.3525 13.3525 26.9971 32.4131 33.4541 51.4131
+c-17.457 9 -40.457 20 -61.2871 30zM398.371 221l-0.568359 1024c25.1973 7 45.1973 13 67.9766 18l0.594727 -1073s-37.374 19 -68.0029 31z" />
+      </g>
+    </g>
+    
+    <!-- E -->
+    <g id="letter-E" data-nstrokes="2" data-width="660" data-extra-width-for-skew="100">
+      <g class="strokes" id="strokes-E">
+        <path
+           d="M626.711 1245.02c-53.1777 51.8389 -126.978 85.46 -208.562 85.46c-163.679 -0.632812 -295.024 -129.67 -295.024 -288.666c0 -110.084 66.1982 -210.92 159.017 -255.545c47.918 -23.0381 160.104 -22.2666 160.104 -22.2666" 
+           id="stroke-E1" />
+        <path
+           d="M442.246 764c0 0 -129.011 6.3418 -192.142 -22.5479c-125.583 -57.4688 -215.718 -189.9 -215.718 -336.924c0 -205.75 169.969 -370.664 379.612 -370.528c57.001 0 101.127 15.2734 152 52.0596c23.8105 17.2178 42.4209 34.4971 57.3242 50.9404" 
+           id="stroke-E2" />
+      </g>
+      <g class="outline" id="outlines-E">
+        <path id="outline-E1"
+      d="M418.149 1296.48c-144.799 -0.559821 -261.031 -114.419 -261.031 -254.673c0 -67.8889 29.0823 -132.736 74.9336 -178.588c19.0917 -19.0917 41.0835 -34.8949 64.8359 -46.3145c22.5821 -10.8571 84.3921 -18.9207 143.701 -18.9207
+c0.930687 0 1.42162 0.00378747 1.42162 0.00378747c0.0785162 0.000539941 0.157034 0.000809911 0.235552 0.000809911c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -13.2137 -9.25138 -33.998 -35.6398 -33.998c-30.9709 0 -124.18 2.0518 -173.204 25.6218
+c-103.259 49.6445 -178.264 161.407 -178.264 286.188c0 177.738 146.461 321.954 329.018 322.659c126.013 0 207.608 -70.417 232.603 -95.4117c6.63447 -6.63447 9.9517 -15.338 9.9517 -24.0416c0 -18.7856 -15.2079 -33.9933 -33.9933 -33.9933
+c-8.5669 0 -17.1338 3.21387 -23.7276 9.6416c-47.2313 46.0421 -112.816 75.8184 -184.834 75.8184zM418.149 1296.48c-144.799 -0.559821 -261.031 -114.419 -261.031 -254.673c0 -67.8889 29.0823 -132.736 74.9336 -178.588
+c19.0917 -19.0917 41.0835 -34.8949 64.8359 -46.3145c22.5821 -10.8571 84.3921 -18.9207 143.701 -18.9207c0.930687 0 1.42162 0.00378747 1.42162 0.00378747c0.0785162 0.000539941 0.157034 0.000809911 0.235552 0.000809911
+c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -13.2137 -9.25138 -33.998 -35.6398 -33.998c-30.9709 0 -124.18 2.0518 -173.204 25.6218c-103.259 49.6445 -178.264 161.407 -178.264 286.188c0 177.738 146.461 321.954 329.018 322.659
+c126.013 0 207.608 -70.417 232.603 -95.4117c6.63447 -6.63447 9.9517 -15.338 9.9517 -24.0416c0 -18.7856 -15.2079 -33.9933 -33.9933 -33.9933c-8.5669 0 -17.1338 3.21387 -23.7276 9.6416c-47.2313 46.0421 -112.816 75.8184 -184.834 75.8184z" />
+        <path id="outline-E2"
+      d="M413.718 0.00657599c-228.454 0 -413.324 180.232 -413.324 404.522c0 161.606 98.9539 305.333 235.545 367.839c44.8428 20.5208 113.087 26.2292 175.863 26.2292c19.1916 0 31.6806 -0.622223 32.1263 -0.644134c18.0862 -0.889066 32.3117 -15.7983 32.3117 -33.952
+c0 -18.7856 -15.2079 -33.9933 -33.9933 -33.9933c-0.560722 0 -1.12144 0.0137681 -1.68161 0.0413044c0 0 -11.2633 0.566979 -28.7908 0.566979c-21.919 0 -106.382 -1.26029 -147.503 -20.0777c-114.553 -52.4212 -195.891 -173.549 -195.891 -306.009
+c0 -187.053 154.802 -336.535 345.383 -336.535c0.0786795 0 0.157365 2.54721e-05 0.236057 7.64244e-05c48.8382 0 86.0789 12.3617 132.101 45.6401c21.1921 15.3244 38.115 30.8466 52.0141 46.182c3.37852 3.72764 11.8075 11.178 25.2092 11.178
+c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -14.4427 -7.14489 -21.8146 -21.52 -36.1898c-18.8898 -18.8898 -74.0511 -69.4435 -141.906 -89.7713c-25.4545 -7.62557 -51.8496 -11.0323 -79.8915 -11.0323
+c-0.0937523 -6.07037e-05 -0.187497 -9.10509e-05 -0.281235 -9.10509e-05z" />
+      </g>
+    </g>
+    
+    <!-- F -->
+    <g id="letter-F" data-nstrokes="3" data-width="970" data-width1="520" data-extra-width-for-skew="120">
+      <g class="strokes" id="strokes-F">
+        <path
+           d="M483.386 1296c0 -418 0.62793 -980.133 0.62793 -1080.67c0 -109.335 -31.5469 -181.668 -112.548 -181.334c-32.9795 0 -57.8711 11.5312 -75.6934 35.0449" 
+           id="stroke-F1" />
+        <path data-lift="1"
+           d="M34.3857 1262c18.9209 16.9287 45.2783 33.8574 75 46.5898c29.9717 12.8389 63.3643 21.4102 96 21.4102c32.0537 0 81.7529 -5.3584 132 -12.0586c56.3516 -7.51465 113.391 -17.7168 146 -21.9414c33.6094 -5.22461 90.6484 -14.4268 147 -21.9414
+c50.2471 -6.7002 99.9473 -12.0586 132 -12.0586c32.6357 0 66.0283 8.57129 96 21.4102c29.7217 12.7324 56.0791 29.6611 75 46.5898" 
+           id="stroke-F2" />
+        <path data-lift="1"
+           d="M273.386 682h419" 
+           id="stroke-F3" />
+      </g>
+      <g class="outline" id="outlines-F">
+        <path id="outline-F1"
+      d="M449.392 1296c0 18.7856 15.2079 33.9933 33.9933 33.9933c18.7783 0 33.9824 -15.1962 33.9933 -33.9734l0.627935 -1080.69c0 -64.9659 -10.2477 -135.985 -53.1669 -178.904c-23.7582 -23.7582 -56.0286 -36.4242 -92.7159 -36.4242
+c-0.219309 0 -0.438776 0.00045261 -0.658399 0.00135816c-30.7486 0 -72.6121 8.68043 -102.813 48.526c-4.5823 6.04562 -6.87345 13.2789 -6.87345 20.5122c0 18.7856 15.2079 33.9933 33.9933 33.9933c10.7942 0 20.7357 -5.05815 27.1199 -13.4811
+c12.8737 -16.9848 28.7457 -21.5638 48.5735 -21.5638c0.156174 -0.000643938 0.311905 -0.000965574 0.467196 -0.000965574c21.6751 0 50.7516 5.08525 66.9461 56.7806c7.25922 23.1726 11.1412 54.094 11.1412 90.561z" />
+        <path id="outline-F2"
+      d="M762.386 1228.01c-124.426 0 -442.463 68 -557 68c-55.2406 0 -115.734 -30.1827 -148.348 -59.3634c-6.43529 -5.75772 -14.5434 -8.63658 -22.6515 -8.63658c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 5.01971 1.24405 16.3222 11.3418 25.3568
+c22.1658 19.8319 51.2078 38.3317 84.2398 52.4822c33.2468 14.2418 70.7986 24.1544 109.412 24.1544c47.3118 0 121.484 -9.18192 226.878 -25.892c213.829 -33.9024 291.343 -42.108 330.122 -42.108c55.2411 0 115.734 30.1831 148.348 59.3634
+c6.43529 5.75772 14.5434 8.63658 22.6515 8.63658c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -5.01971 -1.24405 -16.3222 -11.3418 -25.3568c-22.1658 -19.8319 -51.2072 -38.3314 -84.2392 -52.482c-33.2468 -14.2418 -70.7992 -24.1546 -109.412 -24.1546z" />
+        <path id="outline-F3"
+      d="M726.379 682c0 -18.7856 -15.2079 -33.9933 -33.9933 -33.9933h-419c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 18.7856 15.2079 33.9933 33.9933 33.9933h419c18.7856 0 33.9933 -15.2079 33.9933 -33.9933z" />
+
+      </g>
+    </g>
+    
+    <!-- G -->
+    <g id="letter-G" data-nstrokes="2" data-width="1120" data-width1="980" data-extra-width-for-skew="0">
+      <g class="strokes" id="strokes-G">
+        <path
+           d="M33.3867 939c46 -47 119.976 -79 201 -79c259.008 0 553 149.997 553 311c0 78.0576 -36 159.006 -127 159.006c-244.981 0 -445.613 -293.555 -445.613 -650.467c0 -356.913 200.63 -644.979 445 -645.244c194.628 -0.294922 278.628 143.705 284.611 306.705" 
+           id="stroke-G1" />
+        <path
+           d="M944.385 341c0.000976563 -158.73 0.00292969 -399.345 0.00488281 -764c0.000658799 -123 -29.3398 -224 -140 -224c-77 0 -108.396 57.9688 -108.396 115c0 36.1836 2.00684 81 34 134l346.301 569" 
+           id="stroke-G2" />
+      </g>
+      <g class="outline" id="outlines-G">
+        <path id="outline-G1"
+      d="M248.766 679.539c0.00114546 -334.951 185.296 -611.251 411.618 -611.251c218.356 0 247.178 196.247 250.031 273.969c0.670597 18.2684 15.6591 32.7369 33.9703 32.7369c18.7855 0 33.9933 -15.2077 33.9933 -33.9933
+c0 -0.418901 -0.00768426 -0.837801 -0.0230528 -1.25647c-3.54209 -96.4937 -32.5905 -190.236 -98.1343 -255.78c-52.2643 -52.2643 -126.195 -83.6623 -219.863 -83.6623c-264.27 0 -479.577 301.513 -479.578 679.238c1.0293 384.132 215.662 684.014 479.606 684.46
+c44.1238 0.0745916 80.8444 -16.2145 107.022 -42.3923c39.9388 -39.9388 53.9712 -97.5528 53.9712 -150.607c0 -182.835 -295.553 -335.884 -560.379 -344.602c6 31.6016 6 35.6016 15 69.665c226 9.93652 477.392 148.885 477.392 274.937
+c0 41.6849 -12.4831 80.939 -34.0678 102.524c-13.6799 13.6799 -31.51 22.4889 -58.9389 22.4889c-225.522 0 -411.62 -280.648 -411.62 -616.473zM205 895.288c-65 7.71191 -111.826 31.9892 -145.955 66.1183c-3.81528 3.81528 -11.5869 11.5869 -25.6594 11.5869
+c-18.7856 0 -33.9933 -15.2079 -33.9933 -33.9933c0 -4.44782 1.11022e-16 -14.1074 11.5695 -25.6768c45.0277 -45.0277 108.222 -76.3739 181.038 -84.9511c6 35.6279 8 41.916 13 66.916z" />
+        <path id="outline-G2"
+      d="M910.392 -167l-0.000168895 -256.004c0 -178.524 -65.3047 -190.003 -106.002 -190.003c-26.0853 0 -41.5976 7.97421 -52.3313 18.7079c-13.9267 13.9267 -22.0718 36.9934 -22.0718 62.2987c0 34.6683 1.30867 70.3542 29.0639 116.334
+c0.0635368 0.104824 346.301 569 346.301 569c3.29073 5.40693 4.9361 11.5367 4.9361 17.6664c0 18.7856 -15.2079 33.9933 -33.9933 33.9933c-4.10469 0 -19.7561 -1.04451 -29.0572 -16.3269l-346.301 -569c-36.2311 -60.0206 -38.9361 -113.968 -38.9361 -151.666
+c0 -83.8315 53.2297 -148.993 142.39 -148.993c54.0658 0 127.73 21.1856 158.55 126.978c11.5836 39.7617 15.4431 84.4177 15.4431 131.015l-0.000168896 368zM978.383 75l0.000168896 266c-0.00011992 18.7635 -15.1974 33.9931 -33.9982 33.9931
+c-18.7858 0 -33.9933 -15.2079 -33.9933 -33.9936l0.000168895 -377z" />
+
+      </g>
+    </g>
 
     
+    
+    <!-- G-alt1 -->
+    <g id="letter-G-alt1" data-nstrokes="2" data-width="940" data-width1="800" data-extra-width-for-skew="0">
+      <g class="strokes" id="strokes-G-alt1">
+        <path
+           d="M690 1227c-14.9033 16.4434 -33.5137 33.7227 -57.3242 50.9404c-50.873 36.7861 -95.2881 52.0654 -152.289 52.0654c-245.595 0 -445.613 -293.555 -445.613 -650.467c0 -356.913 200.63 -644.979 445 -645.244c194.628 -0.294922 278.628 143.705 284.611 306.705" 
+           id="stroke-G-alt11" />
+        <path
+           d="M764.385 341c0.001 -158.73 0.003 -399.345 0.005 -764c0.001 -123 -29.34 -224 -140 -224c-77 0 -108.396 57.969 -108.396 115c0 36.184 2.007 81 34 134l346.301 569" 
+           id="stroke-G-alt12" />
+      </g>
+      <g class="outline" id="outlines-G-alt1">
+        <path id="outline-G-alt11"
+      d="M0.780105 679.539c0 378.512 215.177 684.46 479.607 684.46c65.1226 0 116.436 -18.1706 172.188 -58.4847c23.616 -17.0771 44.4154 -35.5972 62.6347 -55.6991c5.85607 -6.46121 8.7841 -14.6383 8.7841 -22.8154c0 -18.7856 -15.2079 -33.9933 -33.9933 -33.9933
+c-5.02649 0 -16.2037 1.24189 -25.2092 11.178c-9.02206 9.95436 -60.8472 64.7961 -123.962 83.6532c-18.5597 5.54514 -37.8175 8.1747 -60.4417 8.1747c-226.186 0 -411.62 -280.735 -411.62 -616.473c0 -334.966 185.304 -611.251 411.617 -611.251
+c78.2251 0 132.956 24.9606 171.754 63.759c49.1541 49.1541 75.1552 125.166 78.277 210.21c0.670581 18.268 15.6587 32.7369 33.9703 32.7369c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -0.418901 -0.00768426 -0.837801 -0.0230528 -1.25647
+c-3.54209 -96.4937 -32.5905 -190.236 -98.1343 -255.78c-52.2643 -52.2643 -126.195 -83.6623 -219.863 -83.6623c-264.274 0 -479.577 301.519 -479.577 679.238z" />
+        <path id="outline-G-alt12"
+      d="M730.392 -167l0 -256.004c0 -178.524 -65.305 -190.003 -106.002 -190.003c-26.085 0 -41.598 7.974 -52.331 18.708c-13.927 13.927 -22.072 36.993 -22.072 62.299c0 34.668 1.309 70.354 29.064 116.334c0.064 0.105 346.301 569 346.301 569c3.291 5.407 4.936 11.537 4.936 17.666c0 18.786 -15.208 33.993 -33.993 33.993c-4.105 0 -19.756 -1.045 -29.057 -16.327l-346.301 -569c-36.231 -60.021 -38.936 -113.968 -38.936 -151.666c0 -83.831 53.23 -148.993 142.39 -148.993c54.066 0 127.73 21.186 158.55 126.978c11.584 39.762 15.443 84.418 15.443 131.015l0 368zM798.383 75l0 266c0 18.764 -15.197 33.993 -33.998 33.993c-18.786 0 -33.993 -15.208 -33.993 -33.994l0 -377z" />
+
+      </g>
+    </g>
+
+
+    <!-- H -->
+    <g id="letter-H" data-nstrokes="2" data-width="1120" data-width1="410" data-extra-width-for-skew="120">
+      <g class="strokes" id="strokes-H">
+        <path
+           d="M34.3867 1266c11 38 56 64 84.4023 64c50.5977 0 91.8008 -63 147.6 -63c56.2012 0 106.998 63 106.998 63" 
+           id="stroke-H1" />
+        <path
+           d="M372.386 1330c0 0.0041432 -0.00292969 34.0029 0.00390625 -1071c0.000976562 -123 -30.3398 -225 -141 -225c-77 0 -107.003 58.9688 -107.003 116c0 127.006 115 429 482 532s481.387 399.794 481.387 532c0 57.0322 -31 116 -108 116
+c-110.047 0 -140.387 -102 -140.387 -225v-968c0 -54 17 -103 75 -103c41 0 61.8348 38.8913 76.6133 69l33.377 68" 
+           id="stroke-H2" />
+      </g>
+      <g class="outline" id="outlines-H">
+        <path id="outline-H1"
+      d="M266.389 1233.01c-67.2476 0 -113.329 63 -147.6 63c-13.736 0 -45.1923 -16.8353 -51.7535 -39.5011c-4.13769 -14.2938 -17.2931 -24.4989 -32.6489 -24.4989c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 19.4367 23.1909 66.5036 77.2701 89.0126
+c13.1311 5.46546 26.7467 8.98069 41.1256 8.98069c63.4154 0 106.764 -63 147.6 -63c32.2621 0 70.4023 37.7909 80.5062 50.3222c3.06214 3.79777 11.7939 12.6778 26.4918 12.6778c18.7856 0 33.9933 -15.2079 33.9933 -33.9933
+c0 -12.5661 -4.94038 -20.149 -22.6622 -37.8708c-25.8036 -25.8036 -68.7286 -59.1225 -118.329 -59.1225z" />
+        <path id="outline-H2"
+      d="M873 774.368c24.9092 19.0625 49.8137 41.1126 69.9199 61.2187c72.6203 72.6203 119.496 152.792 147.006 225.235c22.0224 57.9933 31.8408 111.02 31.8408 153.178c0 84.4457 -53.2039 149.993 -141.993 149.993c-52.876 0 -127.153 -20.6931 -158.592 -127.426
+c-11.768 -39.9508 -15.7877 -84.8363 -15.7877 -131.567v-968c0 -42.8088 9.34942 -82.3066 35.6885 -108.646c18.2662 -18.2662 44.0526 -28.3477 73.3049 -28.3477c63.9424 0 93.2425 59.6942 107.136 88.0002l33.377 68c2.31364 4.71365 3.47045 9.8534 3.47045 14.9932
+c0 18.7856 -15.2079 33.9933 -33.9933 33.9933c-13.359 0 -24.9831 -7.71385 -30.5229 -19.0002l-33.377 -68c-20.7887 -42.3535 -32.8798 -49.9998 -46.0904 -49.9998c-14.2176 0 -27.7054 2.88069 -35.5296 26.9806c-3.55919 10.963 -5.47705 25.7491 -5.47705 42.0261
+v968c0 184.546 71.5928 191.007 106.393 191.007c68.0539 0 74.0067 -60.7499 74.0067 -82.0067c0 -31.5091 -7.93918 -77.6993 -27.4102 -128.974c-19.7228 -51.9375 -65.9754 -142.153 -153.37 -222.438v-88.2197zM805 810.023
+c-54.5244 -36.4385 -124.996 -72.0478 -207.841 -95.2986c-141.512 -39.716 -248.135 -108.305 -325.875 -186.045c-73.401 -73.401 -120.786 -154.417 -148.619 -226.943c-22.2833 -58.0654 -32.2714 -110.642 -32.2714 -151.737
+c0 -85.5617 53.0512 -149.993 140.996 -149.993c53.2692 0 127.754 20.8026 159.221 127.577c11.7649 39.9213 15.7722 84.7501 15.7722 131.416l-0.000168895 294c-34.3828 -25 -38.3828 -28 -67.9902 -54l-0.000168896 -240.006
+c0 -183.551 -70.8734 -191.001 -107.003 -191.001c-25.458 0 -40.3805 7.72523 -50.7947 18.1394c-14.0032 14.0032 -22.2149 37.8115 -22.2149 63.8672c0 29.9817 8.02008 75.8832 27.7562 127.311c21.4963 56.0149 118.149 284.588 429.479 371.964
+c73.197 20.543 134.046 46.6223 189.385 79.6262v81.1221zM338.393 588l-0.000168896 742c0 18.7855 15.2076 33.9935 33.9933 33.9935c18.7986 0 33.9972 -15.2261 33.9972 -33.9932l-0.000168895 -696c-29.3828 -19 -35.3828 -23 -67.9902 -46z" />
+      </g>
+    </g>
+      
+
+    <!-- I -->
+    <g id="letter-I" data-nstrokes="2" data-width="410" data-width1="410" data-extra-width-for-skew="120">
+      <g class="strokes" id="strokes-I">
+        <path
+           d="M33.3867 1264.33c11 38 56 64 84.4023 64c50.5977 0 91.8008 -63 147.6 -63c56.2012 0 106.998 63 106.998 63" 
+           id="stroke-I1" />
+        <path
+           d="M371.386 1327.33c-0.0041432 0 -0.00292969 -4.99707 0.00390625 -1110c-0.0859375 -111.001 -47.7568 -183.334 -176.433 -183c-79.8438 -0.210938 -128.896 27.5684 -154.201 77.3516" 
+           id="stroke-I2" />
+      </g>
+      <g class="outline" id="outlines-I">
+        <path id="outline-I1"
+      d="M265.389 1231.34c-67.2476 0 -113.329 63 -147.6 63c-13.736 0 -45.1923 -16.8353 -51.7535 -39.5011c-4.13769 -14.2938 -17.2931 -24.4989 -32.6489 -24.4989c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 19.4367 23.1909 66.5036 77.2701 89.0126
+c13.1311 5.46546 26.7467 8.98069 41.1256 8.98069c63.4154 0 106.764 -63 147.6 -63c32.2621 0 70.4023 37.7909 80.5062 50.3222c3.06214 3.79777 11.7939 12.6778 26.4918 12.6778c18.7856 0 33.9933 -15.2079 33.9933 -33.9933
+c0 -12.5661 -4.94038 -20.149 -22.6622 -37.8708c-25.8036 -25.8036 -68.7286 -59.1225 -118.329 -59.1225z" />
+        <path id="outline-I2"
+      d="M337.396 1327.33c0 18.8043 15.2172 33.9935 33.9894 33.9935c18.7856 0 33.9933 -15.2078 33.9933 -33.9932v-1110.03c-0.032782 -42.3428 -1.86812 -216.968 -209.377 -216.968c-0.317798 0 -0.635912 0.000413303 -0.954339 0.0012398
+c-0.324131 -0.000856315 -0.647953 -0.00128461 -0.971466 -0.00128461c-70.6439 0 -145.387 20.6886 -183.633 95.9314c-2.45402 4.82792 -3.68103 10.1213 -3.68103 15.4147c0 18.7856 15.2079 33.9933 33.9933 33.9933c3.42841 0 21.3111 -0.870164 30.3123 -18.5786
+c16.4424 -32.3479 48.6645 -58.7742 122.966 -58.7742c0.276901 0 0.554381 0.000366798 0.83244 0.0011014c0.273558 -0.000710034 0.546561 -0.00106455 0.819011 -0.00106455c88.9946 0 141.623 36.1922 141.711 149.034v1109.97z" />
+
+
+      </g>
+    </g>
+
+
+    <!-- J -->
+    <g id="letter-J" data-nstrokes="2" data-width="540" data-width1="410" data-extra-width-for-skew="50">
+      <g class="strokes" id="strokes-J">
+        <path
+           d="M33.3867 1264.33c11 38 56 64 84.4023 64c50.5977 0 91.8008 -63 147.6 -63c56.2012 0 106.998 63 106.998 63" 
+           id="stroke-J1" />
+        <path
+           d="M371.385 1329c-0.00292969 0.00292969 -0.00292969 -646.997 0.00390625 -1752c0.000760921 -123 -31.3398 -224 -142 -224c-77 0 -108.396 57.9688 -108.396 115c0 36.1836 2.00684 81 34 134l346.301 569" 
+           id="stroke-J2" />
+      </g>
+      <g class="outline" id="outlines-J">
+        <path id="outline-J1"
+      d="M265.389 1231.34c-67.2476 0 -113.329 63 -147.6 63c-13.736 0 -45.1923 -16.8353 -51.7535 -39.5011c-4.13769 -14.2938 -17.2931 -24.4989 -32.6489 -24.4989c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 19.4367 23.1909 66.5036 77.2701 89.0126
+c13.1311 5.46546 26.7467 8.98069 41.1256 8.98069c63.4154 0 106.764 -63 147.6 -63c32.2621 0 70.4023 37.7909 80.5062 50.3222c3.06214 3.79777 11.7939 12.6778 26.4918 12.6778c18.7856 0 33.9933 -15.2079 33.9933 -33.9933
+c0 -12.5661 -4.94038 -20.149 -22.6622 -37.8708c-25.8036 -25.8036 -68.7286 -59.1225 -118.329 -59.1225z" />
+        <path id="outline-J2"
+      d="M337.392 -167v-256.004c0 -178.524 -65.3047 -190.003 -106.002 -190.003c-26.085 0 -41.5977 7.97461 -52.3311 18.708c-13.9268 13.9268 -22.0723 36.9932 -22.0723 62.2988c0 34.668 1.30859 70.3545 29.0645 116.334c0.0634766 0.104492 346.301 569 346.301 569
+c3.29004 5.40625 4.93555 11.5361 4.93555 17.666c0 18.7852 -15.208 33.9932 -33.9932 33.9932c-4.10449 0 -19.7559 -1.04395 -29.0576 -16.3271l-346.301 -569c-36.2305 -60.0205 -38.9355 -113.967 -38.9355 -151.666c0 -83.832 53.2295 -148.993 142.39 -148.993
+c54.0654 0 127.73 21.1855 158.55 126.978c11.584 39.7617 15.4434 84.418 15.4434 131.016v368zM337.391 1329c-3.47798e-06 19.0001 15.2076 33.9934 33.9933 33.9934c18.7986 0 33.9972 -14.9933 33.9972 -33.9933l0.000807667 -1254l-67.9912 -111z" />
+
+
+      </g>
+    </g>
+
+    
+    
+    <!-- T -->
+    <g id="letter-T" data-nstrokes="2" data-width="970" data-width1="520" data-extra-width-for-skew="120">
+      <g class="strokes" id="strokes-T">
+        <path
+           d="M483.386 1296c0 -418 0.62793 -980.133 0.62793 -1080.67c0 -109.335 -31.5469 -181.668 -112.548 -181.334c-32.9795 0 -57.8711 11.5312 -75.6934 35.0449" 
+           id="stroke-T1" />
+        <path data-lift="1"
+           d="M34.3857 1262c18.9209 16.9287 45.2783 33.8574 75 46.5898c29.9717 12.8389 63.3643 21.4102 96 21.4102c32.0537 0 81.7529 -5.3584 132 -12.0586c56.3516 -7.51465 113.391 -17.7168 146 -21.9414c33.6094 -5.22461 90.6484 -14.4268 147 -21.9414
+c50.2471 -6.7002 99.9473 -12.0586 132 -12.0586c32.6357 0 66.0283 8.57129 96 21.4102c29.7217 12.7324 56.0791 29.6611 75 46.5898" 
+           id="stroke-T2" />
+      </g>
+      <g class="outline" id="outlines-T">
+        <path id="outline-T1"
+      d="M449.392 1296c0 18.7856 15.2079 33.9933 33.9933 33.9933c18.7783 0 33.9824 -15.1962 33.9933 -33.9734l0.627935 -1080.69c0 -64.9659 -10.2477 -135.985 -53.1669 -178.904c-23.7582 -23.7582 -56.0286 -36.4242 -92.7159 -36.4242
+c-0.219309 0 -0.438776 0.00045261 -0.658399 0.00135816c-30.7486 0 -72.6121 8.68043 -102.813 48.526c-4.5823 6.04562 -6.87345 13.2789 -6.87345 20.5122c0 18.7856 15.2079 33.9933 33.9933 33.9933c10.7942 0 20.7357 -5.05815 27.1199 -13.4811
+c12.8737 -16.9848 28.7457 -21.5638 48.5735 -21.5638c0.156174 -0.000643938 0.311905 -0.000965574 0.467196 -0.000965574c21.6751 0 50.7516 5.08525 66.9461 56.7806c7.25922 23.1726 11.1412 54.094 11.1412 90.561z" />
+        <path id="outline-T2"
+      d="M762.386 1228.01c-124.426 0 -442.463 68 -557 68c-55.2406 0 -115.734 -30.1827 -148.348 -59.3634c-6.43529 -5.75772 -14.5434 -8.63658 -22.6515 -8.63658c-18.7856 0 -33.9933 15.2079 -33.9933 33.9933c0 5.01971 1.24405 16.3222 11.3418 25.3568
+c22.1658 19.8319 51.2078 38.3317 84.2398 52.4822c33.2468 14.2418 70.7986 24.1544 109.412 24.1544c47.3118 0 121.484 -9.18192 226.878 -25.892c213.829 -33.9024 291.343 -42.108 330.122 -42.108c55.2411 0 115.734 30.1831 148.348 59.3634
+c6.43529 5.75772 14.5434 8.63658 22.6515 8.63658c18.7856 0 33.9933 -15.2079 33.9933 -33.9933c0 -5.01971 -1.24405 -16.3222 -11.3418 -25.3568c-22.1658 -19.8319 -51.2072 -38.3314 -84.2392 -52.482c-33.2468 -14.2418 -70.7992 -24.1546 -109.412 -24.1546z" />
+      </g>
+    </g>
     
     
   </defs>
