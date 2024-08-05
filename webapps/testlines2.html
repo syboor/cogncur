@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--
+  Create lines using a font.
+  
+  - create separate font
+    - different line thicknesses
+    - glyphs for fully lined with and without bottom line
+    - glyphs for each line separate
+    - glyhps for a vertical starting line
+    - glyphs for each zone -> dependent on line thickness?
+    - glyphs for 'halfromphoogtelijn'
+    - different patterns for romphoogtelijn & halfromphoogtelijn?
+    - each line glyph has three thicknesses?
+    - schrijfhuis (VLL)
+    - schrijfboom (Klinkers)
+  - remove horizontal overlap between lines
+  - DOM structure: 
+    - create structure where each line is a separate 'underlay' element and can be styled and disabled/enabled separately
+    - bottom line present on every element but should be disabled under certain conditions
+    - use css variables!
+  - Also a DOM structer for 'horizontal' features:
+    - unlined lead-in (for line numbering, little arrows indicating the baseline, etc. This can also include the vertical bar touching the line. Width automatic, based on glyphs present. This could also be a bit of line (so the vertical bar becomes the 'kantlijn').
+    - vertical bar (optional)
+    - lined part:
+      - lined lead-in: some spacing before the text begins. This should have a minimum-size but should expand if you include a large glypph (schrijfhuis or something...). Can also include a 'romphoogtelijn'.
+      - content: where the text is placed. This area is used in its entirety when you justify text or something...
+      - lined end: some spacing at the end of the line, size could be dependent on amount of slant. This spacing is not used when 'justifying' text.
+    - end cap (optional): vertical bar at the end. 
+    Note that it might be needed for the line part to have invisible overflow beyond the end cap.
+  
+  
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/resources/style.css" />
+  <link rel="stylesheet" type="text/css" href="./papersize_a4.css" />
+  <link rel="stylesheet" type="text/css" href="./cogncur.css" />
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="./cogncur_converter.js"></script><!-- functions for converting text to Schoolschrift glyphs -->
+  <script src="./cogncur_lines.js"></script><!-- functions for adding lines, creating outlines, masquing stuff, etc. -->
+  <script>
+    cogncur_converter.init({
+    });
+  </script>
+  <style>
+    table.kerningpairs {
+    
+    }
+    table.kerningpairs td {
+      padding-right: 10px;
+      white-space: nowrap;
+      border: 1px solid #ccc;
+    }
+    table.kantlijn td {
+      border-left: 1px solid #f66;
+    }
+  </style>
+  
+  <style>
+    .lines2 {
+      width: 100%;
+      overflow: hidden; /* needed because the ~~~ lines overflow because we don't know how wide to make them */
+      padding-bottom: .1em; /* Otherwise the last line gets cut off */
+    }
+    .line2overlay {
+      color: blue;
+      position: absolute;
+      top: 0;
+      z-index: -100;
+      width: 100%;
+    }
+    .line2 {
+      position: relative;
+      top: 0;
+      width: 100%;
+      overflow-y: visible; /* needed because the letters on different lines overlay */
+      height: 1em;
+      background: transparent;
+    }
+  </style>
+</head>
+<body class="max">
+  <div class="pages">
+  <div class="page">
+    <div class='lines2 rh6 cursive'>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+    </div>
+    <br/>
+    
+    <div class='lines rh4 cursive'>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+    </div>
+    <br/>
+    
+    <div class='lines rh3 cursive'>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+    </div>
+
+    <div class='lines rh12 cursive'>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+      <div class='line2'>
+        <div class='content'>pufferfish hobbit dragon</div>
+        <div class='line2overlay'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+
+  
+</body>

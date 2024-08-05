@@ -351,7 +351,7 @@ function add_lines($type, $svgwidth, $height, $thinness, $templatetype) {
   if ($type <= 3) {
     $svg .= '<path d="M-10,-683h'. $width .'" stroke-width="'. $outerw .'" stroke="'. $outerk .'" fill="none" shape-rendering="crispEdges"/>';
     if ($templatetype == 'heartline') {
-      $svg .= '<path d="M-10,-649h'. $width .'" stroke-width="'. $outerw .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+      $svg .= '<path d="M-10,-649h'. $width .'" stroke-width="'. ($outerw  / 2).'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
     }
   }
 
@@ -359,7 +359,7 @@ function add_lines($type, $svgwidth, $height, $thinness, $templatetype) {
   if ($type <= 6 || $type == 10 || $type == 11 || $type == 12) {
     $svg .= '<path d="M-10,1365 h'. $width .'" stroke-width="'. $outerw .'" stroke="'. $outerk .'" fill="none" shape-rendering="crispEdges"/>';
     if ($templatetype == 'heartline') {
-      $svg .= '<path d="M-10,1331h'. $width .'" stroke-width="'. $outerw .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+      $svg .= '<path d="M-10,1331h'. $width .'" stroke-width="'. ($outerw  / 2) .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
     }
   }
 
@@ -367,7 +367,10 @@ function add_lines($type, $svgwidth, $height, $thinness, $templatetype) {
   if ($type <= 9) {
     $svg .= '<path d="M-10,683 h' .$width .'" stroke-width="'. $romplijnw .'" stroke="'. $romplijnk .'" fill="none" stroke-dasharray="' . $romplijndash . '" shape-rendering="crispEdges"/>';
     if ($templatetype == 'heartline') {
-      $svg .= '<path d="M-10,649h'. $width .'" stroke-width="'. $outerw .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+      $svg .= '<path d="M-10,649h'. $width .'" stroke-width="'. ($outerw  / 2) .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+      
+      // halve romplijn
+      $svg .= '<path d="M-10,342h'. $width .'" stroke-width="'. ($outerw  / 2).'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges" stroke-dasharray="' . $romplijndash . '"/>';
     }
   }
 
@@ -375,7 +378,7 @@ function add_lines($type, $svgwidth, $height, $thinness, $templatetype) {
   if ($type >= 1) {
     $svg .= '<path d="M-10,0 h'. $width .'" stroke-width="'. $baselinew .'" stroke="'. $baselinek .'" fill="none" shape-rendering="crispEdges"/>';
     if ($templatetype == 'heartline') {
-      $svg .= '<path d="M-10,34h'. $width .'" stroke-width="'. $outerw .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
+      $svg .= '<path d="M-10,34h'. $width .'" stroke-width="'. ($outerw  / 2) .'" stroke="#aaaaaa" fill="none" shape-rendering="crispEdges"/>';
     }
   }
     
