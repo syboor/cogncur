@@ -266,7 +266,7 @@
         // consistent height to increase opportunities for caching.
         var scaledh = 200;
         var scaledw = 140;
-        if (wide) scaledw = 200; 
+        if (wide) scaledw = 226; 
         
         var thinness = $(this).data('th');
         $(this).attr('src', '../webapps/imgen/routeletter/' + t + '/' + l + '.svg?c=1&k=' + kleurschema + '&h=' + Math.round(scaledh) + '&lines=' + liniatuur + '&w=' + Math.round(scaledw) + (skew ? '&s='+skew : '') + (noentrystrokes ? '&e=1' : '') + (thinness ? '&th='+thinness : ''));
@@ -417,6 +417,9 @@
       box-sizing: border-box;
       min-width: 1.1em;
       text-align: center;
+    }
+    #variants .clickable_variant {
+      min-width: 1.3em;
     }
     .clickable_letter:hover, .clickable_variant:hover, .aantal:hover {
       background-color: rgba(0,0,0,.08);
@@ -663,9 +666,37 @@
     <div class="clickable_letter" data-letter='H'></div>
     <div class="clickable_letter" data-letter='I'></div>
     <div class="clickable_letter" data-letter='J'></div>
-
-
-  </div>
+    <div class="clickable_letter" data-letter='K'></div>
+    <div class="clickable_letter" data-letter='L'>
+      <div class="clickable_variant" data-variantname='L-alt1' data-cogncur-uppercase-cgl-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='M' data-wide="1">
+      <div class="clickable_variant" data-variantname='M-alt1' data-cogncur-uppercase-amn-variant=1 data-wide="1"></div>
+      <div class="clickable_variant" data-variantname='M-alt2' data-cogncur-uppercase-amn-variant=2 data-wide="1"></div>
+    </div>
+    <div class="clickable_letter" data-letter='N' data-wide="1">
+      <div class="clickable_variant" data-variantname='N-alt1' data-cogncur-uppercase-amn-variant=1></div>
+      <div class="clickable_variant" data-variantname='N-alt2' data-cogncur-uppercase-amn-variant=2></div>
+    </div>
+    <div class="clickable_letter" data-letter='O'></div>
+    <div class="clickable_letter" data-letter='P'></div>
+    <div class="clickable_letter" data-letter='Q'></div>
+    <div class="clickable_letter" data-letter='R'></div>
+    <div class="clickable_letter" data-letter='S'></div>
+    <div class="clickable_letter" data-letter='T'></div>
+    <div class="clickable_letter" data-letter='U'></div>
+    <div class="clickable_letter" data-letter='V'></div>
+    <div class="clickable_letter" data-letter='W' data-wide="1">
+      <div class="clickable_variant" data-variantname='W-alt1' data-cogncur-w-variant=1 data-wide="1"></div>
+    </div>
+    <div class="clickable_letter" data-letter='X'></div>
+    <div class="clickable_letter" data-letter='Y'>
+      <div class="clickable_variant" data-variantname='Y-alt1' data-cogncur-y-variant=1></div>
+    </div>
+    <div class="clickable_letter" data-letter='Z'>
+      <div class="clickable_variant" data-variantname='Z-alt1' data-cogncur-rz-top-variant=1></div>
+    </div>
+    </div>
   
   <div id="variants_cont">
     <br class="clear">
@@ -692,9 +723,11 @@
   <img class="img_letterstrip" data-th="2" style="height: 26.5cm; object-fit: cover; margin-top: 5mm">
 </div>
 
-<!-- NB this 'wide' format is not suitable for letters with descenders -->
+<!-- NB this 'wide' format is not suitable for letters with descenders. Must fit widest character, which is a fully skewed, uppercase M variant -->
 <div class="page a4" data-ncols="1w" data-stylesheet="a4_landscape">
-  <img class="img_letterstrip" data-th="2" style="height: 26.5cm; object-fit: cover; margin-left: 5mm">
+  <!--<img class="img_letterstrip" data-th="2" style="height: 26.5cm; object-fit: cover; margin-left: 5mm">-->
+  <img class="img_letterstrip" data-th="2" style="height: 24cm; object-fit: cover; margin-left: 5mm; margin-top: 1.2cm"> 
+
 </div>
 
 <div class="page a4" data-ncols="2" data-stylesheet="a4">

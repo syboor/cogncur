@@ -43,9 +43,15 @@
   echo 'letter found: ' . $letter . '<br/>';
 
   // Find the strokes (don't output the entire letter since it includes unnecessary outlines)
+  // Remove strokes with class="overlap"
   $xml_element = $xml->xpath('//*[@id="letter-'.$letter.'"]/*[@class="strokes"]');
+  foreach ($xml_element[0]->path as $stroke_element) {
+    if ($stroke_element['class'] == 'overlap') {
+      $dom = dom_import_simplexml($stroke_element);
+      $dom->parentNode->removeChild($dom);
+    }
+  }
   $letter_xml = $xml_element[0]->asXml();
-  //echo '<pre>' . htmlspecialchars(print_r($xml_element,1)) . '</pre>';
   echo '<pre>' . htmlspecialchars(print_r($letter_xml,1)) . '</pre>';
 
   
