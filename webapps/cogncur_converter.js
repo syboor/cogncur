@@ -19,6 +19,7 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     /* exitstrokes:
         0 = many exit strokes
         1 = no exit strokes for s en p. If using print-like r, replaces the weird exit stroke for print-like r with a more print-like end.
+        2 = also no exit strokes for b, o, v, w.
      */
     exitstrokes: 0,
     
@@ -1713,6 +1714,9 @@ var get_cogncur_converter = (function (the_settings, the_element) {
     if (settings.exitstrokes && end_piece == 'ces') end_piece = 'cfs';
     if (settings.exitstrokes && end_piece == 'cep') end_piece = 'cfp';
     if (settings.exitstrokes && end_piece == 'cegermandbls') end_piece = 'cfgermandbls';
+    
+    if (settings.exitstrokes == 2 && end_piece == 'cev') end_piece = 'cfp'; // 'cfp' is blank and has minimal length.
+    if (settings.exitstrokes == 2 && end_piece == 'ceo') end_piece = 'cfp'; // 'cfp' is blank and has minimal length.
     
     return end_piece;
   }
