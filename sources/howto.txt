@@ -1,11 +1,92 @@
-CREATE ACCENTED CHARACTERS
-Do not 'Build glyph' in slanted layers; the accents will not have the correct position over the characters.
- 
-Instead:
-- select your accented characters
-- switch to the Skeleton layer
-- Element > Build Glyph
-- Edit > Unlink references
-- do the same for these layers: Extra, ExtraCall, StartDot (so for each layer: Build Glyph, Unlink references)
-- run the 'derive-layers.py' script.
- 
+MAKING CHANGES TO THE FONT
+1. The .sfd file is set up in such a few that FontForge uses multiple substitution when using the metrics window. 
+This means a short word like 'cat' is turned into 7 glyphs:
+cgo c cceo a ccnt t cet
+This way, you can make changes to the individual glyphs (entry stroke glyphs, 'invariable part of' letter glyphs, connecting stroke glyphs, exit glyphs) and quickly see the result.
+To propage your changes to 
+
+2. FontForge tends to crash when the left part of a contextual chaining rule is left empty. Therefore, we use a 'space' instead of an empty rule during development. When testing words in FontForge's Metrics window, you should always start with a space. You should also use a space after interpunction or numbers. To test kerning, you can manually insert the correct entry stroke glyph.
+
+
+SOURCE LAYERS
+There are 4 source layers:
+- the 'Skeleton' layer defines all constant-width strokes in the font. It does this by defining the 'heartline', that is, the middle of the stroke
+- the 'StartDots' layer is used to create the fonts containing only starting points. Simply copy the point representing where the pen is put on the paper from the Skeleton layer to the StartDots layer. 
+- the 'Extra' layer represents any elements that can not be derived from the 'Skeleton' layer. This is mostly dots above letters (which are a bit wider than the stroke width) and some interpunction. 
+- the 'ExtraEdged' layer represents any elements that can not be derived from the 'Skeleton' layer that are to be used in the 'Edged' fonts.
+
+
+PROPAGATING CHANGES
+1. Make certain you've made the necessary changes to all 4 source layers.
+2. Derive the other layers of the glyph by selecting the glyph and executing the derive-layers.py script.
+3. Derive any accented characters composed out of the glyph you changed (see instructions below).
+4. If you've changed the way the glyph connects to other glyphs, make the appropriate changes to the add-substitutions-for-char.py script and execute it.
+5. Derive the /csX_X ligature, but restore the original left bearing afterwards (see instructions below).
+6. Derive all the ligatures from position 0xE900 onwards (see instructions below).
+
+DERIVING ACCENTING AND/OR LIGATURE CHARACTERS
+The procedure for updating an accented character or ligature is the same:
+1. For existing glyphs, you can skip this step. For new glyphs (you see a 'cross' as background): 
+  - select the glyph(s)
+  - set your view to one of the foreground layers: View > Layers > GRegOutl
+  - Element > Build Composite Character with a foreground layer active
+  - Edit > Unlink reference. This is needed to prevent the derive-layers.py script from creating a 'double' outline.
+2. For each of the 4 source layers (Skeleton, StartDot, Extra, ExtraEdged):
+  - select the glyph(s)
+  - set your view to the sourc layer: View > Layers > ...
+  - Element > Build Composite Character
+  - Edit > Unlink reference
+  - This is needed to prevent the derive-layers.py script from creating a 'double' outlines.
+3. Select all the glyphs you've re-built and execute the derive-layers.py script.
+
+Some caveats:
+- Build Composite Character does not work correctly on slanted layers. That's why we use derive-layers.py for as many layers as possible.
+- In the middle of the block of accented characters, there are the /IJ and /ij ligatures which should NOT be re-build, as they have been created/modified manually. (There are also some mathematical characters that simply CANNOT be built. Unfortunately, it's not possible to make /IJ and /ij impossible to be rebuild without destroying desired OpenType functionality.)
+- Starting at position 0xE800, there are ligatures with name like /csX_X. These ligatures have had manual changes to their left bearing. If you need to rebuild these ligatures to propagate changes to the base glyph, make a note/photo of their left baring beforehand, and restore it afterwards. Be careful that the StartDots remain aligned with the Skeleton when doing this. 
+- Ligatures that can safely be re-build without requiring manual changes start at position 0xE900.
+
+BUILDING THE FONTS
+For most purposes, you can build a font that uses multiple substitution. Almost all applications that support contextual alternates at all also support multiple substitution. The exception to this is Creative Suite, so the last non-subscription versions of Photoshop, InDesign and Illustrator from 2012. If you need to use these products (and not more recent products from Creative Cloud), you'll need to build the font with single substitution. The single substitution fonts are about 10x the size of the multiple substitution fonts, so for online apps you definitely want to use the multiple substitution fonts.
+
+BUILDING THE FONTS FOR MULTIPLE SUBSTITUTION
+When building the fonts, you need to make a few changes to the Lookups. You should be careful NOT to save these changes!
+
+Procedure for building the fonts:
+1. Update versions numbers and font log.
+2. Save.
+3. Delete all lookups starting with the ss- suffix (multiple substitution).
+4. Delete the 'ligatures-connected' lookup; this table is too large and not needed (it is used for deriving characters, not used for Opentype functionaly).
+5. Change the metadata of the ms-calt lookup and add the 'calt' feature (for all languages, all scripts).
+6. Select all glyphs from unicode point 0xE900 onwards. Delete this by right-clicking and choosing Clear in each layer, until crosses appear.
+7. Test the 'calt' feature in the Metrics window.
+8. Close the Metrics window (FontForge may crash if you do step 5 with the Metrics window open).
+9. Open the subtable of the ss-calt lookup, maximize your screen, and find the 4 rules that start with 'space'. Remove the 'space' bit, so that the rules become:
+| lc @<start-continued> | lc
+| uc @<start-continued> | lc
+| lc @<start-alone> |
+| uc @<start-alone> |
+10. Execute the build-fonts.py script.
+11. Exit without saving.  
+
+BUILDING THE FONTS FOR SINGLE SUBSTITUTION
+When building the fonts, you need to make a few changes to the Lookups. You should be careful NOT to save these changes!
+
+Procedure for building the fonts:
+1. Update versions numbers and font log.
+2. Save.
+3. Delete all lookups starting with the ms- suffix (multiple substitution).
+4. Delete the 'ligatures-connected' lookup; this table is too large and not needed (it is used for deriving characters, not used for Opentype functionaly).
+5. Change the metadata of the ss-calt lookup and add the 'calt' feature (for all languages, all scripts).
+6. Test the 'calt' feature in the Metrics window.
+7. Close the Metrics window (FontForge may crash if you do step 5 with the Metrics window open).
+8. Open the subtable of the ss-calt lookup, maximize your screen, and find the 4 rules that start with 'space'. Remove the 'space' bit, so that the rules become:
+| lc @<start-continued> | lc
+| uc @<start-continued> | lc
+| lc @<start-alone> |
+| uc @<start-alone> |
+9. Execute the build-fonts.py script.
+10. Exit without saving.  
+
+
+
+

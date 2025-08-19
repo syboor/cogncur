@@ -169,8 +169,9 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      numerals_tabular: 0,
 
     /* numerals_tabular
-     0 = yes, replace the space too
-     1 = no, don't replace the space
+     0 = yes, replace the space too and interpunction
+     1 = no, don't replace the space, but still use zero width comma and period
+     2 = no, don't replace space and don't replace any interpunction, only replace numerals and currency (for use within text)
      */
      numerals_tabular_dont_replace_space: 0,
      
@@ -212,7 +213,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
      numeral_variants_set2: 0,
      
      /* standard ligatures: combine breve and macron accents over double vowels */
-     standard_ligatures: 1 
+     standard_ligatures: 1,
+
      
   }
   
@@ -2138,6 +2140,8 @@ var get_cogncur_converter = (function (the_settings, the_element) {
       
       if (key == 'space' && settings.numerals_tabular_dont_replace_space) return;
       
+      //if ((key == 'comma' || key == 'period' || key == 'colon' || key == 'semicolon' || key == 'plus' || key == 'hyphen' || key == 'equal' || key == 'multiply' || key == 'divide' || key == 'percent') && settings.numerals_tabular_dont_replace_space == 2) return;
+
       // OK, only standard style numerals left now
       if (settings.numerals_tabular && settings.numerals_oldstyle && (key+'.tab.old') in numerals) {
         input = input.replaceAll(numerals[key], numerals[key+'.tab.old']);

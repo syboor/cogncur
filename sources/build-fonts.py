@@ -1,16 +1,22 @@
-### IMPORTANT NOTE
-#
-# The last 4 rules of the 'calt - connections between letters' table should be:
+# BUILDING THE FONTS
+# When building the fonts, you need to make a few changes to the Lookups. You should be careful NOT to save these changes!
 # 
+# Procedure for building the fonts:
+# 1. Update versions numbers and font log.
+# 2. Save.
+# 3. Delete all lookups starting with the ms- suffix (multiple substitution).
+# 4. Change the metadata of the ss-calt lookup and add the 'calt' feature (for all languages, all scripts).
+# 5. Test the 'calt' feature in the Metrics window.
+# 6. Close the Metrics window (FontForge may crash if you do step 5 with the Metrics window open).
+# 7. Open the subtable of the ss-calt lookup, maximize your screen, and find the 4 rules that start with 'space'. Remove the 'space' bit, so that the rules become:
 # | lc @<start-continued> | lc
 # | uc @<start-continued> | lc
 # | lc @<start-alone> |
 # | uc @<start-alone> |
-#
-# However, these rules crash Fontforge. To mitigate this, a the back class 'space' is added in front of these four rules.
-# Therefore, just before building the ttf fonts (below), change the existing rules to delete the 'space' backclass.
-# Then build the fonts.
-# Then change it back if you want to continue using Fontforge.
+# 8. Execute the build-fonts.py script.
+# 9. Exit without saving.  
+
+
 
 ### Create fonts
 import fontforge;

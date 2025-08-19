@@ -63,6 +63,7 @@ var get_cogncur_lines = (function () {
   function replace_text_nodes_with_html(element, replace_function) {
     $(element).contents()    // like children(), accept that children() never returns direct textNode-children. 
       .each(function () {   
+        if ($(this).hasClass('line-lines')) return; // never descend into 'line-lines' nodes
         if (this.nodeType === 3) {
           $(this).replaceWith(replace_function(escapeHtml(this.nodeValue)));
         } else {
@@ -118,8 +119,8 @@ var get_cogncur_lines = (function () {
         attr : {}
       }
     ];
-    if (typeof(row_selector) == 'undefined') row_selector = 'tr';
-    if (typeof(col_selector) == 'undefined') col_selector = 'td';
+    if (typeof(row_selector) == 'undefined') row_selector = '.hokjes-row';
+    if (typeof(col_selector) == 'undefined') col_selector = '.hokje';
     if (typeof(separator) == 'undefined') separator || false;
     
     var rows;
@@ -267,7 +268,6 @@ var get_cogncur_lines = (function () {
       var row, col, cols_generated, next, leading_zeros_done, digit;
       var max_line_length = 0;
       var td_class;
-      var prev_td_class;
 
       // strip completely empty lines (no spaces) at beginning and end
       while (lines[0] == '') lines.shift(); // strip leading empty line
@@ -281,7 +281,6 @@ var get_cogncur_lines = (function () {
       for (row = 0; row < lines.length; row++) {
         //lines[row] = lines[row].replace(/\s+$/g, ''); // rtrim
         line_result = '';
-        prev_td_class = 'skip';
 
         //leading_zeros_done = false;
         col = 0; // This is where we are in our input string
@@ -290,10 +289,13 @@ var get_cogncur_lines = (function () {
           td_class = '';
           digit = lines[row][col];
           if (!digit) digit = ' '; // pad to longest line length
-          next = lines[row][col+1];
 
           col++;
-          if (digit == '.' || digit == ',' || digit == ':' || digit == ';') continue;
+          
+          if (digit == '.' || digit == ',' || digit == ':' || digit == ';') {
+            td_class = 'zero';
+            cols_generated--;
+          }
 
           //if (digit == '0' && next && next.match(/[0-9]/) && leading_zeros_done == false) digit = ' ';
           //if (digit.match(/[1-9]/)) leading_zeros_done = true;
@@ -303,22 +305,16 @@ var get_cogncur_lines = (function () {
 
           if (!raw) digit = cogncur_converter.convert(digit);
           
-          if (next == '.' || next == ',' || next == ':' || next == ';') {
-            digit = digit + '<span class="tussen_de_hokjes">' + (raw ? next : cogncur_converter.convert(next)) + '</span>';
-          }
+          if (los && digit == ' ' || digit == '\ue1e2' /* space.tab */) td_class='skip';
+          if (digit == ' ' || digit == '_' || digit == '\ue1e6' /* underscore.tab */ || digit == '\ue1e2' /* space.tab */) digit = '&nbsp;';
           
-          if (los && digit == ' ') td_class='skip';
-          if (digit == ' ' || digit == '_') digit = '&nbsp;';
-          if (prev_td_class != 'skip' && td_class != 'skip') td_class='next';
-
-          line_result = line_result + "<td class='"+td_class+"'><div class='hokjes-cell'><div class='hokjes-rompzone'></div><div class='hokjes-content'>" + digit + "</div></div></td>";
+          line_result = line_result + "<div class='hokje "+td_class+"'><div class='hokje-lines'><div class='hokje-lines-zone'></div><div class='hokje-lines-main'></div></div><div class='hokje-content'><span class='hokje-content-main'>" + digit + "</span></div></div>";
           
-          prev_td_class = td_class;
           cols_generated++;
         }
-        result = result + "<tr>" + line_result + "</tr>\n";
+        result = result + "<div class='hokjes-row'>" + line_result + "</div>";
       }
-      return "<table class='hokjes-table'>" + result + "</table>";
+      return "<div class='hokjes-table'>" + result + "</div>";
     }
     
     return replace_hokjes;
@@ -449,17 +445,180 @@ var get_cogncur_lines = (function () {
 
   }
   
-      
+  // The line 'color scheme' determines not just th colors of the lines (via css) but also 
+  // determines which lines are solid, dashed or dotted. Since lines are composed of glyphs,
+  // this means we need to select between different glyphs based on the line color scheme.
+  function get_linecolorschemeglyph(line, style) {
+    var styles = {
+      'defaultlines' : {
+        'baseline' : 'c',
+        'waistline' : 'd',
+        'topline' : 'f',
+        'bottomline' : 'g',
+        'waistzone' : 'l',
+        'midwaistline' : 'r'
+      },
+      filledrompzone : {
+        'baseline' : 'c',
+        'waistline' : 'd',
+        'topline' : 'f',
+        'bottomline' : 'g',
+        'waistzone' : 'l',
+        'midwaistline' : 'r'
+      },
+      blueredlines : {
+        'baseline' : 'c',
+        'waistline' : 'd',
+        'topline' : 'f',
+        'bottomline' : 'g',
+        'waistzone' : 'l',
+        'midwaistline' : 'r'
+      },
+      multistylelines : { /* Uses lots of different line styles, perfect for monocolor... */
+        'baseline' : 'c',
+        'waistline' : 'd',
+        'topline' : 'F',
+        'bottomline' : 'G',
+        'waistzone' : 'l',
+        'midwaistline' : 't'
+      },
+      blackmultistylelines : { /* Uses lots of different line styles, perfect for monocolor... */
+        'baseline' : 'c',
+        'waistline' : 'd',
+        'topline' : 'F',
+        'bottomline' : 'G',
+        'waistzone' : 'l',
+        'midwaistline' : 't'
+      }
+    };
+    if (typeof styles[style] !== 'undefined' && typeof styles[style][line] !== 'undefined') {
+      return styles[style][line];
+    } else if (typeof styles['defaultlines'][line] !== 'undefined') {
+      return styles['defaultlines'][line]; 
+    } else {
+      return '';
+    }
+  }
+  function get_linestartglyph_lined(style) {
+    var styles = {
+      'huis' : '',
+      'huislos' : '',
+      'boom' : 'k',
+      'geen' : '',
+      'driehoek' : '',
+      'romphoogtelijn' : '/',
+      'kantlijn' : '   \u200a\u200a\\\u200a', /* NB these space characters come from the CognForms font, not from the Congcur font */
+      'kantlijn-overwrite' : '   \u200a\u200a\\\u200a', /* different from 'kantlijn' only in css */
+    };
+    if (typeof styles[style] !== 'undefined') {
+      return styles[style];
+    } else {
+      return '/'; // default  
+    }
+  }
+  function get_linestartglyph_unlined(style) {
+    var styles = {
+      'huis' : 'j',
+      'huislos' : 'i ',
+      'boom' : '',
+      'geen' : '',
+      'driehoek' : 'o',
+      'romphoogtelijn' : '',
+      'kantlijn' : '',
+      'kantlijn-overwrite' : ''
+    };
+    if (typeof styles[style] !== 'undefined') {
+      return styles[style];
+    } else {
+      return ''; 
+    }
+  }
+  
+  function set_linecolorscheme(el) {
+    for (style of ['defaultlines', 'filledrompzone', 'blueredlines', 'blacklines', 'multistylelines', 'blackmultistylelines']) {
+      if ($(el).hasClass(style)) {
+        $(el).data('linecolorscheme', style).attr('data-linecolorscheme', style);
+      }
+    }
+  }
+  function set_linestart(el) {
+    for (style of ['huis', 'huislos', 'geen', 'boom', 'driehoek', 'romphoogtelijn', 'kantlijn', 'kantlijn-overwrite']) {
+      if ($(el).hasClass('linestart-'+style)) {
+        $(el).data('linestart', style).attr('data-linestart', style);
+      }
+    }
+  }
+  
+  function create_liniature(line) {
+    if ($(line).hasClass('empty')) $(line).text(' ');
+
+    var raw = 0;
+    if ($(line).hasClass('rawline')) raw = 1;
+
+    var main = $('<div class="line-text-main"></div>').addClass(raw ? 'rawcursive' : 'cursive');
+    
+    var outline = 0;
+    if ($(line).hasClass('outline')) outline = 1;
+    if (outline) main.addClass('outline');
+    $(line).removeClass('outline');
+
+
+    $(line)
+      .contents()
+      .each(function () {
+        if (this.nodeType == 3) { // textnode
+          $(document.createTextNode(this.nodeValue)).appendTo(main);
+          $(this).remove(); 
+        } else {
+          $(this).appendTo(main);
+        }
+      });
+
+    var content = $(main).wrap('<div class="line-text"></div>').parent().wrap('<div class="line-content"></div>').parent();
+    var lined = $(content).wrap('<div class="line-lined"></div>').parent();
+    $(lined).appendTo(line);
+
+    // Get linecolorscheme
+    var linecolorscheme = $(line).closest('[data-linecolorscheme]').data('linecolorscheme');
+    // Get linestart
+    var linestart = $(line).closest('[data-linestart]').data('linestart');
+    
+    // Insert leading and trailing space
+    $('<div class="line-content-leading"></div>').text(get_linestartglyph_lined(linestart)).prependTo(content);
+    $('<div class="line-content-end"></div>').appendTo(content);
+
+    // TODO: start and end may require some content insertion...
+    $(line).prepend('<div class="line-start"></div>');
+    $('<div class="line-unlined-leading"></div>').text(get_linestartglyph_unlined(linestart)).prependTo(line);
+    $(line).append('<div class="line-end"></div>');
+    
+    // Liniature
+    var lines = $('<div class="line-lines"></div>').appendTo(lined);
+    $('<div class="line-baseline"></div>').text(get_linecolorschemeglyph('baseline', linecolorscheme).repeat(300)).appendTo(lines);
+    $('<div class="line-waistline"></div>').text(get_linecolorschemeglyph('waistline', linecolorscheme).repeat(300)).appendTo(lines);
+    $('<div class="line-midwaistline"></div>').text(get_linecolorschemeglyph('midwaistline', linecolorscheme).repeat(300)).appendTo(lines);
+    $('<div class="line-topline"></div>').text(get_linecolorschemeglyph('topline', linecolorscheme).repeat(300)).appendTo(lines);
+    $('<div class="line-bottomline"></div>').text(get_linecolorschemeglyph('bottomline', linecolorscheme).repeat(300)).appendTo(lines);
+    $('<div class="line-waistzone"></div>').text(get_linecolorschemeglyph('waistzone', linecolorscheme).repeat(300)).appendTo(lines);
+    
+  }
+
+    
   
 
   function do_everything(rootnode) {
+    set_linecolorscheme(rootnode);
+    set_linestart(rootnode);
+
+    $(rootnode).find('.defaultlines, .filledrompzone, .blueredlines, .blacklines, .multistylelines, .blackmultistylelines').each(function (index, el) { set_linecolorscheme(el); });
+    $(rootnode).find('.linestart-huis, .linestart-huislos, .linestart-geen, .linestart-boom, .linestart-driehoek, .linestart-romphoogtelijn, .linestart-kantlijn, .linestart-kantlijn-overwrite').each(function (index, el) { set_linestart(el); });
+
     $(rootnode).find('.repeatlines').each(function () {
       repeatlines($(this), '.line', $(this));
     });
     
-    $(rootnode).find('.line.empty').text(' ');
-    $(rootnode).find('.line, .rawline').append('<div class="baselines"></div>'); 
-    $(rootnode).find('.line, .rawline').append('<div class="outerlines"></div>'); 
+    $(rootnode).find('.line').each(function (index, el) { create_liniature(el); });
+    $(rootnode).find('.rawline').each(function (index, el) { create_liniature(el); });
     
     $(rootnode).find('.page').wrap("<div class='page_container'></div>" );
     // whitespace between elements under .page will break some side-by-side layouts, so remove them
@@ -629,7 +788,7 @@ var get_cogncur_lines = (function () {
     });
     
     $(rootnode).find('.repeatlines.hokjes-table, .repeatlines .hokjes-table').each(function () {
-      repeatlines($(this), 'tr', $(this).closest('.repeatlines'));
+      repeatlines($(this), '.hokjes-row', $(this).closest('.repeatlines'));
     });    
     
     // NB .repeatnumbers should always be combined with .hokjes
@@ -655,17 +814,19 @@ var get_cogncur_lines = (function () {
         $(this).find('td:last-child').remove();
       }
     });    
-    $(rootnode).find('.empty .hokjes-content').text('\u00a0'); // nbsp
+    $(rootnode).find('.empty .hokje-content').text('\u00a0'); // nbsp
+    
     
     $(rootnode).find('.repeatwords').each(function() {
       var line_selector;
       var lines;
+      
       if ($(this).hasClass('line')) {
-        line_selector = false;
-        lines = $(this);
+        line_selector = '.line-text-main';
+        lines = $(this).find(line_selector);
       } else {
-        line_selector = '.line';
-        lines = $(this).find('.line');
+        line_selector = '.line .line-text-main';
+        lines = $(this).find(line_selector);
       }
       
       // Wrap every first word, discard the rest
@@ -701,7 +862,7 @@ var get_cogncur_lines = (function () {
     
     // Overlay two copies of the text (normal + startpunten) onto each other, for complete lines.
     $(rootnode).find('.line.startpunt-overlay-zwart, .startpunt-overlay-zwart .line, .line.startpunt-overlay-rood, .startpunt-overlay-rood .line, .line.startpunt-overlay-groen, .startpunt-overlay-groen .line').each(function () {
-      var content = $(this).text();
+      var content = $(this).find('.line-text-main').text();      
       
       var overlay = $('<div class="line-overlay"></div>').text(content).addClass('startpunten-font');
       var data = $(this).data();
@@ -714,31 +875,20 @@ var get_cogncur_lines = (function () {
         $(overlay).addClass('black');
       }
       
-      $(this).find('.baselines').remove();
-      $(this).find('.outerlines').remove();
-      $(this).addClass('line-original').removeClass('line').wrap('<div class="line line-container"></div>');
+      $(this).find('.line-text').append(overlay);
+      $(overlay).removeClass('line');
+
+      // Keep 'invisible-from' settings sync'ed between the original and the copy, because the way we 
+      // may or may not split up initial ligatures in the original will affect spacing
+      if ($(this).hasClass('invisible-from')) {
+        $(overlay).addClass('invisible-from');
+        $(overlay).data('invisible-from', $(this).data('invisible-from'));
+        $(overlay).attr('data-invisible-from', $(this).data('invisible-from'));
+      }
+      if ($(this).hasClass('invisible-except-one')) {
+        $(overlay).addClass('invisible-except-one');
+      }
       
-      var wrapper = $(this).parent(); // the wrapper
-      $(wrapper).append(overlay);
-      $(wrapper).removeClass('line').addClass('rawline'); // prevent conversion at the .line level, allowing us to convert the .line-original and .line-overlay separately and with different settings each 
-      
-      // copy classes to the wrapper
-      var that = this;
-      var copy_to_wrapper_classes = ['norompline', 'noouterlines', 'nolines', 'blacklines', 'blueredlines', 'noromphoogtelijn', 'romphoogtelijn'];
-      $(copy_to_wrapper_classes).each(function (index, value) {
-        if ($(that).hasClass(value)) $(wrapper).addClass(value);
-      });
-
-
-
-      // Copy all data-attributes to overlay
-      $.each($(this)[0].attributes, function () {
-        if (this.name.substr(0,4) == 'data') {
-          $(overlay).attr(this.name, this.value);
-        }
-      });
-        
-      $(wrapper).append('<div class="baselines"></div>').append('<div class="outerlines"></div>'); 
     });   
     
     $(rootnode).find('.arrows-overlay').addClass('add-overlay').attr('data-overlay-classes', 'arrows-font');
@@ -753,7 +903,7 @@ var get_cogncur_lines = (function () {
 
     // Overlay two copies of the text (normal + custom) onto each other, for complete lines.
     $(rootnode).find('.line.add-overlay, .add-overlay .line').each(function () {
-      var content = $(this).text();
+      var content = $(this).find('.line-text-main').text();      
       
       var classsource = $(this).closest('.add-overlay');
      
@@ -761,35 +911,26 @@ var get_cogncur_lines = (function () {
 
       var data = $(this).data();
     
-      $(this).find('.baselines').remove();
-      $(this).find('.outerlines').remove();
-      $(this).addClass('line-original').removeClass('line').wrap('<div class="line line-container"></div>');
+      $(this).find('.line-text').append(overlay);
+      $(overlay).removeClass('line');
       
-      var wrapper = $(this).parent(); // the wrapper
-      $(wrapper).append(overlay);
-      $(wrapper).removeClass('line').addClass('rawline'); // prevent conversion at the .line level, allowing us to convert the .line-original and .line-overlay separately and with different settings each 
-      
-      // copy classes to the wrapper
-      var that = this;
-      var copy_to_wrapper_classes = ['norompline', 'noouterlines', 'nolines', 'greylines', 'noromphoogtelijn'];
-      $(copy_to_wrapper_classes).each(function (index, value) {
-        if ($(that).hasClass(value)) $(wrapper).addClass(value);
-      });
+      // Keep 'invisible-from' settings sync'ed between the original and the copy, because the way we 
+      // may or may not split up initial ligatures in the original will affect spacing
+      if ($(this).hasClass('invisible-from')) {
+        $(overlay).addClass('invisible-from');
+        $(overlay).data('invisible-from', $(this).data('invisible-from'));
+        $(overlay).attr('data-invisible-from', $(this).data('invisible-from'));
+      }
+      if ($(this).hasClass('invisible-except-one')) {
+        $(overlay).addClass('invisible-except-one');
+      }
 
-      // Copy all data-attributes to overlay
-      $.each($(this)[0].attributes, function () {
-        if (this.name.substr(0,4) == 'data') {
-          $(overlay).attr(this.name, this.value);
-        }
-      });
-        
-      $(wrapper).append('<div class="baselines"></div>').append('<div class="outerlines"></div>'); 
     });   
 
     // Overlay two copies of the text (normal + startpunten) onto each other, for complete lines.
-    $(rootnode).find('.hokjes-cell.startpunt-overlay-zwart, .startpunt-overlay-zwart .hokjes-cell, .hokjes-cell.startpunt-overlay-rood, .startpunt-overlay-rood .hokjes-cell, .hokjes-cell.startpunt-overlay-groen, .startpunt-overlay-groen .hokjes-cell').each(function () {
-      var content = $(this).find('.hokjes-content').text();
-      var overlay = $('<div class="hokjes-content hokjes-overlay"></div>').text(content).addClass('startpunten-font');
+    $(rootnode).find('.hokje-content.startpunt-overlay-zwart, .startpunt-overlay-zwart .hokje-content, .hokje-content.startpunt-overlay-rood, .startpunt-overlay-rood .hokje-content, .hokje-content.startpunt-overlay-groen, .startpunt-overlay-groen .hokje-content').each(function () {
+      var content = $(this).find('.hokje-content-main').text();
+      var overlay = $('<span class="hokje-content-overlay"></span>').text(content).addClass('startpunten-font');
       var data = $(this).data();
 
       if ($(this).closest('.startpunt-overlay-groen').length) {
@@ -805,7 +946,7 @@ var get_cogncur_lines = (function () {
       }
       
       
-      $(this).append(overlay);
+      $(this).prepend(overlay);
 
     });      
     
@@ -843,24 +984,8 @@ var get_cogncur_lines = (function () {
       // $(this).addClass('invisible-except-first');
     });
     
-    // Somehow, if we use startpunten-font in a td.hokjes-content, the sizing gets messed up?!? 
-    // But if we wrap it a level deeper, it works fine...
-    $(rootnode).find('.hokjes-content.startpunten-font').each(function() {
-      var text = $(this).text();
-      var nested = $('<div></div>').addClass('startpunten-font').text(text);
-      $(this).text('').removeClass('startpunten-font').append(nested);
-    });
-    
-    // Same, but with startpunten-font higher in the DOM
-    $(rootnode).find('.startpunten-font .hokjes-content').each(function() {
-      var text = $(this).text();
-      var nested = $('<div></div>').addClass('startpunten-font').text(text);
-      $(this).text('').append(nested);
-      $(this).closest('.startpunten-font').removeClass('startpunten-font');
-    });
 
 
-    
     // spatie tussen letters.
     // NB deze functies worden uitgevoerd voorafgaand aan conversie. 'ij' is dus ook nog twee letters.
     $(rootnode).find('.letterspace').each(function () {
@@ -901,7 +1026,7 @@ var get_cogncur_lines = (function () {
     });  
     
 
-    $(rootnode).find('.line, .cursive, .letter, .line-overlay, .line-original').each(function () {
+    $(rootnode).find('.line-text-main, .line-text-overlay, .cursive, .letter, .line-overlay, .line-original').each(function () {
       var cogncur_converter = get_cogncur_converter(default_settings, this);
       replace_text_nodes(this, cogncur_converter.convert);
     });
@@ -1160,13 +1285,22 @@ var get_cogncur_lines = (function () {
   
   return {
     do_it: do_everything,
-    auto : auto
+    auto : auto,
+    replace_text_nodes: replace_text_nodes
   }
 });
 
 var cogncur_lines = get_cogncur_lines();
 
 jQuery(document).ready(function ($) {
+  /* If MacOS or iOS, add a 'is_mac' class to the body. This is used by cogncur.css to improve vertical spacing and prevent clipping,
+   * which appears to be somehow dependent on OS specific font metric interpretation, not browser.
+   */
+  var is_ios_or_mac = ((navigator.appVersion.indexOf("Mac")!=-1) || !!navigator.platform.match(/iPhone|iPod|iPad|Mac/));
+  if (is_ios_or_mac) {
+    $('body').addClass('is-ios-or-mac');
+  }
+
   if (cogncur_lines.auto) {
     cogncur_lines.do_it(document);
   }
