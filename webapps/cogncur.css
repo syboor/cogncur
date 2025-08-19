@@ -1,34 +1,34 @@
 @font-face {
   font-family: "CogncurVertical";
-  src: url("/fonts/cogncur/fonts/cogncurvertical.ttf?v=20230806") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurvertical.ttf?v=20250819") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "Cogncur";
-  src: url("/fonts/cogncur/fonts/cogncur.ttf?v=20230806") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncur.ttf?v=20250819") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "CogncurOblique";
-  src: url("/fonts/cogncur/fonts/cogncuroblique.ttf?v=20230806") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncuroblique.ttf?v=20250819") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "CogncurEdged";
-  src: url("/fonts/cogncur/fonts/cogncuredged.ttf?v=20230806") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncuredged.ttf?v=20250819") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "CogncurEdgedVertical";
-  src: url("/fonts/cogncur/fonts/cogncuredgedvertical.ttf?v=20230806") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncuredgedvertical.ttf?v=20250819") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
@@ -36,47 +36,99 @@
 
 @font-face {
   font-family: "CogncurVertical-Start";
-  src: url("/fonts/cogncur/fonts/cogncurverticalstartdots.ttf?v=20230806") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurverticalstartdots.ttf?v=20250819") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "Cogncur-Start";
-  src: url("/fonts/cogncur/fonts/cogncurstartdots.ttf?v=20230806") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurstartdots.ttf?v=20250819") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: "CogncurOblique-Start";
-  src: url("/fonts/cogncur/fonts/cogncurobliquestartdots.ttf?v=20230806") format("truetype");
+  src: url("/fonts/cogncur/fonts/cogncurobliquestartdots.ttf?v=20250819") format("truetype");
   font-display: block;
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: "Cognforms";
+  src: url("/fonts/cogncur/fonts/cognforms.ttf?v=20250819") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CognformsThick";
+  src: url("/fonts/cogncur/fonts/cognformsthick.ttf?v=20250819") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CognformsThin";
+  src: url("/fonts/cogncur/fonts/cognformsthin.ttf?v=20250819") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CognformsThinner";
+  src: url("/fonts/cogncur/fonts/cognformsthinner.ttf?v=20250819") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "CognformsThinnest";
+  src: url("/fonts/cogncur/fonts/cognformsthinnest.ttf?v=20250819") format("truetype");
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
+:root, .defaultlinethickness {
+  --cursive-line-height: normal;
+  --lines-font-family-1: "CognformsThick";
+  --lines-font-family-2: "Cognforms";
+  --lines-font-family-3: "CognformsThin";
+  --lines-font-family-4: "CognformsThinner";
+  --lines-font-family-5: "CognformsThinnest";
+  --lines-font-family-6: "CognformsThinnest";
+  --lines-font-family: var(--lines-font-family-6);
+}
+
 
 :root,
 .cogncurvertical .cogncurregular,
 .cogncuroblique .cogncurregular {
   --cursive-font-family: "Cogncur";
   --cursive-start-font-family: "Cogncur-Start";
+  --tabular-slant-compensation: -0.03em; 
 }
 .cogncurvertical {
   --cursive-font-family: "CogncurVertical";
   --cursive-start-font-family: "CogncurVertical-Start";
+  --tabular-slant-compensation: 0em; 
 }
 .cogncuredgedvertical {
   --cursive-font-family: "CogncurEdgedVertical";
+  --tabular-slant-compensation: 0em; 
   /* no suitable starting dots fonts */
 }
 .cogncuredged {
   --cursive-font-family: "CogncurEdged";
+  --tabular-slant-compensation: -0.03em; 
   /* no suitable starting dots fonts */
 }
 .cogncuroblique, i, em {
   --cursive-font-family: "CogncurOblique";
   --cursive-start-font-family: "CogncurOblique-Start";
+  --tabular-slant-compensation: -0.06em;
 }
 b, strong {
   --cursive-font-family: "CogncurEdged";
@@ -92,57 +144,100 @@ b, strong {
 :root,
   .blacklines .defaultlines,
   .blueredlines .defaultlines,
-  .filledrompzone .defaultlines {
+  .filledrompzone .defaultlines,
+  .blackmultistylelines .defaultlines,
+  .multistylelines,
+  .blacklines .multistylelines,
+  .blueredlines .multistylelines,
+  .filledrompzone .multistylelines,
+  .blackmultistylelines .multistylelines {
   --baseline-color: #667AFF;
   --otherlines-color: #667AFF;
   --otherlines-color-fade1: #99a6ff;
   --otherlines-color-fade2: #c4ccff;
   --otherlines-color-fade3: #edefff;
-  --romphoogtelijn-color: #667AFE; /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
   --rompzone-color: transparent;
+  --midromplijn-color: #667AFE;
+  --rompzone-color: transparent;
+  --marginline-color: #e01a6f;
 }
+
 .blacklines,
   .blueredlines .blacklines,
-  .filledrompzone .blacklines {
+  .filledrompzone .blacklines,
+  .multistylelines .blacklines,
+  .blackmultistylelines,
+  .blueredlines .blackmultistylelines,
+  .filledrompzone .blackmultistylelines,
+  .multistylelines .blackmultistylelines {
   --baseline-color: #000;
   --otherlines-color: #000;
   --otherlines-color-fade1: #888888;
   --otherlines-color-fade2: #cccccc;
   --otherlines-color-fade3: #f0f0f0;
-  --romphoogtelijn-color: #010101; /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
+  --midromplijn-color: #000;
   --rompzone-color: transparent;
+  --marginline-color: #000;
 }
 .blueredlines,
   .blacklines .blueredlines,
-  .filledrompzone .blueredlines {
+  .filledrompzone .blueredlines,
+  .multistylelines .blueredlines,
+  .blackmultistylelines .blueredlines {
   --baseline-color: #e01a6f;
   --otherlines-color: #667AFF;
-  --romphoogtelijn-color: #e01a6e;
   --rompzone-color: transparent;
-  --otherlines-style: solid;
+  --midromplijn-color: #999;
 }
 .filledrompzone,
   .blacklines .filledrompzone,
-  .blueredlines .filledrompzone {
+  .blueredlines .filledrompzone,
+  .multistylelines .filledrompzone,
+  .blackmultistylelines .filledrompzone {
   --baseline-color: #667AFF;
   --otherlines-color: #667AFF;
   --rompzone-color: #e7e9fa; 
-  --otherlines-style: solid;
-  --romphoogtelijn-color: #667AFE; /* the left border must have a different colour from any horizontal borders: https://bugs.chromium.org/p/chromium/issues/detail?id=1265886&q=&can=5 */
+  --midromplijn-color: #667AFF;
+}
+
+/* Use these instead ...*/
+.morelinethickness {
+  --lines-font-family-1: "CognformsThick";
+  --lines-font-family-2: "CognformsThick";
+  --lines-font-family-3: "Cognforms";
+  --lines-font-family-4: "CognformsThin";
+  --lines-font-family-5: "CognformsThinner";
+  --lines-font-family-6: "CognformsThinnest";
+}
+.morelinethickness2 {
+  --lines-font-family-1: "CognformsThick";
+  --lines-font-family-2: "CognformsThick";
+  --lines-font-family-3: "CognformsThick";
+  --lines-font-family-4: "Cognforms";
+  --lines-font-family-5: "CognformsThin";
+  --lines-font-family-6: "CognformsThinner";
+}
+.lesslinethickness { /* This only affects smaller font sizes. */
+  --lines-font-family-1: "Cognforms";
+  --lines-font-family-2: "CognformsThin";
+  --lines-font-family-3: "CognformsThinner";
+  --lines-font-family-4: "CognformsThinnest";
+  --lines-font-family-5: "CognformsThinnest";
+  --lines-font-family-6: "CognformsThinnest";
 }
 
 
 
 .cursive, .rawcursive {
   font-family: var(--cursive-font-family);
-  line-height: normal; /* Overrule setting from masterstyle */
+  line-height: var(--cursive-line-height); /* Overrule setting from masterstyle */
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
   font-variant-ligatures: none;  
 }
 
 .autocursive {
   font-family: var(--cursive-font-family);
-  line-height: normal; /* Overrule setting from masterstyle */
+  line-height: var(--cursive-line-height); /* Overrule setting from masterstyle */
   font-feature-settings: "calt" 1;  
 }
 
@@ -165,7 +260,8 @@ b, strong {
 .rawline.startpunten-font, .rawline .startpunten-font, .startpunten-font .rawline,
 .letter.startpunten-font, .letter .startpunten-font, .startpunten-font .letter,
 .rawletter.startpunten-font, .rawletter .startpunten-font, .startpunten-font .rawletter,
-.hokjes.startpunten-font, .hokjes .startpunten-font, .startpunten-font .hokjes,
+.hokje-content-main.startpunten-font, .startpunten-font .hokje-content-main,
+.hokje-content-overlay.startpunten-font, .startpunten-font .hokje-content-overlay,
 .word-startpunten-font, .word .startpunten-font, .startpunten-font .word {
   font-family: var(--cursive-start-font-family);
   font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
@@ -199,23 +295,161 @@ b, strong {
 
 .line, .rawline {
   font-family: var(--cursive-font-family);
-  line-height: normal;
-  display: block;
-  position: relative;
-  margin-bottom: 0em;
-  text-overflow: clip;
-  line-height: 1em;
+  line-height: 1.05em;
+  --cursive-line-height: 1.05em;
+  margin-bottom: -0.05em;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
   white-space: pre; /* Double whitespaces count as double and do not collapse */
-  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
-  font-variant-ligatures: none;  
-  font-style: normal;
-  font-weight: normal;
 }
-.line::before, .rawline::before, .line-original::before, .line-overlay::before {
-  content: '\200a'; /* extra spacing */
+.is-ios-or-mac .line, .is-ios-or-mac .rawline {
+  line-height: 1.17em;
+  --cursive-line-height: 1.17em;
+  margin-bottom: -0.17em;
 }
-.line-container {
-  height: 1em; /* Needed because it only contains absolutely positioned elements */
+
+.line-bar, .line-content-leading, .line-lines, .line-start, .line-end, .line-unlined-leading, .hokje-lines {
+  font-family: var(--lines-font-family);
+  font-smooth: never;
+  -webkit-font-smoothing : none;  
+}
+
+.line .line-lined,
+.rawline .line-lined {
+  flex-grow: 1;
+  overflow-x: hidden;
+}   
+.line-content {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.line-content .line-text {
+  flex-grow: 1;
+}
+.line-lined {
+  position: relative;
+  top: 0px;
+}
+.line-baseline, .line-waistline, .line-topline, .line-bottomline, .line-waistzone, .line-topzone, .line-bottomzone, .line-midwaistline {
+  position: absolute;
+  top: 0px;
+}
+.line-lines, .line-start, .line-end {
+  color: var(--otherlines-color);
+  z-index: -1;
+}
+.line-content {
+  position: relative; /* Needed for z-index */
+  top: 0px;
+  z-index: 1;
+  overflow: hidden;
+}
+.line-text {
+  position: relative; /* Needed to position the text-overlay correctly. Do not hide the overflow, it should be allowed to encroach into line-start and line-end! */
+  top: 0px;
+  z-index: 1;
+}
+
+
+.line-content-leading {
+  color: #666;
+  z-index: 10;
+  min-width: .05em; /* For sentences started with a j  */
+}
+.cogncuroblique .line-content-leading{
+  min-width: .1em; /* For sentences started with a j  */
+}
+.cogncurvertical .line-content-leading {
+  min-width: .02em;
+}
+
+
+.line-text-overlay {
+  position: absolute;
+  z-index: 2;
+  top: 0px;
+  line-height: 1.05em;
+}
+.is-ios-or-mac .line-text-overlay {
+  line-height: 1.17em;
+}
+.line-waistzone, .line-topzone, .line-bottomzone {
+  z-index: -100;
+}
+.line-waistzone {
+  color: var(--rompzone-color);
+}
+.justify {
+  text-align: justify;
+  text-align-last: justify;
+}
+.line-content-end {
+  width: .08em; /* Needed for slanted overhanging letters such as f */
+}
+.cogncuroblique .line-content-end {
+  width: .16em; /* Needed for slanted overhanging letters such as f */
+}
+.cogncurvertical .line-content-end {
+  width: .02em; /* Needed for slanted overhanging letters such as f */
+}
+
+.line-text-main, .line-text-overlay {
+  white-space: pre-wrap; /* somehow 'pre' negates justify when printing */
+  width: 10000%; /* Setting a large width prevents the text from line wrapping; the containing element will hide text that overflows to the right. Somehow, setting the width in pixels will force the containing element to expand, but setting the width in % does not... */
+}
+.justify .line-text-main,
+.align-right .line-text-main, 
+.centered .line-text-main, 
+.word-justify .line-text-main
+ {
+  width: auto;
+}
+.justify .line-text-overlay,
+.align-right .line-text-overlay,
+.centered .line-text-overlay,
+.word-justify .line-text-overlay
+ {
+  width: 100%;
+}
+
+
+.align-right {
+  text-align: right;
+}
+.line-baseline {
+  color: var(--baseline-color);
+}
+.line-unlined-leading {
+  color: var(--otherlines-color);
+}
+.line-content-leading {
+  color: var(--otherlines-color);
+}
+
+.linestart-boom .line-content-leading {
+  color: #ccc;
+  min-width: 0.6em;
+}
+.linestart-driehoek .line-unlined-leading {
+  color: var(--baseline-color);
+}
+.linestart-invisible .line-unlined-leading, .linestart-invisible .line-content-leading {
+  visibility: hidden;
+}
+.linestart-kantlijn .line-content-leading, .linestart-kantlijn-overwrite .line-content-leading {
+  color: var(--marginline-color);
+}
+.linestart-kantlijn-overwrite .line-content-leading {
+  max-width: 0em;
+}
+
+.line-midwaistline {
+  visibility: hidden;
+}
+
+.midromplijn .line-midwaistline {
+  visibility: visible;
 }
 
 
@@ -241,6 +475,29 @@ b, strong {
 .ld18 .line, .ld18.line, .ld18 .rawline, .ld18.rawline { margin-bottom: 2em; }
 .ld19 .line, .ld19.line, .ld19 .rawline, .ld19.rawline { margin-bottom: 2.111em; }
 .ld20 .line, .ld20.line, .ld20 .rawline, .ld20.rawline { margin-bottom: 2.222em; }
+
+/* TODO: adjustment for mac :(. How to test without public access?... */
+.is-ios-or-mac .ld1 .line, .is-ios-or-mac .ld1.line, .is-ios-or-mac .ld1 .rawline, .is-ios-or-mac .ld1.rawline { margin-bottom:-0.059em; } /* Effective: -0.059 + .17 = .111 */
+.is-ios-or-mac .ld2 .line, .is-ios-or-mac .ld2.line, .is-ios-or-mac .ld2 .rawline, .is-ios-or-mac .ld2.rawline { margin-bottom: 0.052em; } /* Effective: 0.052 + .17 = .222 */
+.is-ios-or-mac .ld3 .line, .is-ios-or-mac .ld3.line, .is-ios-or-mac .ld3 .rawline, .is-ios-or-mac .ld3.rawline { margin-bottom: 0.163em; }
+.is-ios-or-mac .ld4 .line, .is-ios-or-mac .ld4.line, .is-ios-or-mac .ld4 .rawline, .is-ios-or-mac .ld4.rawline { margin-bottom: 0.274em; }
+.is-ios-or-mac .ld5 .line, .is-ios-or-mac .ld5.line, .is-ios-or-mac .ld5 .rawline, .is-ios-or-mac .ld5.rawline { margin-bottom: 0.386em; }
+.is-ios-or-mac .ld6 .line, .is-ios-or-mac .ld6.line, .is-ios-or-mac .ld6 .rawline, .is-ios-or-mac .ld6.rawline { margin-bottom: 0.497em; }
+.is-ios-or-mac .ld7 .line, .is-ios-or-mac .ld7.line, .is-ios-or-mac .ld7 .rawline, .is-ios-or-mac .ld7.rawline { margin-bottom: 0.608em; }
+.is-ios-or-mac .ld8 .line, .is-ios-or-mac .ld8.line, .is-ios-or-mac .ld8 .rawline, .is-ios-or-mac .ld8.rawline { margin-bottom: 0.719em; }
+.is-ios-or-mac .ld9 .line, .is-ios-or-mac .ld9.line, .is-ios-or-mac .ld9 .rawline, .is-ios-or-mac .ld9.rawline { margin-bottom: 0.830em; }
+.is-ios-or-mac .ld10 .line, .is-ios-or-mac .ld10.line, .is-ios-or-mac .ld10 .rawline, .is-ios-or-mac .ld10.rawline { margin-bottom: 1.941em; }
+.is-ios-or-mac .ld11 .line, .is-ios-or-mac .ld11.line, .is-ios-or-mac .ld11 .rawline, .is-ios-or-mac .ld11.rawline { margin-bottom: 1.052em; }
+.is-ios-or-mac .ld12 .line, .is-ios-or-mac .ld12.line, .is-ios-or-mac .ld12 .rawline, .is-ios-or-mac .ld12.rawline { margin-bottom: 1.163em; }
+.is-ios-or-mac .ld13 .line, .is-ios-or-mac .ld13.line, .is-ios-or-mac .ld13 .rawline, .is-ios-or-mac .ld13.rawline { margin-bottom: 1.274em; }
+.is-ios-or-mac .ld14 .line, .is-ios-or-mac .ld14.line, .is-ios-or-mac .ld14 .rawline, .is-ios-or-mac .ld14.rawline { margin-bottom: 1.386em; }
+.is-ios-or-mac .ld15 .line, .is-ios-or-mac .ld15.line, .is-ios-or-mac .ld15 .rawline, .is-ios-or-mac .ld15.rawline { margin-bottom: 1.497em; }
+.is-ios-or-mac .ld16 .line, .is-ios-or-mac .ld16.line, .is-ios-or-mac .ld16 .rawline, .is-ios-or-mac .ld16.rawline { margin-bottom: 1.608em; }
+.is-ios-or-mac .ld17 .line, .is-ios-or-mac .ld17.line, .is-ios-or-mac .ld17 .rawline, .is-ios-or-mac .ld17.rawline { margin-bottom: 1.719em; }
+.is-ios-or-mac .ld18 .line, .is-ios-or-mac .ld18.line, .is-ios-or-mac .ld18 .rawline, .is-ios-or-mac .ld18.rawline { margin-bottom: 1.830em; }
+.is-ios-or-mac .ld19 .line, .is-ios-or-mac .ld19.line, .is-ios-or-mac .ld19 .rawline, .is-ios-or-mac .ld19.rawline { margin-bottom: 1.194em; }
+.is-ios-or-mac .ld20 .line, .is-ios-or-mac .ld20.line, .is-ios-or-mac .ld20 .rawline, .is-ios-or-mac .ld20.rawline { margin-bottom: 2.052em; }
+
 
 .ld1 .line:last-child, .ld1.line:last-child, .ld1 .rawline:last-child, .ld1.rawline:last-child,
 .ld2 .line:last-child, .ld2.line:last-child, .ld2 .rawline:last-child, .ld2.rawline:last-child,
@@ -334,7 +591,14 @@ b, strong {
 
 .nospacebetween .line,
 .nospacebetween .rawline {
-  margin-bottom: 0em;
+  margin-bottom: -0.05em;
+}
+.is-ios-or-mac .nospacebetween .line,
+.is-ios-or-mac .nospacebetween .rawline {
+  margin-bottom: -0.17em;
+}
+.lines {
+  padding-bottom: 0.05em;
 }
 
 .centered {
@@ -356,11 +620,6 @@ b, strong {
   left: 0;
   z-index: 1;
 }
-.hokjes-overlay {
-  position: absolute;
-  left: 0;
-  z-index: 1;
-}
 .line-original {
   position: absolute;
   top: 0;
@@ -368,188 +627,65 @@ b, strong {
   width: 100%; /* needed for text-alignment to word */
 }
 
-
-.baselines {
-  width: 100%;
-  position: absolute;
-  top: .33em;
-  height: .325em; /* why??? */
-  border-bottom: var(--baseline-width) solid var(--baseline-color);
-  border-top: var(--rompline-width) var(--rompline-style) var(--otherlines-color);
-  background-color: var(--rompzone-color);
-  z-index: -99;
+/* family-1 is the thickest (relative to the font size), family-5 is the thinnest (relative to the font size */
+.rh2, .rh2_67, .rh3, .rh4, .rh5 {
+  --lines-font-family: var(--lines-font-family-1);
 }
-.baselines, .romphoogtelijn .baselines, .norompline.romphoogtelijn .baselines {
-  border-left: 1px dotted var(--romphoogtelijn-color);
+.rh6, .rh7, .rh8, .rh9, .rh10 {
+  --lines-font-family: var(--lines-font-family-2);
 }
-.norompline .baselines, .nolines .baselines {
-  border-left: none;
+.rh11, .rh12, .rh13, .rh14, .rh15, .rh16 {
+  --lines-font-family: var(--lines-font-family-3);
 }
-/* A possible approach to adding a romphoogtelijn left of the liniature would be this.
-   If we do this, we should mark the glyph so that it will *not* be skewed for skewed fonts.
- */
- /*
-.line:before {
-  content: 'i';
-  font-family: 'Cogncur Vertical';
-  position: relative;
-  left: -.3em;
+.rh17, .rh18, .rh19, .rh20, .rh21, .rh22, .rh23, .rh24 {
+  --lines-font-family: var(--lines-font-family-4);
 }
-*/
-
-.rh2, .rh2_67, .rh3, .rh4, .rh5, .rh6, .rh7, .thin {
-  --baseline-width: 1px;
-  --rompline-width: 1px;
-  --otherlines-width: 1px;
+.rh25, .rh26, .rh27, .rh28, .rh29, .rh30 {
+  --lines-font-family: var(--lines-font-family-5);
 }
 
-.rh2 .baselines, .rh2_67 .baselines, .lhwide .baselines, .rh3 .baselines, .lh2 .baselines, .rh4 .baselines, .lh3 .baselines {
-  height: .3em;
+.nospacebetween .line-bottomline {
+  visibility: hidden;
 }
-.lh3 .baselines {
-  border-bottom-width: 1px;
-  border-top-width: 1px;
-  height: .31em;
+.nospacebetween .line:last-child .line-bottomline,
+.nospacebetween .rawline:last-child .line-bottomline {
+  visibility: visible;
 }
-
-.nospacebetween .outerlines {
-  border-bottom: 0px;
+.nospacebetween.forcebottomline .line-bottomline, .nospacebetween .forcebottomline .line-bottomline { /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
+  visibility: visible;
 }
 
-.rh5 .baselines, .rh6 .baselines, .ld4 .baselines, .rh6 .baselines, .lh4 .baselines, .rh7 .baselines {
-  height: .31em;
+.nolines .line-bottomline, .nolines .line-topline,
+.noouterlines .line-bottomline, .noouterlines .line-topline {
+  visibility: hidden !important;
 }
-.lh5 .baselines, .rh8 .baselines, .rh9 .baselines, .lh6 .baselines, .lh7 .baselines {
-  height: .32em;
-  top: .32em;
+.nolines .line-waistline, 
+.norompline .line-waistline {
+  visibility: hidden !important;
 }
-
-
-.thin .baselines {
-  border-bottom-width: 1px;
-  border-top-width: 1px;
+.nolines .line-waistzone, .norompline .line-waistzone, .norompline_fade .line-waistzone {
+  visibility: hidden !important;
 }
-
-.nolines .baselines {
-  border-width: 0px !important; 
-  background-color: transparent !important;
+.nolines .line-baseline {
+  visibility: hidden !important;
 }
 
-.nospacebetween .outerlines {
-  border-bottom: 0px;
+.norompline_fade .line-waistline {
+  color: transparent;
 }
-.outerlines,
-.nospacebetween .line:last-child .outerlines,
-.nospacebetween .rawline:last-child .outerlines {
-  width: 100%;
-  position: absolute;
-  top: 0em;
-  border-top: var(--otherlines-width) var(--otherlines-style) var(--otherlines-color);
-  border-bottom: var(--otherlines-width) var(--otherlines-style) var(--otherlines-color); 
-  height: 1em;
-  box-sizing: border-box;
-  z-index: -99;
+.norompline_fade .line:first-child .line-waistline {
+  color: var(--otherlines-color);
 }
-.rh2 .outerlines, .rh2_67 .outerlines, .lhwide .outerlines, .rh3 .outerlines, .lh2 .outerlines, .rh4 .outerlines, .lh3 .outerlines,
-.rh2.nospacebetween .line:last-child .outerlines,
-.rh2_67.nospacebetween .line:last-child .outerlines,
-.lhwide.nospacebetween .line:last-child .outerlines,
-.rh3.nospacebetween .line:last-child .outerlines,
-.lh2.nospacebetween .line:last-child .outerlines,
-.rh4.nospacebetween .line:last-child .outerlines,
-.lh3.nospacebetween .line:last-child .outerlines,
-.rh2.nospacebetween .rawline:last-child .outerlines,
-.rh2_67.nospacebetween .rawline:last-child .outerlines,
-.lhwide.nospacebetween .rawline:last-child .outerlines,
-.rh3.nospacebetween .rawline:last-child .outerlines,
-.lh2.nospacebetween .rawline:last-child .outerlines,
-.rh4.nospacebetween .rawline:last-child .outerlines,
-.lh3.nospacebetween .rawline:last-child .outerlines,
-.rh2 .nospacebetween .line:last-child .outerlines,
-.rh2_67 .nospacebetween .line:last-child .outerlines,
-.lhwide .nospacebetween .line:last-child .outerlines,
-.rh3 .nospacebetween .line:last-child .outerlines,
-.lh2 .nospacebetween .line:last-child .outerlines,
-.rh4 .nospacebetween .line:last-child .outerlines,
-.lh3 .nospacebetween .line:last-child .outerlines,
-.rh2 .nospacebetween .rawline:last-child .outerlines,
-.rh2_67 .nospacebetween .rawline:last-child .outerlines,
-.lhwide .nospacebetween .rawline:last-child .outerlines,
-.rh3 .nospacebetween .rawline:last-child .outerlines,
-.lh2 .nospacebetween .rawline:last-child .outerlines,
-.rh4 .nospacebetween .rawline:last-child .outerlines,
-.lh3 .nospacebetween .rawline:last-child .outerlines
-
- {
-  border-bottom-width: 1px;
-  border-top-width: 1px;
+.norompline_fade .line:nth-child(2) .line-waistline {
+  color: var(--otherlines-color-fade1);
+}
+.norompline_fade .line:nth-child(3) .line-waistline {
+  color: var(--otherlines-color-fade2);
+}
+.norompline_fade .line:nth-child(4) .line-waistline {
+  color: var(--otherlines-color-fade3);
 }
 
-.nospacebetween .outerlines {
-  border-bottom: 0px;
-}
-.nospacebetween.forcebottomline .outerlines, .nospacebetween .forcebottomline .outerlines { /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
-  border-bottom: 2px var(--otherlines-style) var(--baseline-color);
-}
-
-.thin .outerlines {
-  border-top-width: .5px;
-  border-bottom-width: .5px;
-}
-.nolines .outerlines {
-  border-width: 0px !important;
-}
-.noouterlines .outerlines {
-  border-width: 0px !important;
-}
-.norompline .baselines, .norompline_fade .baselines {
-  border-top-color: transparent !important;
-  --rompzone-color: transparent;
-}
-.norompline_fade .line:first-child .baselines{
-  border-top-color: var(--otherlines-color) !important;
-}
-.norompline_fade .line:nth-child(2) .baselines{
-  border-top-color: var(--otherlines-color-fade1) !important;
-}
-.norompline_fade .line:nth-child(3) .baselines{
-  border-top-color: var(--otherlines-color-fade2) !important;
-}
-.norompline_fade .line:nth-child(4) .baselines{
-  border-top-color: var(--otherlines-color-fade3) !important;
-}
-
-
-.rh2.nospacebetween.forcebottomline .outerlines, .rh2.nospacebetween .forcebottomline .outerlines, 
-.rh2 .nospacebetween.forcebottomline .outerlines, .rh2 .nospacebetween .forcebottomline .outerlines,
-.rh2_67.nospacebetween.forcebottomline .outerlines, .rh2_67.nospacebetween .forcebottomline .outerlines, 
-.rh2_67 .nospacebetween.forcebottomline .outerlines, .rh2_67 .nospacebetween .forcebottomline .outerlines,
-.rh3.nospacebetween.forcebottomline .outerlines, .rh3.nospacebetween .forcebottomline .outerlines, 
-.rh3 .nospacebetween.forcebottomline .outerlines, .rh3 .nospacebetween .forcebottomline .outerlines,
-.rh4.nospacebetween.forcebottomline .outerlines, .rh4.nospacebetween .forcebottomline .outerlines, 
-.rh4 .nospacebetween.forcebottomline .outerlines, .rh4 .nospacebetween .forcebottomline .outerlines,
-.lhwide.nospacebetween.forcebottomline .outerlines, .lhwide.nospacebetween .forcebottomline .outerlines, 
-.lhwide .nospacebetween.forcebottomline .outerlines, .lhwide .nospacebetween .forcebottomline .outerlines,
-.lh2.nospacebetween.forcebottomline .outerlines, .lh2.nospacebetween .forcebottomline .outerlines, 
-.lh2 .nospacebetween.forcebottomline .outerlines, .lh2 .nospacebetween .forcebottomline .outerlines,
-.lh3.nospacebetween.forcebottomline .outerlines, .lh3.nospacebetween .forcebottomline .outerlines, 
-.lh3 .nospacebetween.forcebottomline .outerlines, .lh3 .nospacebetween .forcebottomline .outerlines
-{ /* Needed when we change liniature between lines, e.g. next line is 'noouterlines' or something... */
-  border-bottom-width: 1px;
-}
-
-
-
-.thin .outerlines {
-  border-top-width: .5px;
-  border-bottom-width: .5px;
-}
-.nolines .outerlines {
-  border-width: 0px !important;
-}
-.nobottomline .outerlines {
-  border-bottom: 0px !important;
-}
 
 /* Outline: text-stroke doesn't work for overlapping glyphs, so we use text-shadow instead. */
 .outline {
@@ -766,10 +902,6 @@ b, strong {
   color: transparent;
   text-shadow: none; /* overrule .outline */
 }
-.outline {
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;  
-}
 .traceable {
   color: #AAA;
 }
@@ -854,6 +986,14 @@ ul {
  * with the bottom of the 'hokje'. Basically, the bottom 1ex of the font (descender zone)
  * is chopped off. However, if you try to print a webpage, you need to have room for 
  * this bottom 1ex, otherwise the entire line of text is omitted when printing.
+ *
+ * Important metrics:
+ * - standard numbers (equal height) in Cogncur are 1.5ex tall. For the heartline instead of the top, that's 1.55 times the heartline of x-height glyphs.
+ * - old-style numerals (unequal height) have varying heights, with the 'waist-zone' at x-height (just as with letters)
+ * - grid glyphs in Cognforms have a line at x-height
+ * - when using standard numbers, we want the top to reach the x-height line. To achieve that, we need to magnify the Cognform glyph grids by 1.55 in both dimensions.
+ * - when using old-style numerals, we want some numerals to reach through the x-height line, and we don't need to magnify Cognform glyphs relative to the numerals, but for backwards compatibility, we need to magnify the numerals themselves bij 1.55.
+ * 
  */
 .hokjes {
   white-space: pre;
@@ -864,65 +1004,192 @@ ul {
   font-weight: normal;
 }
 .hokjes-table {
-  table-layout: fixed;
-  margin: 0px;
-  border-collapse: collapse;
-  border-spacing: 0;	  
+  margin-left: 0.005em; /* Because the grid glyphs in Cognforms stick outside their width a bit. This value possibly be less for thinner Cognforms fonts */
+  margin-top: 0.005em;
+  margin-right: 0;
 }
-table.hokjes-table {
-  border-spacing: 0;
-  border-collapse: collapse;
+[data-cogncur-numerals-oldstyle="1"] .hokjes-table  {
+  margin-bottom: .6ex; /* Extra room for hanging numerals */
 }
-table.hokjes-table td {
-  border: 1px solid var(--otherlines-color);
-  border-bottom: 1px solid var(--baseline-color);
-  margin: 0px;
-  padding: 0px;
-  padding-bottom: 0.03ex;
-  text-align: center;
-  box-sizing: border-box;
-  vertical-align: baseline;
-  line-height: normal; 
+.hokjes-row {
+  display: flex;
 }
-.rh20 table.hokjes-table td,
-.rh22 table.hokjes-table td,
-.rh24 table.hokjes-table td,
-.rh26 table.hokjes-table td,
-.rh28 table.hokjes-table td,
-.rh30 table.hokjes-table td,
-.rh32 table.hokjes-table td,
-.rh34 table.hokjes-table td,
-.rh36 table.hokjes-table td,
-.rh38 table.hokjes-table td,
-.rh40 table.hokjes-table td,
-.rh42 table.hokjes-table td,
-.rh44 table.hokjes-table td,
-.rh46 table.hokjes-table td,
-.rh48 table.hokjes-table td,
-.rh50 table.hokjes-table td,
-.rh20 table.hokjes-table td {
-  border-width: 2px;
+.hokje {
+  flex-shrink: 0;
 }
-
-
 /* Numerals in hokjes must always be tabular. Please make sure in your scripting and data-attributes that the numerals are tabuler!
    Styling will not be correct for propertional numbers.
  */
-table.hokjes-table td div.hokjes-content {
-  width: 1.5ex;
-  height: 3ex;
-  padding-top: 1ex;
+.hokje {
   position: relative;
-  left: -0.05ex; /* compensate for slant */
-  bottom: 0.08ex; /* why not 0? */
+  top: 0px;
+  width: 1.55ex;
+  height: 3.10ex;
+  line-height: 3.10ex;
+  margin-top: 1.04ex;
+  margin-bottom: -1.04ex;
 }
-.cogncurvertical table.hokjes-table td div.hokjes-content {
-  left: 0px;
-}
-.cogncuroblique table.hokjes-table td div.hokjes-content {
-  left: -0.2ex; /* compensate for slant */
+[data-cogncur-numerals-oldstyle="1"] .hokjes-table {
+  font-size: 155%;
+}  
+[data-cogncur-numerals-oldstyle="1"] .hokje  {
+  width: 1ex;
+  height: 2ex;
+  line-height: 2ex;
+  margin-top: .5ex;
+  margin-bottom: -.5ex;
 }
 
+.hokjes-minder-hoog .hokje {
+  height: 2.79ex;
+  line-height: 2.79ex;
+}
+[data-cogncur-numerals-oldstyle="1"] .hokjes-minder-hoog .hokje,
+[data-cogncur-numerals-oldstyle="1"].hokjes-minder-hoog .hokje,
+.hokjes-minder-hoog [data-cogncur-numerals-oldstyle="1"] .hokje {
+  height: 1.8ex;
+  line-height: 1.8ex;
+}
+.hokjes-los .hokje {
+  margin-bottom: .51ex;
+}
+
+/* Remove excess margin at the bottom of an entire hokjes-table */
+.hokjes-minder-hoog .hokjes-table {
+  margin-bottom: 0.2ex;
+}
+[data-cogncur-numerals-oldstyle="1"].hokjes-minder-hoog .hokjes-table,
+[data-cogncur-numerals-oldstyle="1"] .hokjes-minder-hoog .hokjes-table,
+.hokjes-minder-hoog [data-cogncur-numerals-oldstyle="1"] .hokjes-table {
+  margin-bottom: .7ex;
+}
+.hokjes-los .hokjes-table {
+  margin-bottom: -1.55ex;
+}
+[data-cogncur-numerals-oldstyle="1"] .hokjes-los .hokjes-table {
+  margin-bottom: -.45ex;
+}
+.hokjes-minder-hoog .hokjes-los .hokjes-table,
+.hokjes-minder-hoog.hokjes-los .hokjes-table {
+  margin-bottom: -1.35ex;
+}
+[data-cogncur-numerals-oldstyle="1"].hokjes-minder-hoog .hokjes-los .hokjes-table,
+[data-cogncur-numerals-oldstyle="1"] .hokjes-minder-hoog .hokjes-los .hokjes-table,
+.hokjes-minder-hoog [data-cogncur-numerals-oldstyle="1"]  .hokjes-los .hokjes-table {
+  margin-bottom: -.3ex;
+}
+
+/* A 'zero-width' hokje is used to hold a zero-width decimal comma/point.
+ * For a comma or pediod, we want no compensation for slant so the comma/period will line up
+ * with the grid exactly.
+ * For a colon or semicolon, ideal would be 2/3 the normal amount of slant compensation,
+ * since their height is 2/3 of the height of numerals. But colon/semicolon are rare, so we
+ * don't bother. 
+ */ 
+.hokje.zero {
+  width: 0ex;
+  --tabular-slant-compensation: 0;
+}
+
+.hokje-content {
+  position: absolute;
+  top: 0;
+  left: var(--tabular-slant-compensation);
+  width: 1.55ex;
+  height: 3.10ex;
+  text-align: center;
+}
+[data-cogncur-numerals-oldstyle="1"] .hokje-content {
+  width: 1ex;
+  height: 2ex;
+}
+
+.hokjes-minder-hoog .hokje-content {
+  height: 2.79ex;
+}
+
+[data-cogncur-numerals-oldstyle="1"] .hokjes-minder-hoog .hokje-content {
+  height: 1.8ex;
+}
+
+/* ???
+.is-ios-or-mac table.hokjes-table td div.hokjes-content {
+  padding-top: 0ex; 
+}
+*/
+.hokje.zero .hokje-content {
+  width: 0ex;
+  z-index: 1; /* Somehow the lines from the *other* grids are consider z-index 0 */
+}
+.hokje-content-overlay {
+  position: absolute;
+  top: 0; 
+}
+
+:root,
+.hokjes-met-romplijn {
+  --taller-hokje-lines-main-content: 'w';
+  --shorter-hokje-lines-main-content: 'W';
+}
+.hokjes-met-solidromplijn, .hokjes-met-solid-romplijn {
+  --taller-hokje-lines-main-content: 'x';
+  --shorter-hokje-lines-main-content: 'X';
+}
+.hokjes-default {
+  --taller-hokje-lines-main-content: 'v';
+  --shorter-hokje-lines-main-content: 'V';
+}
+.hokjes-baseline {
+  --taller-hokje-lines-main-content: 'u'; /* TODO */
+  --shorter-hokje-lines-main-content: 'u';
+}
+.hokjes-nolines {
+  --taller-hokje-lines-main-content: '';
+  --shorter-hokje-lines-main-content: '';
+}
+
+.hokje-lines {
+  font-size: 155%;
+  position: relative;
+  top: -.235ex;
+}
+[data-cogncur-numerals-oldstyle="1"]  .hokje-lines {
+  font-size: 100%;
+  top: 0ex;
+}
+
+
+.hokje-lines-main, .hokje-lines-zone {
+  position: absolute;
+  left: 0;
+  text-shadow: none; /* Cancel out 'outline' effect */  
+}
+
+.hokje-lines-main::before,
+.hokjes-minder-hoog .hokjes-hoog .hokje-lines-main::before /* for the sake of our settings preview, we need to be able to overrule a global .hokjes-minder-hoog */
+ {
+  content: var(--taller-hokje-lines-main-content);
+  color: var(--otherlines-color);
+  z-index: -99;
+}
+.hokjes-minder-hoog .hokje-lines-main::before {
+  content: var(--shorter-hokje-lines-main-content);
+}
+.hokjes-los .hokje.skip .hokje-lines-main::before {
+  content: '';
+}
+
+.hokje-lines-zone::before {
+  content: 'y';
+  color: var(--rompzone-color);
+  z-index: -100;
+}
+.hokjes-los .hokje.skip .hokje-lines-zone::before {
+  content: '';
+}
+
+
+/*
 [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
 table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content {
   font-size: 150%; 
@@ -930,177 +1197,10 @@ table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content {
   height: 2ex;
   padding-top: 0ex;
   position: relative;
-  left: -0.05ex; /* compensate for slant */
+  left: -0.05ex; 
   bottom: 0.11ex; 
 }
-.cogncurvertical [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
-.cogncurvertical[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
-.cogncurvertical table.hokjes-table[data-cogncur-numerals-oldstyle="1"] td div.hokjes-content {
-  left: 0px;
-}
-.cogncuroblique [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
-.cogncuroblique[data-cogncur-numerals-oldstyle="1"]  table.hokjes-table td div.hokjes-content,
-.cogncuroblique table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content {
-  left: -0.1ex; /* compensate for slant */
-}
-
-
-table.hokjes-table td div.hokjes-content.hokjes-overlay {
-  position: absolute; /* We need to change the padding-top from the normal hokjes to top in this case */
-  padding-top: 0ex;
-  top: 0.92ex;
-  left: -0.05ex; 
-/* somehow, if we put 'startpunten-font' on this element, it all goes wrong, but if we punt an element with 'startpunten-font' inside it, it's fine */
-}
-.cogncurvertical table.hokjes-table td div.hokjes-content.hokjes-overlay {
-  left: 0ex; 
-}
-.cogncuroblique table.hokjes-table td div.hokjes-content.hokjes-overlay {
-  left: -0.2ex; 
-}
-[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
-table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content.hokjes-overlay {
-  position: absolute; /* We need to change the padding-top from the normal hokjes to top in this case */
-  padding-top: 0ex;
-  top: -0.11ex;
-  left: -0.05ex; 
-/* somehow, if we put 'startpunten-font' on this element, it all goes wrong, but if we punt an element with 'startpunten-font' inside it, it's fine */
-}
-.cogncurvertical [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
-.cogncurvertical[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
-.cogncurvertical table.hokjes-table[data-cogncur-numerals-oldstyle="1"] td div.hokjes-content.hokjes-overlay {
-  left: 0ex; 
-}
-.cogncuroblique [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
-.cogncuroblique[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
-.cogncuroblique table.hokjes-table[data-cogncur-numerals-oldstyle="1"] td div.hokjes-content.hokjes-overlay {
-  left: -0.1ex; 
-}
-
-
-div.hokjes-content .tussen_de_hokjes {
-  position: absolute;
-  left: 1.5ex;
-}
-[data-cogncur-numerals-oldstyle="1"] div.hokjes-content .tussen_de_hokjes {
-  position: absolute;
-  left: 1ex;
-}
-
-
-
-table.hokjes-table .hokjes-los, .hokjes-los table.hokjes-table {
-  border-spacing: 0px 1.5ex;
-  border-collapse: separate;
-  margin-top: -1.5ex; /* no border-spacing at the top please */
-  /* Set font so that 1ex is relative to the correct font */
-  font-family: var(--cursive-font-family);
-  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
-  font-variant-ligatures: none;  
-  font-style: normal;
-  font-weight: normal;
-}
-
-.startpunten-font table.hokjes-table .hokjes-los, .startpunten-font .hokjes-los table.hokjes-table, .startpunten-font.hokjes-los table.hokjes-table {
-  font-family: var(--cursive-start-font-family);
-  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
-  font-variant-ligatures: none;  
-}
-.arrows-font table.hokjes-table .hokjes-los, .arrows-font .hokjes-los table.hokjes-table, .arrows-font.hokjes-los table.hokjes-table {
-  font-family: "Cogncur-Arrows";
-  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
-  font-variant-ligatures: none;  
-}
-.morearrows-font table.hokjes-table .hokjes-los, .morearrows-font .hokjes-los table.hokjes-table, .morearrows-font.hokjes-los table.hokjes-table {
-  font-family: "Cogncur-MArrows";
-  font-feature-settings: "calt" 0;  /* We create the connections in javascript, so that we can style individual connecting glyphs */
-  font-variant-ligatures: none;  
-}
-
-table.hokjes-table .hokjes-los td.skip, .hokjes-los table.hokjes-table td.skip,
-table.hokjes-table .hokjes-nolines td, .hokjes-nolines table.hokjes-table td {
-  border: none;
-}
-table.hokjes-table .hokjes-los td.next, .hokjes-los table.hokjes-table td.next {
-  border-left: none;
-}
-table.hokjes-table .hokjes-baseline td, .hokjes-baseline table.hokjes-table td, table.hokjes-table td.hokjes-baseline {
-  border-top: 1px solid rgba(255,255,255,0);
-  border-left: 1px solid rgba(255,255,255,0);
-  border-right: 1px solid rgba(255,255,255,0);
-}
-table.hokjes-table .hokjes-met-romphoogtelijn .hokjes-rompzone, .hokjes-met-romphoogtelijn table.hokjes-table .hokjes-rompzone {
-  border-left: 1px dotted var(--otherlines-color); /* TODO: nog niet duidelijk genoeg */
-}
-table.hokjes-table td.next .hokjes-rompzone, table.hokjes-table td.next .hokjes-rompzone,
-table.hokjes-table td.skip .hokjes-rompzone, table.hokjes-table td.skip .hokjes-rompzone {
-  border-left: none;
-}
-
-.hokjes-cell {
-  position: relative;
-  height: 3ex;
-}
-.hokjes-minder-hoog .hokjes-cell {
-  height: 2.7ex;
-}
-
-.hokjes-rompzone {
-  position: absolute;
-  height: 1.5ex;
-  width: 100%;
-  bottom: -0.03ex; /* why??? */
-  z-index: -99;
-}
-.hokjes-met-romplijn .hokjes-rompzone {
-  border-top: 1px dashed var(--otherlines-color);
-  background-color: var(--rompzone-color);
-}
-.hokjes-met-solid-romplijn .hokjes-rompzone {
-  border-top: 1px solid var(--otherlines-color);
-  background-color: var(--rompzone-color);
-}
-
-.hokjes-los .skip .hokjes-rompzone {
-  background-color: transparent;
-  border-top: none;
-}
-
-
-/* 'hokjes-minder_hoog' have a height/width-ratio of 1.8:1. 
- * These 'hokjes' are 1ex wide, 1.8ex tall, and the baseline of the font is aligned 
- * with the bottom of the 'hokje'. Don't use them with any glyphs that have descenders.
- * NB the font is 3ex high: 1ex for descenders, 1ex for the 'letterrompen', and 1ex for ascenders.
- */
-
-table.hokjes-minder-hoog.hokjes-table td .hokjes-content,
-.hokjes-minder-hoog table.hokjes-table td .hokjes-content {
-  bottom: .38ex;
-}
-
-/* and for the sake of our settings preview, we need to be able to overrule this :( */
-.hokjes-minder-hoog .hokjes-hoog table.hokjes-table td .hokjes-content {
-  bottom: 0.08em;
-}
-.hokjes-minder-hoog .hokjes-hoog .hokjes-cell {
-  height: 3ex;
-}
-
-.hokjes-minder-hoog table.hokjes-table td div.hokjes-content.hokjes-overlay,
-table.hokjes-table.hokjes-minder-hoog  td div.hokjes-content.hokjes-overlay {
-  top: 0.62ex;
-}
-.hokjes-minder-hoog [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content,
-.hokjes-minder-hoog table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content,
-.hokjes-minder-hoog[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content {
-  bottom: 0.31ex; 
-}
-.hokjes-minder-hoog [data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
-.hokjes-minder-hoog table.hokjes-table[data-cogncur-numerals-oldstyle="1"]  td div.hokjes-content.hokjes-overlay,
-.hokjes-minder-hoog[data-cogncur-numerals-oldstyle="1"] table.hokjes-table td div.hokjes-content.hokjes-overlay,
-[data-cogncur-numerals-oldstyle="1"] .hokjes-minder-hoog table.hokjes-table td div.hokjes-content.hokjes-overlay {
-  top: -0.32ex;
-}
+*/
 
 
 
